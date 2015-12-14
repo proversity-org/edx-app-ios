@@ -26,7 +26,6 @@
 		1918AFBD1949B54C00F40345 /* bt_view_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918AFB51949B54C00F40345 /* bt_view_default.png */; };
 		1918AFBE1949B54C00F40345 /* ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918AFB61949B54C00F40345 /* ic_back.png */; };
 		1918AFBF1949B54C00F40345 /* ic_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 1918AFB71949B54C00F40345 /* ic_cancel.png */; };
-		1918AFC51949B66400F40345 /* OEXGenericTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1918AFC41949B66400F40345 /* OEXGenericTableViewCell.m */; };
 		191A00201940560D004F7902 /* OEXDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A001F1940560D004F7902 /* OEXDataParser.m */; };
 		191A002419405B91004F7902 /* OEXUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A002319405B91004F7902 /* OEXUserDetails.m */; };
 		191A002B19405E1B004F7902 /* OEXCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 191A002A19405E1B004F7902 /* OEXCourse.m */; };
@@ -601,8 +600,6 @@
 		1918AFB51949B54C00F40345 /* bt_view_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_view_default.png; sourceTree = "<group>"; };
 		1918AFB61949B54C00F40345 /* ic_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_back.png; sourceTree = "<group>"; };
 		1918AFB71949B54C00F40345 /* ic_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_cancel.png; sourceTree = "<group>"; };
-		1918AFC31949B66400F40345 /* OEXGenericTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXGenericTableViewCell.h; sourceTree = "<group>"; };
-		1918AFC41949B66400F40345 /* OEXGenericTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXGenericTableViewCell.m; sourceTree = "<group>"; };
 		191A001E1940560D004F7902 /* OEXDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXDataParser.h; sourceTree = "<group>"; };
 		191A001F1940560D004F7902 /* OEXDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXDataParser.m; sourceTree = "<group>"; };
 		191A002219405B91004F7902 /* OEXUserDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXUserDetails.h; sourceTree = "<group>"; };
@@ -1374,8 +1371,6 @@
 			children = (
 				199B9B5D193473AB00081A09 /* OEXGenericCourseTableViewController.h */,
 				199B9B5E193473AB00081A09 /* OEXGenericCourseTableViewController.m */,
-				1918AFC31949B66400F40345 /* OEXGenericTableViewCell.h */,
-				1918AFC41949B66400F40345 /* OEXGenericTableViewCell.m */,
 			);
 			name = "Generic View";
 			sourceTree = "<group>";
@@ -3197,7 +3192,6 @@
 				1A9A1E481B8F3BB8005AE336 /* OEXCheckBox.swift in Sources */,
 				46CECC3C1B041D270073C63A /* CourseDashboardCell.swift in Sources */,
 				778F177A1C0D125A0099BF93 /* CoursesTableViewController.swift in Sources */,
-				1918AFC51949B66400F40345 /* OEXGenericTableViewCell.m in Sources */,
 				77ADF4AF1AC1F80E00AC8955 /* OEXGoogleAuthProvider.m in Sources */,
 				1A7CEA331BABA8C70043A58C /* ProfileImageView.swift in Sources */,
 				7727EC351BBC73F300C9987F /* RevealViewController.swift in Sources */,
