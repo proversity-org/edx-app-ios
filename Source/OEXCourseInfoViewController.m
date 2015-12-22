@@ -92,16 +92,9 @@ static NSString* const OEXCourseInfoLinkPathIDPlaceholder = @"{path_id}";
 }
 
 - (void)enrollInCourseWithCourseID:(NSString*)courseID emailOptIn:(BOOL)emailOptIn {
-    BOOL enrollmentExists = NO;
-    NSArray* coursesArray = [[OEXInterface sharedInterface] courses];
-    for(UserCourseEnrollment* courseEnrollment in coursesArray) {
-        OEXCourse* course = courseEnrollment.course;
-        if([course.course_id isEqualToString:courseID]) {
-            enrollmentExists = YES;
-        }
-    }
+    UserCourseEnrollment* courseEnrollment = [[OEXInterface sharedInterface] enrollmentForCourseWithID:courseID];
 
-    if(enrollmentExists) {
+    if(courseEnrollment) {
         OEXEnrollmentMessage* message = [[OEXEnrollmentMessage alloc] init];
         message.messageBody = [Strings findCoursesAlreadyEnrolledMessage];
         message.shouldReloadTable = NO;
