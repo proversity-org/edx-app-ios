@@ -15,14 +15,14 @@ private let DefaultCourseMode = CourseOutlineMode.Full
 
 public class CourseDataManager: NSObject, CourseOutlineModeControllerDataSource {
     
-    private let analytics : OEXAnalytics?
+    private let analytics : OEXAnalytics
     private let interface : OEXInterface?
-    private let session : OEXSession?
-    private let networkManager : NetworkManager?
+    private let session : OEXSession
+    private let networkManager : NetworkManager
     private let outlineQueriers = LiveObjectCache<CourseOutlineQuerier>()
     private let discussionDataManagers = LiveObjectCache<DiscussionDataManager>()
     
-    public init(analytics: OEXAnalytics?, interface : OEXInterface?, networkManager : NetworkManager?, session : OEXSession?) {
+    public init(analytics: OEXAnalytics, interface : OEXInterface?, networkManager : NetworkManager, session : OEXSession) {
         self.analytics = analytics
         self.interface = interface
         self.networkManager = networkManager
@@ -62,7 +62,7 @@ public class CourseDataManager: NSObject, CourseOutlineModeControllerDataSource 
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue.rawValue, forKey: CurrentCourseOutlineModeKey)
             NSNotificationCenter.defaultCenter().postNotificationName(CourseOutlineModeChangedNotification, object: nil)
-            analytics?.trackOutlineModeChanged(currentOutlineMode)
+            analytics.trackOutlineModeChanged(currentOutlineMode)
         }
     }
     

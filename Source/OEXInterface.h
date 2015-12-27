@@ -129,7 +129,7 @@ extern NSString* const OEXDownloadEndedNotification;
 #pragma mark- For Refresh of all Courses.
 - (void)setAllEntriesUnregister;
 /// @param courses Array of OEXCourse*
-- (void)setRegisteredCourses:(NSArray*)courses;
+- (void)setRegisteredCourses:(NSArray<OEXCourse*>*)courses;
 - (void)deleteUnregisteredItems;
 
 #pragma mark Video Management
