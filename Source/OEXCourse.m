@@ -107,7 +107,8 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         self.name = [info objectForKey:@"name"];
         self.org = [info objectForKey:@"org"];
         self.video_outline = [info objectForKey:@"video_outline"];
-        self.course_id = [info objectForKey:@"id"];
+        // different APIs return this field with a different name
+        self.course_id = [info objectForKey:@"id"] ?: [info objectForKey:@"course_id"];
         self.root_block_usage_key = [info objectForKey:@"root_block_usage_key"];
         self.number = [info objectForKey:@"number"];
         self.effort = [info objectForKey:@"effort"];
