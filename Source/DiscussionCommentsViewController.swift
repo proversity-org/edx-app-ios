@@ -68,6 +68,8 @@ class DiscussionCommentCell: UITableViewCell {
         
         bodyTextLabel.numberOfLines = 0
         contentView.addSubview(containerView)
+        containerView.userInteractionEnabled = true
+        
         containerView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(contentView).inset(UIEdgeInsetsMake(0, StandardHorizontalMargin, 0, StandardHorizontalMargin))
         }
@@ -124,7 +126,7 @@ class DiscussionCommentCell: UITableViewCell {
         self.containerView.backgroundColor = OEXStyles.sharedStyles().neutralWhiteT()
         
         // TODO: Get a better count in here 
-        let message = Strings.comment(count: response.children.count)
+        let message = Strings.comment(count: response.commentsCount)
         let buttonTitle = NSAttributedString.joinInNaturalLayout([
             Icon.Comment.attributedTextWithStyle(smallIconStyle),
             smallTextStyle.attributedStringWithText(message)])
@@ -182,11 +184,13 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
     private let environment: Environment
     private let courseID: String
     private let discussionManager : DiscussionDataManager
-    
+    private var loadController : LoadStateViewController?
+    private var networkPaginator : NetworkPaginator<DiscussionComment>?
+    private let contentView = UIView()
     private let addCommentButton = UIButton(type: .System)
     private var tableView: UITableView!
     private var comments : [DiscussionComment]  = []
-    private let responseItem: DiscussionComment
+    private var responseItem: DiscussionComment
     
     //Since didSet doesn't get called from within initialization context, we need to set it with another variable.
     private var commentsClosed : Bool = false {
@@ -240,26 +244,26 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        setStyles()
         addSubviews()
+        setStyles()
         setConstraints()
         
-        discussionManager.commentAddedStream.listen(self) {[weak self] result in
-            result.ifSuccess {
-                self?.addedItem($0.threadID, item: $0.comment)
-            }
-        }
+        loadController = LoadStateViewController()
+        loadController?.setupInController(self, contentView: self.contentView)
         
         self.commentsClosed = self.closed
         
-        self.comments = responseItem.children
-        self.tableView.reloadData()
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        loadInitialData()
     }
     
     func addSubviews() {
+        view.addSubview(contentView)
+        contentView.addSubview(tableView)
         view.addSubview(addCommentButton)
-        view.addSubview(tableView)
     }
     
     func setStyles() {
@@ -272,6 +276,7 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         
         self.navigationItem.title = Strings.comments
         view.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
+        self.contentView.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
         
         addCommentButton.contentVerticalAlignment = .Center
         
@@ -279,6 +284,13 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
     }
     
     func setConstraints() {
+        contentView.snp_makeConstraints { (make) -> Void in
+            make.leading.equalTo(view.snp_leading)
+            make.top.equalTo(view)
+            make.trailing.equalTo(view.snp_trailing)
+            make.bottom.equalTo(addCommentButton.snp_top)
+        }
+        
         addCommentButton.snp_makeConstraints{ (make) -> Void in
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
@@ -296,12 +308,55 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         
     }
     
+    private func loadInitialData() {
+        
+        self.networkPaginator = NetworkPaginator(networkManager: self.environment.networkManager, paginatedFeed: responseItem.commentsPaginatedFeed, tableView: self.tableView)
+        
+        loadPaginatedDataIfAvailable(removePrevious: true)
+        
+    }
+    
+    private func loadPaginatedDataIfAvailable(removePrevious removePrevious : Bool = false) {
+        self.networkPaginator?.loadDataIfAvailable() { [weak self] results in
+            self?.loadController?.handleErrorForPaginatedArray(self?.comments, error: results?.error)
+            if let comments = results?.data {
+                self?.updateComments(comments, removeAll: removePrevious)
+            }
+        }
+    }
+    
+    func updateComments(comments : [DiscussionComment], removeAll : Bool) {
+        if removeAll {
+            self.comments.removeAll(keepCapacity: true)
+            
+            if comments.isEmpty {
+                // TODO : Configure the empty state
+            }
+        }
+        
+        for comment in comments {
+            self.comments.append(comment)
+        }
+        
+        self.responseItem.commentsCount = self.comments.count
+        self.tableView.reloadData()
+        self.loadController?.state = .Loaded
+    }
+    
     func addedItem(threadID: String, item: DiscussionComment) {
         self.comments.append(item)
         tableView.reloadData()
     }
     
     // MARK - tableview delegate methods
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        cell.backgroundColor = UIColor.clearColor()
+        if tableView.isLastRow(indexPath : indexPath) {
+            loadPaginatedDataIfAvailable()
+        }
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -334,6 +389,15 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         case .None:
             assert(false, "Unknown table section")
             return UITableViewCell()
+        }
+    }
+}
+
+extension DiscussionComment {
+    
+    var commentsPaginatedFeed : PaginatedFeed<NetworkRequest<[DiscussionComment]>> {
+        return PaginatedFeed() { i in
+            return DiscussionAPI.getComments(self.commentID, pageNumber: i)
         }
     }
 }

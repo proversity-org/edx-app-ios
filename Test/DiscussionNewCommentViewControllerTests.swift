@@ -71,7 +71,7 @@ class DiscussionNewCommentViewControllerTests: SnapshotTestCase {
             flagged: false,
             abuseFlagged: false,
             editableFields: nil,
-            children: [])
+            commentsCount: 0)
        
         let controller = DiscussionNewCommentViewController(environment: environment, courseID: courseID, context: .Comment(comment))
         inScreenNavigationContext(controller, action: {
