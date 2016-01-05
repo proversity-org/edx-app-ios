@@ -14,6 +14,7 @@ class CourseCardViewModel : NSObject {
     private let persistImage: Bool
     private let title: String?
     private let courseImageURL: String?
+    private let course: OEXCourse
     
     private init(course: OEXCourse, detailText: String, bottomTrailingText: String?, persistImage: Bool) {
         self.title = course.name
@@ -21,6 +22,7 @@ class CourseCardViewModel : NSObject {
         self.bottomTrailingText = bottomTrailingText
         self.persistImage = persistImage
         self.courseImageURL = course.courseImageURL
+        self.course = course
     }
     
     static func onMyVideos(course: OEXCourse, collectionInfo: String) -> CourseCardViewModel {
@@ -43,6 +45,7 @@ class CourseCardViewModel : NSObject {
         card.titleText = title
         card.detailText = detailText
         card.bottomTrailingText = bottomTrailingText
+        card.course = self.course
         
         let remoteImage : RemoteImage
         let placeholder = UIImage(named: "Splash_map")
