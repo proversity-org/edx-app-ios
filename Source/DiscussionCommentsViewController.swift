@@ -120,13 +120,11 @@ class DiscussionCommentCell: UITableViewCell {
     }
     
     func useResponse(response : DiscussionComment, position : CellPosition) {
+        self.containerView.backgroundColor = OEXStyles.sharedStyles().neutralWhiteT()
         self.bodyTextLabel.attributedText = commentTextStyle.attributedStringWithText(response.renderedBody)
         self.authorLabel.attributedText = response.authorLabelForTextStyle(smallTextStyle)
         
-        self.containerView.backgroundColor = OEXStyles.sharedStyles().neutralWhiteT()
-        
-        // TODO: Get a better count in here 
-        let message = Strings.comment(count: response.commentsCount)
+        let message = Strings.comment(count: response.childCount)
         let buttonTitle = NSAttributedString.joinInNaturalLayout([
             Icon.Comment.attributedTextWithStyle(smallIconStyle),
             smallTextStyle.attributedStringWithText(message)])
@@ -338,7 +336,7 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
             self.comments.append(comment)
         }
         
-        self.responseItem.commentsCount = self.comments.count
+        self.responseItem.childCount = self.comments.count
         self.tableView.reloadData()
         self.loadController?.state = .Loaded
     }

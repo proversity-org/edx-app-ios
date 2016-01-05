@@ -31,7 +31,7 @@ public struct DiscussionComment {
     var flagged = false
     var abuseFlagged = false
     var editableFields: String?
-    var commentsCount = 0
+    var childCount = 0
     
 }
 
@@ -69,7 +69,7 @@ extension DiscussionComment {
         self.flagged = json["flagged"].boolValue
         self.abuseFlagged = json["abuse_flagged"].boolValue
         self.editableFields = json["editable_fields"].string
-        self.commentsCount = json["child_count"].intValue
+        self.childCount = json["child_count"].intValue
     }
 }
 

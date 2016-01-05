@@ -306,7 +306,7 @@ public class DiscussionAPI {
     }
     
     // get response comments
-    static func getComments(commentID: String, pageNumber: NSInteger) -> NetworkRequest<[DiscussionComment]> {
+    static func getComments(commentID: String, pageNumber: Int) -> NetworkRequest<[DiscussionComment]> {
         
         let query = [
             PaginationDefaults.pageParam : JSON(pageNumber),

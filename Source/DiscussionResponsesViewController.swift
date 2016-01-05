@@ -328,7 +328,7 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
     @IBAction func commentTapped(sender: AnyObject) {
         if let button = sender as? DiscussionCellButton, row = button.row {
             let response = responses[row]
-            if response.commentsCount == 0{
+            if response.childCount == 0{
                 if !postClosed {
                     environment.router?.showDiscussionNewCommentFromController(self, courseID: courseID, context: .Comment(response))
                 }
@@ -476,12 +476,12 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
         let prompt : String
         let icon : Icon
         
-        if item.commentsCount == 0 {
+        if item.childCount == 0 {
             prompt = postClosed ? Strings.commentsClosed : Strings.addAComment
             icon = postClosed ? Icon.Closed : Icon.Comment
         }
         else {
-            prompt = Strings.commentsToResponse(count: item.commentsCount)
+            prompt = Strings.commentsToResponse(count: item.childCount)
             icon = Icon.Comment
         }
         
