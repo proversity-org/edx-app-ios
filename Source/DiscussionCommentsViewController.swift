@@ -183,7 +183,6 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
     private let courseID: String
     private let discussionManager : DiscussionDataManager
     private var loadController : LoadStateViewController?
-    private var networkPaginator : NetworkPaginator<DiscussionComment>?
     private let contentView = UIView()
     private let addCommentButton = UIButton(type: .System)
     private var tableView: UITableView!
@@ -214,6 +213,21 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
             }
         }
     }
+    
+    private var commentID: String {
+        return responseItem.commentID
+    }
+    
+    lazy var paginationController : TablePaginationController<DiscussionComment> = {
+
+        let commentID = self.commentID
+        precondition(commentID != "", "Shouldn't be showing comments for empty commentID")
+        
+        let paginator = UnwrappedNetworkPaginator(networkManager: self.environment.networkManager) { page in
+            return DiscussionAPI.getComments(commentID, pageNumber: page)
+        }
+        return TablePaginationController(paginator: paginator, tableView: self.tableView)
+    }()
     
     //Only used to set commentsClosed out of initialization context
     //TODO: Get rid of this variable when Swift improves
@@ -308,53 +322,20 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
     
     private func loadInitialData() {
         
-        self.networkPaginator = NetworkPaginator(networkManager: self.environment.networkManager, paginatedFeed: responseItem.commentsPaginatedFeed, tableView: self.tableView)
+        paginationController.stream.listen(self, fireIfAlreadyLoaded: false, success:
+            { [weak self] comments in
+                self?.loadController?.state = .Loaded
+                self?.comments = comments
+                self?.tableView.reloadData()
+            }, failure: { (error) -> Void in
+                self.loadController?.state = LoadState.failed(error)
+        })
         
-        loadPaginatedDataIfAvailable(removePrevious: true)
+        paginationController.loadMore()
         
-    }
-    
-    private func loadPaginatedDataIfAvailable(removePrevious removePrevious : Bool = false) {
-        self.networkPaginator?.loadDataIfAvailable() { [weak self] results in
-            self?.loadController?.handleErrorForPaginatedArray(self?.comments, error: results?.error)
-            if let comments = results?.data {
-                self?.updateComments(comments, removeAll: removePrevious)
-            }
-        }
-    }
-    
-    func updateComments(comments : [DiscussionComment], removeAll : Bool) {
-        if removeAll {
-            self.comments.removeAll(keepCapacity: true)
-            
-            if comments.isEmpty {
-                // TODO : Configure the empty state
-            }
-        }
-        
-        for comment in comments {
-            self.comments.append(comment)
-        }
-        
-        self.responseItem.childCount = self.comments.count
-        self.tableView.reloadData()
-        self.loadController?.state = .Loaded
-    }
-    
-    func addedItem(threadID: String, item: DiscussionComment) {
-        self.comments.append(item)
-        tableView.reloadData()
     }
     
     // MARK - tableview delegate methods
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        cell.backgroundColor = UIColor.clearColor()
-        if tableView.isLastRow(indexPath : indexPath) {
-            loadPaginatedDataIfAvailable()
-        }
-    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
