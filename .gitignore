@@ -10,3 +10,6 @@ build
 /edx.properties
 default_config/local.yaml 
 *.gcda
+
+fastlane/
+custom_config/
