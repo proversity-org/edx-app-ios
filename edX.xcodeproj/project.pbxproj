@@ -616,7 +616,6 @@
 		B4D5C7EB1A6FBAA300427D1D /* OEXAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7E61A6FBAA300427D1D /* OEXAccessToken.m */; };
 		B4D5C7EC1A6FBAA300427D1D /* OEXPersistentCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7E81A6FBAA300427D1D /* OEXPersistentCredentialStorage.m */; };
 		B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7EA1A6FBAA300427D1D /* OEXSession.m */; };
-		BD3876DC1DD325FD0092F089 /* launchBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = BD3876DB1DD325FD0092F089 /* launchBackground.png */; };
 		BDC52A561DD3428C0070C0D7 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC52A4C1DD3428C0070C0D7 /* Icon-29.png */; };
 		BDC52A571DD3428C0070C0D7 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC52A4D1DD3428C0070C0D7 /* Icon-29@2x.png */; };
 		BDC52A581DD3428C0070C0D7 /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC52A4E1DD3428C0070C0D7 /* Icon-29@3x.png */; };
@@ -636,6 +635,7 @@
 		BDEC435A1DD4A60E006E07C5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEC43551DD4A60E006E07C5 /* Default@2x.png */; };
 		BDEC435D1DD4A65D006E07C5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEC435B1DD4A65D006E07C5 /* logo.png */; };
 		BDEC435E1DD4A65D006E07C5 /* logoColor.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEC435C1DD4A65D006E07C5 /* logoColor.png */; };
+		BDEC43601DD4AE3B006E07C5 /* launchBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEC435F1DD4AE3B006E07C5 /* launchBackground.png */; };
 		BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */; };
 		BE0D4551192DE65200D720D6 /* OEXInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4550192DE65200D720D6 /* OEXInterface.m */; };
 		BE0EE287192B78C400F9FF98 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0EE286192B78C400F9FF98 /* CoreTelephony.framework */; };
@@ -1500,7 +1500,6 @@
 		B4D5C7E91A6FBAA300427D1D /* OEXSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXSession.h; sourceTree = "<group>"; };
 		B4D5C7EA1A6FBAA300427D1D /* OEXSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXSession.m; sourceTree = "<group>"; };
 		B4D5C7EE1A6FBAC300427D1D /* OEXAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXAccessToken.h; sourceTree = "<group>"; };
-		BD3876DB1DD325FD0092F089 /* launchBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchBackground.png; sourceTree = "<group>"; };
 		BDC52A4C1DD3428C0070C0D7 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		BDC52A4D1DD3428C0070C0D7 /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
 		BDC52A4E1DD3428C0070C0D7 /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@3x.png"; sourceTree = "<group>"; };
@@ -1520,6 +1519,7 @@
 		BDEC43551DD4A60E006E07C5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		BDEC435B1DD4A65D006E07C5 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		BDEC435C1DD4A65D006E07C5 /* logoColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoColor.png; sourceTree = "<group>"; };
+		BDEC435F1DD4AE3B006E07C5 /* launchBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchBackground.png; sourceTree = "<group>"; };
 		BE0D4547192DD16300D720D6 /* OEXNetworkConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXNetworkConstants.h; sourceTree = "<group>"; };
 		BE0D4548192DD4F800D720D6 /* OEXNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXNetworkInterface.h; sourceTree = "<group>"; };
 		BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXNetworkInterface.m; sourceTree = "<group>"; };
@@ -2048,7 +2048,7 @@
 				69ECC5EF1D50D1170030CF87 /* separator3.png */,
 				69ECC5F01D50D1170030CF87 /* separator5.png */,
 				69ECC5F11D50D1170030CF87 /* share.pdf */,
-				BD3876DB1DD325FD0092F089 /* launchBackground.png */,
+				BDEC435F1DD4AE3B006E07C5 /* launchBackground.png */,
 				69ECC5F31D50D1170030CF87 /* placeholderCourseCardImage.png */,
 			);
 			path = Images;
@@ -3641,8 +3641,8 @@
 				69ECC6141D50D1170030CF87 /* bt_blue2.png in Resources */,
 				BDEC435A1DD4A60E006E07C5 /* Default@2x.png in Resources */,
 				69ECC6321D50D1170030CF87 /* ic_download_arrow.png in Resources */,
+				BDEC43601DD4AE3B006E07C5 /* launchBackground.png in Resources */,
 				69ECC6111D50D1170030CF87 /* bg_card_image.png in Resources */,
-				BD3876DC1DD325FD0092F089 /* launchBackground.png in Resources */,
 				69ECC6391D50D1170030CF87 /* ic_unwatched@3x.png in Resources */,
 				69ECC61B1D50D1170030CF87 /* bt_logout_active.png in Resources */,
 				1905BFF11A31B037001917FA /* COURSE_NOT_LISTED.htm in Resources */,
