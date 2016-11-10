@@ -227,12 +227,12 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoColor.png" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-EL-Jso">
-                                        <rect key="frame" x="113" y="51" width="157" height="68"/>
+                                        <rect key="frame" x="86" y="37" width="210" height="97"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="68" id="D9d-Ra-6Nl"/>
+                                            <constraint firstAttribute="height" constant="97" id="D9d-Ra-6Nl"/>
                                             <constraint firstAttribute="height" constant="45" id="MUA-79-jE4"/>
                                             <constraint firstAttribute="width" constant="95" id="SlJ-UJ-dzq"/>
-                                            <constraint firstAttribute="width" constant="157" id="b1w-uj-lsL"/>
+                                            <constraint firstAttribute="width" constant="210" id="b1w-uj-lsL"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -299,7 +299,7 @@
                                     <constraint firstItem="hfa-gq-20d" firstAttribute="centerX" secondItem="EXv-n9-pKW" secondAttribute="centerX" id="mDT-tx-307"/>
                                     <constraint firstItem="Pqx-qN-yU2" firstAttribute="leading" secondItem="XeO-S4-8zQ" secondAttribute="leading" constant="210" id="mEF-9f-cVA"/>
                                     <constraint firstItem="ahW-UE-xWc" firstAttribute="top" secondItem="cYz-SW-wBv" secondAttribute="bottom" constant="8" symbolic="YES" id="mNG-aB-zFK"/>
-                                    <constraint firstItem="EXv-n9-pKW" firstAttribute="top" secondItem="TTs-EL-Jso" secondAttribute="bottom" constant="62" id="mtt-p4-lyh"/>
+                                    <constraint firstItem="EXv-n9-pKW" firstAttribute="top" secondItem="TTs-EL-Jso" secondAttribute="bottom" constant="47" id="mtt-p4-lyh"/>
                                     <constraint firstItem="9O4-tw-OUv" firstAttribute="centerY" secondItem="2of-Hn-kff" secondAttribute="centerY" id="nKQ-0e-tkM"/>
                                     <constraint firstItem="w4q-wU-kRm" firstAttribute="top" secondItem="EXv-n9-pKW" secondAttribute="bottom" constant="8" id="nWT-tP-Q5n"/>
                                     <constraint firstItem="ahW-UE-xWc" firstAttribute="centerX" secondItem="XeO-S4-8zQ" secondAttribute="centerX" id="od6-0B-DvE"/>
@@ -317,20 +317,6 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="8VG-bG-bsd"/>
-                                        <exclude reference="qGY-UC-u4o"/>
-                                        <exclude reference="Jpr-eN-Jam"/>
-                                        <exclude reference="RNV-2E-14V"/>
-                                        <exclude reference="Uuj-wm-SUE"/>
-                                        <exclude reference="X0j-N8-9ZC"/>
-                                        <exclude reference="YVn-R1-RcM"/>
-                                        <exclude reference="mEF-9f-cVA"/>
-                                        <exclude reference="Ogo-10-kPE"/>
-                                        <exclude reference="QMK-RP-Dwj"/>
-                                        <exclude reference="hB1-YP-FkD"/>
-                                        <exclude reference="DeT-Ul-YDQ"/>
-                                        <exclude reference="itP-fL-BN2"/>
-                                        <exclude reference="l0T-3k-yIM"/>
-                                        <exclude reference="06n-uK-Qm2"/>
                                         <exclude reference="5At-WC-HPh"/>
                                         <exclude reference="A46-z9-ghc"/>
                                         <exclude reference="DY6-ao-1rI"/>
@@ -339,10 +325,24 @@
                                         <exclude reference="ZBt-RH-5zI"/>
                                         <exclude reference="aGr-2P-jxF"/>
                                         <exclude reference="mDT-tx-307"/>
+                                        <exclude reference="Ogo-10-kPE"/>
+                                        <exclude reference="QMK-RP-Dwj"/>
                                         <exclude reference="6Fh-e6-fEp"/>
                                         <exclude reference="CRV-47-xcF"/>
+                                        <exclude reference="X0j-N8-9ZC"/>
+                                        <exclude reference="YVn-R1-RcM"/>
                                         <exclude reference="WSO-Bo-bZs"/>
                                         <exclude reference="nWT-tP-Q5n"/>
+                                        <exclude reference="06n-uK-Qm2"/>
+                                        <exclude reference="qGY-UC-u4o"/>
+                                        <exclude reference="Uuj-wm-SUE"/>
+                                        <exclude reference="hB1-YP-FkD"/>
+                                        <exclude reference="l0T-3k-yIM"/>
+                                        <exclude reference="mEF-9f-cVA"/>
+                                        <exclude reference="Jpr-eN-Jam"/>
+                                        <exclude reference="RNV-2E-14V"/>
+                                        <exclude reference="DeT-Ul-YDQ"/>
+                                        <exclude reference="itP-fL-BN2"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -413,13 +413,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qlv-wh-CyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5010.3999999999996" y="1232.8335832083958"/>
+            <point key="canvasLocation" x="-5010.3999999999996" y="1231.9340329835084"/>
         </scene>
     </scenes>
     <resources>
         <image name="bt_grey_default.png" width="525" height="100"/>
         <image name="loginScreenImage.png" width="320" height="171"/>
-        <image name="logoColor.png" width="1803" height="724"/>
+        <image name="logoColor.png" width="495" height="229"/>
         <image name="separator.png" width="526" height="2"/>
     </resources>
 </document>

@@ -58,10 +58,10 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="KSL-zR-AIM">
-                    <rect key="frame" x="87" y="50" width="200" height="96"/>
+                    <rect key="frame" x="62" y="52" width="251" height="125"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="96" id="VkP-rt-iAz"/>
-                        <constraint firstAttribute="width" constant="200" id="thr-UM-pMU"/>
+                        <constraint firstAttribute="height" constant="125" id="VkP-rt-iAz"/>
+                        <constraint firstAttribute="width" constant="251" id="thr-UM-pMU"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -69,7 +69,7 @@
             <accessibility key="accessibilityConfiguration" identifier="splash-screen"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="AEY-cT-K95" secondAttribute="centerX" id="4Xu-hT-26y"/>
-                <constraint firstItem="KSL-zR-AIM" firstAttribute="top" secondItem="IfH-km-N4o" secondAttribute="top" constant="50" id="6sf-dG-AbH"/>
+                <constraint firstItem="KSL-zR-AIM" firstAttribute="top" secondItem="IfH-km-N4o" secondAttribute="top" constant="52" id="6sf-dG-AbH"/>
                 <constraint firstItem="SIO-jm-HLG" firstAttribute="leading" secondItem="IfH-km-N4o" secondAttribute="leading" id="Bsg-oC-pBY"/>
                 <constraint firstAttribute="bottom" secondItem="dJC-c2-JVU" secondAttribute="bottom" constant="42" id="C4S-jf-BpE"/>
                 <constraint firstAttribute="centerX" secondItem="dJC-c2-JVU" secondAttribute="centerX" id="cab-Re-AdF"/>
@@ -148,6 +148,6 @@
     <resources>
         <image name="bt_signin_active.png" width="525" height="100"/>
         <image name="launchBackground.png" width="1122" height="1920"/>
-        <image name="logo.png" width="1912" height="768"/>
+        <image name="logo.png" width="495" height="229"/>
     </resources>
 </document>
