@@ -24,13 +24,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="SIO-jm-HLG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="KSL-zR-AIM">
-                    <rect key="frame" x="113" y="46" width="150" height="74"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="74" id="VkP-rt-iAz"/>
-                        <constraint firstAttribute="width" constant="150" id="thr-UM-pMU"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEY-cT-K95" customClass="OEXCustomButton">
                     <rect key="frame" x="63" y="530" width="250" height="44"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,19 +50,26 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <state key="normal" title="Already have an account? Sign in">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="showLogin:" destination="-1" eventType="touchUpInside" id="bpi-ei-60F"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="KSL-zR-AIM">
+                    <rect key="frame" x="88" y="50" width="200" height="108"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="108" id="VkP-rt-iAz"/>
+                        <constraint firstAttribute="width" constant="200" id="thr-UM-pMU"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" identifier="splash-screen"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="AEY-cT-K95" secondAttribute="centerX" id="4Xu-hT-26y"/>
-                <constraint firstItem="KSL-zR-AIM" firstAttribute="top" secondItem="IfH-km-N4o" secondAttribute="top" constant="46" id="6sf-dG-AbH"/>
+                <constraint firstItem="KSL-zR-AIM" firstAttribute="top" secondItem="IfH-km-N4o" secondAttribute="top" constant="50" id="6sf-dG-AbH"/>
                 <constraint firstItem="SIO-jm-HLG" firstAttribute="leading" secondItem="IfH-km-N4o" secondAttribute="leading" id="Bsg-oC-pBY"/>
                 <constraint firstAttribute="bottom" secondItem="dJC-c2-JVU" secondAttribute="bottom" constant="42" id="C4S-jf-BpE"/>
                 <constraint firstAttribute="centerX" secondItem="dJC-c2-JVU" secondAttribute="centerX" id="cab-Re-AdF"/>
@@ -79,6 +79,7 @@
                 <constraint firstItem="dJC-c2-JVU" firstAttribute="top" secondItem="AEY-cT-K95" secondAttribute="bottom" constant="26" id="nyP-Mu-POU"/>
                 <constraint firstAttribute="bottom" secondItem="SIO-jm-HLG" secondAttribute="bottom" id="zpC-Ar-QjG"/>
             </constraints>
+            <point key="canvasLocation" x="33.5" y="65.5"/>
         </view>
         <view contentMode="scaleToFill" id="rUI-CX-Fgz">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -147,6 +148,6 @@
     <resources>
         <image name="bt_signin_active.png" width="525" height="100"/>
         <image name="launchBackground.png" width="1122" height="1920"/>
-        <image name="logo.png" width="141" height="65"/>
+        <image name="logo.png" width="1024" height="1024"/>
     </resources>
 </document>

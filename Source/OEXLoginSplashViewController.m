@@ -38,7 +38,7 @@
     [super viewDidLoad];
     
     [self.signInButton setTitle:[Strings loginSplashSignIn] forState:UIControlStateNormal];
-    [self.signUpButton applyButtonStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings loginSplashSignUp]];
+    [self.signUpButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings loginSplashSignUp]];
     self.signUpButton.exclusiveTouch = YES;
 }
 
