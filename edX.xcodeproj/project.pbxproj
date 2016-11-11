@@ -616,6 +616,8 @@
 		B4D5C7EB1A6FBAA300427D1D /* OEXAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7E61A6FBAA300427D1D /* OEXAccessToken.m */; };
 		B4D5C7EC1A6FBAA300427D1D /* OEXPersistentCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7E81A6FBAA300427D1D /* OEXPersistentCredentialStorage.m */; };
 		B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5C7EA1A6FBAA300427D1D /* OEXSession.m */; };
+		BD2BF34A1DD5C5FB006DDDCE /* VodafoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2BF3491DD5C5FB006DDDCE /* VodafoneUITests.swift */; };
+		BD2BF3531DD5C60E006DDDCE /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2BF3521DD5C60E006DDDCE /* SnapshotHelper.swift */; };
 		BD61FDE11DCB3BAB00BC9BA5 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = BD61FDD71DCB3BAA00BC9BA5 /* Icon-29.png */; };
 		BD61FDE21DCB3BAB00BC9BA5 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD61FDD81DCB3BAA00BC9BA5 /* Icon-29@2x.png */; };
 		BD61FDE31DCB3BAB00BC9BA5 /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD61FDD91DCB3BAA00BC9BA5 /* Icon-29@3x.png */; };
@@ -712,6 +714,13 @@
 			remoteInfo = "edX-core";
 		};
 		77E648351C91016300B6740D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BECB7B0A1924C0C3009C77F1;
+			remoteInfo = edX;
+		};
+		BD2BF34C1DD5C5FB006DDDCE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
 			proxyType = 1;
@@ -1500,6 +1509,10 @@
 		B4D5C7E91A6FBAA300427D1D /* OEXSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXSession.h; sourceTree = "<group>"; };
 		B4D5C7EA1A6FBAA300427D1D /* OEXSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXSession.m; sourceTree = "<group>"; };
 		B4D5C7EE1A6FBAC300427D1D /* OEXAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXAccessToken.h; sourceTree = "<group>"; };
+		BD2BF3471DD5C5FA006DDDCE /* VodafoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VodafoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD2BF3491DD5C5FB006DDDCE /* VodafoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VodafoneUITests.swift; sourceTree = "<group>"; };
+		BD2BF34B1DD5C5FB006DDDCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD2BF3521DD5C60E006DDDCE /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		BD61FDD71DCB3BAA00BC9BA5 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		BD61FDD81DCB3BAA00BC9BA5 /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
 		BD61FDD91DCB3BAA00BC9BA5 /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@3x.png"; sourceTree = "<group>"; };
@@ -1610,6 +1623,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		77E6482D1C91016300B6740D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD2BF3441DD5C5FA006DDDCE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2936,6 +2956,16 @@
 			name = "Registration Field Controllers";
 			sourceTree = "<group>";
 		};
+		BD2BF3481DD5C5FA006DDDCE /* VodafoneUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BD2BF3491DD5C5FB006DDDCE /* VodafoneUITests.swift */,
+				BD2BF3521DD5C60E006DDDCE /* SnapshotHelper.swift */,
+				BD2BF34B1DD5C5FB006DDDCE /* Info.plist */,
+			);
+			path = VodafoneUITests;
+			sourceTree = "<group>";
+		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -3021,6 +3051,7 @@
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
 				BE76FEAA193C8D9C00BB9BDD /* External Libraries */,
+				BD2BF3481DD5C5FA006DDDCE /* VodafoneUITests */,
 				BECB7B0D1924C0C3009C77F1 /* Frameworks */,
 				BECB7B0C1924C0C3009C77F1 /* Products */,
 				4F2CE57B45D0225FF32D9A3F /* Pods */,
@@ -3035,6 +3066,7 @@
 				77E6478E1C90C10300B6740D /* edXCore.framework */,
 				77E647971C90C10300B6740D /* edXCoreTests.xctest */,
 				77E648301C91016300B6740D /* EndToEndTests.xctest */,
+				BD2BF3471DD5C5FA006DDDCE /* VodafoneUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3424,6 +3456,24 @@
 			productReference = 77E648301C91016300B6740D /* EndToEndTests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		BD2BF3461DD5C5FA006DDDCE /* VodafoneUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD2BF3511DD5C5FB006DDDCE /* Build configuration list for PBXNativeTarget "VodafoneUITests" */;
+			buildPhases = (
+				BD2BF3431DD5C5FA006DDDCE /* Sources */,
+				BD2BF3441DD5C5FA006DDDCE /* Frameworks */,
+				BD2BF3451DD5C5FA006DDDCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD2BF34D1DD5C5FB006DDDCE /* PBXTargetDependency */,
+			);
+			name = VodafoneUITests;
+			productName = VodafoneUITests;
+			productReference = BD2BF3471DD5C5FA006DDDCE /* VodafoneUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		BECB7B0A1924C0C3009C77F1 /* edX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BECB7B3D1924C0C3009C77F1 /* Build configuration list for PBXNativeTarget "edX" */;
@@ -3477,7 +3527,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = edX;
 				TargetAttributes = {
@@ -3494,6 +3544,11 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
+						TestTargetID = BECB7B0A1924C0C3009C77F1;
+					};
+					BD2BF3461DD5C5FA006DDDCE = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
 					BECB7B0A1924C0C3009C77F1 = {
@@ -3537,6 +3592,7 @@
 				77E6478D1C90C10300B6740D /* edXCore */,
 				77E647961C90C10300B6740D /* edXCoreTests */,
 				77E6482F1C91016300B6740D /* EndToEndTests */,
+				BD2BF3461DD5C5FA006DDDCE /* VodafoneUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -3557,6 +3613,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		77E6482E1C91016300B6740D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD2BF3451DD5C5FA006DDDCE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3935,6 +3998,15 @@
 				775391501C98B7C500FA959C /* RegisterFeatureTestCase.swift in Sources */,
 				7753912A1C9234F300FA959C /* MockResponseCache.swift in Sources */,
 				7753914E1C98B6FA00FA959C /* RegistrationScreenInteractor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD2BF3431DD5C5FA006DDDCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD2BF34A1DD5C5FB006DDDCE /* VodafoneUITests.swift in Sources */,
+				BD2BF3531DD5C60E006DDDCE /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4441,6 +4513,11 @@
 			target = BECB7B0A1924C0C3009C77F1 /* edX */;
 			targetProxy = 77E648351C91016300B6740D /* PBXContainerItemProxy */;
 		};
+		BD2BF34D1DD5C5FB006DDDCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BECB7B0A1924C0C3009C77F1 /* edX */;
+			targetProxy = BD2BF34C1DD5C5FB006DDDCE /* PBXContainerItemProxy */;
+		};
 		BECB7B321924C0C3009C77F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BECB7B0A1924C0C3009C77F1 /* edX */;
@@ -4844,6 +4921,70 @@
 			};
 			name = Profile;
 		};
+		BD2BF34E1DD5C5FB006DDDCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = VodafoneUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tea.VodafoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a9e84afb-9bf0-421a-a56d-84256c4dbaa5";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Debug;
+		};
+		BD2BF34F1DD5C5FB006DDDCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = VodafoneUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tea.VodafoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a9e84afb-9bf0-421a-a56d-84256c4dbaa5";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Release;
+		};
+		BD2BF3501DD5C5FB006DDDCE /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = VodafoneUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tea.VodafoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a9e84afb-9bf0-421a-a56d-84256c4dbaa5";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Profile;
+		};
 		BECB7B3B1924C0C3009C77F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5148,6 +5289,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BD2BF3511DD5C5FB006DDDCE /* Build configuration list for PBXNativeTarget "VodafoneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD2BF34E1DD5C5FB006DDDCE /* Debug */,
+				BD2BF34F1DD5C5FB006DDDCE /* Release */,
+				BD2BF3501DD5C5FB006DDDCE /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		BECB7B061924C0C3009C77F1 /* Build configuration list for PBXProject "edX" */ = {
 			isa = XCConfigurationList;

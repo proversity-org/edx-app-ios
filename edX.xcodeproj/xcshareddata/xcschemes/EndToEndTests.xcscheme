@@ -52,6 +52,16 @@
                ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BD2BF3461DD5C5FA006DDDCE"
+               BuildableName = "VodafoneUITests.xctest"
+               BlueprintName = "VodafoneUITests"
+               ReferencedContainer = "container:edX.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
