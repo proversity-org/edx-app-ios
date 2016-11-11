@@ -634,6 +634,8 @@
 		BD877C311DC88E8400AA1492 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BD877C301DC88E8400AA1492 /* logo.png */; };
 		BD877C331DC88E9E00AA1492 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = BD877C321DC88E9E00AA1492 /* iTunesArtwork@2x */; };
 		BD877C351DC88EB200AA1492 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BD877C341DC88EB200AA1492 /* iTunesArtwork */; };
+		BDA0B5FF1DD5BB5E0031B260 /* TeachFirstUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA0B5FE1DD5BB5E0031B260 /* TeachFirstUITests.swift */; };
+		BDA0B6081DD5BB850031B260 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA0B6071DD5BB850031B260 /* SnapshotHelper.swift */; };
 		BDAB4CC71DC89AD1006ECD63 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAB4CC61DC89AD1006ECD63 /* Icon-40.png */; };
 		BDAB4CC91DC89AD6006ECD63 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAB4CC81DC89AD6006ECD63 /* Icon-76.png */; };
 		BDAB4CCB1DC89ADA006ECD63 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDAB4CCA1DC89ADA006ECD63 /* Icon-76@2x.png */; };
@@ -714,6 +716,13 @@
 			remoteInfo = "edX-core";
 		};
 		77E648351C91016300B6740D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BECB7B0A1924C0C3009C77F1;
+			remoteInfo = edX;
+		};
+		BDA0B6011DD5BB5E0031B260 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
 			proxyType = 1;
@@ -1520,6 +1529,10 @@
 		BD877C301DC88E8400AA1492 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		BD877C321DC88E9E00AA1492 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		BD877C341DC88EB200AA1492 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		BDA0B5FC1DD5BB5E0031B260 /* TeachFirstUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeachFirstUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDA0B5FE1DD5BB5E0031B260 /* TeachFirstUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachFirstUITests.swift; sourceTree = "<group>"; };
+		BDA0B6001DD5BB5E0031B260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDA0B6071DD5BB850031B260 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		BDAB4CC61DC89AD1006ECD63 /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		BDAB4CC81DC89AD6006ECD63 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		BDAB4CCA1DC89ADA006ECD63 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
@@ -1614,6 +1627,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		77E6482D1C91016300B6740D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDA0B5F91DD5BB5E0031B260 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2941,6 +2961,16 @@
 			name = "Registration Field Controllers";
 			sourceTree = "<group>";
 		};
+		BDA0B5FD1DD5BB5E0031B260 /* TeachFirstUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BDA0B5FE1DD5BB5E0031B260 /* TeachFirstUITests.swift */,
+				BDA0B6071DD5BB850031B260 /* SnapshotHelper.swift */,
+				BDA0B6001DD5BB5E0031B260 /* Info.plist */,
+			);
+			path = TeachFirstUITests;
+			sourceTree = "<group>";
+		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -3026,6 +3056,7 @@
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
 				BE76FEAA193C8D9C00BB9BDD /* External Libraries */,
+				BDA0B5FD1DD5BB5E0031B260 /* TeachFirstUITests */,
 				BECB7B0D1924C0C3009C77F1 /* Frameworks */,
 				BECB7B0C1924C0C3009C77F1 /* Products */,
 				4F2CE57B45D0225FF32D9A3F /* Pods */,
@@ -3040,6 +3071,7 @@
 				77E6478E1C90C10300B6740D /* edXCore.framework */,
 				77E647971C90C10300B6740D /* edXCoreTests.xctest */,
 				77E648301C91016300B6740D /* EndToEndTests.xctest */,
+				BDA0B5FC1DD5BB5E0031B260 /* TeachFirstUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3430,6 +3462,24 @@
 			productReference = 77E648301C91016300B6740D /* EndToEndTests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		BDA0B5FB1DD5BB5E0031B260 /* TeachFirstUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDA0B6061DD5BB5E0031B260 /* Build configuration list for PBXNativeTarget "TeachFirstUITests" */;
+			buildPhases = (
+				BDA0B5F81DD5BB5E0031B260 /* Sources */,
+				BDA0B5F91DD5BB5E0031B260 /* Frameworks */,
+				BDA0B5FA1DD5BB5E0031B260 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BDA0B6021DD5BB5E0031B260 /* PBXTargetDependency */,
+			);
+			name = TeachFirstUITests;
+			productName = TeachFirstUITests;
+			productReference = BDA0B5FC1DD5BB5E0031B260 /* TeachFirstUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		BECB7B0A1924C0C3009C77F1 /* edX */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BECB7B3D1924C0C3009C77F1 /* Build configuration list for PBXNativeTarget "edX" */;
@@ -3483,7 +3533,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = edX;
 				TargetAttributes = {
@@ -3500,6 +3550,11 @@
 						CreatedOnToolsVersion = 7.2.1;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
+						TestTargetID = BECB7B0A1924C0C3009C77F1;
+					};
+					BDA0B5FB1DD5BB5E0031B260 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
 					BECB7B0A1924C0C3009C77F1 = {
@@ -3543,6 +3598,7 @@
 				77E6478D1C90C10300B6740D /* edXCore */,
 				77E647961C90C10300B6740D /* edXCoreTests */,
 				77E6482F1C91016300B6740D /* EndToEndTests */,
+				BDA0B5FB1DD5BB5E0031B260 /* TeachFirstUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -3563,6 +3619,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		77E6482E1C91016300B6740D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDA0B5FA1DD5BB5E0031B260 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3943,6 +4006,15 @@
 				775391501C98B7C500FA959C /* RegisterFeatureTestCase.swift in Sources */,
 				7753912A1C9234F300FA959C /* MockResponseCache.swift in Sources */,
 				7753914E1C98B6FA00FA959C /* RegistrationScreenInteractor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BDA0B5F81DD5BB5E0031B260 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDA0B5FF1DD5BB5E0031B260 /* TeachFirstUITests.swift in Sources */,
+				BDA0B6081DD5BB850031B260 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4449,6 +4521,11 @@
 			target = BECB7B0A1924C0C3009C77F1 /* edX */;
 			targetProxy = 77E648351C91016300B6740D /* PBXContainerItemProxy */;
 		};
+		BDA0B6021DD5BB5E0031B260 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BECB7B0A1924C0C3009C77F1 /* edX */;
+			targetProxy = BDA0B6011DD5BB5E0031B260 /* PBXContainerItemProxy */;
+		};
 		BECB7B321924C0C3009C77F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BECB7B0A1924C0C3009C77F1 /* edX */;
@@ -4860,6 +4937,70 @@
 			};
 			name = Profile;
 		};
+		BDA0B6031DD5BB5E0031B260 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = TeachFirstUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tea.TeachFirstUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e83709c0-760c-492a-8040-4f2d1d2fc2a9";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Debug;
+		};
+		BDA0B6041DD5BB5E0031B260 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = TeachFirstUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tea.TeachFirstUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e83709c0-760c-492a-8040-4f2d1d2fc2a9";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Release;
+		};
+		BDA0B6051DD5BB5E0031B260 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = TeachFirstUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tea.TeachFirstUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e83709c0-760c-492a-8040-4f2d1d2fc2a9";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Profile;
+		};
 		BECB7B3B1924C0C3009C77F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5164,6 +5305,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BDA0B6061DD5BB5E0031B260 /* Build configuration list for PBXNativeTarget "TeachFirstUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDA0B6031DD5BB5E0031B260 /* Debug */,
+				BDA0B6041DD5BB5E0031B260 /* Release */,
+				BDA0B6051DD5BB5E0031B260 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		BECB7B061924C0C3009C77F1 /* Build configuration list for PBXProject "edX" */ = {
 			isa = XCConfigurationList;
