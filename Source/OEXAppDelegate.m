@@ -147,6 +147,109 @@
     }
     
     NSLog(@"%@", [token copy]);
+    // Make API call to create a new mobile endpoint
+    NSURL *url = [NSURL URLWithString:@"http://konnekteer-api.proversity.org/mobileEndpoints"];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]
+                                       initWithURL:url];
+    NSError *error;
+    NSDictionary *payload = @{@"organizationCode": @"edx", @"token": [token copy], @"platform": @"iOS"};
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:payload
+                                                       options:0
+                                                         error:&error];
+    
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:@"application/json"
+      forHTTPHeaderField:@"Content-Type"];
+    
+    [urlRequest setHTTPBody:postData];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration
+                                                defaultSessionConfiguration];
+    
+    [configuration setAllowsCellularAccess:YES];
+    
+    // Configure the task
+    NSURLSessionTask *task = [[NSURLSession
+                               sessionWithConfiguration:configuration]
+                              dataTaskWithRequest:urlRequest
+                              completionHandler:^(NSData * _Nullable data,
+                                                  NSURLResponse * _Nullable res,
+                                                  NSError * _Nullable error)
+                              {
+                                  // Get the status code
+                                  NSHTTPURLResponse *httpResponse =
+                                  (NSHTTPURLResponse *)res;
+                                  
+                                  NSInteger statusCode =
+                                  [httpResponse statusCode];
+                                  
+                                  id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                  
+                                  // call the completion handler
+                                  if (error) {
+                                      NSLog(@"%@", error);
+                                      NSLog(@"%ld", (long)statusCode);
+                                      NSLog(@"%@", json);
+                                      
+                                  } else {
+                                      NSLog(@"%ld", statusCode);
+                                      NSLog(@"%@", json);
+                                      //store device token in memory
+                                      NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+                                      [standardUserDefaults setObject:[token copy] forKey:@"token"];
+                                      [standardUserDefaults synchronize];
+                                      
+                                      NSURL *url = [NSURL URLWithString:@"http://konnekteer-api.proversity.org/mobileEndpoints/subscribe"];
+                                      NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]
+                                                                         initWithURL:url];
+                                      NSError *error;
+                                      NSDictionary *payload = @{@"organizationCode": @"edx", @"token": [token copy], @"topicType": @"organization", @"username": @"jagonazlr", @"email": @"jagonzalr@gmail.com"};
+                                      NSData *postData = [NSJSONSerialization dataWithJSONObject:payload
+                                                                                         options:0
+                                                                                           error:&error];
+                                      
+                                      [urlRequest setHTTPMethod:@"POST"];
+                                      [urlRequest setValue:@"application/json"
+                                        forHTTPHeaderField:@"Content-Type"];
+                                      [urlRequest setHTTPBody:postData];
+                                      
+                                      NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration
+                                                                                  defaultSessionConfiguration];
+                                      
+                                      [configuration setAllowsCellularAccess:YES];
+                                      
+                                      NSURLSessionTask *subscribeTask = [[NSURLSession
+                                                                 sessionWithConfiguration:configuration]
+                                                                dataTaskWithRequest:urlRequest
+                                                                completionHandler:^(NSData * _Nullable data,
+                                                                                    NSURLResponse * _Nullable res,
+                                                                                    NSError * _Nullable error)
+                                                                {
+                                                                    // Get the status code
+                                                                    NSHTTPURLResponse *httpResponse =
+                                                                    (NSHTTPURLResponse *)res;
+                                                                    
+                                                                    NSInteger statusCode =
+                                                                    [httpResponse statusCode];
+                                                                    
+                                                                    id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                                                    
+                                                                    // call the completion handler
+                                                                    if (error) {
+                                                                        NSLog(@"%@", error);
+                                                                        NSLog(@"%ld", (long)statusCode);
+                                                                        NSLog(@"%@", json);
+                                                                        
+                                                                    } else {
+                                                                        NSLog(@"%ld", statusCode);
+                                                                        NSLog(@"%@", json);
+                                                                    }
+                                                                }];
+                                      [subscribeTask resume];
+
+                                  }
+                              }];
+    [task resume];
+    
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 

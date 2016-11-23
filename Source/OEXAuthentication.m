@@ -156,6 +156,43 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:OEXWrapURLCompletion(completionBlock)];
     [task resume];
+    
+    NSURL *url = [NSURL URLWithString:@"http://staging.learn.proversity.io/api/enrollment/v1/enrollment"];
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]
+                                       initWithURL:url];
+    
+    [urlRequest setValue:authValue forHTTPHeaderField:@"Authorization"];
+    
+    // Configure the task
+    NSURLSessionTask *subscribeTask = [[NSURLSession
+                               sessionWithConfiguration:config]
+                              dataTaskWithRequest:urlRequest
+                              completionHandler:^(NSData * _Nullable data,
+                                                  NSURLResponse * _Nullable res,
+                                                  NSError * _Nullable error)
+                              {
+                                  // Get the status code
+                                  NSHTTPURLResponse *httpResponse =
+                                  (NSHTTPURLResponse *)res;
+                                  
+                                  NSInteger statusCode =
+                                  [httpResponse statusCode];
+                                  
+                                  id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                                  
+                                  // call the completion handler
+                                  if (error) {
+                                      NSLog(@"%@", error);
+                                      NSLog(@"%ld", (long)statusCode);
+                                      NSLog(@"%@", json);
+                                      
+                                  } else {
+                                      NSLog(@"%ld", statusCode);
+                                      NSLog(@"%@", json);
+                                      // Subscribe
+                                  }
+                              }];
+    [subscribeTask resume];
 }
 
 // Returns authentication header for every authenticated webservice call
