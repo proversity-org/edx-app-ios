@@ -15,6 +15,7 @@
 #import <SEGAnalytics.h>
 
 #import "OEXAppDelegate.h"
+#import "KPNService.h"
 
 #import "edX-Swift.h"
 #import "Logger+OEXObjC.h"
@@ -144,111 +145,19 @@
     
     for (NSUInteger i = 0; i < [deviceToken length]; i++) {
         [token appendFormat:@"%02.2hhX", data[i]];
-    }
+    };
+    [KPNService initWithDeviceToken:[token copy]];
+    NSDictionary *payload = @{
+                              @"organizationCode": self.environment.config.organizationCode,
+                              @"token": [[KPNService instance] getDeviceToken],
+                              @"platform": @"iOS",
+                              @"apiKey": self.environment.config.konnekteerApiKey};
     
-    NSLog(@"%@", [token copy]);
-    // Make API call to create a new mobile endpoint
-    NSURL *url = [NSURL URLWithString:@"http://konnekteer-api.proversity.org/mobileEndpoints"];
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]
-                                       initWithURL:url];
-    NSError *error;
-    NSDictionary *payload = @{@"organizationCode": @"edx", @"token": [token copy], @"platform": @"iOS"};
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:payload
-                                                       options:0
-                                                         error:&error];
-    
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setValue:@"application/json"
-      forHTTPHeaderField:@"Content-Type"];
-    
-    [urlRequest setHTTPBody:postData];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration
-                                                defaultSessionConfiguration];
-    
-    [configuration setAllowsCellularAccess:YES];
-    
-    // Configure the task
-    NSURLSessionTask *task = [[NSURLSession
-                               sessionWithConfiguration:configuration]
-                              dataTaskWithRequest:urlRequest
-                              completionHandler:^(NSData * _Nullable data,
-                                                  NSURLResponse * _Nullable res,
-                                                  NSError * _Nullable error)
-                              {
-                                  // Get the status code
-                                  NSHTTPURLResponse *httpResponse =
-                                  (NSHTTPURLResponse *)res;
-                                  
-                                  NSInteger statusCode =
-                                  [httpResponse statusCode];
-                                  
-                                  id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                  
-                                  // call the completion handler
-                                  if (error) {
-                                      NSLog(@"%@", error);
-                                      NSLog(@"%ld", (long)statusCode);
-                                      NSLog(@"%@", json);
-                                      
-                                  } else {
-                                      NSLog(@"%ld", statusCode);
-                                      NSLog(@"%@", json);
-                                      //store device token in memory
-                                      NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-                                      [standardUserDefaults setObject:[token copy] forKey:@"token"];
-                                      [standardUserDefaults synchronize];
-                                      
-                                      NSURL *url = [NSURL URLWithString:@"http://konnekteer-api.proversity.org/mobileEndpoints/subscribe"];
-                                      NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]
-                                                                         initWithURL:url];
-                                      NSError *error;
-                                      NSDictionary *payload = @{@"organizationCode": @"edx", @"token": [token copy], @"topicType": @"organization", @"username": @"jagonazlr", @"email": @"jagonzalr@gmail.com"};
-                                      NSData *postData = [NSJSONSerialization dataWithJSONObject:payload
-                                                                                         options:0
-                                                                                           error:&error];
-                                      
-                                      [urlRequest setHTTPMethod:@"POST"];
-                                      [urlRequest setValue:@"application/json"
-                                        forHTTPHeaderField:@"Content-Type"];
-                                      [urlRequest setHTTPBody:postData];
-                                      
-                                      NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration
-                                                                                  defaultSessionConfiguration];
-                                      
-                                      [configuration setAllowsCellularAccess:YES];
-                                      
-                                      NSURLSessionTask *subscribeTask = [[NSURLSession
-                                                                 sessionWithConfiguration:configuration]
-                                                                dataTaskWithRequest:urlRequest
-                                                                completionHandler:^(NSData * _Nullable data,
-                                                                                    NSURLResponse * _Nullable res,
-                                                                                    NSError * _Nullable error)
-                                                                {
-                                                                    // Get the status code
-                                                                    NSHTTPURLResponse *httpResponse =
-                                                                    (NSHTTPURLResponse *)res;
-                                                                    
-                                                                    NSInteger statusCode =
-                                                                    [httpResponse statusCode];
-                                                                    
-                                                                    id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                                                                    
-                                                                    // call the completion handler
-                                                                    if (error) {
-                                                                        NSLog(@"%@", error);
-                                                                        NSLog(@"%ld", (long)statusCode);
-                                                                        NSLog(@"%@", json);
-                                                                        
-                                                                    } else {
-                                                                        NSLog(@"%ld", statusCode);
-                                                                        NSLog(@"%@", json);
-                                                                    }
-                                                                }];
-                                      [subscribeTask resume];
-
-                                  }
+    [[KPNService instance] createMobileEndpoint:payload
+                              CompletionHandler:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
+                                  NSLog(@"Create mobile endpoint");
+                                  NSLog(@"%@", data);
                               }];
-    [task resume];
     
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
