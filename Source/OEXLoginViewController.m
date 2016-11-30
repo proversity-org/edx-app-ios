@@ -172,8 +172,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setTitle:[Strings loginSignInToPlatformWithPlatformName:self.environment.config.platformName]];
+
+    [self setTitle:[Strings signInText]];
 
     NSMutableArray* providers = [[NSMutableArray alloc] init];
     if([self isGoogleEnabled]) {
@@ -194,19 +194,19 @@
 
     [self.lbl_OrSignIn setText:[Strings orSignInWith]];
     [self.lbl_OrSignIn setTextColor:[UIColor colorWithRed:60.0 / 255.0 green:64.0 / 255.0 blue:69.0 / 255.0 alpha:1.0]];
-    
+
     if (self.environment.config.isRegistrationEnabled) {
         UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack)];
         closeButton.accessibilityLabel = [Strings close];
         self.navigationItem.leftBarButtonItem = closeButton;
     }
-    
+
     [self setExclusiveTouch];
 
     if ([self isRTL]) {
         [self.btn_TroubleLogging setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
     }
-    
+
     self.tf_EmailID.textAlignment = NSTextAlignmentNatural;
     self.tf_Password.textAlignment = NSTextAlignmentNatural;
     self.img_Logo.isAccessibilityElement = YES;
@@ -220,7 +220,7 @@
     else {
         self.versionLabel.text = @"";
     }
-    
+
     _placeHolderStyle = [[OEXTextStyle alloc] initWithWeight:OEXTextWeightNormal size:OEXTextSizeBase color:[[OEXStyles sharedStyles] neutralDark]];
     _buttonsTitleStyle = [[OEXMutableTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[[OEXStyles sharedStyles] primaryBaseColor]];
 }
@@ -283,7 +283,7 @@
 }
 
 - (NSString*)signInButtonText {
-    return [Strings signInButtonText];
+    return [Strings signInText];
 }
 
 - (void)handleActivationDuringLogin {
@@ -334,7 +334,7 @@
 
     self.btn_OpenEULA.accessibilityTraits = UIAccessibilityTraitLink;
     self.btn_OpenEULA.accessibilityLabel = [NSString stringWithFormat:@"%@,%@",[Strings redirectText], termsText];
-    
+
     [self.btn_Login applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[self signInButtonText]];
     [self.activityIndicator stopAnimating];
 
@@ -358,6 +358,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view setUserInteractionEnabled:YES];
         });
+
         [self.btn_Login applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[self signInButtonText]];
 
         [self.activityIndicator stopAnimating];
@@ -396,7 +397,7 @@
     }
     else {
         // error
-        
+
         [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle]
                                               message:[Strings networkNotAvailableMessageTrouble]
                                      onViewController:self];
@@ -411,7 +412,7 @@
                                               message:[Strings networkNotAvailableMessage]
                                      onViewController:self.navigationController
                                                             ];
-        
+
         [self.view setUserInteractionEnabled:YES];
 
         return;
@@ -486,17 +487,17 @@
         self.authProvider = nil;
         return;
     }
-    
+
     OEXURLRequestHandler handler = ^(NSData* data, NSHTTPURLResponse* response, NSError* error) {
         if(!response) {
             [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
             return;
         }
         self.authProvider = nil;
-        
+
         [self handleLoginResponseWith:data response:response error:error];
     };
-    
+
     [provider authorizeServiceFromController:self
                        requestingUserDetails:NO
                               withCompletion:^(NSString* accessToken, OEXRegisteringUserDetails* details, NSError* error) {
@@ -555,6 +556,7 @@
     }
 
     [self.activityIndicator stopAnimating];
+
     [self.btn_Login applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[self signInButtonText]];
 
     [self.view setUserInteractionEnabled:YES];
@@ -645,7 +647,7 @@
                     else if(httpResp.statusCode >= 500) {
                         NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                         [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:responseStr onViewController:self.navigationController];
-                        
+
                     }
                 }
                 else {
@@ -685,15 +687,15 @@
     else if([textField isEqual:_tf_EmailID] && [string isEqualToString:@""] && textField.text.length == 1) {
         textField.accessibilityLabel = nil;
     }
-    
-    
+
+
     if ([textField isEqual:_tf_Password] && [textField.text isEqualToString:@""] && string.length > 0) {
         textField.accessibilityLabel = [Strings passwordPlaceholder];
     }
     else if([textField isEqual:_tf_Password] && [string isEqualToString:@""] && textField.text.length == 1) {
         textField.accessibilityLabel = nil;
     }
-    
+
     return YES;
 }
 

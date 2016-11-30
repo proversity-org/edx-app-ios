@@ -55,7 +55,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
 
     private let environment: Environment
     private let courseID: String
-    
     private let courseCard = CourseCardView(frame: CGRectZero)
     
     private let tableView: UITableView = UITableView()
@@ -89,7 +88,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = OEXStyles.sharedStyles().neutralXLight()
         
         self.navigationItem.rightBarButtonItem = self.progressController.navigationItem()
@@ -168,6 +166,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         verifyAccessForCourse(enrollment.course)
         prepareTableViewData(enrollment)
         self.tableView.reloadData()
+        
         shareButton.hidden = enrollment.course.course_about == nil || !environment.config.courseSharingEnabled
         shareButton.oex_removeAllActions()
         shareButton.oex_addAction({[weak self] _ in
@@ -227,8 +226,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     }
     
     public func prepareTableViewData(enrollment: UserCourseEnrollment) {
-        cellItems = []
-        
         if let certificateUrl = getCertificateUrl(enrollment) {
             let item = CertificateDashboardItem(certificateImage: UIImage(named: "courseCertificate")!, certificateUrl: certificateUrl, action: {
                 let url = NSURL(string: certificateUrl)!
@@ -249,11 +246,12 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }
             cellItems.append(item)
         }
-        
+
         item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
             self?.showHandouts()
         }
         cellItems.append(item)
+
         
         item = StandardCourseDashboardItem(title: Strings.courseDashboardAnnouncements, detail: Strings.courseDashboardAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
             self?.showAnnouncements()
