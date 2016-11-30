@@ -8,5 +8,8 @@ xcuserdata
 .gradle
 build
 /edx.properties
-default_config/local.yaml 
+default_config/local.yaml
 *.gcda
+
+custom_config/
+fastlane/

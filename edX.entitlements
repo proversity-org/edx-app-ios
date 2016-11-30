@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)org.edx.mobile</string>
+		<string>$(AppIdentifierPrefix)org.proversity.icaew</string>
 	</array>
 </dict>
 </plist>
