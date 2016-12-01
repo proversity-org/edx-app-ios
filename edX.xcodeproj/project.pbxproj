@@ -4568,7 +4568,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.edx;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "8950e9b6-c581-4b13-82b4-06efc0bfeace";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.proversity.edx";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
@@ -4959,8 +4959,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kevin Fourie (ETEC9CKDS3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kevin Fourie (ETEC9CKDS3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jose Antonio Gonzalez (A28D4H9R9N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jose Antonio Gonzalez (A28D4H9R9N)";
 				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4978,7 +4978,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.edx;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "0a118f41-e14f-4b53-a3db-7ada698bf50e";
+				PROVISIONING_PROFILE = "aea18a23-fe25-4446-9e19-291ffb82c59f";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.edx";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5014,7 +5014,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.edx;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "8950e9b6-c581-4b13-82b4-06efc0bfeace";
+				PROVISIONING_PROFILE = "1e8e4e06-34c2-48a7-8182-4f4216359bc2";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.proversity.edx";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
