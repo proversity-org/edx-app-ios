@@ -4960,7 +4960,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.icaew;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "8d63491e-349f-4b0a-8df8-8872a45f3b17";
+				PROVISIONING_PROFILE = "fe28df20-fb38-4835-8500-ce825c9a7029";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.icaew";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
