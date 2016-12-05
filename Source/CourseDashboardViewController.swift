@@ -250,10 +250,12 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             cellItems.append(item)
         }
         
-        item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
-            self?.showHandouts()
+        if !isHandoutsEmpty(enrollment.course) {
+            item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
+                self?.showHandouts()
+            }
+            cellItems.append(item)
         }
-        cellItems.append(item)
         
         item = StandardCourseDashboardItem(title: Strings.courseDashboardAnnouncements, detail: Strings.courseDashboardAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
             self?.showAnnouncements()
@@ -271,6 +273,10 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     private func getCertificateUrl(enrollment: UserCourseEnrollment) -> String? {
         guard environment.config.discussionsEnabled else { return nil }
         return enrollment.certificateUrl
+    }
+    
+    private func isHandoutsEmpty(course: OEXCourse) -> Bool {
+        return (course.course_handouts?.isEmpty)!
     }
     
     

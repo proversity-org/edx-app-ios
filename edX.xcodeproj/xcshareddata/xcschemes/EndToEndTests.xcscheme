@@ -52,6 +52,16 @@
                ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BD578FA01DF57D3500826069"
+               BuildableName = "Family Mosaic | ProversityUITests.xctest"
+               BlueprintName = "Family Mosaic | ProversityUITests"
+               ReferencedContainer = "container:edX.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>

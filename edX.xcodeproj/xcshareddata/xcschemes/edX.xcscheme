@@ -21,11 +21,11 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForTesting = "NO"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BECB7B2B1924C0C3009C77F1"
@@ -35,16 +35,30 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77E647961C90C10300B6740D"
                BuildableName = "edXCoreTests.xctest"
                BlueprintName = "edXCoreTests"
+               ReferencedContainer = "container:edX.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "77E6482F1C91016300B6740D"
+               BuildableName = "EndToEndTests.xctest"
+               BlueprintName = "EndToEndTests"
                ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -61,29 +75,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77E647961C90C10300B6740D"
-               BuildableName = "edXCoreTests.xctest"
-               BlueprintName = "edXCoreTests"
-               ReferencedContainer = "container:edX.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BECB7B2B1924C0C3009C77F1"
-               BuildableName = "edXTests.xctest"
-               BlueprintName = "edXTests"
-               ReferencedContainer = "container:edX.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77E6482F1C91016300B6740D"
-               BuildableName = "EndToEndTests.xctest"
-               BlueprintName = "EndToEndTests"
+               BlueprintIdentifier = "BD578FAF1DF57E1000826069"
+               BuildableName = "Family Mosaic | ProversityUITests.xctest"
+               BlueprintName = "Family Mosaic | ProversityUITests"
                ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </TestableReference>
