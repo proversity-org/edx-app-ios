@@ -192,7 +192,20 @@ public class DiscussionAPI {
             headers: ["Content-Type": "application/merge-patch+json"], //should push this to a lower level once all our PATCHs support this content-type
             deserializer : .JSONResponse(threadDeserializer)
         )
-    }    
+    }
+    
+    // get thread
+    static func getThread(threadID: String) -> NetworkRequest<DiscussionThread> {
+        let query = ["requested_fields" : JSON("profile_image")]
+        return NetworkRequest(
+            method : HTTPMethod.GET,
+            path : "/api/discussion/v1/threads/\(threadID)/",
+            requiresAuth : true,
+            query: query,
+            headers: ["Content-Type": "application/merge-patch+json"], //should push this to a lower level once all our PATCHs support this content-type
+            deserializer : .JSONResponse(threadDeserializer)
+        )
+    }
     
     // mark thread as read
     static func readThread(read: Bool, threadID: String) -> NetworkRequest<DiscussionThread> {
