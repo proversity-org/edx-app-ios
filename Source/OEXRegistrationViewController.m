@@ -85,25 +85,25 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [super viewDidLoad];
     self.loadController = [[LoadStateViewController alloc] init];
     [self.loadController setupInController:self contentView:self.scrollView];
-    
+
     self.navigationController.navigationBarHidden = NO;
-    
-    [self setTitle:[Strings registrationSignUpForPlatformWithPlatformName:self.environment.config.platformName]];
-    
+
+    [self setTitle:[Strings registerText]];
+
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack:)];
     closeButton.accessibilityLabel = [Strings close];
     self.navigationItem.leftBarButtonItem = closeButton;
-    
+
     //By default we only shows required fields
     self.isShowingOptionalFields = NO;
-    
+
     _buttonsTitleStyle = [[OEXMutableTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[[OEXStyles sharedStyles] primaryBaseColor]];
-    
+
     [self getFormFields];
 }
 
 - (void)getFormFields {
-    
+
     [self getRegistrationFormDescription:^(OEXRegistrationDescription * _Nonnull response) {
         self.registrationDescription = response;
         [self makeFieldControllers];
@@ -135,12 +135,12 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     NSString* platform = self.environment.config.platformName;
     ////Create and initalize 'btnCreateAccount' button
     self.registerButton = [[UIButton alloc] init];
-    
+
     [self.registerButton oex_addAction:^(id  _Nonnull control) {
         [self createAccount:nil];
     } forEvents:UIControlEventTouchUpInside];
-    
-    [self.registerButton applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+
+    [self.registerButton applyButtonStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
     self.registerButton.accessibilityIdentifier = @"register";
 
     ////Create progrssIndicator as subview to btnCreateAccount
@@ -163,7 +163,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     self.agreementLink.accessibilityTraits = UIAccessibilityTraitLink;
     self.agreementLink.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.agreementLink.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
+
     [self.agreementLink oex_addAction:^(id  _Nonnull control) {
         [self agreementButtonTapped:nil];
     } forEvents:UIControlEventTouchUpInside];
@@ -181,7 +181,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] init];
     [tapGesture addTarget:self action:@selector(scrollViewTapped:)];
     [self.scrollView addGestureRecognizer:tapGesture];
-    
+
     NSMutableArray* providers = [[NSMutableArray alloc] init];
     if(self.environment.config.googleConfig.enabled) {
         [providers addObject:[[OEXGoogleAuthProvider alloc] init]];
@@ -211,7 +211,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     // Scrolling on keyboard hide and show
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardFrameChanged:)
@@ -276,20 +276,20 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     NSInteger offset = 0;
     CGFloat width = self.scrollView.frame.size.width;
     NSInteger contentWidth = width - 2 * horizontalSpacing;
-    
+
     // Force the heading view to layout, so we get its height
     [self.currentHeadingView setNeedsLayout];
     [self.currentHeadingView layoutIfNeeded];
-    
+
     // Then do it again since we may have updated the preferred size of some text
     [self.currentHeadingView setNeedsLayout];
-    
+
     //Setting offset as topspacing
     CGSize size = [self.currentHeadingView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     offset = topSpacing + size.height;
-    
+
     BOOL isOptionalFieldPresent = NO;
-    
+
     for(id <OEXRegistrationFieldController>fieldController in self.fieldControllers) {
         UIView* view = fieldController.view;
         // Add view to scroll view if field is not optional and it is not agreement field.
@@ -302,7 +302,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
             isOptionalFieldPresent = YES;
         }
     }
-    
+
     if (isOptionalFieldPresent) {
         //Add the optional field toggle
         CGFloat buttonWidth = 150;
@@ -312,10 +312,10 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         [self.scrollView addSubview:self.toggleOptionalFieldsButton];
         self.optionalFieldsSeparator.frame = CGRectMake(horizontalSpacing, self.toggleOptionalFieldsButton.center.y, contentWidth, 1);
         self.optionalFieldsSeparator.center = self.toggleOptionalFieldsButton.center;
-        
+
         offset = offset + buttonHeight + 10;
     }
-    
+
     // Actually show the optional fields if necessary
     for(id <OEXRegistrationFieldController>fieldController in self.fieldControllers) {
         UIView* view = fieldController.view;
@@ -326,18 +326,18 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
             offset = offset + view.frame.size.height;
         }
     }
-    
+
     [self.registerButton setFrame:CGRectMake(horizontalSpacing, offset, contentWidth, 40)];
 
     const int progressIndicatorCenterX = [self isRTL] ? 40 : self.registerButton.frame.size.width - 40;
 
     self.progressIndicator.center = CGPointMake(progressIndicatorCenterX, self.registerButton.frame.size.height / 2);
-    
+
     [self.scrollView addSubview:self.registerButton];
     offset = offset + 40;
-    
+
     NSInteger buttonLabelSpacing = 10;
-    
+
     [self.agreementLabel setFrame:CGRectMake(horizontalSpacing, offset + buttonLabelSpacing, width - 2 * horizontalSpacing, 20)];
     [self.scrollView addSubview:self.agreementLabel];
     offset = offset + self.agreementLabel.frame.size.height;
@@ -514,7 +514,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
     //As user is agree to the license setting 'terms_of_service'='true'
     [parameters setObject:@"true" forKey:@"terms_of_service"];
-    
+
     if(self.externalProvider != nil) {
         [parameters safeSetObject:self.externalAccessToken forKey: @"access_token"];
         [parameters safeSetObject:self.externalProvider.backendName forKey:@"provider"];
@@ -538,12 +538,12 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)showProgress:(BOOL)status {
     if(status) {
         [self.progressIndicator startAnimating];
-        [self.registerButton applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
+        [self.registerButton applyButtonStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     }
     else {
         [self.progressIndicator stopAnimating];
-        [self.registerButton applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+        [self.registerButton applyButtonStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }

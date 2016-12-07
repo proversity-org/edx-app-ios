@@ -276,7 +276,10 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     }
     
     private func isHandoutsEmpty(course: OEXCourse) -> Bool {
-        return (course.course_handouts?.isEmpty)!
+        if let handouts = course.course_handouts {
+            return handouts.isEmpty
+        }
+        return false
     }
     
     
