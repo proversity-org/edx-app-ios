@@ -211,9 +211,13 @@ public class DiscussionNewCommentViewController: UIViewController, UITextViewDel
     private func authorDetails() {
         switch context {
         case let .Comment(commnet):
+            print("comment")
+            print(commnet.imageURL)
             DiscussionHelper.styleAuthorDetails(commnet.author, authorLabel: commnet.authorLabel, createdAt: commnet.createdAt, hasProfileImage: commnet.hasProfileImage, imageURL: commnet.imageURL, authoNameLabel: authorNamelabel, dateLabel: dateLabel, authorButton: authorButton, imageView: authorProfileImage, viewController: self, router: environment.router)
             setAuthorAccessibility(commnet.author, date: commnet.createdAt)
         case let .Thread(thread):
+            print("thread")
+            print(thread.imageURL)
             DiscussionHelper.styleAuthorDetails(thread.author, authorLabel: thread.authorLabel, createdAt: thread.createdAt, hasProfileImage: thread.hasProfileImage, imageURL: thread.imageURL, authoNameLabel: authorNamelabel, dateLabel: dateLabel, authorButton: authorButton, imageView: authorProfileImage, viewController: self, router: environment.router)
             setAuthorAccessibility(thread.author, date: thread.createdAt)
         }

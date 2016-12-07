@@ -267,8 +267,9 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
     }
     
     private func markThreadAsRead() {
-        let apiRequest = DiscussionAPI.readThread(true, threadID: threadID)
-        self.environment.networkManager.taskForRequest(apiRequest) {[weak self] result in
+        DiscussionAPI.readThread(true, threadID: threadID)
+        let apiGetThread = DiscussionAPI.getThread(threadID)
+        self.environment.networkManager.taskForRequest(apiGetThread) {[weak self] result in
             if let thread = result.data {
                 self?.loadedThread(thread)
                 self?.tableView.reloadSections(NSIndexSet(index: TableSection.Post.rawValue) , withRowAnimation: .Fade)
@@ -411,6 +412,8 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
     }
     
     func applyThreadToCell(cell: DiscussionPostCell) -> UITableViewCell {
+        print("applyThreadToCell")
+        print(thread)
         if let thread = self.thread {
             cell.titleLabel.attributedText = titleTextStyle.attributedStringWithText(thread.title)
             
@@ -424,7 +427,6 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
                 visibilityString = Strings.postVisibilityEveryone
             }
             cell.visibilityLabel.attributedText = infoTextStyle.attributedStringWithText(visibilityString)
-            
             DiscussionHelper.styleAuthorDetails(thread.author, authorLabel: thread.authorLabel, createdAt: thread.createdAt, hasProfileImage: thread.hasProfileImage, imageURL: thread.imageURL, authoNameLabel: cell.authorNameLabel, dateLabel: cell.dateLabel, authorButton: cell.authorButton, imageView: cell.authorProfileImage, viewController: self, router: environment.router)
 
             if let responseCount = thread.responseCount {
