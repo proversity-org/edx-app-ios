@@ -4540,7 +4540,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4557,10 +4557,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.3aaa;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tf;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "b2e47b61-8e15-421f-b613-8727c00b07f7";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.proversity.3aaa";
+				PROVISIONING_PROFILE = "710eaf38-9d57-4101-8a70-ff92d060d0e7";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.tf";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
@@ -4966,10 +4966,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.3aaa;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tf;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "347b0da2-56e0-499a-860f-d0ec6c798a0a";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.3aaa";
+				PROVISIONING_PROFILE = "710eaf38-9d57-4101-8a70-ff92d060d0e7";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.tf";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -4984,7 +4984,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5001,10 +5001,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.3aaa;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.tf;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "b2e47b61-8e15-421f-b613-8727c00b07f7";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.proversity.3aaa";
+				PROVISIONING_PROFILE = "710eaf38-9d57-4101-8a70-ff92d060d0e7";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.tf";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
