@@ -267,7 +267,8 @@ class DiscussionResponsesViewController: UIViewController, UITableViewDataSource
     }
     
     private func markThreadAsRead() {
-        let apiRequest = DiscussionAPI.readThread(true, threadID: threadID)
+        DiscussionAPI.readThread(true, threadID: threadID)
+        let apiRequest = DiscussionAPI.getThread(threadID)
         self.environment.networkManager.taskForRequest(apiRequest) {[weak self] result in
             if let thread = result.data {
                 self?.loadedThread(thread)
