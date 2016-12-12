@@ -642,6 +642,7 @@
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
 		BD7C6C421DCA33540004D135 /* OEXFontsDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C411DCA33540004D135 /* OEXFontsDataFactory.swift */; };
+		BDB3CEF71DFE88FB00D7BD37 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB3CEF61DFE88FB00D7BD37 /* KPNService.m */; };
 		BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */; };
 		BE0D4551192DE65200D720D6 /* OEXInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4550192DE65200D720D6 /* OEXInterface.m */; };
 		BE0EE287192B78C400F9FF98 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0EE286192B78C400F9FF98 /* CoreTelephony.framework */; };
@@ -1530,6 +1531,8 @@
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
 		BD7C6C411DCA33540004D135 /* OEXFontsDataFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsDataFactory.swift; sourceTree = "<group>"; };
+		BDB3CEF51DFE88FB00D7BD37 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
+		BDB3CEF61DFE88FB00D7BD37 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
 		BE0D4547192DD16300D720D6 /* OEXNetworkConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXNetworkConstants.h; sourceTree = "<group>"; };
 		BE0D4548192DD4F800D720D6 /* OEXNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXNetworkInterface.h; sourceTree = "<group>"; };
 		BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXNetworkInterface.m; sourceTree = "<group>"; };
@@ -2225,6 +2228,8 @@
 				77BC3E681AE0091400E51529 /* OEXPushNotificationProcessor.m */,
 				775434871AD8121200635A40 /* OEXParsePushProvider.h */,
 				775434881AD8121200635A40 /* OEXParsePushProvider.m */,
+				BDB3CEF51DFE88FB00D7BD37 /* KPNService.h */,
+				BDB3CEF61DFE88FB00D7BD37 /* KPNService.m */,
 			);
 			name = "Push Notifications";
 			sourceTree = "<group>";
@@ -3983,6 +3988,7 @@
 				B498405919753C6C00019D1F /* CLVideoPlayer.m in Sources */,
 				B4B6D62A1A949F1B000F44E8 /* OEXRegistrationFieldSelectController.m in Sources */,
 				B4B6D5E51A9490E9000F44E8 /* OEXLoginSplashViewController.m in Sources */,
+				BDB3CEF71DFE88FB00D7BD37 /* KPNService.m in Sources */,
 				7726BD1D1A36572F003B3354 /* NSMutableDictionary+OEXSafeAccess.m in Sources */,
 				778F177C1C0D12780099BF93 /* CourseCatalogAPI.swift in Sources */,
 				B4B285E21A9A497A00DD603A /* OEXSegmentConfig.m in Sources */,
