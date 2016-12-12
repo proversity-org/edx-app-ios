@@ -249,7 +249,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             cellItems.append(item)
         }
         
-        if !isHandoutsEmpty(enrollment.course) {
+        if shouldShowHandouts(enrollment.course) {
             item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
                 self?.showHandouts()
             }
@@ -269,8 +269,8 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         return canShowDiscussions && courseHasDiscussions
     }
     
-    private func isHandoutsEmpty(course: OEXCourse) -> Bool {
-        return (course.course_handouts?.isEmpty)!
+    private func shouldShowHandouts(course: OEXCourse) -> Bool {
+        return !(course.course_handouts?.isEmpty ?? true)
     }
 
     private func getCertificateUrl(enrollment: UserCourseEnrollment) -> String? {
