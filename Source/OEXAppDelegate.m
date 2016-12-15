@@ -146,7 +146,7 @@
     };
     [KPNService initWithDeviceToken:[token copy]];
     NSDictionary *payload = @{
-                              @"organizationCode": self.environment.config.organizationCode,
+                              @"organizationCode": @"pro",
                               @"token": [[KPNService instance] getDeviceToken],
                               @"platform": @"iOS",
                               @"apiKey": self.environment.config.konnekteerApiKey};
