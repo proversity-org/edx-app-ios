@@ -83,7 +83,7 @@
     
 #ifdef __IPHONE_10_0
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionBadge)
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge)
                                                                         completionHandler:^(BOOL granted, NSError * _Nullable error)
      {
          if (granted) {
