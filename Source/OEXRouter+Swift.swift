@@ -39,6 +39,7 @@ extension CourseBlock {
     
     var displayType : CourseBlockDisplayType {
         switch self.type {
+        case .Unknown("pb-answer"): return .Unknown
         case .Unknown(_), .HTML: return multiDevice ? .HTML(.Base) : .Unknown
         case .Problem: return multiDevice ? .HTML(.Problem) : .Unknown
         case .Course: return .Outline

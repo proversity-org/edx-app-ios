@@ -78,6 +78,8 @@ public struct CourseOutline {
                         type = .HTML
                     case CourseBlock.Category.Problem:
                         type = .Problem
+                    case CourseBlock.Category.ProblemBuilder:
+                        type = .Problem
                     case CourseBlock.Category.Video :
                         let bodyData = (body[Fields.StudentViewData].object as? NSDictionary).map { [Fields.Summary.rawValue : $0 ] }
                         let summary = OEXVideoSummary(dictionary: bodyData ?? [:], videoID: blockID, name : name ?? Strings.untitled)
@@ -151,6 +153,7 @@ public class CourseBlock {
         case Course = "course"
         case HTML = "html"
         case Problem = "problem"
+        case ProblemBuilder = "problem-builder"
         case Section = "sequential"
         case Unit = "vertical"
         case Video = "video"
