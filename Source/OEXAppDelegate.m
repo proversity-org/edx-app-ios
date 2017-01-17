@@ -15,6 +15,7 @@
 #import <SEGAnalytics.h>
 
 #import "OEXAppDelegate.h"
+#import "KPNService.h"
 
 #import "edX-Swift.h"
 #import "Logger+OEXObjC.h"
@@ -35,8 +36,9 @@
 #import "OEXRouter.h"
 #import "OEXSession.h"
 #import "OEXSegmentConfig.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface OEXAppDelegate () <UIApplicationDelegate>
+@interface OEXAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary* dictCompletionHandler;
 @property (nonatomic, strong) OEXEnvironment* environment;
@@ -78,6 +80,22 @@
     [self.environment.session performMigrations];
 
     [self.environment.router openInWindow:self.window];
+    
+#ifdef __IPHONE_10_0
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionBadge)
+                                                                        completionHandler:^(BOOL granted, NSError * _Nullable error)
+     {
+         if (granted) {
+             [application registerForRemoteNotifications];
+         }
+     }];
+#else
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+#endif
+
 
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -120,6 +138,26 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    const char *data = [deviceToken bytes];
+    NSMutableString *token = [NSMutableString string];
+    
+    for (NSUInteger i = 0; i < [deviceToken length]; i++) {
+        [token appendFormat:@"%02.2hhX", data[i]];
+    };
+    [KPNService initWithDeviceToken:[token copy]];
+    NSDictionary *payload = @{
+                              @"organizationCode": self.environment.config.organizationCode,
+                              @"token": [[KPNService instance] getDeviceToken],
+                              @"platform": @"iOS",
+                              @"apiKey": self.environment.config.konnekteerApiKey};
+    
+    [[KPNService instance] createMobileEndpoint:payload
+                              CompletionHandler:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
+                                  NSLog(@"Create mobile endpoint");
+                                  NSLog(@"%@", data);
+                              }];
+    
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
