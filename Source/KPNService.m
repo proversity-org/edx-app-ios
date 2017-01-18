@@ -29,8 +29,10 @@
 }
 
 + (id __nonnull)initWithDeviceToken:(NSString * __nonnull)deviceToken
+                               Mode:(NSString * _Nonnull)mode
 {
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults] setObject:mode forKey:@"mode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     return self;
 }
@@ -38,6 +40,11 @@
 - (NSString * __nonnull)getDeviceToken
 {
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+}
+
+- (NSString * __nonnull)getMode
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"mode"];
 }
 
 #pragma mark - Konnekteer

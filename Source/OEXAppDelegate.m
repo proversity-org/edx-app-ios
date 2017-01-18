@@ -95,8 +95,7 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
 #endif
-
-
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -145,12 +144,18 @@
     for (NSUInteger i = 0; i < [deviceToken length]; i++) {
         [token appendFormat:@"%02.2hhX", data[i]];
     };
-    [KPNService initWithDeviceToken:[token copy]];
+    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSString *receiptURLString = [receiptURL path];
+    BOOL isRunningDev =  ([receiptURLString rangeOfString:@"sandboxReceipt"].location != NSNotFound);
+    NSString *mode = isRunningDev ? @"dev" : @"prod";
+    [KPNService initWithDeviceToken:[token copy] Mode:mode];
+    
     NSDictionary *payload = @{
                               @"organizationCode": self.environment.config.organizationCode,
                               @"token": [[KPNService instance] getDeviceToken],
                               @"platform": @"iOS",
-                              @"apiKey": self.environment.config.konnekteerApiKey};
+                              @"apiKey": self.environment.config.konnekteerApiKey,
+                              @"mode": [[KPNService instance] getMode]};
     
     [[KPNService instance] createMobileEndpoint:payload
                               CompletionHandler:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
