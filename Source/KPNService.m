@@ -104,9 +104,9 @@ CompletionHandler:(onComplete __nullable)completionHandler
                                           NSURLResponse * _Nullable response,
                                           NSError * _Nullable error)
             {
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                NSLog(@"%ld", httpResponse.statusCode);
-                NSLog(@"%@", error);
+//                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//                NSLog(@"%ld", httpResponse.statusCode);
+//                NSLog(@"%@", error);
                 if (data != nil) {
                     NSError *err;
                     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
