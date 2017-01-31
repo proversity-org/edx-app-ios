@@ -105,23 +105,23 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
                         print(data)
                     })
                     
-//                    for userCourse in enrollments {
-//                        let course = userCourse.course as OEXCourse
-//                        print(course.course_id)
-//                        
-//                        // Subscribe to course
-//                        let payload: [String: String] = ["courseKey": course.course_id!,
-//                                                         "token": KPNService.instance().getDeviceToken(),
-//                                                         "username": (self?.environment.router?.environment.session.currentUser?.username)!,
-//                                                         "email": (self?.environment.router?.environment.session.currentUser?.email)!,
-//                                                         "apiKey": (self?.environment.config.konnekteerApiKey())!,
-//                                                         "topicType": "course"]
-//                        
-//                        KPNService.instance().subscribe(payload, completionHandler: {data, error in
-//                            print(data)
-//                        })
-//                        
-//                    }
+                    for userCourse in enrollments {
+                        let course = userCourse.course as OEXCourse
+                        print(course.course_id)
+                        
+                        // Subscribe to course
+                        let payload: [String: String] = ["courseKey": course.course_id!,
+                                                         "token": KPNService.instance().getDeviceToken(),
+                                                         "username": (self?.environment.router?.environment.session.currentUser?.username)!,
+                                                         "email": (self?.environment.router?.environment.session.currentUser?.email)!,
+                                                         "apiKey": (self?.environment.config.konnekteerApiKey())!,
+                                                         "topicType": "course"]
+                        
+                        KPNService.instance().subscribe(payload, completionHandler: {data, error in
+                            print(data)
+                        })
+                        
+                    }
                     self?.tableController.courses = enrollments.flatMap { $0.course } ?? []
                     self?.tableController.tableView.reloadData()
                     self?.loadController.state = .Loaded
