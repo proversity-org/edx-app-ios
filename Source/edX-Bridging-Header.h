@@ -3,6 +3,8 @@
 //
 
 #import <SEGAnalytics.h>
+#import <FirebaseCore/FirebaseCore.h>
+#import <FirebaseAnalytics/FirebaseAnalytics.h>
 
 #import "CLVideoPlayer.h"
 #import "CLButton.h"
@@ -48,7 +50,6 @@
 #import "OEXRemovable.h"
 #import "OEXRouter.h"
 #import "OEXSession.h"
-#import "OEXStatusMessageViewController.h"
 #import "OEXStyles.h"
 #import "OEXTextStyle.h"
 #import "OEXSwitchStyle.h"

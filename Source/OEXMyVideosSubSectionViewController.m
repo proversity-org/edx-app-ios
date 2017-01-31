@@ -21,7 +21,6 @@
 #import "OEXDateFormatting.h"
 #import "OEXInterface.h"
 #import "OEXHelperVideoDownload.h"
-#import "OEXStatusMessageViewController.h"
 #import "OEXStyles.h"
 #import "OEXUserDetails.h"
 #import "OEXVideoPathEntry.h"
@@ -29,7 +28,6 @@
 #import "OEXVideoSummary.h"
 #import "OEXRouter.h"
 #import "Reachability.h"
-#import "OEXCustomNavigationView.h"
 #import "OEXCustomEditingView.h"
 
 
@@ -47,7 +45,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     OEXAlertTypePlayBackContentUnAvailable
 };
 
-@interface OEXMyVideosSubSectionViewController () <UITableViewDelegate, OEXStatusMessageControlling>
+@interface OEXMyVideosSubSectionViewController () <UITableViewDelegate>
 {
     NSIndexPath* clickedIndexpath;
 }
@@ -81,16 +79,6 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 @implementation OEXMyVideosSubSectionViewController
 
-- (CGFloat)verticalOffsetForStatusController:(OEXStatusMessageViewController*)controller {
-    return CGRectGetMaxY(self.navigationController.navigationBar.frame);
-}
-
-- (NSArray*)overlayViewsForStatusController:(OEXStatusMessageViewController*)controller {
-    NSMutableArray* result = [[NSMutableArray alloc] init];
-    [result oex_safeAddObjectOrNil:self.selectAllButton];
-    return result;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
@@ -110,6 +98,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         [self.table_SubSectionVideos setLayoutMargins:UIEdgeInsetsZero];
     }
 #endif
+    
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenMyVideosCourseVideos courseID:self.course.course_id value:nil];
 }
 
 - (void)navigateBack {
@@ -156,6 +146,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     
     //Set Navigation Buttons
     self.selectAllButton = [[OEXCheckBox alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [self.selectAllButton addTarget:self action:@selector(selectAllChanged:) forControlEvents:UIControlEventTouchUpInside];
     self.progressController = [[ProgressController alloc] initWithOwner:self router:self.environment.router dataInterface:self.environment.interface];
     self.navigationItem.rightBarButtonItem = [self.progressController navigationItem];
     [self.progressController hideProgessView];
@@ -344,7 +335,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
         sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 30)];
         sectionTitle.text = headerTitle;
-        sectionTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         sectionTitle.textColor = [UIColor blackColor];
         [viewMain addSubview:sectionTitle];
     }
@@ -366,13 +357,13 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         
         chapTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 50)];
         chapTitle.text = chapterName;
-        chapTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        chapTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         chapTitle.textColor = [UIColor whiteColor];
         [viewMain addSubview:chapTitle];
 
         sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, mainViewWidth - 20, 30)];
         sectionTitle.text = headerTitle;
-        sectionTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         sectionTitle.textColor = [UIColor blackColor];
         [viewMain addSubview:sectionTitle];
     }
@@ -918,8 +909,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (void)movieTimedOut {
     if(!_videoPlayerInterface.moviePlayerController.isFullscreen) {
-        [[OEXStatusMessageViewController sharedInstance]
-         showMessage:[Strings timeoutCheckInternetConnection] onViewController:self];
+        [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
         [_videoPlayerInterface.moviePlayerController stop];
     }
     else {
@@ -969,9 +959,6 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
                 [self performSelector:@selector(pop) withObject:nil afterDelay:1.0];
             }
             else {
-                NSString* message = [Strings videosDeletedWithCount:deleteCount formatted:nil];
-                [[OEXStatusMessageViewController sharedInstance] showMessage:message onViewController:self];
-
                 // clear all objects form array after deletion.
                 // To obtain correct count on next deletion process.
 
@@ -980,7 +967,6 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
                 [self.table_SubSectionVideos reloadData];
             }
 
-//            [self disableDeleteButton];
             [self cancelTableClicked:nil];
         }
     }

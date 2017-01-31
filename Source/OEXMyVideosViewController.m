@@ -105,7 +105,7 @@ typedef  enum OEXAlertType
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //Analytics Screen record
-    [[OEXAnalytics sharedAnalytics] trackScreenWithName: @"My Videos - All Videos"];
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosAllVideos];
 
     [self.navigationController setNavigationBarHidden:false animated:animated];
 
@@ -370,7 +370,7 @@ typedef  enum OEXAlertType
         UILabel* courseTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, tableView.frame.size.width - 20, RECENT_HEADER_HEIGHT)];
         courseTitle.numberOfLines = 2;
         courseTitle.text = obj_course.name;
-        courseTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        courseTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         courseTitle.textColor = [UIColor colorWithRed:69.0 / 255.0 green:73.0 / 255.0 blue:81.0 / 255.0 alpha:1.0];
         [view addSubview:courseTitle];
 
@@ -838,7 +838,7 @@ typedef  enum OEXAlertType
             [self cancelTableClicked:nil];
 
             //Analytics Screen record
-            [[OEXAnalytics sharedAnalytics] trackScreenWithName: @"My Videos - All Videos"];
+            [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosAllVideos];
 
             break;
 
@@ -859,7 +859,7 @@ typedef  enum OEXAlertType
             }
             
             //Analytics Screen record
-            [[OEXAnalytics sharedAnalytics] trackScreenWithName: @"My Videos - Recent Videos"];
+            [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosRecentVideos];
 
             break;
 
@@ -1221,9 +1221,6 @@ typedef  enum OEXAlertType
 
             [self.table_RecentVideos reloadData];
             [self.table_MyVideos reloadData];
-
-            NSString* message = [Strings videosDeletedWithCount:deleteCount formatted:nil];
-            [self showOverlayMessage:message];
 
             // clear all objects form array after deletion.
             // To obtain correct count on next deletion process.

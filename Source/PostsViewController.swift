@@ -189,6 +189,27 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         updateHeaderViewVisibility()
         
         loadContent()
+        
+        setAccessibility()
+    }
+    
+    private func setAccessibility() {
+        if let searchBar = searchBar {
+            view.accessibilityElements = [searchBar, tableView]
+        }
+        else {
+            view.accessibilityElements = [refineLabel, filterButton, sortButton, tableView, newPostButton]
+        }
+        
+        updateAccessibility()
+    }
+    
+    private func updateAccessibility() {
+        
+        filterButton.accessibilityLabel = Strings.Accessibility.discussionFilterBy(filterBy: titleForFilter(selectedFilter))
+        filterButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
+        sortButton.accessibilityLabel = Strings.Accessibility.discussionSortBy(sortBy: titleForSort(selectedOrderBy))
+        sortButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
     }
     
     private func configureSearchBar() {
@@ -482,6 +503,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.loadController.state = self.posts.isEmpty ? emptyState : .Loaded
         // set visibility of header view
         updateHeaderViewVisibility()
+        UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil)
     }
 
     func titleForFilter(filter : DiscussionPostsFilter) -> String {
@@ -535,6 +557,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.filterTextStyle.attributedStringWithText(self.titleForFilter(filter))])
             
             self.filterButton.setAttributedTitle(buttonTitle, forState: .Normal, animated : false)
+            self.updateAccessibility()
         }
         controller.addCancelAction()
         self.presentViewController(controller, animated: true, completion:nil)
@@ -554,6 +577,7 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.filterTextStyle.attributedStringWithText(self.titleForSort(sort))])
             
             self.sortButton.setAttributedTitle(buttonTitle, forState: .Normal, animated: false)
+            self.updateAccessibility()
         }
         
         controller.addCancelAction()
