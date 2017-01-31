@@ -161,6 +161,7 @@
                               CompletionHandler:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
                                   NSLog(@"Create mobile endpoint");
                                   NSLog(@"%@", data);
+                                  NSLog(@"%@", error);
                               }];
     
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
