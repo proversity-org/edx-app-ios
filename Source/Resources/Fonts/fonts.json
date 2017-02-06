@@ -1,12 +1,12 @@
 {
-    "regular":"OpenSans",
-    "semiBold":"OpenSans-Semibold",
-    "semiBoldItalic":"OpenSans-SemiboldItalic",
-    "bold":"OpenSans-Bold",
-    "boldItalic":"OpenSans-BoldItalic",
-    "extraBold":"OpenSans-ExtraBold",
-    "extraBoldItalic":"OpenSans-ExtraBoldItalic",
-    "light":"OpenSans-Light",
-    "lightItalic":"OpenSans-LightItalic",
-    "italic":"OpenSans-Italic"
+    "regular":"Bliss",
+    "semiBold":"Bliss",
+    "semiBoldItalic":"Bliss",
+    "bold":"Bliss",
+    "boldItalic":"Bliss",
+    "extraBold":"Bliss",
+    "extraBoldItalic":"Bliss",
+    "light":"Bliss",
+    "lightItalic":"Bliss",
+    "italic":"Bliss"
 }
