@@ -628,7 +628,6 @@
 		BD0287F01DC9D90A009F8737 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = BD0287EE1DC9D90A009F8737 /* iTunesArtwork */; };
 		BD0287F11DC9D90A009F8737 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = BD0287EF1DC9D90A009F8737 /* iTunesArtwork@2x */; };
 		BD0287F51DC9D949009F8737 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0287F41DC9D949009F8737 /* logo.png */; };
-		BD0287F71DC9D955009F8737 /* launchBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0287F61DC9D955009F8737 /* launchBackground.png */; };
 		BD0287FD1DC9D972009F8737 /* Default-375w-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0287F81DC9D972009F8737 /* Default-375w-667h@2x.png */; };
 		BD0287FE1DC9D972009F8737 /* Default-414w-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0287F91DC9D972009F8737 /* Default-414w-736h@3x.png */; };
 		BD0287FF1DC9D972009F8737 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0287FA1DC9D972009F8737 /* Default-568h@2x.png */; };
@@ -693,6 +692,7 @@
 		E0C6EF971BFF4B9900B315E3 /* UIButton+TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C6EF961BFF4B9900B315E3 /* UIButton+TintColor.swift */; };
 		E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
+		E764163C1E48BB630003112B /* launchBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E764163B1E48BB630003112B /* launchBackground.jpg */; };
 		E7D8398D1E43227D0009D71F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7D8398A1E43227D0009D71F /* Info.plist */; };
 		E7D8398E1E43227D0009D71F /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8398B1E43227D0009D71F /* SnapshotHelper.swift */; };
 		E7D8398F1E43227D0009D71F /* TeachFirstUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D8398C1E43227D0009D71F /* TeachFirstUITests.swift */; };
@@ -1518,7 +1518,6 @@
 		BD0287EE1DC9D90A009F8737 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		BD0287EF1DC9D90A009F8737 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		BD0287F41DC9D949009F8737 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		BD0287F61DC9D955009F8737 /* launchBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchBackground.png; sourceTree = "<group>"; };
 		BD0287F81DC9D972009F8737 /* Default-375w-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-375w-667h@2x.png"; sourceTree = "<group>"; };
 		BD0287F91DC9D972009F8737 /* Default-414w-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-414w-736h@3x.png"; sourceTree = "<group>"; };
 		BD0287FA1DC9D972009F8737 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1602,6 +1601,7 @@
 		E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXCourseInfoViewController+Swift.swift"; sourceTree = "<group>"; };
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E764163B1E48BB630003112B /* launchBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launchBackground.jpg; sourceTree = "<group>"; };
 		E7D8397E1E4321FD0009D71F /* TeachFirstUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeachFirstUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D8398A1E43227D0009D71F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7D8398B1E43227D0009D71F /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -2076,7 +2076,7 @@
 				69ECC5EF1D50D1170030CF87 /* separator3.png */,
 				69ECC5F01D50D1170030CF87 /* separator5.png */,
 				69ECC5F11D50D1170030CF87 /* share.pdf */,
-				BD0287F61DC9D955009F8737 /* launchBackground.png */,
+				E764163B1E48BB630003112B /* launchBackground.jpg */,
 				69ECC5F31D50D1170030CF87 /* placeholderCourseCardImage.png */,
 			);
 			path = Images;
@@ -3661,6 +3661,7 @@
 				69ECC6341D50D1170030CF87 /* ic_next_deactive.png in Resources */,
 				1AFEB1B91BBD88F3004C471D /* languages.json in Resources */,
 				9E7D1BCC1AEA5BF5000AF768 /* OEXDownloadViewController.storyboard in Resources */,
+				E764163C1E48BB630003112B /* launchBackground.jpg in Resources */,
 				69ECC61A1D50D1170030CF87 /* bt_grey_default.png in Resources */,
 				69ECC6161D50D1170030CF87 /* bt_facebook_RTL.png in Resources */,
 				6926CDAE1D59BE3600A16E22 /* ic_previous.png in Resources */,
@@ -3709,7 +3710,6 @@
 				69ECC6321D50D1170030CF87 /* ic_download_arrow.png in Resources */,
 				BD0288011DC9D972009F8737 /* Default@2x.png in Resources */,
 				69ECC6111D50D1170030CF87 /* bg_card_image.png in Resources */,
-				BD0287F71DC9D955009F8737 /* launchBackground.png in Resources */,
 				69ECC6391D50D1170030CF87 /* ic_unwatched@3x.png in Resources */,
 				69ECC61B1D50D1170030CF87 /* bt_logout_active.png in Resources */,
 				1905BFF11A31B037001917FA /* COURSE_NOT_LISTED.htm in Resources */,
@@ -5361,6 +5361,7 @@
 				E7D839881E4321FD0009D71F /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
