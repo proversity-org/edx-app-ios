@@ -92,10 +92,14 @@
     _moviePlayerController.videoTitle = video.summary.name;
     _moviePlayerController.controls.video = video;
     NSURL* url = [NSURL URLWithString:video.summary.videoURL];
-
+    if (video.summary.downloadVideo) {
+        url = [NSURL URLWithString:video.summary.downloadVideo];
+    }
+    
+    NSLog(@"PLAY: %@", video.summary.videoURL);
     NSFileManager* filemgr = [NSFileManager defaultManager];
     NSString* path = [video.filePath stringByAppendingPathExtension:@"mp4"];
-
+    NSLog(@"PLAY: %@", path);
     if([filemgr fileExistsAtPath:path]) {
         url = [NSURL fileURLWithPath:path];
     }

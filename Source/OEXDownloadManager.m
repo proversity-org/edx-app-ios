@@ -118,7 +118,8 @@ static NSURLSession* videosBackgroundSession = nil;
         completionHandler(nil);
         return;
     }
-
+    
+    NSLog(@"all is good here!");
     [videosBackgroundSession getTasksWithCompletionHandler:^(NSArray* dataTasks, NSArray* uploadTasks, NSArray* downloadTasks) {
         //Check if already downloading
         BOOL alreadyInProgress = NO;
@@ -133,6 +134,7 @@ static NSURLSession* videosBackgroundSession = nil;
             }
         }
         if(alreadyInProgress) {
+            NSLog(@"ALREADY IN PROGRESS ===>");
             NSURLSessionDownloadTask* downloadTask = [downloadTasks objectAtIndex:taskIndex];
             video.download_state = [NSNumber numberWithInt:OEXDownloadStatePartial];
             video.dm_id = [NSNumber numberWithUnsignedInteger:downloadTask.taskIdentifier];
@@ -186,6 +188,7 @@ static NSURLSession* videosBackgroundSession = nil;
 - (NSURLSessionDownloadTask*)startBackgroundDownloadForVideo:(VideoData*)video {
     //Request
     NSURL* url = [NSURL URLWithString:video.video_url];
+    NSLog(@"URL: %@", url);
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     //Task
     NSURLSessionDownloadTask* downloadTask = nil;
@@ -193,23 +196,28 @@ static NSURLSession* videosBackgroundSession = nil;
     OEXDownloadState state = [video.download_state intValue];
     if(state == OEXDownloadStatePartial) {
         if(video) {
+            NSLog(@"IF 1");
             //Get resume data
             NSData* resumedata = [self resumeDataForURLString:video.video_url];
             if(resumedata && ![resumedata isKindOfClass:[NSNull class]]) {
+                NSLog(@"IF 1");
                 OEXLogError(@"DOWNLOADS", @"Download resume for video %@ with resume data", video.title);
                 downloadTask = [videosBackgroundSession downloadTaskWithResumeData:resumedata];
             }
             else {
+                NSLog(@"ELSE 1");
                 downloadTask = [videosBackgroundSession downloadTaskWithRequest:request];
             }
         }
         //If not, start a fresh download
         else {
+            NSLog(@"ELSE 2");
             downloadTask = [videosBackgroundSession downloadTaskWithRequest:request];
             video.download_state = [NSNumber numberWithInt: OEXDownloadStatePartial];
         }
     }
     else {
+        NSLog(@"ELSE 3");
         downloadTask = [videosBackgroundSession downloadTaskWithRequest:request];
         video.download_state = [NSNumber numberWithInt: OEXDownloadStatePartial];
     }

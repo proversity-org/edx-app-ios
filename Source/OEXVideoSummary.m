@@ -81,6 +81,13 @@
         
         if (_encodings.count <=0)
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+        
+        self.downloadVideo = [summary objectForKey:@"video_url"];
+        if ([summary objectForKey:@"video_alternatives"]) {
+            if ([[summary objectForKey:@"video_alternatives"] count] > 0) {
+                self.downloadVideo = [summary objectForKey:@"video_alternatives"][0];
+            }
+        }
     }
 
     return self;

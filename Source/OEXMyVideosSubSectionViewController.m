@@ -575,7 +575,11 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     else if(reason == MPMovieFinishReasonUserExited) {
     }
     else if(reason == MPMovieFinishReasonPlaybackError) {
-        if([_currentTappedVideo.summary.videoURL isEqualToString:@""]) {
+        NSString* videoUrl = _currentTappedVideo.summary.videoURL;
+        if (_currentTappedVideo.summary.downloadVideo) {
+            videoUrl = _currentTappedVideo.summary.downloadVideo;
+        }
+        if([videoUrl isEqualToString:@""]) {
             [self showAlert:OEXAlertTypePlayBackContentUnAvailable];
         }
     }

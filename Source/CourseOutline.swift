@@ -79,6 +79,8 @@ public struct CourseOutline {
                     case CourseBlock.Category.Problem:
                         type = .Problem
                     case CourseBlock.Category.Video :
+                        print("VIDEO")
+                        print(body[Fields.StudentViewData].object)
                         let bodyData = (body[Fields.StudentViewData].object as? NSDictionary).map { [Fields.Summary.rawValue : $0 ] }
                         let summary = OEXVideoSummary(dictionary: bodyData ?? [:], videoID: blockID, name : name ?? Strings.untitled)
                         type = .Video(summary)

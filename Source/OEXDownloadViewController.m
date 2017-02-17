@@ -111,6 +111,9 @@
                 [self.arr_downloadingVideo addObject:video];
                 if (video != nil && video.summary != nil) {
                     NSString* key = video.summary.videoURL;
+                    if (video.summary.downloadVideo) {
+                        key = video.summary.downloadVideo;
+                    }
                     if (key) {
                         duplicationAvoidingDict[key] = @"object";
                     }
@@ -198,7 +201,11 @@
     NSURLSessionTask* task = [progress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
     NSString* url = [task.originalRequest.URL absoluteString];
     for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
-        if([video.summary.videoURL isEqualToString:url]) {
+        NSString* videoUrl = video.summary.videoURL;
+        if (video.summary.downloadVideo) {
+            videoUrl = video.summary.downloadVideo;
+        }
+        if([videoUrl isEqualToString:url]) {
 //            //NSLog(@"progress for video  %@   id  %@ download  %f", video.name , video.str_VideoTitle , video.DownloadProgress);
             [self updateProgressForVisibleRows];
             break;

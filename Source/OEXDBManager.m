@@ -229,7 +229,6 @@ static OEXDBManager* _sharedManager = nil;
                 resultArray = [self.backGroundContext executeFetchRequest:fetchRequest error:nil];
             }];
         }
-
         if(!resultArray) {
             return [NSArray array];
         }
@@ -579,7 +578,7 @@ static OEXDBManager* _sharedManager = nil;
 
     NSPredicate* query = [NSPredicate predicateWithFormat:@"video_url==%@", downloadUrl];
     [fetchRequest setPredicate:query];
-
+    NSLog(@"QUERY: %@", query);
     return [self executeFetchRequest:fetchRequest];
 }
 
@@ -718,8 +717,9 @@ static OEXDBManager* _sharedManager = nil;
                LastPlayedTime:(float)last_played_offset
                        is_Reg:(BOOL)is_registered
                   PlayedState:(OEXPlayedState)played_state {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     VideoData* Checkdata = [self getVideoDataForVideoID:video_id];
-
+    
     if(Checkdata && video_id != nil) {
         return Checkdata;
     }
@@ -743,7 +743,7 @@ static OEXDBManager* _sharedManager = nil;
     videoObj.last_played_offset = [NSNumber numberWithFloat:last_played_offset];
     videoObj.is_registered = [NSNumber numberWithBool:is_registered];
     videoObj.played_state = [NSNumber numberWithInt:played_state];
-
+    NSLog(@"%@", videoObj.video_url);
     [self saveCurrentStateToDB];
 
     return videoObj;

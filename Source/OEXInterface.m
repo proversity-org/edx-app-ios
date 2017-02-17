@@ -399,7 +399,11 @@ static OEXInterface* _sharedInterface = nil;
     
     NSInteger count = 0;
     for(OEXHelperVideoDownload* video in array) {
-        if(video.summary.videoURL.length > 0 && video.downloadState == OEXDownloadStateNew) {
+        NSString* videoUrl = video.summary.videoURL;
+        if (video.summary.downloadVideo) {
+            videoUrl = video.summary.downloadVideo;
+        }
+        if(videoUrl.length > 0 && video.downloadState == OEXDownloadStateNew) {
             [self downloadAllTranscriptsForVideo:video];
             [self addVideoForDownload:video completionHandler:^(BOOL success){}];
             count++;
@@ -485,12 +489,20 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 - (VideoData*)insertVideoData:(OEXHelperVideoDownload*)helperVideo {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSString *videoUrl = helperVideo.summary.videoURL;
+    if (helperVideo.summary.downloadVideo) {
+        videoUrl = helperVideo.summary.downloadVideo;
+    }
+    
+    NSLog(@"INIT: %@", videoUrl);
+    
     return [_storage insertVideoData: @""
                                Title: helperVideo.summary.name
                                 Size: [NSString stringWithFormat:@"%.2f", [helperVideo.summary.size doubleValue]]
                             Duration: [NSString stringWithFormat:@"%.2f", helperVideo.summary.duration]
                        DownloadState: helperVideo.downloadState
-                            VideoURL: helperVideo.summary.videoURL
+                            VideoURL: videoUrl
                              VideoID: helperVideo.summary.videoID
                              UnitURL: helperVideo.summary.unitURL
                             CourseID: helperVideo.course_id
@@ -663,7 +675,11 @@ static OEXInterface* _sharedInterface = nil;
 #pragma mark Video management
 - (void)markDownloadProgress:(float)progress forURL:(NSString*)URLString andVideoId:(NSString*)videoId {
     for(OEXHelperVideoDownload* video in [self allVideos]) {
-        if(([video.summary.videoURL isEqualToString:URLString] && video.downloadState == OEXDownloadStatePartial)
+        NSString* videoUrl = video.summary.videoURL;
+        if (video.summary.downloadVideo) {
+            videoUrl = video.summary.downloadVideo;
+        }
+        if(([videoUrl isEqualToString:URLString] && video.downloadState == OEXDownloadStatePartial)
            || [video.summary.videoID isEqualToString:videoId]) {
             video.downloadProgress = progress;
             video.isVideoDownloading = YES;
@@ -1007,7 +1023,11 @@ static OEXInterface* _sharedInterface = nil;
     for(OEXVideoSummary* objVideo in [self.videoSummaries objectForKey : URL]) {
         OEXHelperVideoDownload* obj_helperVideo = [[OEXHelperVideoDownload alloc] init];
         obj_helperVideo.summary = objVideo;
-        obj_helperVideo.filePath = [OEXFileUtility filePathForRequestKey:obj_helperVideo.summary.videoURL];
+        NSString* videoUrl = obj_helperVideo.summary.videoURL;
+        if (obj_helperVideo.summary.downloadVideo) {
+            videoUrl = obj_helperVideo.summary.downloadVideo;
+        }
+        obj_helperVideo.filePath = [OEXFileUtility filePathForRequestKey:videoUrl];
 
         [arr_Videos addObject:obj_helperVideo];
     }
@@ -1099,7 +1119,11 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)startDownloadForVideo:(OEXHelperVideoDownload*)video completionHandler:(void (^)(BOOL sucess))completionHandler {
     OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if([OEXInterface isURLForVideo:video.summary.videoURL]) {
+    NSString *videoUrl = video.summary.videoURL;
+    if (video.summary.downloadVideo) {
+        videoUrl = video.summary.downloadVideo;
+    }
+    if([OEXInterface isURLForVideo:videoUrl]) {
         if([OEXInterface shouldDownloadOnlyOnWifi]) {
             if(![appD.reachability isReachableViaWiFi]) {
                 completionHandler(NO);
@@ -1111,12 +1135,23 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 - (void)addVideoForDownload:(OEXHelperVideoDownload*)video completionHandler:(void (^)(BOOL sucess))completionHandler {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     __block VideoData* data = [_storage videoDataForVideoID:video.summary.videoID];
-    if(!data || !data.video_url) {
+    NSLog(@"DATA: %@", data.video_url);
+    NSString *videoUrl = [NSString stringWithFormat:@"%@", video.summary.videoURL];
+    if (video.summary.downloadVideo) {
+        videoUrl = video.summary.downloadVideo;
+    }
+    
+    if(!data || !videoUrl) {
+        NSLog(@"insertring video data ===>");
         data = [self insertVideoData:video];
     }
-
-    NSArray* array = [_storage getVideosForDownloadUrl:video.summary.videoURL];
+    
+    NSLog(@"Video URL: %@", videoUrl);
+    NSLog(@"DATA: %@", data);
+    NSArray* array = [_storage getVideosForDownloadUrl:videoUrl];
+    NSLog(@"ARRAy: %@", array);
     if([array count] > 1) {
         for(VideoData* videoObj in array) {
             if([videoObj.download_state intValue] == OEXDownloadStateComplete) {
@@ -1131,6 +1166,7 @@ static OEXInterface* _sharedInterface = nil;
     }
 
     if(data) {
+        NSLog(@"DOWNLOADING FROM DATA");
         [[OEXDownloadManager sharedManager] downloadVideoForObject:data withCompletionHandler:^(NSURLSessionDownloadTask* downloadTask) {
             if(downloadTask) {
                 video.downloadState = OEXDownloadStatePartial;

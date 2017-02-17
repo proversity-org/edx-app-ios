@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic, assign) BOOL onlyOnWeb;
 @property (readonly, nonatomic, assign) BOOL isYoutubeVideo;
 @property (nonatomic, strong) NSDictionary* encodings;
+@property (nonatomic, strong, nullable) NSString *downloadVideo;
 
 // For CC
 // de - German
