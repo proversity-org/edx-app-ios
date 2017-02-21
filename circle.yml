@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: 8.2.1
+    version: 8.2.0
 
 dependencies:
   override:
@@ -20,4 +20,5 @@ deployment:
   beta:
     branch: proversity/PRO
     commands:
+      - sudo xcode-select -s /Applications/Xcode.app
       - fastlane beta
