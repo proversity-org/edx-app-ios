@@ -6,7 +6,7 @@ dependencies:
   override:
         - echo "Override"
   post:
-    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/PRO ./deployment
     - cp -R deployment/custom_config custom_config
     - cp -R deployment/fastlane fastlane
 
