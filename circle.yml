@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   override:
-        - ./gradlew dependencies --stacktrace --info
+        - echo "Override"
   post:
     - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
     - cp -R deployment/custom_config custom_config
