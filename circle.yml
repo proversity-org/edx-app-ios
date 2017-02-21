@@ -1,0 +1,25 @@
+
+general:
+  branches:
+      only:
+          - proversity/PRO
+
+machine:
+  xcode:
+    version: 8.2.1
+
+depencencies:
+  post:
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
+    - cp -R deployment/custom_config custom_config
+    - cp -R deployment/fastlane fastlane
+
+test:
+  override:
+    - echo 'No test'
+
+deployment:
+  beta:
+    branch: proversity/PRO
+    commands:
+      - fastlane beta
