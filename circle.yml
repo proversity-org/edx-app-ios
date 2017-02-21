@@ -3,6 +3,8 @@ machine:
     version: 8.2.1
 
 dependencies:
+  override:
+        - ./gradlew dependencies --stacktrace --info
   post:
     - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
     - cp -R deployment/custom_config custom_config
