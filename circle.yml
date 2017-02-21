@@ -20,5 +20,5 @@ deployment:
   beta:
     branch: proversity/PRO
     commands:
-      - sudo xcode-select -s /Applications/Xcode.app
+      - sudo xcode-select -s /Applications/Xcode-8.2.app && xcodebuild -version
       - fastlane beta
