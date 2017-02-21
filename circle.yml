@@ -1,14 +1,8 @@
-
-general:
-  branches:
-      only:
-          - proversity/PRO
-
 machine:
   xcode:
     version: 8.2.1
 
-depencencies:
+dependencies:
   post:
     - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
     - cp -R deployment/custom_config custom_config
@@ -16,7 +10,7 @@ depencencies:
 
 test:
   override:
-    - echo 'No test'
+    - sleep 10
 
 deployment:
   beta:
