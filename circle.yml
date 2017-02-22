@@ -9,7 +9,7 @@ dependencies:
   override:
     - sudo gem update fastlane
     - sudo gem cleanup
-    - ./gradlew dependencies --stacktrace --info
+    - ./gradlew dependencies --stacktrace --info --debug
   post:
     - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/PRO ./deployment
     - cp -R deployment/custom_config custom_config
