@@ -1,6 +1,9 @@
 machine:
   xcode:
     version: 8.2.1
+  environment:
+    XCODE_WORKSPACE: edX.xcworkscapce
+    XCODE_SCHEME: edX
 
 dependencies:
   override:
