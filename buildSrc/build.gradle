@@ -45,9 +45,6 @@ def edXAppPluginSetup(url, ref) {
     def dest = buildSrc.getAbsolutePath() + "/edx-app-gradle-plugin"
 
     if(!new File(dest).exists()) {
-        println(dest)
-        println(url)
-        println(ref)
         Grgit.clone(dir: dest, uri: url, refToCheckout : ref)
     }
 
