@@ -17,6 +17,7 @@ static NSString* const OEXUserDetailsCourseEnrollmentsKey = @"course_enrollments
 static NSString* const OEXUserDetailsNameKey = @"name";
 static NSString* const OEXUserDetailsUserIdKey = @"id";
 static NSString* const OEXUserDetailsUrlKey = @"url";
+static NSString* const OEXUserDetailsYearOfBirthKey = @"year_of_birth";
 
 @implementation OEXUserDetails
 
@@ -59,6 +60,11 @@ static NSString* const OEXUserDetailsUrlKey = @"url";
         _userId = [userDetailsDictionary objectForKey:OEXUserDetailsUserIdKey];
         _name = [userDetailsDictionary objectForKey:OEXUserDetailsNameKey];
         _url = [userDetailsDictionary objectForKey:OEXUserDetailsUrlKey];
+        if ([[userDetailsDictionary objectForKey:OEXUserDetailsYearOfBirthKey] isKindOfClass:[NSNull class]]) {
+            _year_of_birth = 0;
+        }else {
+            _year_of_birth = [[userDetailsDictionary objectForKey:OEXUserDetailsYearOfBirthKey] integerValue];
+        }
     }
 
     return self;
@@ -73,6 +79,7 @@ static NSString* const OEXUserDetailsUrlKey = @"url";
         [dict setObjectOrNil:_userId forKey:OEXUserDetailsUserIdKey];
         [dict setObjectOrNil:_url forKey:OEXUserDetailsUrlKey];
         [dict setObjectOrNil:_name forKey:OEXUserDetailsNameKey];
+        [dict setObjectOrNil:@(_year_of_birth) forKey:OEXUserDetailsYearOfBirthKey];
     }
     else {
         return nil;
