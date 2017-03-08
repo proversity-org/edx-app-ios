@@ -55,6 +55,8 @@ class CourseCatalogDetailViewController: UIViewController {
         self.courseStream.listen(self,
             success: {[weak self] (course, enrolled) in
                 self?.aboutView.applyCourse(course)
+                print(course)
+                print(course.invitation_only)
                 if enrolled {
                     self?.aboutView.actionText = Strings.CourseDetail.viewCourse
                     self?.aboutView.action = {completion in
