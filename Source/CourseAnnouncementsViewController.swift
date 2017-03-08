@@ -177,9 +177,9 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
         }
         
         var html:String = String()
-        
         for (index,announcement) in announcements.enumerate() {
-                html += "<div class=\"announcement-header\">\(announcement.heading)</div>"
+                let header = (announcement.heading ?? "").isEmpty ? "" : announcement.heading!
+                html += "<div class=\"announcement-header\">\(header)</div>"
                 html += "<hr class=\"announcement\"/>"
                 html += announcement.content ?? ""
                 if(index + 1 < announcements.count)
@@ -187,6 +187,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
                     html += "<div class=\"announcement-separator\"/></div>"
                 }
         }
+        print(html)
         let displayHTML = OEXStyles.sharedStyles().styleHTMLContent(html, stylesheet: "handouts-announcements") ?? ""
         let baseURL = self.environment.config.apiHostURL()
         self.webView.loadHTMLString(displayHTML, baseURL: baseURL)
