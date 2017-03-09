@@ -55,8 +55,6 @@ class CourseCatalogDetailViewController: UIViewController {
         self.courseStream.listen(self,
             success: {[weak self] (course, enrolled) in
                 self?.aboutView.applyCourse(course)
-                print(course)
-                print(course.invitation_only)
                 if enrolled {
                     self?.aboutView.actionText = Strings.CourseDetail.viewCourse
                     self?.aboutView.action = {completion in
@@ -83,7 +81,8 @@ class CourseCatalogDetailViewController: UIViewController {
     }
     
     private func load() {
-        let request = CourseCatalogAPI.getCourse(courseID)
+        let username = self.environment.router?.environment.session.currentUser?.username
+        let request = CourseCatalogAPI.getCourse(courseID, userID: username!)
         let courseStream = environment.networkManager.streamForRequest(request)
         let enrolledStream = environment.dataManager.enrollmentManager.streamForCourseWithID(courseID).resultMap {
             return .Success($0.isSuccess)

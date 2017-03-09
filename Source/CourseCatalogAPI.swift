@@ -49,10 +49,13 @@ public struct CourseCatalogAPI {
         ).paginated(page: page)
     }
     
-    public static func getCourse(courseID: String) -> NetworkRequest<OEXCourse> {
+    public static func getCourse(courseID: String, userID: String) -> NetworkRequest<OEXCourse> {
+        let query = [Params.Mobile.rawValue: JSON(true), Params.User.rawValue: JSON(userID)]
         return NetworkRequest(
             method: .GET,
             path: "api/courses/v1/courses/{courseID}".oex_formatWithParameters(["courseID" : courseID]),
+            query: query,
+            requiresAuth : true,
             deserializer: .JSONResponse(courseDeserializer))
     }
     
