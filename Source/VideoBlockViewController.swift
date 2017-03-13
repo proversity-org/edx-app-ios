@@ -54,6 +54,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     }
     
     func addLoadListener() {
+        
         loader.listen (self,
                        success : { [weak self] block in
                         if let video = block.type.asVideo where video.isYoutubeVideo,

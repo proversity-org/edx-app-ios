@@ -134,7 +134,10 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
             [parsedMediaInfo setObjectOrNil:info forKey:type];
         }];
         self.mediaInfo = parsedMediaInfo;
-
+        
+        if ([self.name isEqualToString:@"Moving into Middle Leadership"]) {
+            NSLog(@"%@", self.course_id);
+        }
     }
     return self;
 }
