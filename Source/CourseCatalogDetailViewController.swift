@@ -74,9 +74,9 @@ class CourseCatalogDetailViewController: UIViewController {
                         let calendar = NSCalendar.currentCalendar()
                         let components = calendar.components([.Day , .Month , .Year], fromDate: date)
                         let year =  components.year
-                        if (yearOfBirthProfile != nil && Float(year - yearOfBirthProfile!) >= minimumAge) {
+                        if (yearOfBirthProfile != nil && Float(year - yearOfBirthProfile!) <= minimumAge) {
                             isOldEnough = false
-                        } else if (yearOfBirthDetails != nil && Float(year - yearOfBirthDetails!) >= minimumAge) {
+                        } else if (yearOfBirthDetails != nil && Float(year - yearOfBirthDetails!) <= minimumAge) {
                             isOldEnough = false
                         }
                     }
