@@ -20,7 +20,7 @@ extern NSString* const OEXAnalyticsKeyQueryString;
 
 // TODO rename these to be more like the above
 #define key_app_name @"app_name"
-#define key_app_version @"version"
+#define key_app_version @"app_version"
 #define key_username @"username"
 #define key_email @"email"
 #define key_name @"name"
@@ -41,12 +41,13 @@ extern NSString* const OEXAnalyticsKeyQueryString;
 #define key_new_speed @"new_speed"
 #define key_component @"component"
 #define key_No_Of_Videos @"number_of_videos"
-#define key_courseSection @"courseSection"
-#define key_courseSubsection @"courseSubsection"
+#define key_courseSection @"course_section"
+#define key_courseSubsection @"course_subsection"
 #define key_fullscreen @"settings.video.fullscreen"
 #define key_method @"method"
 #define key_target_url @"target_url"
 #define key_language @"language"
+#define key_rating @"rating"
 
 // Values
 
@@ -63,12 +64,9 @@ extern NSString* const OEXAnalyticsEventAnnouncementNotificationTapped;
 extern NSString* const OEXAnalyticsEventComponentViewed;
 extern NSString* const OEXAnalyticsEventPictureSet;
 extern NSString* const OEXAnalyticsEventProfileViewed;
-extern NSString* const OEXAnalyticsEventOpenInBrowser;
-extern NSString* const OEXAnalyticsEventOutlineModeChanged;
 extern NSString* const OEXAnalyticsEventScreen;
 extern NSString* const OEXAnalyticsEventCertificateShared;
 extern NSString* const OEXAnalyticsEventCourseShared;
-
 
 // TODO rename these to be more like the above
 #define value_video_loaded @"edx.video.loaded"
@@ -111,11 +109,20 @@ extern NSString* const OEXAnalyticsValuePhotoSourceCamera;
 extern NSString* const OEXAnalyticsValuePhotoSourceLibrary;
 
 // Screens
+extern NSString* const OEXAnalyticsScreenLaunch;
+extern NSString* const OEXAnalyticsScreenRegister;
 extern NSString* const OEXAnalyticsScreenCourseDashboard;
 extern NSString* const OEXAnalyticsScreenMyCourses;
 extern NSString* const OEXAnalyticsScreenCourseOutline;
 extern NSString* const OEXAnalyticsScreenSectionOutline;
 extern NSString* const OEXAnalyticsScreenUnitDetail;
+extern NSString* const OEXAnalyticsScreenHandouts;
+extern NSString* const OEXAnalyticsScreenAnnouncements;
+extern NSString* const OEXAnalyticsScreenFindCourses;
+extern NSString* const OEXAnalyticsScreenCourseInfo;
+extern NSString* const OEXAnalyticsScreenMyVideosAllVideos;
+extern NSString* const OEXAnalyticsScreenMyVideosRecentVideos;
+extern NSString* const OEXAnalyticsScreenMyVideosCourseVideos;
 extern NSString* const OEXAnalyticsScreenProfileView;
 extern NSString* const OEXAnalyticsScreenProfileEdit;
 extern NSString* const OEXAnalyticsScreenCropPhoto;
@@ -130,5 +137,7 @@ extern NSString* const OEXAnalyticsScreenViewThread;
 extern NSString* const OEXAnalyticsScreenAddThreadResponse;
 extern NSString* const OEXAnalyticsScreenAddResponseComment;
 extern NSString* const OEXAnalyticsScreenViewResponseComments;
+extern NSString* const OEXAnalyticsScreenDownloads;
+extern NSString* const OEXAnalyticsScreenSettings;
 
 NS_ASSUME_NONNULL_END

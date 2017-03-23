@@ -87,6 +87,4 @@ class SegmentAnalyticsTracker : NSObject, OEXAnalyticsTracker {
         event.courseID = courseID
         trackEvent(event, forComponent: nil, withProperties: properties)
     }
-    
-    
 }

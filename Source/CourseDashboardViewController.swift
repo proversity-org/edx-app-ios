@@ -250,7 +250,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             cellItems.append(item)
         }
         
-        if !isHandoutsEmpty(enrollment.course) {
+        if shouldShowHandouts(enrollment.course) {
             item = StandardCourseDashboardItem(title: Strings.courseDashboardHandouts, detail: Strings.courseDashboardHandoutsDetail, icon: .Handouts) {[weak self] () -> Void in
                 self?.showHandouts()
             }
@@ -268,6 +268,10 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
         let canShowDiscussions = self.environment.config.discussionsEnabled ?? false
         let courseHasDiscussions = course.hasDiscussionsEnabled ?? false
         return canShowDiscussions && courseHasDiscussions
+    }
+    
+    private func shouldShowHandouts(course: OEXCourse) -> Bool {
+        return !(course.course_handouts?.isEmpty ?? true)
     }
 
     private func getCertificateUrl(enrollment: UserCourseEnrollment) -> String? {
@@ -343,6 +347,10 @@ extension CourseDashboardViewController {
     
     func t_canVisitDiscussions() -> Bool {
         return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is StandardCourseDashboardItem) && (item as! StandardCourseDashboardItem).icon == .Discussions }) != nil
+    }
+    
+    func t_canVisitHandouts() -> Bool {
+        return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is StandardCourseDashboardItem) && (item as! StandardCourseDashboardItem).icon == .Handouts }) != nil
     }
 
     func t_canVisitCertificate() -> Bool {

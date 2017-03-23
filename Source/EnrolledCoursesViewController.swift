@@ -10,7 +10,7 @@ import Foundation
 
 var isActionTakenOnUpgradeSnackBar: Bool = false
 
-class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTableViewControllerDelegate, PullRefreshControllerDelegate {
+class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTableViewControllerDelegate, PullRefreshControllerDelegate, LoadStateViewReloadSupport {
     
     typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider>
     
@@ -94,6 +94,33 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             switch result {
             case let .Success(enrollments):
                 if let enrollments = enrollments {
+                    let payload: [String: String] = ["organizationCode": (self?.environment.config.organizationCode())!,
+                                                     "token": KPNService.instance().getDeviceToken(),
+                                                     "username": (self?.environment.router?.environment.session.currentUser?.username)!,
+                                                     "email": (self?.environment.router?.environment.session.currentUser?.email)!,
+                                                     "apiKey": (self?.environment.config.konnekteerApiKey())!,
+                                                     "topicType": "organization"]
+                    
+                    KPNService.instance().subscribe(payload, completionHandler: {data, error in
+                        print(data)
+                    })
+                    
+                    for userCourse in enrollments {
+                        let course = userCourse.course as OEXCourse
+                        
+                        // Subscribe to course
+                        let payload: [String: String] = ["courseKey": course.course_id!,
+                                                         "token": KPNService.instance().getDeviceToken(),
+                                                         "username": (self?.environment.router?.environment.session.currentUser?.username)!,
+                                                         "email": (self?.environment.router?.environment.session.currentUser?.email)!,
+                                                         "apiKey": (self?.environment.config.konnekteerApiKey())!,
+                                                         "topicType": "course"]
+                        
+                        KPNService.instance().subscribe(payload, completionHandler: {data, error in
+                            print(data)
+                        }) 
+                    }
+
                     self?.tableController.courses = enrollments.flatMap { $0.course } ?? []
                     self?.tableController.tableView.reloadData()
                     self?.loadController.state = .Loaded
@@ -118,9 +145,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             let footer = EnrolledCoursesFooterView()
             footer.findCoursesAction = {[weak self] in
                 self?.environment.router?.showCourseCatalog(nil)
-            }
-            footer.missingCoursesAction = {[weak self] in
-                self?.showCourseNotListedAlert()
             }
             
             footer.sizeToFit()
@@ -161,15 +185,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         }
     }
     
-    private func showCourseNotListedAlert() {
-        let alertController = UIAlertController().showAlertWithTitle(nil, message: Strings.courseNotListed, cancelButtonTitle: nil, onViewController: self)
-        alertController.addButtonWithTitle(Strings.ok, actionBlock: { (action) in
-            dispatch_async(dispatch_get_main_queue(), { 
-                UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem)
-            })
-        })
-    }
-    
     private func showVersionUpgradeSnackBarIfNecessary() {
         if let _ = VersionUpgradeInfoController.sharedController.latestVersion {
             var infoString = Strings.VersionUpgrade.newVersionAvailable
@@ -203,6 +218,11 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableController.tableView.autolayoutFooter()
+    }
+    
+    //MARK:- LoadStateViewReloadSupport method 
+    func loadStateViewReload() {
+        refreshIfNecessary()
     }
 }
 
