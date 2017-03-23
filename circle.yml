@@ -8,6 +8,7 @@ machine:
 dependencies:
   override:
     - sudo gem install fastlane -NV
+    - sudo gem install fastimage
     - sudo gem cleanup
     - ./gradlew dependencies --stacktrace --info
   post:
