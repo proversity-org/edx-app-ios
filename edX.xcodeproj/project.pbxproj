@@ -695,6 +695,8 @@
 		E711B4A21E83C7C4006FFD31 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E711B4A11E83C7C4006FFD31 /* logo@2x.png */; };
 		E711B4A41E83C892006FFD31 /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E711B4A31E83C892006FFD31 /* logoWhite@2x.png */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
+		E7C649CD1E83E55400C288FD /* FamilyMosaicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C649CC1E83E55400C288FD /* FamilyMosaicUITests.swift */; };
+		E7C649DA1E83E69900C288FD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C649D91E83E69900C288FD /* SnapshotHelper.swift */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -729,6 +731,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = BECB7B0A1924C0C3009C77F1;
 			remoteInfo = edXVideoLocker;
+		};
+		E7C649CF1E83E55400C288FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BECB7B031924C0C3009C77F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BECB7B0A1924C0C3009C77F1;
+			remoteInfo = edX;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1595,6 +1604,10 @@
 		E711B4A31E83C892006FFD31 /* logoWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@2x.png"; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
+		E7C649CA1E83E55400C288FD /* FamilyMosaicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FamilyMosaicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7C649CC1E83E55400C288FD /* FamilyMosaicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMosaicUITests.swift; sourceTree = "<group>"; };
+		E7C649CE1E83E55400C288FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7C649D91E83E69900C288FD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -1655,6 +1668,13 @@
 				BECB7B301924C0C3009C77F1 /* UIKit.framework in Frameworks */,
 				BECB7B2F1924C0C3009C77F1 /* Foundation.framework in Frameworks */,
 				7838FA70AF5D18DFDFA51252 /* libPods-edXTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7C649C71E83E55400C288FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3032,6 +3052,7 @@
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
 				BE76FEAA193C8D9C00BB9BDD /* External Libraries */,
+				E7C649CB1E83E55400C288FD /* FamilyMosaicUITests */,
 				BECB7B0D1924C0C3009C77F1 /* Frameworks */,
 				BECB7B0C1924C0C3009C77F1 /* Products */,
 				01AAC8755C861B14E810FE8B /* Pods */,
@@ -3046,6 +3067,7 @@
 				77E6478E1C90C10300B6740D /* edXCore.framework */,
 				77E647971C90C10300B6740D /* edXCoreTests.xctest */,
 				77E648301C91016300B6740D /* EndToEndTests.xctest */,
+				E7C649CA1E83E55400C288FD /* FamilyMosaicUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3366,6 +3388,16 @@
 			name = PassthroughView;
 			sourceTree = "<group>";
 		};
+		E7C649CB1E83E55400C288FD /* FamilyMosaicUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E7C649D91E83E69900C288FD /* SnapshotHelper.swift */,
+				E7C649CC1E83E55400C288FD /* FamilyMosaicUITests.swift */,
+				E7C649CE1E83E55400C288FD /* Info.plist */,
+			);
+			path = FamilyMosaicUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3489,6 +3521,24 @@
 			productReference = BECB7B2C1924C0C3009C77F1 /* edXTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E7C649C91E83E55400C288FD /* FamilyMosaicUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7C649D41E83E55400C288FD /* Build configuration list for PBXNativeTarget "FamilyMosaicUITests" */;
+			buildPhases = (
+				E7C649C61E83E55400C288FD /* Sources */,
+				E7C649C71E83E55400C288FD /* Frameworks */,
+				E7C649C81E83E55400C288FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7C649D01E83E55400C288FD /* PBXTargetDependency */,
+			);
+			name = FamilyMosaicUITests;
+			productName = FamilyMosaicUITests;
+			productReference = E7C649CA1E83E55400C288FD /* FamilyMosaicUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3496,7 +3546,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = edX;
 				TargetAttributes = {
@@ -3537,6 +3587,11 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
+					E7C649C91E83E55400C288FD = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = BECB7B0A1924C0C3009C77F1;
+					};
 				};
 			};
 			buildConfigurationList = BECB7B061924C0C3009C77F1 /* Build configuration list for PBXProject "edX" */;
@@ -3556,6 +3611,7 @@
 				77E6478D1C90C10300B6740D /* edXCore */,
 				77E647961C90C10300B6740D /* edXCoreTests */,
 				77E6482F1C91016300B6740D /* EndToEndTests */,
+				E7C649C91E83E55400C288FD /* FamilyMosaicUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -3710,6 +3766,13 @@
 				77E6489E1C91D92D00B6740D /* DiscussionPosts.json in Resources */,
 				775716B51CB7FF660091AB10 /* sample-badge.png in Resources */,
 				B4B6D64B1A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7C649C81E83E55400C288FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4447,6 +4510,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7C649C61E83E55400C288FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7C649CD1E83E55400C288FD /* FamilyMosaicUITests.swift in Sources */,
+				E7C649DA1E83E69900C288FD /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -4469,6 +4541,11 @@
 			isa = PBXTargetDependency;
 			target = BECB7B0A1924C0C3009C77F1 /* edX */;
 			targetProxy = BECB7B311924C0C3009C77F1 /* PBXContainerItemProxy */;
+		};
+		E7C649D01E83E55400C288FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BECB7B0A1924C0C3009C77F1 /* edX */;
+			targetProxy = E7C649CF1E83E55400C288FD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5146,6 +5223,67 @@
 			};
 			name = Release;
 		};
+		E7C649D11E83E55400C288FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = FamilyMosaicUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.fam.FamilyMosaicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6f28455c-9f82-431b-aa39-602e5334ee12";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Debug;
+		};
+		E7C649D21E83E55400C288FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = FamilyMosaicUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.fam.FamilyMosaicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6f28455c-9f82-431b-aa39-602e5334ee12";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Release;
+		};
+		E7C649D31E83E55400C288FD /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				INFOPLIST_FILE = FamilyMosaicUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.fam.FamilyMosaicUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6f28455c-9f82-431b-aa39-602e5334ee12";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = edX;
+			};
+			name = Profile;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5208,6 +5346,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E7C649D41E83E55400C288FD /* Build configuration list for PBXNativeTarget "FamilyMosaicUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7C649D11E83E55400C288FD /* Debug */,
+				E7C649D21E83E55400C288FD /* Release */,
+				E7C649D31E83E55400C288FD /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

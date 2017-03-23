@@ -31,6 +31,12 @@ class FamilyMosaicUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        snapshot("splash")
+        app.buttons["login"].tap()
+        snapshot("login")
+        app.navigationBars["Sign In"].buttons["Close"].tap()
     }
     
 }
