@@ -7,7 +7,7 @@ machine:
 
 dependencies:
   override:
-    - sudo gem update fastlane
+    - sudo fastlane update_fastlane
     - sudo gem cleanup
     - ./gradlew dependencies --stacktrace --info
   post:
