@@ -116,7 +116,8 @@ class CourseCatalogDetailViewController: UIViewController {
     }
     
     private func load() {
-        let request = CourseCatalogAPI.getCourse(courseID)
+        let username = self.environment.router?.environment.session.currentUser?.username
+        let request = CourseCatalogAPI.getCourse(courseID, userID: username!)
         let courseStream = environment.networkManager.streamForRequest(request)
         let enrolledStream = environment.dataManager.enrollmentManager.streamForCourseWithID(courseID).resultMap {
             return .Success($0.isSuccess)
