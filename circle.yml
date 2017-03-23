@@ -6,8 +6,6 @@ machine:
     XCODE_SCHEME: edX
 
 dependencies:
-  pre:
-    - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   override:
     - sudo gem uninstall fastlane
     - sudo gem cleanup
