@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: 8.2.1
+    version: 8.2
   environment:
     XCODE_WORKSPACE: edX.xcworkspace
     XCODE_SCHEME: edX
