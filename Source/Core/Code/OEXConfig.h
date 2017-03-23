@@ -50,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// User facing platform web destination, like "edx.org"
 - (NSString*)platformDestinationName;
 - (nullable NSString*)organizationCode;
+- (nullable NSString*)konnekteerApiKey;
 // Network
 - (nullable NSURL*)apiHostURL;
 - (nullable NSString*)feedbackEmailAddress;
