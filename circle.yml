@@ -9,6 +9,7 @@ dependencies:
   override:
     - sudo gem update fastlane
     - sudo fastlane fastlane_update
+    - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
     - ./gradlew dependencies --stacktrace --info
   post:
