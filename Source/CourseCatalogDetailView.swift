@@ -217,6 +217,11 @@ extension CourseCatalogDetailView {
         }
         return result
     }
+
+    func invitationOnlyBtn(text: String) {
+        self.actionButton.applyButtonStyle(OEXStyles.sharedStyles().filledButtonStyle(UIColor(hexString: "A7A4A4", alpha: 1.0)), withTitle: text)
+        self.actionButton.enabled = false
+    }
     
     func applyCourse(course : OEXCourse) {
         CourseCardViewModel.onCourseCatalog(course, wrapTitle: true).apply(courseCard, networkManager: self.environment.networkManager)
