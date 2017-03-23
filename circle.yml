@@ -7,9 +7,8 @@ machine:
 
 dependencies:
   override:
-    - sudo gem uninstall fastlane
+    - sudo gem install fastlane -NV
     - sudo gem cleanup
-    - brew cask install fastlane
     - ./gradlew dependencies --stacktrace --info
   post:
     - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/FAM ./deployment
