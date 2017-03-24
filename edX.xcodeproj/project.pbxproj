@@ -5355,6 +5355,7 @@
 				E7C649D31E83E55400C288FD /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
