@@ -117,6 +117,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     NSArray* fields = self.registrationDescription.registrationFormFields;
     self.fieldControllers = [fields oex_map:^id < OEXRegistrationFieldController > (OEXRegistrationFormField* formField)
                              {
+                                 NSLog(@"%@, %@", formField.name, (formField.isRequired ? @"YES" : @"NO"));
                                  id <OEXRegistrationFieldController> fieldController = [OEXRegistrationFieldControllerFactory registrationFieldViewController:formField];
                                  if(formField.fieldType == OEXRegistrationFieldTypeAgreement) {
                                      // These don't have explicit representations in the apps
@@ -430,7 +431,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [OEXAuthentication registerUserWithParameters:parameters completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         if(!error) {
             NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:&error];
-            OEXLogInfo(@"REGISTRATION", @"Register user response ==>> %@", dictionary);
+            OEXLogInfo(@"REGISTRATION", @"Register user response ==> %@", dictionary);
             NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
 
             void(^completion)(NSData*, NSURLResponse*, NSError*) = ^(NSData* data, NSURLResponse* response, NSError* error){

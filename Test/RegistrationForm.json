@@ -61,7 +61,7 @@
                "label": "Password"
                }, {
                "restrictions": {},
-               "required": true,
+               "required": false,
                "name": "country",
                "errorMessages": {
                "required": "Please select your Country."
