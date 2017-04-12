@@ -694,6 +694,10 @@
 		E0C6EF971BFF4B9900B315E3 /* UIButton+TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C6EF961BFF4B9900B315E3 /* UIButton+TintColor.swift */; };
 		E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
+		E7AB26291E9E3C5200546107 /* logoBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AB26251E9E3C5200546107 /* logoBlack@2x.png */; };
+		E7AB262A1E9E3C5200546107 /* logoBlack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AB26261E9E3C5200546107 /* logoBlack@3x.png */; };
+		E7AB262B1E9E3C5200546107 /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AB26271E9E3C5200546107 /* logoWhite@2x.png */; };
+		E7AB262C1E9E3C5200546107 /* logoWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AB26281E9E3C5200546107 /* logoWhite@3x.png */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
@@ -1593,6 +1597,10 @@
 		E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXCourseInfoViewController+Swift.swift"; sourceTree = "<group>"; };
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E7AB26251E9E3C5200546107 /* logoBlack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoBlack@2x.png"; sourceTree = "<group>"; };
+		E7AB26261E9E3C5200546107 /* logoBlack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoBlack@3x.png"; sourceTree = "<group>"; };
+		E7AB26271E9E3C5200546107 /* logoWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@2x.png"; sourceTree = "<group>"; };
+		E7AB26281E9E3C5200546107 /* logoWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@3x.png"; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
@@ -2040,6 +2048,10 @@
 				69ECC5E81D50D1170030CF87 /* iTunesArtwork */,
 				69ECC5E91D50D1170030CF87 /* iTunesArtwork@2x */,
 				69ECC5EA1D50D1170030CF87 /* logo@2x.png */,
+				E7AB26251E9E3C5200546107 /* logoBlack@2x.png */,
+				E7AB26261E9E3C5200546107 /* logoBlack@3x.png */,
+				E7AB26271E9E3C5200546107 /* logoWhite@2x.png */,
+				E7AB26281E9E3C5200546107 /* logoWhite@3x.png */,
 				69ECC5EB1D50D1170030CF87 /* logo@3x.png */,
 				69ECC5EC1D50D1170030CF87 /* loginScreenImage@2x.png */,
 				69ECC5ED1D50D1170030CF87 /* separator.png */,
@@ -3516,6 +3528,7 @@
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
 					BECB7B0A1924C0C3009C77F1 = {
+						DevelopmentTeam = 773JA72FQU;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -3594,6 +3607,7 @@
 				69ECC5FE1D50D1170030CF87 /* OpenSans-Bold.ttf in Resources */,
 				69ECC60F1D50D1170030CF87 /* arrow_next@2x.png in Resources */,
 				69ECC6451D50D1170030CF87 /* separator.png in Resources */,
+				E7AB262A1E9E3C5200546107 /* logoBlack@3x.png in Resources */,
 				69ECC6131D50D1170030CF87 /* loginScreenImage.png in Resources */,
 				69ECC6011D50D1170030CF87 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				19A1339719CAE108003ADD24 /* EULA.htm in Resources */,
@@ -3607,6 +3621,7 @@
 				6926CDAD1D59BE3600A16E22 /* ic_previous_press.png in Resources */,
 				69ECC6401D50D1170030CF87 /* iTunesArtwork in Resources */,
 				69ECC6441D50D1170030CF87 /* loginScreenImage@2x.png in Resources */,
+				E7AB262B1E9E3C5200546107 /* logoWhite@2x.png in Resources */,
 				6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */,
 				69ECC61D1D50D1170030CF87 /* bt_logout_default.png in Resources */,
 				69ECC6501D50D1170030CF87 /* Default@2x.png in Resources */,
@@ -3614,6 +3629,7 @@
 				1AFEB1B91BBD88F3004C471D /* languages.json in Resources */,
 				9E7D1BCC1AEA5BF5000AF768 /* OEXDownloadViewController.storyboard in Resources */,
 				69ECC6421D50D1170030CF87 /* logo@2x.png in Resources */,
+				E7AB262C1E9E3C5200546107 /* logoWhite@3x.png in Resources */,
 				69ECC61A1D50D1170030CF87 /* bt_grey_default.png in Resources */,
 				69ECC6161D50D1170030CF87 /* bt_facebook_RTL.png in Resources */,
 				69ECC6411D50D1170030CF87 /* iTunesArtwork@2x in Resources */,
@@ -3644,6 +3660,7 @@
 				5DD0FFD21B1D23DA00837121 /* DiscussionNewPostViewController.xib in Resources */,
 				69ECC6521D50D1170030CF87 /* inline-content.css in Resources */,
 				69ECC64C1D50D1170030CF87 /* Default-568h@2x.png in Resources */,
+				E7AB26291E9E3C5200546107 /* logoBlack@2x.png in Resources */,
 				9ED269CC1AF0E67200328A34 /* OEXMyVideosViewController.storyboard in Resources */,
 				69ECC6471D50D1170030CF87 /* separator3.png in Resources */,
 				1A55019C1BBA30C900D5F9DD /* profiles.json in Resources */,
@@ -4557,9 +4574,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4576,8 +4593,10 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.cau;
 				PRODUCT_NAME = edX;
+				PROVISIONING_PROFILE = "0b8528b8-1e6d-4285-b3f9-60057dbd5446";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.proversity.cau";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
@@ -4969,7 +4988,7 @@
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4985,10 +5004,10 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.cau;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "a4e3b22a-aa31-4846-9cfb-d125efe10dff";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.cau";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -5003,9 +5022,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5022,9 +5041,10 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.cau;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0b8528b8-1e6d-4285-b3f9-60057dbd5446";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.proversity.cau";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
