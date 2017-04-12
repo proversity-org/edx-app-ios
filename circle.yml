@@ -12,7 +12,7 @@ dependencies:
     - sudo gem cleanup
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/Cause4 ./deployment
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/CAU ./deployment
     - cp -R deployment/custom_config custom_config
     - cp -R deployment/fastlane fastlane
 
@@ -22,6 +22,6 @@ test:
 
 deployment:
   beta:
-    branch: proversity/Cause4
+    branch: proversity/CAU
     commands:
       - fastlane beta
