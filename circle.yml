@@ -1,0 +1,27 @@
+machine:
+  xcode:
+    version: 8.2
+  environment:
+    XCODE_WORKSPACE: edX.xcworkspace
+    XCODE_SCHEME: edX
+
+dependencies:
+  override:
+    - sudo gem install fastlane -NV
+    - sudo gem uninstall fastimage -v 2.0.1
+    - sudo gem cleanup
+    - ./gradlew dependencies --stacktrace --info
+  post:
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/TOM ./deployment
+    - cp -R deployment/custom_config custom_config
+    - cp -R deployment/fastlane fastlane
+
+test:
+  override:
+    - sleep 10
+
+deployment:
+  beta:
+    branch: proversity/TOM
+    commands:
+      - fastlane beta
