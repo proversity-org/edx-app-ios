@@ -78,7 +78,7 @@ private let OAuthExchangePath = "/oauth2/login/"
 
 // Allows access to course content that requires authentication.
 // Forwarding our oauth token to the server so we can get a web based cookie
-public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate {
+public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate, UIDocumentInteractionControllerDelegate {
     
     private enum State {
         case CreatingSession
@@ -107,6 +107,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         let contentController = WKUserContentController();
         contentController.addUserScript(userScript)
         contentController.addScriptMessageHandler(self, name: "clickPDFDownload")
+        contentController.addScriptMessageHandler(self, name: "downloadPDF")
         let config = WKWebViewConfiguration();
         config.userContentController = contentController;
         let controller = WKWebViewContentController(configuration: config)
@@ -322,7 +323,43 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     public func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         if(message.name == "clickPDFDownload") {
             generatePdf()
+        } else if (message.name == "downloadPDF") {
+//            "window.open(doc.output('datauristring'));" +
+            let url = NSURL(string: message.body as! String)
+            let request = NSURLRequest(URL: url!)
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let session = NSURLSession(configuration: config)
+            let task = session.downloadTaskWithRequest(request, completionHandler: { (location, response, error) in
+                print(location)
+                let fileManager = NSFileManager.defaultManager()
+                let documents = try! fileManager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+                let fileURL = documents.URLByAppendingPathComponent("PDF.pdf")
+                let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+                let url = NSURL(fileURLWithPath: path)
+                let filePath = url.URLByAppendingPathComponent("PDF.pdf")!.path!
+                if fileManager.fileExistsAtPath(filePath) {
+                    do {
+                        try fileManager.removeItemAtPath(filePath)
+                    } catch {
+                        print(error)
+                    }
+                }
+                
+                do {
+                    try fileManager.moveItemAtURL(location!, toURL: fileURL!)
+                    let documentController = UIDocumentInteractionController.init(URL: fileURL!)
+                    documentController.delegate = self
+                    documentController.presentPreviewAnimated(true)
+                } catch {
+                    print(error)
+                }
+            })
+            task.resume()
         }
+    }
+    
+    public func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
     
     public func generatePdf() {
@@ -335,7 +372,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
                                         "}" +
                                     "}" +
                                 "}, function(){" +
-                                    "window.open(doc.output('datauristring'));" +
+                                    "window.webkit.messageHandlers.downloadPDF.postMessage(doc.output('datauristring'))" +
                                 "}, { top: 10, bottom: 10 });"
         let webView = webController.view as! WKWebView
         webView.evaluateJavaScript(pdfJS, completionHandler: { (result, error) -> Void in
@@ -344,13 +381,12 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         })
     }
     
-    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
-        print(navigationAction.targetFrame)
-        if navigationAction.targetFrame == nil {
-            webView.loadRequest(navigationAction.request)
-        }
-        return nil
-    }
+//    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
+//        if navigationAction.targetFrame == nil {
+//            webView.loadRequest(navigationAction.request)
+//        }
+//        return nil
+//    }
 
 }
 
