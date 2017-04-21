@@ -38,7 +38,11 @@ private protocol WebContentController {
 }
 
 private class WKWebViewContentController : WebContentController {
-    private let webView = WKWebView(frame: CGRectZero)
+    let webView : WKWebView
+    
+    init(configuration: WKWebViewConfiguration) {
+        self.webView = WKWebView(frame: CGRectZero, configuration: configuration)
+    }
     
     var view : UIView {
         return webView
@@ -74,7 +78,7 @@ private let OAuthExchangePath = "/oauth2/login/"
 
 // Allows access to course content that requires authentication.
 // Forwarding our oauth token to the server so we can get a web based cookie
-public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate {
+public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate {
     
     private enum State {
         case CreatingSession
@@ -90,8 +94,24 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     private let headerInsets : HeaderViewInsets
     
     private lazy var webController : WebContentController = {
-        let controller = WKWebViewContentController()
+        let js : String = "$(document).ready(function() {" +
+            "$('#recap_cmd').click(function() {" +
+                "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
+            "});" +
+        "});"
+        
+        let userScript: WKUserScript =  WKUserScript(source: js,
+                                                  injectionTime: WKUserScriptInjectionTime.AtDocumentEnd,
+                                                  forMainFrameOnly: false)
+        
+        let contentController = WKUserContentController();
+        contentController.addUserScript(userScript)
+        contentController.addScriptMessageHandler(self, name: "clickPDFDownload")
+        let config = WKWebViewConfiguration();
+        config.userContentController = contentController;
+        let controller = WKWebViewContentController(configuration: config)
         controller.webView.navigationDelegate = self
+        controller.webView.UIDelegate = self
         return controller
     
     }()
@@ -297,6 +317,39 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         else {
             completionHandler(.PerformDefaultHandling, nil)
         }
+    }
+    
+    public func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        if(message.name == "clickPDFDownload") {
+            generatePdf()
+        }
+    }
+    
+    public func generatePdf() {
+        let pdfJS : String = "var doc = new jsPDF('p', 'pt', 'letter');" +
+                                "doc.fromHTML($('#recap_answers').get(0), 30, 20, {" +
+                                    "'width': 550," +
+                                    "'elementHandlers': {" +
+                                        "'#recap_editor': function(element, renderer){" +
+                                            "return true;" +
+                                        "}" +
+                                    "}" +
+                                "}, function(){" +
+                                    "window.open(doc.output('datauristring'));" +
+                                "}, { top: 10, bottom: 10 });"
+        let webView = webController.view as! WKWebView
+        webView.evaluateJavaScript(pdfJS, completionHandler: { (result, error) -> Void in
+            print(result)
+            print(error)
+        })
+    }
+    
+    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
+        print(navigationAction.targetFrame)
+        if navigationAction.targetFrame == nil {
+            webView.loadRequest(navigationAction.request)
+        }
+        return nil
     }
 
 }
