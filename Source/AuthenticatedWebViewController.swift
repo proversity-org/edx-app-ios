@@ -5,7 +5,6 @@
 //  Created by Akiva Leffert on 5/26/15.
 //  Copyright (c) 2015 edX. All rights reserved.
 //
-
 import UIKit
 import WebKit
 
@@ -38,7 +37,11 @@ private protocol WebContentController {
 }
 
 private class WKWebViewContentController : WebContentController {
-    private let webView = WKWebView(frame: CGRectZero)
+    let webView : WKWebView
+    
+    init(configuration: WKWebViewConfiguration) {
+        self.webView = WKWebView(frame: CGRectZero, configuration: configuration)
+    }
     
     var view : UIView {
         return webView
@@ -74,7 +77,7 @@ private let OAuthExchangePath = "/oauth2/login/"
 
 // Allows access to course content that requires authentication.
 // Forwarding our oauth token to the server so we can get a web based cookie
-public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate {
+public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate, UIDocumentInteractionControllerDelegate {
     
     private enum State {
         case CreatingSession
@@ -90,8 +93,25 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     private let headerInsets : HeaderViewInsets
     
     private lazy var webController : WebContentController = {
-        let controller = WKWebViewContentController()
+        let js : String = "$(document).ready(function() {" +
+            "$('#recap_cmd').click(function() {" +
+                "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
+            "});" +
+        "});"
+        
+        let userScript: WKUserScript =  WKUserScript(source: js,
+                                                  injectionTime: WKUserScriptInjectionTime.AtDocumentEnd,
+                                                  forMainFrameOnly: false)
+        
+        let contentController = WKUserContentController();
+        contentController.addUserScript(userScript)
+        contentController.addScriptMessageHandler(self, name: "clickPDFDownload")
+        contentController.addScriptMessageHandler(self, name: "downloadPDF")
+        let config = WKWebViewConfiguration();
+        config.userContentController = contentController;
+        let controller = WKWebViewContentController(configuration: config)
         controller.webView.navigationDelegate = self
+        controller.webView.UIDelegate = self
         return controller
     
     }()
@@ -226,7 +246,6 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     }
     
     // MARK: WKWebView delegate
-
     public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         switch navigationAction.navigationType {
         case .LinkActivated, .FormSubmitted, .FormResubmitted:
@@ -298,6 +317,80 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             completionHandler(.PerformDefaultHandling, nil)
         }
     }
+    
+    public func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        if(message.name == "clickPDFDownload") {
+            generatePdf();
+        } else if (message.name == "downloadPDF") {
+            showPdf(message.body);
+        }
+    }
+    
+    public func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+    
+    public func generatePdf() {
+        let pdfJS : String = "var doc = new jsPDF('p', 'pt', 'letter');" +
+                                "doc.fromHTML($('#recap_answers').get(0), 30, 20, {" +
+                                    "'width': 550," +
+                                    "'elementHandlers': {" +
+                                        "'#recap_editor': function(element, renderer){" +
+                                            "return true;" +
+                                        "}" +
+                                    "}" +
+                                "}, function(){" +
+                                    "window.webkit.messageHandlers.downloadPDF.postMessage(doc.output('datauristring'))" +
+                                "}, { top: 10, bottom: 10 });"
+        let webView = webController.view as! WKWebView
+        webView.evaluateJavaScript(pdfJS, completionHandler: { (result, error) -> Void in
+            print(result)
+            print(error)
+        })
+    }
 
+    public func showPdf(pdf: AnyObject) {
+        let url = NSURL(string: pdf as! String)
+        let request = NSURLRequest(URL: url!)
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        let task = session.downloadTaskWithRequest(request, completionHandler: { (location, response, error) in
+            let fileManager = NSFileManager.defaultManager()
+            let documents = try! fileManager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+            let fileURL = documents.URLByAppendingPathComponent("PDF.pdf")
+            let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            let url = NSURL(fileURLWithPath: path)
+            let filePath = url.URLByAppendingPathComponent("PDF.pdf")!.path!
+            if fileManager.fileExistsAtPath(filePath) {
+                do {
+                    try fileManager.removeItemAtPath(filePath)
+                } catch {
+                    print(error)
+                }
+            }
+            
+            do {
+                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+                try fileManager.moveItemAtURL(location!, toURL: fileURL!)
+                dispatch_async(backgroundQueue, {
+                    let documentController = UIDocumentInteractionController.init(URL: fileURL!)
+                    documentController.delegate = self
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        documentController.presentPreviewAnimated(true)
+                    })
+                })
+            } catch {
+                print(error)
+            }
+        })
+        task.resume()
+    }
+    
+//    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
+//        if navigationAction.targetFrame == nil {
+//            webView.loadRequest(navigationAction.request)
+//        }
+//        return nil
+//    }
 }
-
