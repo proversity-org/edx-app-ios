@@ -10,7 +10,7 @@ import Foundation
 import MediaPlayer
 import UIKit
 
-class VideoBlockViewController : UIViewController, CourseBlockViewController, OEXVideoPlayerInterfaceDelegate, StatusBarOverriding, InterfaceOrientationOverriding, VideoTranscriptDelegate {
+class VideoBlockViewController : UIViewController, CourseBlockViewController, OEXVideoPlayerInterfaceDelegate, StatusBarOverriding, InterfaceOrientationOverriding, VideoTranscriptDelegate, RatingViewControllerDelegate {
     
     typealias Environment = protocol<DataManagerProvider, OEXInterfaceProvider, ReachabilityProvider, OEXConfigProvider, OEXRouterProvider>
 
@@ -337,5 +337,13 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     //MARK: - VideoTranscriptDelegate methods
     func didSelectSubtitleAtInterval(time: NSTimeInterval) {
         videoController.moviePlayerController?.controls?.setCurrentPlaybackTimeFromTranscript(time)
+    }
+    
+    //MARK: - RatingDelegate
+    func didDismissRatingViewController() {
+        let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.8 * NSTimeInterval(NSEC_PER_SEC)))
+        dispatch_after(delay, dispatch_get_main_queue()) {
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.backBarButtonItem)
+        }
     }
 }

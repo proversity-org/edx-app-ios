@@ -5,7 +5,6 @@
 //  Created by Akiva Leffert on 5/26/15.
 //  Copyright (c) 2015 edX. All rights reserved.
 //
-
 import UIKit
 import WebKit
 
@@ -247,7 +246,6 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     }
     
     // MARK: WKWebView delegate
-
     public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         switch navigationAction.navigationType {
         case .LinkActivated, .FormSubmitted, .FormResubmitted:
@@ -324,37 +322,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         if(message.name == "clickPDFDownload") {
             generatePdf()
         } else if (message.name == "downloadPDF") {
-//            "window.open(doc.output('datauristring'));" +
-            let url = NSURL(string: message.body as! String)
-            let request = NSURLRequest(URL: url!)
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: config)
-            let task = session.downloadTaskWithRequest(request, completionHandler: { (location, response, error) in
-                print(location)
-                let fileManager = NSFileManager.defaultManager()
-                let documents = try! fileManager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-                let fileURL = documents.URLByAppendingPathComponent("PDF.pdf")
-                let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-                let url = NSURL(fileURLWithPath: path)
-                let filePath = url.URLByAppendingPathComponent("PDF.pdf")!.path!
-                if fileManager.fileExistsAtPath(filePath) {
-                    do {
-                        try fileManager.removeItemAtPath(filePath)
-                    } catch {
-                        print(error)
-                    }
-                }
-                
-                do {
-                    try fileManager.moveItemAtURL(location!, toURL: fileURL!)
-                    let documentController = UIDocumentInteractionController.init(URL: fileURL!)
-                    documentController.delegate = self
-                    documentController.presentPreviewAnimated(true)
-                } catch {
-                    print(error)
-                }
-            })
-            task.resume()
+            showPdf(message.body);
         }
     }
     
@@ -380,6 +348,44 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             print(error)
         })
     }
+
+    public func showPdf(pdf: AnyObject) {
+        let url = NSURL(string: pdf as! String)
+        let request = NSURLRequest(URL: url!)
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        let task = session.downloadTaskWithRequest(request, completionHandler: { (location, response, error) in
+            let fileManager = NSFileManager.defaultManager()
+            let documents = try! fileManager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+            let fileURL = documents.URLByAppendingPathComponent("PDF.pdf")
+            let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            let url = NSURL(fileURLWithPath: path)
+            let filePath = url.URLByAppendingPathComponent("PDF.pdf")!.path!
+            if fileManager.fileExistsAtPath(filePath) {
+                do {
+                    try fileManager.removeItemAtPath(filePath)
+                } catch {
+                    print(error)
+                }
+            }
+            
+            do {
+                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+                try fileManager.moveItemAtURL(location!, toURL: fileURL!)
+                dispatch_async(backgroundQueue, {
+                    let documentController = UIDocumentInteractionController.init(URL: fileURL!)
+                    documentController.delegate = self
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        documentController.presentPreviewAnimated(true)
+                    })
+                })
+            } catch {
+                print(error)
+            }
+        })
+        task.resume()
+    }
     
 //    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
 //        if navigationAction.targetFrame == nil {
@@ -387,6 +393,4 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
 //        }
 //        return nil
 //    }
-
 }
-

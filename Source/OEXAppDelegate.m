@@ -95,7 +95,6 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
 #endif
-    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -166,6 +165,7 @@
     
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
+
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [self.environment.pushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
