@@ -84,24 +84,25 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         case LoadingContent
         case NeedingSession
     }
-
+    
     public typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, OEXSessionProvider>
     
     internal let environment : Environment
+    private let blockID: CourseBlockID
     private let loadController : LoadStateViewController
     private let insetsController : ContentInsetsController
     private let headerInsets : HeaderViewInsets
     
     private lazy var webController : WebContentController = {
         let js : String = "$(document).ready(function() {" +
-            "$('#recap_cmd').click(function() {" +
-                "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
+            "$('#recap_cmd_" + self.blockID + "').click(function() {" +
+            "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
             "});" +
         "});"
         
         let userScript: WKUserScript =  WKUserScript(source: js,
-                                                  injectionTime: WKUserScriptInjectionTime.AtDocumentEnd,
-                                                  forMainFrameOnly: false)
+                                                     injectionTime: WKUserScriptInjectionTime.AtDocumentEnd,
+                                                     forMainFrameOnly: false)
         
         let contentController = WKUserContentController();
         contentController.addUserScript(userScript)
@@ -113,7 +114,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         controller.webView.navigationDelegate = self
         controller.webView.UIDelegate = self
         return controller
-    
+        
     }()
     
     private var state = State.CreatingSession
@@ -123,9 +124,9 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         return contentRequest?.URL
     }
     
-    public init(environment : Environment) {
+    public init(environment : Environment, blockID: String) {
         self.environment = environment
-        
+        self.blockID = blockID
         loadController = LoadStateViewController()
         insetsController = ContentInsetsController()
         headerInsets = HeaderViewInsets()
@@ -261,9 +262,9 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     public func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
         
         if let
-        httpResponse = navigationResponse.response as? NSHTTPURLResponse,
-        statusCode = OEXHTTPStatusCode(rawValue: httpResponse.statusCode),
-        errorGroup = statusCode.errorGroup
+            httpResponse = navigationResponse.response as? NSHTTPURLResponse,
+            statusCode = OEXHTTPStatusCode(rawValue: httpResponse.statusCode),
+            errorGroup = statusCode.errorGroup
             where state == .LoadingContent
         {
             switch errorGroup {
@@ -320,7 +321,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     
     public func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         if(message.name == "clickPDFDownload") {
-            generatePdf();
+            generatePdf()
         } else if (message.name == "downloadPDF") {
             showPdf(message.body);
         }
@@ -332,23 +333,23 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     
     public func generatePdf() {
         let pdfJS : String = "var doc = new jsPDF('p', 'pt', 'letter');" +
-                                "doc.fromHTML($('#recap_answers').get(0), 30, 20, {" +
-                                    "'width': 550," +
-                                    "'elementHandlers': {" +
-                                        "'#recap_editor': function(element, renderer){" +
-                                            "return true;" +
-                                        "}" +
-                                    "}" +
-                                "}, function(){" +
-                                    "window.webkit.messageHandlers.downloadPDF.postMessage(doc.output('datauristring'))" +
-                                "}, { top: 10, bottom: 10 });"
+            "doc.fromHTML($('#recap_answers_" + blockID + "').get(0), 30, 20, {" +
+            "'width': 550," +
+            "'elementHandlers': {" +
+            "'#recap_editor_" + blockID + "': function(element, renderer){" +
+            "return true;" +
+            "}" +
+            "}" +
+            "}, function(){" +
+            "window.webkit.messageHandlers.downloadPDF.postMessage(doc.output('datauristring'))" +
+        "}, { top: 10, bottom: 10 });"
         let webView = webController.view as! WKWebView
         webView.evaluateJavaScript(pdfJS, completionHandler: { (result, error) -> Void in
             print(result)
             print(error)
         })
     }
-
+    
     public func showPdf(pdf: AnyObject) {
         let url = NSURL(string: pdf as! String)
         let request = NSURLRequest(URL: url!)
@@ -387,10 +388,10 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         task.resume()
     }
     
-//    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
-//        if navigationAction.targetFrame == nil {
-//            webView.loadRequest(navigationAction.request)
-//        }
-//        return nil
-//    }
+    //    public func webView(webView: WKWebView!, createWebViewWithConfiguration configuration: WKWebViewConfiguration!, forNavigationAction navigationAction: WKNavigationAction!, windowFeatures: WKWindowFeatures!) -> WKWebView! {
+    //        if navigationAction.targetFrame == nil {
+    //            webView.loadRequest(navigationAction.request)
+    //        }
+    //        return nil
+    //    }
 }
