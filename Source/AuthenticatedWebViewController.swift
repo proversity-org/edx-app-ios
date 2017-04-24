@@ -88,13 +88,14 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     public typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, OEXSessionProvider>
     
     internal let environment : Environment
+    private let blockID: CourseBlockID
     private let loadController : LoadStateViewController
     private let insetsController : ContentInsetsController
     private let headerInsets : HeaderViewInsets
     
     private lazy var webController : WebContentController = {
         let js : String = "$(document).ready(function() {" +
-            "$('#recap_cmd').click(function() {" +
+            "$('#recap_cmd_" + self.blockID + "').click(function() {" +
                 "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
             "});" +
         "});"
@@ -123,9 +124,10 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         return contentRequest?.URL
     }
     
-    public init(environment : Environment) {
+    public init(environment : Environment, blockID: String) {
+        print(blockID)
         self.environment = environment
-        
+        self.blockID = blockID
         loadController = LoadStateViewController()
         insetsController = ContentInsetsController()
         headerInsets = HeaderViewInsets()
@@ -332,10 +334,10 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     
     public func generatePdf() {
         let pdfJS : String = "var doc = new jsPDF('p', 'pt', 'letter');" +
-                                "doc.fromHTML($('#recap_answers').get(0), 30, 20, {" +
+                                "doc.fromHTML($('#recap_answers_" + blockID + "').get(0), 30, 20, {" +
                                     "'width': 550," +
                                     "'elementHandlers': {" +
-                                        "'#recap_editor': function(element, renderer){" +
+                                        "'#recap_editor_" + blockID + "': function(element, renderer){" +
                                             "return true;" +
                                         "}" +
                                     "}" +
