@@ -8,9 +8,7 @@
 
 #import "KPNService.h"
 
-#import "KPNService.h"
-
-#define KONNEKTEER_API_URL "http://konnekteer-api.proversity.org"
+#define KONNEKTEER_API_URL "https://konnekteer-api.proversity.org"
 #define MOBILE_ENDPOINT "/mobileEndpoints"
 #define SUBSCRIBE "/subscribe"
 

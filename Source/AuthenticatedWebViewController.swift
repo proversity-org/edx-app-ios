@@ -370,10 +370,16 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             }
             
             do {
+                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
                 try fileManager.moveItemAtURL(location!, toURL: fileURL!)
-                let documentController = UIDocumentInteractionController.init(URL: fileURL!)
-                documentController.delegate = self
-                documentController.presentPreviewAnimated(true)
+                dispatch_async(backgroundQueue, {
+                    let documentController = UIDocumentInteractionController.init(URL: fileURL!)
+                    documentController.delegate = self
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        documentController.presentPreviewAnimated(true)
+                    })
+                })
             } catch {
                 print(error)
             }
