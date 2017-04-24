@@ -39,8 +39,6 @@
 		199B9B6F1935C72900081A09 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199B9B6E1935C72900081A09 /* DACircularProgressView.m */; };
 		199B9B721935C8AC00081A09 /* OEXCourseVideosTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 199B9B711935C8AC00081A09 /* OEXCourseVideosTableViewCell.m */; };
 		199B9B751935E35D00081A09 /* OEXHelperVideoDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 199B9B741935E35D00081A09 /* OEXHelperVideoDownload.m */; };
-		199B9B7A1935EA8000081A09 /* OEXFlowErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199B9B781935EA8000081A09 /* OEXFlowErrorViewController.m */; };
-		199B9B7B1935EA8000081A09 /* OEXFlowErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 199B9B791935EA8000081A09 /* OEXFlowErrorViewController.xib */; };
 		19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A1339219CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m */; };
 		19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19A1339319CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib */; };
 		19A1339719CAE108003ADD24 /* EULA.htm in Resources */ = {isa = PBXBuildFile; fileRef = 19A1339619CAE108003ADD24 /* EULA.htm */; };
@@ -118,6 +116,7 @@
 		6960892B1D53935500EE66DD /* courseCertificate.png in Resources */ = {isa = PBXBuildFile; fileRef = 696089281D53935500EE66DD /* courseCertificate.png */; };
 		6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 696089291D53935500EE66DD /* courseCertificate@2x.png */; };
 		6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6960892A1D53935500EE66DD /* courseCertificate@3x.png */; };
+		6975C4BD1E42085300AF014D /* CLVideoPlayerControlsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6975C4BC1E42085300AF014D /* CLVideoPlayerControlsTests.swift */; };
 		697652261D9BA7C80031FF8B /* OEXColorsDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697652251D9BA7C80031FF8B /* OEXColorsDataFactory.swift */; };
 		697B5A011D92D9CD002C3ABD /* TestCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775391321C973CEC00FA959C /* TestCredentials.swift */; };
 		697B5A021D92DA17002C3ABD /* RegistrationAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775391831CA0600700FA959C /* RegistrationAPITests.swift */; };
@@ -125,7 +124,14 @@
 		697B5A091D92DB3F002C3ABD /* RegistrationFormAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697B5A081D92DB3F002C3ABD /* RegistrationFormAPI.swift */; };
 		6987A86B1D6C57C100E9D183 /* OEXColorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6987A86A1D6C57C100E9D183 /* OEXColorsTests.swift */; };
 		6987A86D1D6C67DB00E9D183 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 6987A86C1D6C67DB00E9D183 /* colors.json */; };
+		698C6D781E2619E4009156BB /* VideoTranscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C6D771E2619E4009156BB /* VideoTranscriptTests.swift */; };
+		698EE6E91E38A53600DF4FEA /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698EE6E81E38A53600DF4FEA /* RatingView.swift */; };
+		699FF8501E559E6B00AD98A5 /* OEXInterface+AppReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699FF84F1E559E6B00AD98A5 /* OEXInterface+AppReview.swift */; };
+		699FF8541E5AE74300AD98A5 /* EmailTemplates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699FF8531E5AE74300AD98A5 /* EmailTemplates.swift */; };
+		699FF8561E5AFACF00AD98A5 /* OEXInterface+AppReviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699FF8551E5AFACF00AD98A5 /* OEXInterface+AppReviewTests.swift */; };
 		69AC76AF1D8FF45F007FF866 /* RegistrationForm.json in Resources */ = {isa = PBXBuildFile; fileRef = 69DD264F1D8FC55C00CF7E87 /* RegistrationForm.json */; };
+		69AD2B8D1E4B1CE500029B9B /* RatingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AD2B8B1E4B1CA000029B9B /* RatingViewControllerTests.swift */; };
+		69C12C661E07F5F8004E7261 /* VideoTranscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C12C651E07F5F8004E7261 /* VideoTranscript.swift */; };
 		69E1CD011D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E1CD001D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift */; };
 		69ECC5FD1D50D1170030CF87 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5A31D50D1170030CF87 /* FontAwesome.otf */; };
 		69ECC5FE1D50D1170030CF87 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5A41D50D1170030CF87 /* OpenSans-Bold.ttf */; };
@@ -147,8 +153,6 @@
 		69ECC60E1D50D1170030CF87 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B51D50D1170030CF87 /* Icon-60@3x.png */; };
 		69ECC60F1D50D1170030CF87 /* arrow_next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B71D50D1170030CF87 /* arrow_next@2x.png */; };
 		69ECC6101D50D1170030CF87 /* profilePhotoPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B81D50D1170030CF87 /* profilePhotoPlaceholder.png */; };
-		69ECC6111D50D1170030CF87 /* bg_card_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B91D50D1170030CF87 /* bg_card_image.png */; };
-		69ECC6121D50D1170030CF87 /* bg_card_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BA1D50D1170030CF87 /* bg_card_text.png */; };
 		69ECC6131D50D1170030CF87 /* loginScreenImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BB1D50D1170030CF87 /* loginScreenImage.png */; };
 		69ECC6141D50D1170030CF87 /* bt_blue2.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BC1D50D1170030CF87 /* bt_blue2.png */; };
 		69ECC6151D50D1170030CF87 /* bt_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BD1D50D1170030CF87 /* bt_facebook.png */; };
@@ -158,20 +162,14 @@
 		69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C11D50D1170030CF87 /* bt_grey_deactive.png */; };
 		69ECC61A1D50D1170030CF87 /* bt_grey_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C21D50D1170030CF87 /* bt_grey_default.png */; };
 		69ECC61B1D50D1170030CF87 /* bt_logout_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C31D50D1170030CF87 /* bt_logout_active.png */; };
-		69ECC61C1D50D1170030CF87 /* bt_logout_deactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C41D50D1170030CF87 /* bt_logout_deactive.png */; };
 		69ECC61D1D50D1170030CF87 /* bt_logout_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C51D50D1170030CF87 /* bt_logout_default.png */; };
 		69ECC61E1D50D1170030CF87 /* bt_scrollbar_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C61D50D1170030CF87 /* bt_scrollbar_tap.png */; };
 		69ECC61F1D50D1170030CF87 /* bt_signin_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C71D50D1170030CF87 /* bt_signin_active.png */; };
 		69ECC6201D50D1170030CF87 /* bt_signin_deactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C81D50D1170030CF87 /* bt_signin_deactive.png */; };
-		69ECC6211D50D1170030CF87 /* bt_signin_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5C91D50D1170030CF87 /* bt_signin_default.png */; };
-		69ECC6221D50D1170030CF87 /* bt_view_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5CA1D50D1170030CF87 /* bt_view_active.png */; };
-		69ECC6231D50D1170030CF87 /* bt_view_deactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5CB1D50D1170030CF87 /* bt_view_deactive.png */; };
-		69ECC6241D50D1170030CF87 /* bt_view_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5CC1D50D1170030CF87 /* bt_view_default.png */; };
 		69ECC6281D50D1170030CF87 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D01D50D1170030CF87 /* check.png */; };
 		69ECC6291D50D1170030CF87 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D11D50D1170030CF87 /* check@2x.png */; };
 		69ECC62B1D50D1170030CF87 /* downloading.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D31D50D1170030CF87 /* downloading.png */; };
 		69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D41D50D1170030CF87 /* ic_back.png */; };
-		69ECC62D1D50D1170030CF87 /* ic_blue2_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D51D50D1170030CF87 /* ic_blue2_pressed.png */; };
 		69ECC62E1D50D1170030CF87 /* ic_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D61D50D1170030CF87 /* ic_cancel.png */; };
 		69ECC62F1D50D1170030CF87 /* ic_cancel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D71D50D1170030CF87 /* ic_cancel@3x.png */; };
 		69ECC6301D50D1170030CF87 /* ic_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5D81D50D1170030CF87 /* ic_circle.png */; };
@@ -207,6 +205,10 @@
 		69ECC6501D50D1170030CF87 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5F91D50D1170030CF87 /* Default@2x.png */; };
 		69ECC6511D50D1170030CF87 /* handouts-announcements.css in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5FB1D50D1170030CF87 /* handouts-announcements.css */; };
 		69ECC6521D50D1170030CF87 /* inline-content.css in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5FC1D50D1170030CF87 /* inline-content.css */; };
+		69EFBB0B1E36259D00FF66C4 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EFBB0A1E36259D00FF66C4 /* RatingViewController.swift */; };
+		69EFBB0D1E36270000FF66C4 /* RatingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EFBB0C1E36270000FF66C4 /* RatingContainerView.swift */; };
+		69F5FACB1E28B0AD00F6ACC6 /* VideoTranscriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F5FACA1E28B0AD00F6ACC6 /* VideoTranscriptTableViewCell.swift */; };
+		69F998571E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F998561E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift */; };
 		77000A371A76EF8C007D306C /* NSString+OEXValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 77000A361A76EF8C007D306C /* NSString+OEXValidation.m */; };
 		77000A391A76EFF2007D306C /* NSString+OEXValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77000A381A76EFF2007D306C /* NSString+OEXValidationTests.m */; };
 		77000A4A1A7757E0007D306C /* NSDate+OEXComparisons.m in Sources */ = {isa = PBXBuildFile; fileRef = 77000A491A7757E0007D306C /* NSDate+OEXComparisons.m */; };
@@ -342,7 +344,7 @@
 		775EB3AE1B1FF1AD009526A8 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775EB3AD1B1FF1AD009526A8 /* ButtonStyle.swift */; };
 		7764597F1A096339008404CC /* NSString+OEXEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 7764597E1A096339008404CC /* NSString+OEXEncoding.m */; };
 		776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 776459811A09650C008404CC /* NSDictionary+OEXEncoding.m */; };
-		7765025B1C73B90C007384E7 /* OEXRearTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7765025A1C73B90C007384E7 /* OEXRearTableViewControllerTests.swift */; };
+		7765025B1C73B90C007384E7 /* EmailTemplateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7765025A1C73B90C007384E7 /* EmailTemplateTests.swift */; };
 		7765025D1C77CAE8007384E7 /* NSDate+TestDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7765025C1C77BC0A007384E7 /* NSDate+TestDates.swift */; };
 		7765025F1C7CEBC5007384E7 /* SingleChildContainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7765025E1C7CEBC5007384E7 /* SingleChildContainingViewController.swift */; };
 		7768745B1CDCCB1E001DFB77 /* RemoteImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7768745A1CDCCB1E001DFB77 /* RemoteImageTests.swift */; };
@@ -666,6 +668,7 @@
 		E00A33C11D3CEB3400963D8F /* SnackbarViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00A33C01D3CEB3400963D8F /* SnackbarViewsTests.swift */; };
 		E01591F21D533F3B00201B15 /* UIViewController+CommonAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01591F11D533F3B00201B15 /* UIViewController+CommonAdditions.swift */; };
 		E01F45671E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01F45661E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift */; };
+		E02165AF1E39D3040058D685 /* UIImage_OEXHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02165AE1E39D3040058D685 /* UIImage_OEXHelpersTests.swift */; };
 		E03402211C7F1FC9003EB9B7 /* DiscussionResponsesDataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E034021F1C7F1F92003EB9B7 /* DiscussionResponsesDataControllerTests.swift */; };
 		E03402241C7F2308003EB9B7 /* DiscussionTestsDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03402221C7F2173003EB9B7 /* DiscussionTestsDataFactory.swift */; };
 		E03E6A151D38C91F00944AAA /* OfflineSupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03E6A141D38C91F00944AAA /* OfflineSupportViewController.swift */; };
@@ -687,12 +690,13 @@
 		E09B9D6E1D06D79F0080BAE0 /* VersionUpgradeInfoControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09B9D6C1D06D6C40080BAE0 /* VersionUpgradeInfoControllerTests.swift */; };
 		E09B9D701D06D8010080BAE0 /* VersionUpgradeDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09B9D6F1D06D8010080BAE0 /* VersionUpgradeDataFactory.swift */; };
 		E0A2461D1D5CA6950066C766 /* LogoutApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2461C1D5CA6950066C766 /* LogoutApi.swift */; };
-		E0A2461F1D5DA12A0066C766 /* AppUpgradeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2461E1D5DA12A0066C766 /* AppUpgradeConfig.swift */; };
+		E0A2461F1D5DA12A0066C766 /* AppStoreConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A2461E1D5DA12A0066C766 /* AppStoreConfig.swift */; };
 		E0A246211D5DB3FD0066C766 /* AppUpgradeConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A246201D5DB3FD0066C766 /* AppUpgradeConfigTests.swift */; };
 		E0AF4E8E1BFB19CC0083753C /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF4E8D1BFB19CC0083753C /* PassthroughView.swift */; };
 		E0C6EF971BFF4B9900B315E3 /* UIButton+TintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C6EF961BFF4B9900B315E3 /* UIButton+TintColor.swift */; };
 		E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
+		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -811,9 +815,6 @@
 		199B9B711935C8AC00081A09 /* OEXCourseVideosTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXCourseVideosTableViewCell.m; sourceTree = "<group>"; };
 		199B9B731935E35D00081A09 /* OEXHelperVideoDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXHelperVideoDownload.h; sourceTree = "<group>"; };
 		199B9B741935E35D00081A09 /* OEXHelperVideoDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXHelperVideoDownload.m; sourceTree = "<group>"; };
-		199B9B771935EA8000081A09 /* OEXFlowErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXFlowErrorViewController.h; sourceTree = "<group>"; };
-		199B9B781935EA8000081A09 /* OEXFlowErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXFlowErrorViewController.m; sourceTree = "<group>"; };
-		199B9B791935EA8000081A09 /* OEXFlowErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OEXFlowErrorViewController.xib; sourceTree = "<group>"; };
 		19A1339119CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXClosedCaptionTableViewCell.h; sourceTree = "<group>"; };
 		19A1339219CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXClosedCaptionTableViewCell.m; sourceTree = "<group>"; };
 		19A1339319CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OEXClosedCaptionTableViewCell.xib; path = CutomePlayer/OEXClosedCaptionTableViewCell.xib; sourceTree = "<group>"; };
@@ -899,10 +900,18 @@
 		696089281D53935500EE66DD /* courseCertificate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = courseCertificate.png; sourceTree = "<group>"; };
 		696089291D53935500EE66DD /* courseCertificate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "courseCertificate@2x.png"; sourceTree = "<group>"; };
 		6960892A1D53935500EE66DD /* courseCertificate@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "courseCertificate@3x.png"; sourceTree = "<group>"; };
+		6975C4BC1E42085300AF014D /* CLVideoPlayerControlsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLVideoPlayerControlsTests.swift; sourceTree = "<group>"; };
 		697652251D9BA7C80031FF8B /* OEXColorsDataFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXColorsDataFactory.swift; sourceTree = "<group>"; };
 		697B5A081D92DB3F002C3ABD /* RegistrationFormAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationFormAPI.swift; path = Source/Core/Code/RegistrationFormAPI.swift; sourceTree = SOURCE_ROOT; };
 		6987A86A1D6C57C100E9D183 /* OEXColorsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXColorsTests.swift; sourceTree = "<group>"; };
 		6987A86C1D6C67DB00E9D183 /* colors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
+		698C6D771E2619E4009156BB /* VideoTranscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTranscriptTests.swift; sourceTree = "<group>"; };
+		698EE6E81E38A53600DF4FEA /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		699FF84F1E559E6B00AD98A5 /* OEXInterface+AppReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXInterface+AppReview.swift"; sourceTree = "<group>"; };
+		699FF8531E5AE74300AD98A5 /* EmailTemplates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTemplates.swift; sourceTree = "<group>"; };
+		699FF8551E5AFACF00AD98A5 /* OEXInterface+AppReviewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXInterface+AppReviewTests.swift"; sourceTree = "<group>"; };
+		69AD2B8B1E4B1CA000029B9B /* RatingViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewControllerTests.swift; sourceTree = "<group>"; };
+		69C12C651E07F5F8004E7261 /* VideoTranscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTranscript.swift; sourceTree = "<group>"; };
 		69DD264F1D8FC55C00CF7E87 /* RegistrationForm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RegistrationForm.json; sourceTree = "<group>"; };
 		69E1CD001D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXRegistrationViewController+Swift.swift"; sourceTree = "<group>"; };
 		69ECC5A31D50D1170030CF87 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
@@ -925,8 +934,6 @@
 		69ECC5B51D50D1170030CF87 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
 		69ECC5B71D50D1170030CF87 /* arrow_next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_next@2x.png"; sourceTree = "<group>"; };
 		69ECC5B81D50D1170030CF87 /* profilePhotoPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profilePhotoPlaceholder.png; sourceTree = "<group>"; };
-		69ECC5B91D50D1170030CF87 /* bg_card_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_card_image.png; sourceTree = "<group>"; };
-		69ECC5BA1D50D1170030CF87 /* bg_card_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_card_text.png; sourceTree = "<group>"; };
 		69ECC5BB1D50D1170030CF87 /* loginScreenImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginScreenImage.png; sourceTree = "<group>"; };
 		69ECC5BC1D50D1170030CF87 /* bt_blue2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_blue2.png; sourceTree = "<group>"; };
 		69ECC5BD1D50D1170030CF87 /* bt_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_facebook.png; sourceTree = "<group>"; };
@@ -936,20 +943,14 @@
 		69ECC5C11D50D1170030CF87 /* bt_grey_deactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_grey_deactive.png; sourceTree = "<group>"; };
 		69ECC5C21D50D1170030CF87 /* bt_grey_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_grey_default.png; sourceTree = "<group>"; };
 		69ECC5C31D50D1170030CF87 /* bt_logout_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_logout_active.png; sourceTree = "<group>"; };
-		69ECC5C41D50D1170030CF87 /* bt_logout_deactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_logout_deactive.png; sourceTree = "<group>"; };
 		69ECC5C51D50D1170030CF87 /* bt_logout_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_logout_default.png; sourceTree = "<group>"; };
 		69ECC5C61D50D1170030CF87 /* bt_scrollbar_tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_scrollbar_tap.png; sourceTree = "<group>"; };
 		69ECC5C71D50D1170030CF87 /* bt_signin_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_signin_active.png; sourceTree = "<group>"; };
 		69ECC5C81D50D1170030CF87 /* bt_signin_deactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_signin_deactive.png; sourceTree = "<group>"; };
-		69ECC5C91D50D1170030CF87 /* bt_signin_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_signin_default.png; sourceTree = "<group>"; };
-		69ECC5CA1D50D1170030CF87 /* bt_view_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_view_active.png; sourceTree = "<group>"; };
-		69ECC5CB1D50D1170030CF87 /* bt_view_deactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_view_deactive.png; sourceTree = "<group>"; };
-		69ECC5CC1D50D1170030CF87 /* bt_view_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_view_default.png; sourceTree = "<group>"; };
 		69ECC5D01D50D1170030CF87 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		69ECC5D11D50D1170030CF87 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		69ECC5D31D50D1170030CF87 /* downloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloading.png; sourceTree = "<group>"; };
 		69ECC5D41D50D1170030CF87 /* ic_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_back.png; sourceTree = "<group>"; };
-		69ECC5D51D50D1170030CF87 /* ic_blue2_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_blue2_pressed.png; sourceTree = "<group>"; };
 		69ECC5D61D50D1170030CF87 /* ic_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_cancel.png; sourceTree = "<group>"; };
 		69ECC5D71D50D1170030CF87 /* ic_cancel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_cancel@3x.png"; sourceTree = "<group>"; };
 		69ECC5D81D50D1170030CF87 /* ic_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_circle.png; sourceTree = "<group>"; };
@@ -985,6 +986,10 @@
 		69ECC5F91D50D1170030CF87 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		69ECC5FB1D50D1170030CF87 /* handouts-announcements.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "handouts-announcements.css"; sourceTree = "<group>"; };
 		69ECC5FC1D50D1170030CF87 /* inline-content.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "inline-content.css"; sourceTree = "<group>"; };
+		69EFBB0A1E36259D00FF66C4 /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
+		69EFBB0C1E36270000FF66C4 /* RatingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingContainerView.swift; sourceTree = "<group>"; };
+		69F5FACA1E28B0AD00F6ACC6 /* VideoTranscriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTranscriptTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		69F998561E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXAnalytics+AppReview.swift"; sourceTree = "<group>"; };
 		6C5AB6D484316B1D809C5BC7 /* Pods-edX.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edX.profile.xcconfig"; path = "Pods/Target Support Files/Pods-edX/Pods-edX.profile.xcconfig"; sourceTree = "<group>"; };
 		77000A351A76EF8C007D306C /* NSString+OEXValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+OEXValidation.h"; sourceTree = "<group>"; };
 		77000A361A76EF8C007D306C /* NSString+OEXValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OEXValidation.m"; sourceTree = "<group>"; };
@@ -1154,7 +1159,7 @@
 		7764597E1A096339008404CC /* NSString+OEXEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OEXEncoding.m"; sourceTree = "<group>"; };
 		776459801A09650C008404CC /* NSDictionary+OEXEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+OEXEncoding.h"; sourceTree = "<group>"; };
 		776459811A09650C008404CC /* NSDictionary+OEXEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+OEXEncoding.m"; sourceTree = "<group>"; };
-		7765025A1C73B90C007384E7 /* OEXRearTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXRearTableViewControllerTests.swift; sourceTree = "<group>"; };
+		7765025A1C73B90C007384E7 /* EmailTemplateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTemplateTests.swift; sourceTree = "<group>"; };
 		7765025C1C77BC0A007384E7 /* NSDate+TestDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+TestDates.swift"; sourceTree = "<group>"; };
 		7765025E1C7CEBC5007384E7 /* SingleChildContainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChildContainingViewController.swift; sourceTree = "<group>"; };
 		7768745A1CDCCB1E001DFB77 /* RemoteImageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteImageTests.swift; path = Test/RemoteImageTests.swift; sourceTree = SOURCE_ROOT; };
@@ -1570,6 +1575,7 @@
 		E00A33C01D3CEB3400963D8F /* SnackbarViewsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnackbarViewsTests.swift; sourceTree = "<group>"; };
 		E01591F11D533F3B00201B15 /* UIViewController+CommonAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CommonAdditions.swift"; sourceTree = "<group>"; };
 		E01F45661E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsTracker.swift; sourceTree = "<group>"; };
+		E02165AE1E39D3040058D685 /* UIImage_OEXHelpersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_OEXHelpersTests.swift; sourceTree = "<group>"; };
 		E02DE7CA1C85E15A0086943F /* DiscussionPosts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DiscussionPosts.json; sourceTree = "<group>"; };
 		E034021F1C7F1F92003EB9B7 /* DiscussionResponsesDataControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionResponsesDataControllerTests.swift; sourceTree = "<group>"; };
 		E03402221C7F2173003EB9B7 /* DiscussionTestsDataFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionTestsDataFactory.swift; sourceTree = "<group>"; };
@@ -1593,13 +1599,15 @@
 		E09B9D6C1D06D6C40080BAE0 /* VersionUpgradeInfoControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionUpgradeInfoControllerTests.swift; sourceTree = "<group>"; };
 		E09B9D6F1D06D8010080BAE0 /* VersionUpgradeDataFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionUpgradeDataFactory.swift; sourceTree = "<group>"; };
 		E0A2461C1D5CA6950066C766 /* LogoutApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoutApi.swift; sourceTree = SOURCE_ROOT; };
-		E0A2461E1D5DA12A0066C766 /* AppUpgradeConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpgradeConfig.swift; sourceTree = "<group>"; };
+		E0A2461E1D5DA12A0066C766 /* AppStoreConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreConfig.swift; sourceTree = "<group>"; };
 		E0A246201D5DB3FD0066C766 /* AppUpgradeConfigTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpgradeConfigTests.swift; sourceTree = "<group>"; };
 		E0AF4E8D1BFB19CC0083753C /* PassthroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		E0C6EF961BFF4B9900B315E3 /* UIButton+TintColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TintColor.swift"; sourceTree = "<group>"; };
 		E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OEXCourseInfoViewController+Swift.swift"; sourceTree = "<group>"; };
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
+		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -1826,8 +1834,6 @@
 			isa = PBXGroup;
 			children = (
 				77FDF4181B02910D00E8C639 /* IconMessageView.swift */,
-				199B9B771935EA8000081A09 /* OEXFlowErrorViewController.h */,
-				199B9B781935EA8000081A09 /* OEXFlowErrorViewController.m */,
 			);
 			name = ErrorView;
 			sourceTree = "<group>";
@@ -2016,8 +2022,6 @@
 				6960892A1D53935500EE66DD /* courseCertificate@3x.png */,
 				69ECC5B71D50D1170030CF87 /* arrow_next@2x.png */,
 				69ECC5B81D50D1170030CF87 /* profilePhotoPlaceholder.png */,
-				69ECC5B91D50D1170030CF87 /* bg_card_image.png */,
-				69ECC5BA1D50D1170030CF87 /* bg_card_text.png */,
 				69ECC5BB1D50D1170030CF87 /* loginScreenImage.png */,
 				69ECC5BC1D50D1170030CF87 /* bt_blue2.png */,
 				69ECC5BD1D50D1170030CF87 /* bt_facebook.png */,
@@ -2027,20 +2031,14 @@
 				69ECC5C11D50D1170030CF87 /* bt_grey_deactive.png */,
 				69ECC5C21D50D1170030CF87 /* bt_grey_default.png */,
 				69ECC5C31D50D1170030CF87 /* bt_logout_active.png */,
-				69ECC5C41D50D1170030CF87 /* bt_logout_deactive.png */,
 				69ECC5C51D50D1170030CF87 /* bt_logout_default.png */,
 				69ECC5C61D50D1170030CF87 /* bt_scrollbar_tap.png */,
 				69ECC5C71D50D1170030CF87 /* bt_signin_active.png */,
 				69ECC5C81D50D1170030CF87 /* bt_signin_deactive.png */,
-				69ECC5C91D50D1170030CF87 /* bt_signin_default.png */,
-				69ECC5CA1D50D1170030CF87 /* bt_view_active.png */,
-				69ECC5CB1D50D1170030CF87 /* bt_view_deactive.png */,
-				69ECC5CC1D50D1170030CF87 /* bt_view_default.png */,
 				69ECC5D01D50D1170030CF87 /* check.png */,
 				69ECC5D11D50D1170030CF87 /* check@2x.png */,
 				69ECC5D31D50D1170030CF87 /* downloading.png */,
 				69ECC5D41D50D1170030CF87 /* ic_back.png */,
-				69ECC5D51D50D1170030CF87 /* ic_blue2_pressed.png */,
 				69ECC5D61D50D1170030CF87 /* ic_cancel.png */,
 				69ECC5D71D50D1170030CF87 /* ic_cancel@3x.png */,
 				69ECC5D81D50D1170030CF87 /* ic_circle.png */,
@@ -2094,6 +2092,18 @@
 				69ECC5FC1D50D1170030CF87 /* inline-content.css */,
 			);
 			path = Stylesheets;
+			sourceTree = "<group>";
+		};
+		69EFBB011E361BE600FF66C4 /* App Review */ = {
+			isa = PBXGroup;
+			children = (
+				69EFBB0C1E36270000FF66C4 /* RatingContainerView.swift */,
+				69EFBB0A1E36259D00FF66C4 /* RatingViewController.swift */,
+				698EE6E81E38A53600DF4FEA /* RatingView.swift */,
+				699FF84F1E559E6B00AD98A5 /* OEXInterface+AppReview.swift */,
+				69F998561E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift */,
+			);
+			name = "App Review";
 			sourceTree = "<group>";
 		};
 		770848BD1B20BB5B002FEEEE /* Deprecated */ = {
@@ -2234,6 +2244,8 @@
 				77BC3E681AE0091400E51529 /* OEXPushNotificationProcessor.m */,
 				775434871AD8121200635A40 /* OEXParsePushProvider.h */,
 				775434881AD8121200635A40 /* OEXParsePushProvider.m */,
+				E7C40C2A1E83AEEA00300C68 /* KPNService.h */,
+				E7C40C2B1E83AEEA00300C68 /* KPNService.m */,
 			);
 			name = "Push Notifications";
 			sourceTree = "<group>";
@@ -2433,7 +2445,6 @@
 			isa = PBXGroup;
 			children = (
 				19A1339319CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib */,
-				199B9B791935EA8000081A09 /* OEXFlowErrorViewController.xib */,
 				77DC295F1ABCA0F200FAD22C /* OEXLoginSplashViewController.xib */,
 				19BB622F1A9C656B007DBF47 /* OEXMySettingsViewController.xib */,
 				198826E71952FE39005D4D8A /* OEXOpenInBrowserViewController.xib */,
@@ -2831,7 +2842,7 @@
 				B4B285E61A9A662600DD603A /* OEXZeroRatingConfig.h */,
 				B4B285E71A9A662600DD603A /* OEXZeroRatingConfig.m */,
 				1A8172521C3C21DE007262AA /* TwitterConfig.swift */,
-				E0A2461E1D5DA12A0066C766 /* AppUpgradeConfig.swift */,
+				E0A2461E1D5DA12A0066C766 /* AppStoreConfig.swift */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -2982,6 +2993,7 @@
 				775E5A801BE1C88A0046B26B /* LiveObjectCache.swift */,
 				697652251D9BA7C80031FF8B /* OEXColorsDataFactory.swift */,
 				BD7C6C411DCA33540004D135 /* OEXFontsDataFactory.swift */,
+				699FF8531E5AE74300AD98A5 /* EmailTemplates.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -3098,6 +3110,7 @@
 			isa = PBXGroup;
 			children = (
 				1972E3B619BF474900085F08 /* Analytics */,
+				69EFBB011E361BE600FF66C4 /* App Review */,
 				772619B41ADC5CE8005BD7E4 /* Application */,
 				B4B6D5E21A94901A000F44E8 /* Authentication */,
 				77864DDA1B10057600182FC2 /* Base Structures */,
@@ -3156,7 +3169,7 @@
 				775391401C97593B00FA959C /* NetworkManager+InterceptionTests.swift */,
 				77ADB7921C92228D006A66A1 /* XCTestCase+Stream.swift */,
 				7745B4001C88DD0900E76ACD /* ServerChangedCheckerTests.swift */,
-				7765025A1C73B90C007384E7 /* OEXRearTableViewControllerTests.swift */,
+				7765025A1C73B90C007384E7 /* EmailTemplateTests.swift */,
 				7791C4EC1C651E9D0005745B /* OEXRegistrationViewControllerTests.swift */,
 				779998221C3C1EE00058E5FE /* EnrolledCoursesViewControllerTests.swift */,
 				7742F8D91C3C9785009E555A /* EnrollmentConfigTests.swift */,
@@ -3247,6 +3260,11 @@
 				1A6D90921D0A05D500D01BEA /* StartupViewControllerTests.swift */,
 				E0A246201D5DB3FD0066C766 /* AppUpgradeConfigTests.swift */,
 				694D34A11D76B75F0047F3F4 /* UIAlertController+OEXBlockActionsTests.swift */,
+				E02165AE1E39D3040058D685 /* UIImage_OEXHelpersTests.swift */,
+				698C6D771E2619E4009156BB /* VideoTranscriptTests.swift */,
+				6975C4BC1E42085300AF014D /* CLVideoPlayerControlsTests.swift */,
+				69AD2B8B1E4B1CA000029B9B /* RatingViewControllerTests.swift */,
+				699FF8551E5AFACF00AD98A5 /* OEXInterface+AppReviewTests.swift */,
 				77FDF4171B0269FA00E8C639 /* Test Data */,
 				77FFA2C41AC30D6300B4D69B /* Data Factories */,
 				7772BE901AF90C8A0081CA7A /* Helpers */,
@@ -3286,6 +3304,8 @@
 			children = (
 				BECB7B4F1924C9FB009C77F1 /* OEXVideoPlayerInterface.h */,
 				BECB7B501924C9FB009C77F1 /* OEXVideoPlayerInterface.m */,
+				69C12C651E07F5F8004E7261 /* VideoTranscript.swift */,
+				69F5FACA1E28B0AD00F6ACC6 /* VideoTranscriptTableViewCell.swift */,
 			);
 			name = "Video Player";
 			sourceTree = "<group>";
@@ -3644,7 +3664,6 @@
 				19A1339719CAE108003ADD24 /* EULA.htm in Resources */,
 				69ECC6371D50D1170030CF87 /* ic_partiallywatched@3x.png in Resources */,
 				69ECC5FF1D50D1170030CF87 /* OpenSans-BoldItalic.ttf in Resources */,
-				69ECC6121D50D1170030CF87 /* bg_card_text.png in Resources */,
 				69ECC6461D50D1170030CF87 /* separator1.png in Resources */,
 				69ECC6491D50D1170030CF87 /* share.pdf in Resources */,
 				69ECC64D1D50D1170030CF87 /* Default-375w-667h@2x.png in Resources */,
@@ -3666,16 +3685,13 @@
 				69ECC61E1D50D1170030CF87 /* bt_scrollbar_tap.png in Resources */,
 				69ECC62B1D50D1170030CF87 /* downloading.png in Resources */,
 				69ECC60D1D50D1170030CF87 /* Icon-60@2x.png in Resources */,
-				69ECC6221D50D1170030CF87 /* bt_view_active.png in Resources */,
 				69ECC60A1D50D1170030CF87 /* Icon-29@3x.png in Resources */,
 				69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */,
 				BDA917BB1E190B7400211931 /* logo.png in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
-				69ECC6241D50D1170030CF87 /* bt_view_default.png in Resources */,
 				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
 				9ED269D21AF114B900328A34 /* OEXLoginViewController.storyboard in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
-				69ECC62D1D50D1170030CF87 /* ic_blue2_pressed.png in Resources */,
 				69ECC60E1D50D1170030CF87 /* Icon-60@3x.png in Resources */,
 				69ECC5FD1D50D1170030CF87 /* FontAwesome.otf in Resources */,
 				77DC29601ABCA0F200FAD22C /* OEXLoginSplashViewController.xib in Resources */,
@@ -3693,7 +3709,6 @@
 				5DD0FFD21B1D23DA00837121 /* DiscussionNewPostViewController.xib in Resources */,
 				69ECC6521D50D1170030CF87 /* inline-content.css in Resources */,
 				69ECC64C1D50D1170030CF87 /* Default-568h@2x.png in Resources */,
-				69ECC61C1D50D1170030CF87 /* bt_logout_deactive.png in Resources */,
 				BDA917BC1E190B7400211931 /* logoColor.png in Resources */,
 				9ED269CC1AF0E67200328A34 /* OEXMyVideosViewController.storyboard in Resources */,
 				69ECC6471D50D1170030CF87 /* separator3.png in Resources */,
@@ -3703,7 +3718,6 @@
 				69ECC6481D50D1170030CF87 /* separator5.png in Resources */,
 				69ECC6141D50D1170030CF87 /* bt_blue2.png in Resources */,
 				69ECC6321D50D1170030CF87 /* ic_download_arrow.png in Resources */,
-				69ECC6111D50D1170030CF87 /* bg_card_image.png in Resources */,
 				69ECC6091D50D1170030CF87 /* Icon-29@2x.png in Resources */,
 				69ECC6391D50D1170030CF87 /* ic_unwatched@3x.png in Resources */,
 				69ECC61B1D50D1170030CF87 /* bt_logout_active.png in Resources */,
@@ -3719,7 +3733,6 @@
 				69ECC64F1D50D1170030CF87 /* Default-Landscape@3x.png in Resources */,
 				69ECC6331D50D1170030CF87 /* ic_lms_blue.png in Resources */,
 				69ECC6511D50D1170030CF87 /* handouts-announcements.css in Resources */,
-				69ECC6231D50D1170030CF87 /* bt_view_deactive.png in Resources */,
 				69ECC6031D50D1170030CF87 /* OpenSans-Light.ttf in Resources */,
 				5D836DC91B2FA12E00411CAB /* DiscussionNewCommentViewController.xib in Resources */,
 				69ECC6101D50D1170030CF87 /* profilePhotoPlaceholder.png in Resources */,
@@ -3734,11 +3747,9 @@
 				69ECC60C1D50D1170030CF87 /* Icon-40@3x.png in Resources */,
 				6926CDAB1D59BE3600A16E22 /* ic_next_press.png in Resources */,
 				BEEEBF80196AAACF00EF2C35 /* Localizable.strings in Resources */,
-				199B9B7B1935EA8000081A09 /* OEXFlowErrorViewController.xib in Resources */,
 				69ECC63A1D50D1170030CF87 /* ic_watched@2x.png in Resources */,
 				69ECC6061D50D1170030CF87 /* OpenSans-Semibold.ttf in Resources */,
 				69ECC63B1D50D1170030CF87 /* ic_watched@3x.png in Resources */,
-				69ECC6211D50D1170030CF87 /* bt_signin_default.png in Resources */,
 				19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */,
 				805329101B0E80E50093B177 /* DiscussionResponses.storyboard in Resources */,
 				6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */,
@@ -4047,7 +4058,7 @@
 				7772BEA31AFA68330081CA7A /* ConstraintAttributes.swift in Sources */,
 				773A04801AF2E6DA0076532C /* CourseOutlineTableSource.swift in Sources */,
 				191A002B19405E1B004F7902 /* OEXCourse.m in Sources */,
-				E0A2461F1D5DA12A0066C766 /* AppUpgradeConfig.swift in Sources */,
+				E0A2461F1D5DA12A0066C766 /* AppStoreConfig.swift in Sources */,
 				7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */,
 				B4B6D6041A949EFC000F44E8 /* OEXRegistrationRestriction.m in Sources */,
 				77BFD86A1BB9E15B001D7BE5 /* Strings.swift in Sources */,
@@ -4115,6 +4126,7 @@
 				77D76BFD1AA5076D00C51C2C /* OEXLocalizedString.m in Sources */,
 				778F17781C0D123F0099BF93 /* CourseCatalogViewController.swift in Sources */,
 				1AB539E41BFA24DC0065501F /* CertificateViewController.swift in Sources */,
+				E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */,
 				69E1CD011D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift in Sources */,
 				19BB622A1A9B28F1007DBF47 /* OEXRegistrationFieldWrapperView.m in Sources */,
 				9E1081081B8B7EEC00888746 /* PaginatedFeed.swift in Sources */,
@@ -4133,6 +4145,7 @@
 				B4D5C7ED1A6FBAA300427D1D /* OEXSession.m in Sources */,
 				B4B6D6181A949F0F000F44E8 /* OEXRegistrationFieldPasswordView.m in Sources */,
 				B4B6D6481A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.m in Sources */,
+				69EFBB0D1E36270000FF66C4 /* RatingContainerView.swift in Sources */,
 				B4B6D62D1A949F1B000F44E8 /* OEXRegistrationFieldCheckBoxController.m in Sources */,
 				77691FA31B3B4596003922F2 /* UIColor+OEXHex.m in Sources */,
 				E01F45671E03D04100B9D7DC /* FirebaseAnalyticsTracker.swift in Sources */,
@@ -4158,6 +4171,8 @@
 				7784C68B1B03BA1E00529C7C /* LoadStateViewController.swift in Sources */,
 				778F176C1C0CF57F0099BF93 /* RouterEnvironment.swift in Sources */,
 				778C72F11B17C30000FC3F68 /* Dictionary+Functional.swift in Sources */,
+				69F5FACB1E28B0AD00F6ACC6 /* VideoTranscriptTableViewCell.swift in Sources */,
+				699FF8501E559E6B00AD98A5 /* OEXInterface+AppReview.swift in Sources */,
 				773A04781AF2D5DE0076532C /* CourseOutlineViewController.swift in Sources */,
 				B4D5C7EB1A6FBAA300427D1D /* OEXAccessToken.m in Sources */,
 				7C2DD5531D4A8669006148E0 /* UserPreferenceManager.swift in Sources */,
@@ -4214,6 +4229,7 @@
 				B4B6D62B1A949F1B000F44E8 /* OEXRegistrationFieldTextController.m in Sources */,
 				7772BEAC1AFA68330081CA7A /* View+SnapKit.swift in Sources */,
 				774B393B1B5EEF8A00595D33 /* UIAlertController+Selection.swift in Sources */,
+				69EFBB0B1E36259D00FF66C4 /* RatingViewController.swift in Sources */,
 				1AC147391BCEC09F00E0A230 /* UIImage+OEXHelpers.swift in Sources */,
 				775DF4181AFAAC8C00F96B2F /* DataManager.swift in Sources */,
 				77C182AC1CD2E60E00AE1474 /* StackPaginationManipulator.swift in Sources */,
@@ -4225,6 +4241,7 @@
 				0B1212221B4F089A002EE96C /* OEXCoursewareAccess.m in Sources */,
 				77DCD2391C2B13AA00CAEBB5 /* EnrolledCoursesFooterView.swift in Sources */,
 				77ADF4A91AC1B57800AC8955 /* UIImage+OEXColors.m in Sources */,
+				69F998571E6FEB2400CDFA9C /* OEXAnalytics+AppReview.swift in Sources */,
 				77D7FD261B04ED45002ACA8C /* Icon.swift in Sources */,
 				770A27931A69933D00DFC6FF /* NSArray+OEXSafeAccess.m in Sources */,
 				77503E8C1B278B9A00C47229 /* RegistrationFieldSelectView.swift in Sources */,
@@ -4232,13 +4249,13 @@
 				BE54F19C195F080E005D069F /* Reachability.m in Sources */,
 				775434861AD73D1900635A40 /* OEXParseConfig.m in Sources */,
 				1AE0A6C81BF4F68A00E14917 /* CourseCertificateCell.swift in Sources */,
-				199B9B7A1935EA8000081A09 /* OEXFlowErrorViewController.m in Sources */,
 				770848BC1B209EF4002FEEEE /* BorderStyle.swift in Sources */,
 				19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */,
 				B4B6D6051A949EFC000F44E8 /* OEXRegistrationAgreement.m in Sources */,
 				7712732E1BA8F5C7008BA397 /* SegmentAnalyticsTracker.swift in Sources */,
 				776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */,
 				9C9B7F731A8CC80E00A857B2 /* OEXURLSessionManager.m in Sources */,
+				699FF8541E5AE74300AD98A5 /* EmailTemplates.swift in Sources */,
 				199627A71945D95D0022C489 /* OEXFrontTableViewCell.m in Sources */,
 				9EB9C5251BAFEE9F00300E55 /* OEXDateFormatting+Swift.swift in Sources */,
 				1913DD3D194B267000573977 /* OEXDownloadViewController.m in Sources */,
@@ -4327,6 +4344,7 @@
 				777EFEFD1A7AFF0E00F8BF06 /* OEXRouter.m in Sources */,
 				9EC6E0FE1BDE106500729704 /* IrregularBorderView.swift in Sources */,
 				8F562F881A1F2D2C00320DB3 /* OEXGoogleSocial.m in Sources */,
+				69C12C661E07F5F8004E7261 /* VideoTranscript.swift in Sources */,
 				E03E6A151D38C91F00944AAA /* OfflineSupportViewController.swift in Sources */,
 				B4B6D6291A949F1B000F44E8 /* OEXRegistrationFieldEmailController.m in Sources */,
 				E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */,
@@ -4343,6 +4361,7 @@
 				B4B6C80D1A9C7AEA004F0FAF /* OEXPlaceholderTextView.m in Sources */,
 				77E648781C91330D00B6740D /* Result+Conveniences.swift in Sources */,
 				9EF21A9E1B4697CA000048F8 /* CourseLastAccessedController.swift in Sources */,
+				698EE6E91E38A53600DF4FEA /* RatingView.swift in Sources */,
 				694D34A01D75BDF80047F3F4 /* UIAlertController+OEXBlockActions.swift in Sources */,
 				BECB7B1B1924C0C3009C77F1 /* main.m in Sources */,
 				77691F981B38A09B003922F2 /* NSAttributedString+Combination.swift in Sources */,
@@ -4374,6 +4393,7 @@
 				694D34A21D76B75F0047F3F4 /* UIAlertController+OEXBlockActionsTests.swift in Sources */,
 				1A373E8F1C457DBB00E3AAAA /* MockRouter.swift in Sources */,
 				77236EEF1C21C3D5006AC1A4 /* PaginatorTests.swift in Sources */,
+				699FF8561E5AFACF00AD98A5 /* OEXInterface+AppReviewTests.swift in Sources */,
 				77AFD11D1C1B7721001985FD /* NSObject+SafeKVOTests.swift in Sources */,
 				778B40DB1C2F64680009F33E /* EnrollmentManagerTests.swift in Sources */,
 				B4B285EA1A9B182900DD603A /* OEXConfigTests.m in Sources */,
@@ -4399,7 +4419,7 @@
 				773B1D491B1F818300B861DF /* XCTestCase+Async.swift in Sources */,
 				E008D9061CCE150F007F3643 /* DiscussionResponsesViewControllerTests.swift in Sources */,
 				775434971AD8635200635A40 /* OEXUserDetails+OEXTestDataFactory.m in Sources */,
-				7765025B1C73B90C007384E7 /* OEXRearTableViewControllerTests.swift in Sources */,
+				7765025B1C73B90C007384E7 /* EmailTemplateTests.swift in Sources */,
 				771FA0161B4588D80067F22D /* CourseDataManagerTests.swift in Sources */,
 				E03E6A221D38F77C00944AAA /* OfflineSupportViewControllerTests.swift in Sources */,
 				77BC6F431CB82E1D00F0A8C1 /* CourseOutlineTestDataFactory.swift in Sources */,
@@ -4409,6 +4429,7 @@
 				E04848361D000DD600BE00E1 /* PostsViewControllerTests.swift in Sources */,
 				775391461C9763D000FA959C /* Result+Assertions.swift in Sources */,
 				773CC0251BE42EAC00DDC127 /* UserProfileEditViewControllerTests.swift in Sources */,
+				6975C4BD1E42085300AF014D /* CLVideoPlayerControlsTests.swift in Sources */,
 				770A27AA1A70261F00DFC6FF /* NSObject+OEXReplaceNullTests.m in Sources */,
 				770A279F1A6F164800DFC6FF /* OEXVideoPathEntryTests.m in Sources */,
 				7CB46D271D58E567005110AB /* UserPreferenceManagerTests.swift in Sources */,
@@ -4458,6 +4479,7 @@
 				E09B9D6E1D06D79F0080BAE0 /* VersionUpgradeInfoControllerTests.swift in Sources */,
 				E03E6A201D38F2AF00944AAA /* UIView+UIViewControllerTests.swift in Sources */,
 				7754348C1AD83E4600635A40 /* OEXPushNotificationManagerTests.m in Sources */,
+				698C6D781E2619E4009156BB /* VideoTranscriptTests.swift in Sources */,
 				E03402211C7F1FC9003EB9B7 /* DiscussionResponsesDataControllerTests.swift in Sources */,
 				778D53371B3D97CC00441A98 /* ListCursorTests.swift in Sources */,
 				77567B4C1AC5E8EC00877A7B /* OEXAnalyticsTests.m in Sources */,
@@ -4491,6 +4513,8 @@
 				9E74AFE71B4A821500B2D843 /* CourseLastAccessedControllerTests.swift in Sources */,
 				77691FB21B3C824E003922F2 /* CourseOutlineQuerierTests.swift in Sources */,
 				77691FB01B3C820B003922F2 /* CourseOutlineViewControllerTests.swift in Sources */,
+				E02165AF1E39D3040058D685 /* UIImage_OEXHelpersTests.swift in Sources */,
+				69AD2B8D1E4B1CE500029B9B /* RatingViewControllerTests.swift in Sources */,
 				770A27A71A700E1600DFC6FF /* OEXVideoSummary+OEXTestDataFactory.m in Sources */,
 				77F76A741B0CE01E00ED3E39 /* MockCourseDataManager.swift in Sources */,
 			);

@@ -62,7 +62,7 @@ static NSString* const OEXUserDetailsYearOfBirthKey = @"year_of_birth";
         _url = [userDetailsDictionary objectForKey:OEXUserDetailsUrlKey];
         if ([[userDetailsDictionary objectForKey:OEXUserDetailsYearOfBirthKey] isKindOfClass:[NSNull class]]) {
             _year_of_birth = 0;
-        }else {
+        } else {
             _year_of_birth = [[userDetailsDictionary objectForKey:OEXUserDetailsYearOfBirthKey] integerValue];
         }
     }

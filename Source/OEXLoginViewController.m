@@ -26,7 +26,6 @@
 #import "OEXExternalAuthOptionsView.h"
 #import "OEXFacebookAuthProvider.h"
 #import "OEXFacebookConfig.h"
-#import "OEXFlowErrorViewController.h"
 #import "OEXGoogleAuthProvider.h"
 #import "OEXGoogleConfig.h"
 #import "OEXGoogleSocial.h"
@@ -460,6 +459,9 @@
         if(httpResp.statusCode == 200) {
             [self loginSuccessful];
         }
+        else if(httpResp.statusCode == OEXHTTPStatusCode426UpgradeRequired) {
+            [self showUpdateRequiredMessage];
+        }
         else if(httpResp.statusCode >= 400 && httpResp.statusCode <= 500) {
             NSString* errorStr = [Strings invalidUsernamePassword];
                 [self loginFailedWithErrorMessage:errorStr title:nil];
@@ -562,6 +564,23 @@
     [self tappedToDismiss];
 }
 
+- (void) showUpdateRequiredMessage {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self.activityIndicator stopAnimating];
+    [self.btn_Login applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
+    [self.view setUserInteractionEnabled:YES];
+    [self tappedToDismiss];
+    
+    UIAlertController *alertController = [[UIAlertController alloc] showAlertWithTitle:nil message:[VersionUpgrade outDatedLoginMessage] cancelButtonTitle:[Strings cancel] onViewController:self];
+    
+    [alertController addButtonWithTitle:[VersionUpgrade update] actionBlock:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = _environment.config.appUpgradeConfig.iOSAppStoreURL;
+        if (url && [[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }];
+}
+
 - (void)loginSuccessful {
     //set global auth
 
@@ -623,7 +642,6 @@
     {
         dispatch_async(dispatch_get_main_queue(), ^{
                 [self.view setUserInteractionEnabled:YES];
-                [[OEXFlowErrorViewController sharedInstance] animationUp];
 
                 if(!error) {
                     NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;

@@ -28,7 +28,6 @@ extern NSString* const OEXVideoStateChangedNotification;
 extern NSString* const OEXDownloadProgressChangedNotification;
 extern NSString* const OEXDownloadEndedNotification;
 
-
 // This class requires significant refactoring
 // Think very hard before adding anything to it
 @interface OEXInterface : NSObject <OEXNetworkInterfaceDelegate, UIAlertViewDelegate>
@@ -163,6 +162,10 @@ extern NSString* const OEXDownloadEndedNotification;
 #pragma mark - Course Enrollments
 /** Finds the user's enrollment for a course */
 - (nullable UserCourseEnrollment*)enrollmentForCourseWithID:(nullable NSString*)courseID;
+
+#pragma mark - App Version
+/* Return saved version of app */
+- (nullable NSString*) getSavedAppVersion;
 
 @end
 
