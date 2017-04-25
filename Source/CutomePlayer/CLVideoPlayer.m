@@ -151,6 +151,7 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
 - (void)setFullscreen:(BOOL)fullscreen animated:(BOOL)animated withOrientation:(UIInterfaceOrientation)deviceOrientation forceRotate:(BOOL)rotate {
     _movieFullscreen = fullscreen;
     if(fullscreen) {
+        [self.controls setStyle:CLVideoPlayerControlsStyleFullscreen];
         [[NSNotificationCenter defaultCenter] postNotificationName:MPMoviePlayerWillEnterFullscreenNotification object:nil];
 
         UIWindow* keyWindow = [[UIApplication sharedApplication] keyWindow];
@@ -355,6 +356,18 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
 - (void) videoPlayerTapped:(id) sender {
     if([self.delegate respondsToSelector:@selector(videoPlayerTapped:)]) {
         [self.delegate videoPlayerTapped:sender];
+    }
+}
+
+- (void)transcriptLoaded:(NSArray *)transcript {
+    if([self.delegate respondsToSelector:@selector(transcriptLoaded:)]) {
+        [self.delegate transcriptLoaded:transcript];
+    }
+}
+
+- (void)didFinishVideoPlaying {
+    if([self.delegate respondsToSelector:@selector(didFinishVideoPlaying)]) {
+        [self.delegate didFinishVideoPlaying];
     }
 }
 

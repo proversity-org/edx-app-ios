@@ -39,13 +39,14 @@ extension CourseBlock {
     
     var displayType : CourseBlockDisplayType {
         switch self.type {
+        case .Unknown("recap"): return .HTML(.Base)
         case .Unknown(_), .HTML: return multiDevice ? .HTML(.Base) : .Unknown
         case .Problem: return multiDevice ? .HTML(.Problem) : .Unknown
         case .Course: return .Outline
         case .Chapter: return .Outline
         case .Section: return .Outline
         case .Unit: return .Unit
-        case let .Video(summary): return (summary.onlyOnWeb || summary.isYoutubeVideo) ? .Unknown : .Video
+        case let .Video(summary): return (summary.isSupportedVideo) ? .Video : .Unknown
         case let .Discussion(discussionModel): return .Discussion(discussionModel)
         }
     }
@@ -121,18 +122,19 @@ extension OEXRouter {
         }
     }
     
-    func showDiscussionResponsesFromViewController(controller: UIViewController, courseID : String, threadID : String) {
+    func showDiscussionResponsesFromViewController(controller: UIViewController, courseID : String, threadID : String, isDiscussionBlackedOut: Bool) {
         let storyboard = UIStoryboard(name: "DiscussionResponses", bundle: nil)
         let responsesViewController = storyboard.instantiateInitialViewController() as! DiscussionResponsesViewController
         responsesViewController.environment = environment
         responsesViewController.courseID = courseID
         responsesViewController.threadID = threadID
+        responsesViewController.isDiscussionBlackedOut = isDiscussionBlackedOut
         controller.navigationController?.pushViewController(responsesViewController, animated: true)
     }
     
-    func showDiscussionCommentsFromViewController(controller: UIViewController, courseID : String, response : DiscussionComment, closed : Bool, thread: DiscussionThread) {
-        let commentsVC = DiscussionCommentsViewController(environment: environment, courseID : courseID, responseItem: response, closed: closed, thread: thread)
-       
+    func showDiscussionCommentsFromViewController(controller: UIViewController, courseID : String, response : DiscussionComment, closed : Bool, thread: DiscussionThread, isDiscussionBlackedOut: Bool) {
+        let commentsVC = DiscussionCommentsViewController(environment: environment, courseID : courseID, responseItem: response, closed: closed, thread: thread, isDiscussionBlackedOut: isDiscussionBlackedOut)
+        
         if let delegate = controller as? DiscussionCommentsViewControllerDelegate {
             commentsVC.delegate = delegate
         }
@@ -257,6 +259,22 @@ extension OEXRouter {
     func showCourseCatalogDetail(courseID: String, fromController: UIViewController) {
         let detailController = CourseCatalogDetailViewController(environment: environment, courseID: courseID)
         fromController.navigationController?.pushViewController(detailController, animated: true)
+    }
+    
+    func showAppReviewIfNeeded(fromController: UIViewController) {
+        if RatingViewController.canShowAppReview(environment){
+            let reviewController = RatingViewController(environment: environment)
+            
+            reviewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            reviewController.providesPresentationContextTransitionStyle = true
+            reviewController.definesPresentationContext = true
+            
+            if let controller = fromController as? RatingViewControllerDelegate {
+                reviewController.delegate = controller
+            }
+            
+            fromController.presentViewController(reviewController, animated: false, completion: nil)
+        }
     }
 
     // MARK: - LOGIN / LOGOUT

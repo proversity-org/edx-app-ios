@@ -81,22 +81,20 @@
 
     [self.environment.router openInWindow:self.window];
     
-    #ifdef __IPHONE_10_0
-        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionBadge)
-                                                                            completionHandler:^(BOOL granted, NSError * _Nullable error)
-         {
-             if (granted) {
-                 [application registerForRemoteNotifications];
-             }
-         }];
-    #else
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [application registerForRemoteNotifications];
-    #endif
-    
-    
+#ifdef __IPHONE_10_0
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                        completionHandler:^(BOOL granted, NSError * _Nullable error)
+     {
+         if (granted) {
+             [application registerForRemoteNotifications];
+         }
+     }];
+#else
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+#endif
 
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -146,24 +144,31 @@
     for (NSUInteger i = 0; i < [deviceToken length]; i++) {
         [token appendFormat:@"%02.2hhX", data[i]];
     };
-    [KPNService initWithDeviceToken:[token copy]];
+    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSString *receiptURLString = [receiptURL path];
+    BOOL isRunningDev =  ([receiptURLString rangeOfString:@"sandboxReceipt"].location != NSNotFound);
+    NSString *mode = isRunningDev ? @"dev" : @"prod";
+    [KPNService initWithDeviceToken:[token copy] Mode:mode];
+    
     NSDictionary *payload = @{
                               @"organizationCode": self.environment.config.organizationCode,
                               @"token": [[KPNService instance] getDeviceToken],
                               @"platform": @"iOS",
-                              @"apiKey": self.environment.config.konnekteerApiKey};
+                              @"apiKey": self.environment.config.konnekteerApiKey,
+                              @"mode": [[KPNService instance] getMode]};
     
     [[KPNService instance] createMobileEndpoint:payload
                               CompletionHandler:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
                                   NSLog(@"Create mobile endpoint");
                                   NSLog(@"%@", data);
+                                  NSLog(@"%@", error);
                               }];
     
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     [self.environment.pushNotificationManager didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
@@ -215,6 +220,12 @@
     OEXSegmentConfig* segmentIO = [config segmentConfig];
     if(segmentIO.apiKey && segmentIO.isEnabled) {
         [SEGAnalytics setupWithConfiguration:[SEGAnalyticsConfiguration configurationWithWriteKey:segmentIO.apiKey]];
+    }
+    
+    //Initialize Firebase
+    if (config.isFirebaseEnabled) {
+        [FIRApp configure];
+        [[FIRAnalyticsConfiguration sharedInstance] setAnalyticsCollectionEnabled:YES];
     }
 
     //NewRelic Initialization with edx key

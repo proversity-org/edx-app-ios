@@ -34,6 +34,19 @@ class DiscussionHelper: NSObject {
         }
     }
     
+    class func showErrorMessage(controller: UIViewController?, error: NSError?) {
+        
+        let controller = controller ?? UIApplication.sharedApplication().keyWindow?.rootViewController
+        
+        if let error = error where error.oex_isNoInternetConnectionError {
+            UIAlertController().showAlertWithTitle(Strings.networkNotAvailableTitle, message: Strings.networkNotAvailableMessageTrouble, onViewController: controller ?? UIViewController())
+        }
+        else {
+            controller?.showOverlayMessage(Strings.unknownError)
+        }
+        
+    }
+    
     class func styleAuthorProfileImageView(imageView: UIImageView) {
         dispatch_async(dispatch_get_main_queue(),{
             imageView.layer.cornerRadius = imageView.bounds.size.width / 2
@@ -94,6 +107,7 @@ class DiscussionHelper: NSObject {
             // if post is by anonymous user then disable author button (navigating to user profile)
             authorButton.enabled = false
         }
+        authorButton.isAccessibilityElement = authorButton.enabled
         
         imageView.remoteImage = profileImage(hasProfileImage, imageURL: imageURL)
         

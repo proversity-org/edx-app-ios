@@ -28,14 +28,12 @@
 #import "OEXVideoSummary.h"
 #import "OEXRouter.h"
 #import "Reachability.h"
-#import "OEXCustomNavigationView.h"
 #import "OEXCustomEditingView.h"
 
 
 #define HEADER_HEIGHT 80.0
 #define SHIFT_LEFT 40.0
 #define ORIGINAL_RIGHT_SPACE_PROGRESSBAR 8
-#define VIDEO_VIEW_HEIGHT  225
 
 typedef NS_ENUM (NSUInteger, OEXAlertType) {
     OEXAlertTypeNextVideoAlert,
@@ -99,6 +97,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         [self.table_SubSectionVideos setLayoutMargins:UIEdgeInsetsZero];
     }
 #endif
+    
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenMyVideosCourseVideos courseID:self.course.course_id value:nil];
 }
 
 - (void)navigateBack {
@@ -115,8 +115,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 - (void)removePlayerObserver {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_NEXT_VIDEO object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PREVIOUS_VIDEO object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:_videoPlayerInterface.moviePlayerController];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:_videoPlayerInterface.moviePlayerController];
 }
@@ -140,6 +140,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     [self addChildViewController:self.videoPlayerInterface];
     [self.videoPlayerInterface didMoveToParentViewController:self];
     _videoPlayerInterface.videoPlayerVideoView = self.videoVideo;
+    self.videoPlayerInterface.moviePlayerController.controls.isShownOnMyVideos = YES;
     self.videoViewHeight.constant = 0;
     self.videoVideo.exclusiveTouch = YES;
     
@@ -175,8 +176,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 - (void)addObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_NEXT_VIDEO object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_PREVIOUS_VIDEO object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTotalDownloadProgress:) name:OEXDownloadProgressChangedNotification object:nil];
 
@@ -334,7 +335,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
         sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 30)];
         sectionTitle.text = headerTitle;
-        sectionTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         sectionTitle.textColor = [UIColor blackColor];
         [viewMain addSubview:sectionTitle];
     }
@@ -356,13 +357,13 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         
         chapTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, mainViewWidth - 20, 50)];
         chapTitle.text = chapterName;
-        chapTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        chapTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         chapTitle.textColor = [UIColor whiteColor];
         [viewMain addSubview:chapTitle];
 
         sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, mainViewWidth - 20, 30)];
         sectionTitle.text = headerTitle;
-        sectionTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        sectionTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         sectionTitle.textColor = [UIColor blackColor];
         [viewMain addSubview:sectionTitle];
     }
@@ -511,7 +512,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (void)handleComponentsFrame {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.videoViewHeight.constant = VIDEO_VIEW_HEIGHT;
+        self.videoViewHeight.constant = self.view.bounds.size.width * STANDARD_VIDEO_ASPECT_RATIO;
+        self.videoPlayerInterface.height = self.view.bounds.size.width * STANDARD_VIDEO_ASPECT_RATIO;
+        self.videoPlayerInterface.width = self.view.bounds.size.width;
+
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];

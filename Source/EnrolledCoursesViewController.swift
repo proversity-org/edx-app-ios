@@ -5,12 +5,11 @@
 //  Created by Akiva Leffert on 12/21/15.
 //  Copyright © 2015 edX. All rights reserved.
 //
-
 import Foundation
 
 var isActionTakenOnUpgradeSnackBar: Bool = false
 
-class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTableViewControllerDelegate, PullRefreshControllerDelegate {
+class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTableViewControllerDelegate, PullRefreshControllerDelegate, LoadStateViewReloadSupport {
     
     typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider>
     
@@ -79,6 +78,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         environment.analytics.trackScreenWithName(OEXAnalyticsScreenMyCourses)
         showVersionUpgradeSnackBarIfNecessary()
         super.viewWillAppear(animated)
+        hideSnackBarForFullScreenError()
     }
     
     override func reloadViewData() {
@@ -94,18 +94,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             switch result {
             case let .Success(enrollments):
                 if let enrollments = enrollments {
-                    // Subscribe to organization
-//                    NSDictionary *subscribePayload = @{@"organizationCode": [[OEXConfig sharedConfig] organizationCode],
-//                        @"token": [[KPNService instance] getDeviceToken],
-//                        @"topicType": @"organization",
-//                        @"username": userDetails.username,
-//                        @"email": userDetails.email,
-//                        @"apiKey": [[OEXConfig sharedConfig] konnekteerApiKey]};
-//                    [[KPNService instance] subscribe:subscribePayload
-//                        CompletionHandler:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
-//                        NSLog(@"%@", data);
-//                        }];
-                    
                     let payload: [String: String] = ["organizationCode": (self?.environment.config.organizationCode())!,
                                                      "token": KPNService.instance().getDeviceToken(),
                                                      "username": (self?.environment.router?.environment.session.currentUser?.username)!,
@@ -119,7 +107,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
                     
                     for userCourse in enrollments {
                         let course = userCourse.course as OEXCourse
-                        print(course.course_id)
                         
                         // Subscribe to course
                         let payload: [String: String] = ["courseKey": course.course_id!,
@@ -131,10 +118,9 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
                         
                         KPNService.instance().subscribe(payload, completionHandler: {data, error in
                             print(data)
-                        })
-                        
+                        }) 
                     }
-                    
+
                     self?.tableController.courses = enrollments.flatMap { $0.course } ?? []
                     self?.tableController.tableView.reloadData()
                     self?.loadController.state = .Loaded
@@ -159,9 +145,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             let footer = EnrolledCoursesFooterView()
             footer.findCoursesAction = {[weak self] in
                 self?.environment.router?.showCourseCatalog(nil)
-            }
-            footer.missingCoursesAction = {[weak self] in
-                self?.showCourseNotListedAlert()
             }
             
             footer.sizeToFit()
@@ -202,15 +185,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         }
     }
     
-    private func showCourseNotListedAlert() {
-        let alertController = UIAlertController().showAlertWithTitle(nil, message: Strings.courseNotListed, cancelButtonTitle: nil, onViewController: self)
-        alertController.addButtonWithTitle(Strings.ok, actionBlock: { (action) in
-            dispatch_async(dispatch_get_main_queue(), { 
-                UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.navigationItem.leftBarButtonItem)
-            })
-        })
-    }
-    
     private func showVersionUpgradeSnackBarIfNecessary() {
         if let _ = VersionUpgradeInfoController.sharedController.latestVersion {
             var infoString = Strings.VersionUpgrade.newVersionAvailable
@@ -223,6 +197,12 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             }
         }
         else {
+            hideSnackBar()
+        }
+    }
+    
+    private func hideSnackBarForFullScreenError() {
+        if tableController.courses.count <= 0 {
             hideSnackBar()
         }
     }
@@ -244,6 +224,11 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableController.tableView.autolayoutFooter()
+    }
+    
+    //MARK:- LoadStateViewReloadSupport method 
+    func loadStateViewReload() {
+        refreshIfNecessary()
     }
 }
 

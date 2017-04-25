@@ -61,6 +61,8 @@ class DiscussionCommentCell: UITableViewCell {
         divider.backgroundColor = OEXStyles.sharedStyles().discussionsBackgroundColor
         containerView.backgroundColor = OEXStyles.sharedStyles().neutralWhiteT()
         containerView.applyBorderStyle(BorderStyle())
+        accessibilityTraits = UIAccessibilityTraitHeader
+        bodyTextView.isAccessibilityElement = false
     }
     
     private func addSubViews() {
@@ -149,6 +151,8 @@ class DiscussionCommentCell: UITableViewCell {
         layoutIfNeeded()
         
         DiscussionHelper.styleAuthorProfileImageView(authorProfileImage)
+        
+        setAccessiblity(commentCountOrReportIconButton.currentAttributedTitle?.string)
     }
     
     func useComment(comment : DiscussionComment, inViewController viewController : DiscussionCommentsViewController, index: NSInteger) {
@@ -182,6 +186,8 @@ class DiscussionCommentCell: UITableViewCell {
         setNeedsLayout()
         layoutIfNeeded()
         DiscussionHelper.styleAuthorProfileImageView(authorProfileImage)
+        
+        setAccessiblity(nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -202,8 +208,41 @@ class DiscussionCommentCell: UITableViewCell {
             make.width.equalTo(buttonTitle.singleLineWidth() + StandardHorizontalMargin)
             make.trailing.equalTo(contentView).offset(-2*StandardHorizontalMargin)
         }
+        
+        button.accessibilityHint = report ? Strings.Accessibility.discussionUnreportHint : Strings.Accessibility.discussionReportHint
     }
     
+    func setAccessiblity(commentCount : String?) {
+        var accessibilityString = ""
+        let sentenceSeparator = ", "
+        
+        let body = bodyTextView.attributedText.string
+        accessibilityString.appendContentsOf(body + sentenceSeparator)
+            
+        if let date = dateLabel.text {
+            accessibilityString.appendContentsOf(Strings.Accessibility.discussionPostedOn(date: date) + sentenceSeparator)
+        }
+        
+        if let author = authorNameLabel.text {
+            accessibilityString.appendContentsOf(Strings.accessibilityBy + " " + author + sentenceSeparator)
+        }
+        
+        if let endorsed = endorsedLabel.text where !endorsedLabel.hidden {
+            accessibilityString.appendContentsOf(endorsed + sentenceSeparator)
+        }
+        
+        if let comments = commentCount {
+            accessibilityString.appendContentsOf(comments)
+            commentCountOrReportIconButton.isAccessibilityElement = false
+        }
+        
+        accessibilityLabel = accessibilityString
+        
+        if let authorName = authorNameLabel.text {
+            self.authorButton.accessibilityLabel = authorName
+            self.authorButton.accessibilityHint = Strings.accessibilityShowUserProfileHint
+        }
+    }
 }
 
 protocol DiscussionCommentsViewControllerDelegate: class {
@@ -213,7 +252,7 @@ protocol DiscussionCommentsViewControllerDelegate: class {
 
 class DiscussionCommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, DiscussionNewCommentViewControllerDelegate, InterfaceOrientationOverriding {
     
-    typealias Environment = protocol<DataManagerProvider, NetworkManagerProvider, OEXRouterProvider, OEXAnalyticsProvider>
+    typealias Environment = protocol<DataManagerProvider, NetworkManagerProvider, OEXRouterProvider, OEXAnalyticsProvider, OEXStylesProvider>
     
     private enum TableSection : Int {
         case Response = 0
@@ -235,9 +274,6 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
     //Since didSet doesn't get called from within initialization context, we need to set it with another variable.
     private var commentsClosed : Bool = false {
         didSet {
-            let styles = OEXStyles.sharedStyles()
-            
-            addCommentButton.backgroundColor = commentsClosed ? styles.neutralBase() : styles.primaryXDarkColor()
             
             let textStyle = OEXTextStyle(weight : .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralWhite())
             let icon = commentsClosed ? Icon.Closed : Icon.Create
@@ -245,7 +281,6 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
             let buttonTitle = NSAttributedString.joinInNaturalLayout([icon.attributedTextWithStyle(textStyle.withSize(.XSmall)), textStyle.attributedStringWithText(buttonText)])
             
             addCommentButton.setAttributedTitle(buttonTitle, forState: .Normal)
-            addCommentButton.enabled = !commentsClosed
             
             if (!commentsClosed) {
                 addCommentButton.oex_addAction({[weak self] (action : AnyObject!) -> Void in
@@ -270,14 +305,16 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
     //TODO: Get rid of this variable when Swift improves
     private var closed : Bool = false
     private let thread: DiscussionThread?
+    private var isDiscussionBlackedOut: Bool
     
-    init(environment: Environment, courseID : String, responseItem: DiscussionComment, closed : Bool, thread: DiscussionThread?) {
+    init(environment: Environment, courseID : String, responseItem: DiscussionComment, closed : Bool, thread: DiscussionThread?,isDiscussionBlackedOut: Bool = false) {
         self.courseID = courseID
         self.environment = environment
         self.responseItem = responseItem
         self.thread = thread
         self.discussionManager = self.environment.dataManager.courseDataManager.discussionManagerForCourseWithID(self.courseID)
         self.closed = closed
+        self.isDiscussionBlackedOut = isDiscussionBlackedOut
         self.loadController = LoadStateViewController()
         super.init(nibName: nil, bundle: nil)
     }
@@ -345,7 +382,15 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
         
         addCommentButton.contentVerticalAlignment = .Center
         
+        addCommentButton.backgroundColor = isDiscussionBlackedOut || commentsClosed ? environment.styles.neutralBase() : environment.styles.primaryXDarkColor()
+        addCommentButton.enabled = !(isDiscussionBlackedOut || commentsClosed)
+        
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
+    }
+    
+    func toggleAddCommentButton(enabled: Bool){
+        addCommentButton.backgroundColor = enabled ? environment.styles.primaryXDarkColor() : environment.styles.neutralBase()
+        addCommentButton.enabled = enabled
     }
     
     func setConstraints() {
@@ -370,7 +415,6 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
             make.bottom.equalTo(addCommentButton.snp_top)
         }
         
-        
     }
     
     private func initializePaginator() {
@@ -390,6 +434,7 @@ class DiscussionCommentsViewController: UIViewController, UITableViewDataSource,
                 self?.loadController.state = .Loaded
                 self?.comments = comments
                 self?.tableView.reloadData()
+                UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil)
             }, failure: { [weak self] (error) -> Void in
                 self?.loadController.state = LoadState.failed(error)
         })

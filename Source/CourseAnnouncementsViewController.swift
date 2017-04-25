@@ -13,7 +13,7 @@ private let notificationLabelLeadingOffset = 20.0
 private let notificationLabelTrailingOffset = -10.0
 private let notificationBarHeight = 50.0
 
-@objc protocol CourseAnnouncementsViewControllerEnvironment : OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider {}
+@objc protocol CourseAnnouncementsViewControllerEnvironment : OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider, OEXAnalyticsProvider {}
 
 extension RouterEnvironment : CourseAnnouncementsViewControllerEnvironment {}
 
@@ -27,7 +27,7 @@ private func announcementsDeserializer(response: NSHTTPURLResponse, json: JSON) 
 }
 
 
-class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebViewDelegate {
+class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebViewDelegate, LoadStateViewReloadSupport {
     private let environment: CourseAnnouncementsViewControllerEnvironment
     
     let courseID: String
@@ -102,6 +102,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.loadContent()
+        environment.analytics.trackScreenWithName(OEXAnalyticsScreenAnnouncements, courseID: courseID, value: nil)
     }
     
     override func reloadViewData() {
@@ -178,7 +179,7 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
         var html:String = String()
         
         for (index,announcement) in announcements.enumerate() {
-                html += "<div class=\"announcement-header\">\(announcement.heading)</div>"
+                html += "<div class=\"announcement-header\">\(announcement.heading ?? "")</div>"
                 html += "<hr class=\"announcement\"/>"
                 html += announcement.content ?? ""
                 if(index + 1 < announcements.count)
@@ -209,6 +210,11 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
         self.loadController.state = LoadState.failed(error)
+    }
+    
+    //MARK:- LoadStateViewReloadSupport method
+    func loadStateViewReload() {
+        loadContent()
     }
 }
 

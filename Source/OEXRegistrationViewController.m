@@ -16,15 +16,11 @@
 #import "NSError+OEXKnownErrors.h"
 #import "NSJSONSerialization+OEXSafeAccess.h"
 #import "NSMutableDictionary+OEXSafeAccess.h"
-
-#import "OEXAnalytics.h"
 #import "OEXAuthentication.h"
-#import "OEXConfig.h"
 #import "OEXExternalAuthProvider.h"
 #import "OEXExternalRegistrationOptionsView.h"
 #import "OEXFacebookAuthProvider.h"
 #import "OEXFacebookConfig.h"
-#import "OEXFlowErrorViewController.h"
 #import "OEXGoogleAuthProvider.h"
 #import "OEXGoogleConfig.h"
 #import "OEXHTTPStatusCodes.h"
@@ -35,8 +31,6 @@
 #import "OEXRegistrationFormField.h"
 #import "OEXRegistrationStyles.h"
 #import "OEXRegisteringUserDetails.h"
-#import "OEXRouter.h"
-#import "OEXStyles.h"
 #import "OEXUserLicenseAgreementViewController.h"
 #import "OEXUsingExternalAuthHeadingView.h"
 #import "OEXRegistrationAgreement.h"
@@ -97,7 +91,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     //By default we only shows required fields
     self.isShowingOptionalFields = NO;
     
-    _buttonsTitleStyle = [[OEXMutableTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[[OEXStyles sharedStyles] primaryBaseColor]];
+    _buttonsTitleStyle = [[OEXMutableTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[self.environment.styles primaryBaseColor]];
     
     [self getFormFields];
 }
@@ -129,10 +123,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 // This method will set default ui.
 
 - (void)initializeViews {
-    NSString* regularFont = @"OpenSans";
-    NSString* semiboldFont = @"OpenSans-Semibold";
 
     NSString* platform = self.environment.config.platformName;
+
     ////Create and initalize 'btnCreateAccount' button
     self.registerButton = [[UIButton alloc] init];
     
@@ -140,7 +133,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         [self createAccount:nil];
     } forEvents:UIControlEventTouchUpInside];
     
-    [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+    [self.registerButton applyButtonStyle:[self.environment.styles filledButtonStyle:self.environment.styles.secondaryBaseColor] withTitle:[Strings registrationCreateMyAccount]];
     self.registerButton.accessibilityIdentifier = @"register";
 
     ////Create progrssIndicator as subview to btnCreateAccount
@@ -150,7 +143,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     self.optionalFieldsSeparator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"separator3"]];
     //Initialize label above agreement view
     self.agreementLabel = [[UILabel alloc] init];
-    self.agreementLabel.font = [UIFont fontWithName:regularFont size:10.f];
+    self.agreementLabel.font = [self.environment.styles sansSerifOfSize:10.f];
     self.agreementLabel.textAlignment = NSTextAlignmentCenter;
     self.agreementLabel.numberOfLines = 0;
     self.agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -158,7 +151,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     self.agreementLabel.text = [Strings registrationAgreementMessage];
     self.agreementLink = [[UIButton alloc] init];
     [self.agreementLink setTitle:[Strings registrationAgreementButtonTitleWithPlatformName:platform] forState:UIControlStateNormal];
-    [self.agreementLink.titleLabel setFont:[UIFont fontWithName:semiboldFont size:10]];
+    [self.agreementLink.titleLabel setFont:[self.environment.styles semiBoldSansSerifOfSize:10]];
     [self.agreementLink setTitleColor:[UIColor colorWithRed:0.16 green:0.44 blue:0.84 alpha:1] forState:UIControlStateNormal];
     self.agreementLink.accessibilityTraits = UIAccessibilityTraitLink;
     self.agreementLink.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -174,7 +167,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [self.toggleOptionalFieldsButton setBackgroundColor:[UIColor whiteColor]];
     [self.toggleOptionalFieldsButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [self.toggleOptionalFieldsButton setTitle:[Strings registrationShowOptionalFields]  forState:UIControlStateNormal];
-    [self.toggleOptionalFieldsButton.titleLabel setFont:[UIFont fontWithName:semiboldFont size:14.0]];
+    [self.toggleOptionalFieldsButton.titleLabel setFont:[self.environment.styles semiBoldSansSerifOfSize:14.0]];
 
     [self.toggleOptionalFieldsButton addTarget:self action:@selector(toggleOptionalFields:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -216,6 +209,8 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardFrameChanged:)
                                                  name:UIKeyboardWillChangeFrameNotification object:nil];
+    //Analytics Screen record
+    [self.environment.analytics trackScreenWithName:OEXAnalyticsScreenRegister];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -388,7 +383,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         }
         else if([error oex_isNoInternetConnectionError]){
             [view endIndicatingActivity];
-            [[OEXFlowErrorViewController sharedInstance] showNoConnectionErrorOnView:self.view];
+            [self showNoNetworkError];
         }
         else {
             [view endIndicatingActivity];
@@ -440,7 +435,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                     [self.delegate registrationViewControllerDidRegister:weakSelf completion:nil];
                 }
                 else if([error oex_isNoInternetConnectionError]) {
-                    [[OEXFlowErrorViewController sharedInstance] showNoConnectionErrorOnView:self.view];
+                    [self showNoNetworkError];
                 }
                 [self showProgress:NO];
             };
@@ -477,9 +472,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         }
         else {
             if([error oex_isNoInternetConnectionError]) {
-                NSString* title = [Strings networkNotAvailableTitle];
-                NSString* message = [Strings networkNotAvailableMessage];
-                [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:title message:message onViewController:self.view shouldHide:YES];
+                [self showNoNetworkError];
             }
             [self showProgress:NO];
         }
@@ -525,6 +518,10 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
 }
 
+- (void) showNoNetworkError {
+    [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle] message:[Strings networkNotAvailableMessage] onViewController:self];
+}
+
 - (void)scrollViewTapped:(id)sender {
     [self.view endEditing:YES];
 }
@@ -549,7 +546,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return [OEXStyles sharedStyles].standardStatusBarStyle;
+    return self.environment.styles.standardStatusBarStyle;
 }
 
 - (BOOL) shouldAutorotate {
