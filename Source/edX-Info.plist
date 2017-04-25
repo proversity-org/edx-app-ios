@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>edX</string>
+	<string>Oxford BSG</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -30,15 +30,15 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>edX</string>
+	<string>Blavatnik School of Government</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.8</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSpokenName</key>
-	<string>ed ex</string>
+	<string>Blavatnik School of Government</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -57,7 +57,7 @@
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
 	<key>FacebookDisplayName</key>
-	<string>edX</string>
+	<string>Blavatnik School of Government</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>
@@ -97,6 +97,18 @@
 		<string>OpenSans-LightItalic.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
 		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>BrandonGrotesque-BoldItalic.otf</string>
+		<string>BrandonGrotesque-Bold.otf</string>
+		<string>BrandonGrotesque-BlackItalic.otf</string>
+		<string>BrandonGrotesque-Black.otf</string>
+		<string>BrandonGrotesque-LightItalic.otf</string>
+		<string>BrandonGrotesque-Light.otf</string>
+		<string>BrandonGrotesque-MediumItalic.otf</string>
+		<string>BrandonGrotesque-Medium.otf</string>
+		<string>BrandonGrotesque-RegularItalic.otf</string>
+		<string>BrandonGrotesque-Regular.otf</string>
+		<string>BrandonGrotesque-ThinItalic.otf</string>
+		<string>BrandonGrotesque-Thin.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

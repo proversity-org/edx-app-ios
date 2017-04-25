@@ -695,6 +695,18 @@
 		E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
+		E7FDC2651EAF784300FB79CE /* BrandonGrotesque-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC2591EAF784300FB79CE /* BrandonGrotesque-BoldItalic.otf */; };
+		E7FDC2661EAF784300FB79CE /* BrandonGrotesque-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC25A1EAF784300FB79CE /* BrandonGrotesque-Bold.otf */; };
+		E7FDC2671EAF784300FB79CE /* BrandonGrotesque-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC25B1EAF784300FB79CE /* BrandonGrotesque-BlackItalic.otf */; };
+		E7FDC2681EAF784300FB79CE /* BrandonGrotesque-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC25C1EAF784300FB79CE /* BrandonGrotesque-Black.otf */; };
+		E7FDC2691EAF784300FB79CE /* BrandonGrotesque-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC25D1EAF784300FB79CE /* BrandonGrotesque-LightItalic.otf */; };
+		E7FDC26A1EAF784300FB79CE /* BrandonGrotesque-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC25E1EAF784300FB79CE /* BrandonGrotesque-Light.otf */; };
+		E7FDC26B1EAF784300FB79CE /* BrandonGrotesque-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC25F1EAF784300FB79CE /* BrandonGrotesque-MediumItalic.otf */; };
+		E7FDC26C1EAF784300FB79CE /* BrandonGrotesque-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC2601EAF784300FB79CE /* BrandonGrotesque-Medium.otf */; };
+		E7FDC26D1EAF784300FB79CE /* BrandonGrotesque-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC2611EAF784300FB79CE /* BrandonGrotesque-RegularItalic.otf */; };
+		E7FDC26E1EAF784300FB79CE /* BrandonGrotesque-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC2621EAF784300FB79CE /* BrandonGrotesque-Regular.otf */; };
+		E7FDC26F1EAF784300FB79CE /* BrandonGrotesque-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC2631EAF784300FB79CE /* BrandonGrotesque-ThinItalic.otf */; };
+		E7FDC2701EAF784300FB79CE /* BrandonGrotesque-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7FDC2641EAF784300FB79CE /* BrandonGrotesque-Thin.otf */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -1595,6 +1607,18 @@
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
+		E7FDC2591EAF784300FB79CE /* BrandonGrotesque-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-BoldItalic.otf"; sourceTree = "<group>"; };
+		E7FDC25A1EAF784300FB79CE /* BrandonGrotesque-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-Bold.otf"; sourceTree = "<group>"; };
+		E7FDC25B1EAF784300FB79CE /* BrandonGrotesque-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-BlackItalic.otf"; sourceTree = "<group>"; };
+		E7FDC25C1EAF784300FB79CE /* BrandonGrotesque-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-Black.otf"; sourceTree = "<group>"; };
+		E7FDC25D1EAF784300FB79CE /* BrandonGrotesque-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-LightItalic.otf"; sourceTree = "<group>"; };
+		E7FDC25E1EAF784300FB79CE /* BrandonGrotesque-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-Light.otf"; sourceTree = "<group>"; };
+		E7FDC25F1EAF784300FB79CE /* BrandonGrotesque-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-MediumItalic.otf"; sourceTree = "<group>"; };
+		E7FDC2601EAF784300FB79CE /* BrandonGrotesque-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-Medium.otf"; sourceTree = "<group>"; };
+		E7FDC2611EAF784300FB79CE /* BrandonGrotesque-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-RegularItalic.otf"; sourceTree = "<group>"; };
+		E7FDC2621EAF784300FB79CE /* BrandonGrotesque-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-Regular.otf"; sourceTree = "<group>"; };
+		E7FDC2631EAF784300FB79CE /* BrandonGrotesque-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-ThinItalic.otf"; sourceTree = "<group>"; };
+		E7FDC2641EAF784300FB79CE /* BrandonGrotesque-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BrandonGrotesque-Thin.otf"; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -1966,6 +1990,18 @@
 				69ECC5AB1D50D1170030CF87 /* OpenSans-Regular.ttf */,
 				69ECC5AC1D50D1170030CF87 /* OpenSans-Semibold.ttf */,
 				69ECC5AD1D50D1170030CF87 /* OpenSans-SemiboldItalic.ttf */,
+				E7FDC2591EAF784300FB79CE /* BrandonGrotesque-BoldItalic.otf */,
+				E7FDC25A1EAF784300FB79CE /* BrandonGrotesque-Bold.otf */,
+				E7FDC25B1EAF784300FB79CE /* BrandonGrotesque-BlackItalic.otf */,
+				E7FDC25C1EAF784300FB79CE /* BrandonGrotesque-Black.otf */,
+				E7FDC25D1EAF784300FB79CE /* BrandonGrotesque-LightItalic.otf */,
+				E7FDC25E1EAF784300FB79CE /* BrandonGrotesque-Light.otf */,
+				E7FDC25F1EAF784300FB79CE /* BrandonGrotesque-MediumItalic.otf */,
+				E7FDC2601EAF784300FB79CE /* BrandonGrotesque-Medium.otf */,
+				E7FDC2611EAF784300FB79CE /* BrandonGrotesque-RegularItalic.otf */,
+				E7FDC2621EAF784300FB79CE /* BrandonGrotesque-Regular.otf */,
+				E7FDC2631EAF784300FB79CE /* BrandonGrotesque-ThinItalic.otf */,
+				E7FDC2641EAF784300FB79CE /* BrandonGrotesque-Thin.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -3516,6 +3552,7 @@
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
 					BECB7B0A1924C0C3009C77F1 = {
+						DevelopmentTeam = 773JA72FQU;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -3595,10 +3632,13 @@
 				69ECC60F1D50D1170030CF87 /* arrow_next@2x.png in Resources */,
 				69ECC6451D50D1170030CF87 /* separator.png in Resources */,
 				69ECC6131D50D1170030CF87 /* loginScreenImage.png in Resources */,
+				E7FDC2651EAF784300FB79CE /* BrandonGrotesque-BoldItalic.otf in Resources */,
 				69ECC6011D50D1170030CF87 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				E7FDC2701EAF784300FB79CE /* BrandonGrotesque-Thin.otf in Resources */,
 				19A1339719CAE108003ADD24 /* EULA.htm in Resources */,
 				69ECC6371D50D1170030CF87 /* ic_partiallywatched@3x.png in Resources */,
 				69ECC5FF1D50D1170030CF87 /* OpenSans-BoldItalic.ttf in Resources */,
+				E7FDC2681EAF784300FB79CE /* BrandonGrotesque-Black.otf in Resources */,
 				69ECC6461D50D1170030CF87 /* separator1.png in Resources */,
 				69ECC6491D50D1170030CF87 /* share.pdf in Resources */,
 				69ECC64D1D50D1170030CF87 /* Default-375w-667h@2x.png in Resources */,
@@ -3612,6 +3652,7 @@
 				69ECC6501D50D1170030CF87 /* Default@2x.png in Resources */,
 				69ECC6341D50D1170030CF87 /* ic_next_deactive.png in Resources */,
 				1AFEB1B91BBD88F3004C471D /* languages.json in Resources */,
+				E7FDC2661EAF784300FB79CE /* BrandonGrotesque-Bold.otf in Resources */,
 				9E7D1BCC1AEA5BF5000AF768 /* OEXDownloadViewController.storyboard in Resources */,
 				69ECC6421D50D1170030CF87 /* logo@2x.png in Resources */,
 				69ECC61A1D50D1170030CF87 /* bt_grey_default.png in Resources */,
@@ -3624,6 +3665,7 @@
 				69ECC60A1D50D1170030CF87 /* Icon-29@3x.png in Resources */,
 				69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
+				E7FDC26B1EAF784300FB79CE /* BrandonGrotesque-MediumItalic.otf in Resources */,
 				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
 				9ED269D21AF114B900328A34 /* OEXLoginViewController.storyboard in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
@@ -3643,6 +3685,7 @@
 				69ECC6281D50D1170030CF87 /* check.png in Resources */,
 				5DD0FFD21B1D23DA00837121 /* DiscussionNewPostViewController.xib in Resources */,
 				69ECC6521D50D1170030CF87 /* inline-content.css in Resources */,
+				E7FDC26D1EAF784300FB79CE /* BrandonGrotesque-RegularItalic.otf in Resources */,
 				69ECC64C1D50D1170030CF87 /* Default-568h@2x.png in Resources */,
 				9ED269CC1AF0E67200328A34 /* OEXMyVideosViewController.storyboard in Resources */,
 				69ECC6471D50D1170030CF87 /* separator3.png in Resources */,
@@ -3680,21 +3723,27 @@
 				6960892B1D53935500EE66DD /* courseCertificate.png in Resources */,
 				69ECC6071D50D1170030CF87 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				69ECC60C1D50D1170030CF87 /* Icon-40@3x.png in Resources */,
+				E7FDC26F1EAF784300FB79CE /* BrandonGrotesque-ThinItalic.otf in Resources */,
 				6926CDAB1D59BE3600A16E22 /* ic_next_press.png in Resources */,
 				BEEEBF80196AAACF00EF2C35 /* Localizable.strings in Resources */,
 				69ECC63A1D50D1170030CF87 /* ic_watched@2x.png in Resources */,
 				69ECC6061D50D1170030CF87 /* OpenSans-Semibold.ttf in Resources */,
 				69ECC63B1D50D1170030CF87 /* ic_watched@3x.png in Resources */,
+				E7FDC26A1EAF784300FB79CE /* BrandonGrotesque-Light.otf in Resources */,
 				19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */,
 				805329101B0E80E50093B177 /* DiscussionResponses.storyboard in Resources */,
 				6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */,
+				E7FDC2691EAF784300FB79CE /* BrandonGrotesque-LightItalic.otf in Resources */,
+				E7FDC2671EAF784300FB79CE /* BrandonGrotesque-BlackItalic.otf in Resources */,
 				1905BFF31A31B097001917FA /* NEW_USER.htm in Resources */,
 				6926CDB11D59BE3600A16E22 /* ic_seek_thumb@2x.png in Resources */,
 				69ECC6351D50D1170030CF87 /* ic_next_default.png in Resources */,
 				69ECC6311D50D1170030CF87 /* ic_download.png in Resources */,
+				E7FDC26E1EAF784300FB79CE /* BrandonGrotesque-Regular.otf in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				BD837BB91DC8D5D400341EFD /* Icon-76@2x.png in Resources */,
 				BD837BBB1DC8D5DF00341EFD /* Icon-40.png in Resources */,
+				E7FDC26C1EAF784300FB79CE /* BrandonGrotesque-Medium.otf in Resources */,
 				69ECC60B1D50D1170030CF87 /* Icon-40@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4576,7 +4625,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.bsg;
 				PRODUCT_NAME = edX;
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
@@ -4969,7 +5018,7 @@
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 773JA72FQU;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4985,10 +5034,10 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.bsg;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dbf23eb7-df98-4aca-bf71-a7665ab0e3bf";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.bsg";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -5022,7 +5071,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.bsg;
 				PRODUCT_NAME = edX;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";

@@ -37,6 +37,7 @@
     [super viewDidLoad];
     
     [self.signInButton setTitle:[Strings loginSplashSignIn] forState:UIControlStateNormal];
+    [self.signInButton.titleLabel setFont:[self.environment.styles boldSansSerifOfSize:14.0f]];
     [self.signUpButton applyButtonStyle:[self.environment.styles filledButtonStyle:self.environment.styles.secondaryBaseColor] withTitle:[Strings loginSplashSignUp]];
 }
 
