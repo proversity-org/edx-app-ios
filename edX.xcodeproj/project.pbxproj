@@ -696,8 +696,8 @@
 		E7299E181ECB470100926509 /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7299E121ECB470100926509 /* logo@3x.png */; };
 		E7299E191ECB470100926509 /* logoBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7299E131ECB470100926509 /* logoBlack@2x.png */; };
 		E7299E1A1ECB470100926509 /* logoBlack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7299E141ECB470100926509 /* logoBlack@3x.png */; };
-		E7299E1B1ECB470100926509 /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7299E151ECB470100926509 /* logoWhite@2x.png */; };
-		E7299E1C1ECB470100926509 /* logoWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7299E161ECB470100926509 /* logoWhite@3x.png */; };
+		E7890AF41ECC335900B5A1BB /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7890AF21ECC335900B5A1BB /* logoWhite@2x.png */; };
+		E7890AF51ECC335900B5A1BB /* logoWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7890AF31ECC335900B5A1BB /* logoWhite@3x.png */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
@@ -1599,8 +1599,8 @@
 		E7299E121ECB470100926509 /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		E7299E131ECB470100926509 /* logoBlack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoBlack@2x.png"; sourceTree = "<group>"; };
 		E7299E141ECB470100926509 /* logoBlack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoBlack@3x.png"; sourceTree = "<group>"; };
-		E7299E151ECB470100926509 /* logoWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@2x.png"; sourceTree = "<group>"; };
-		E7299E161ECB470100926509 /* logoWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@3x.png"; sourceTree = "<group>"; };
+		E7890AF21ECC335900B5A1BB /* logoWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@2x.png"; sourceTree = "<group>"; };
+		E7890AF31ECC335900B5A1BB /* logoWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@3x.png"; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
@@ -2051,8 +2051,8 @@
 				E7299E121ECB470100926509 /* logo@3x.png */,
 				E7299E131ECB470100926509 /* logoBlack@2x.png */,
 				E7299E141ECB470100926509 /* logoBlack@3x.png */,
-				E7299E151ECB470100926509 /* logoWhite@2x.png */,
-				E7299E161ECB470100926509 /* logoWhite@3x.png */,
+				E7890AF21ECC335900B5A1BB /* logoWhite@2x.png */,
+				E7890AF31ECC335900B5A1BB /* logoWhite@3x.png */,
 				69ECC5EC1D50D1170030CF87 /* loginScreenImage@2x.png */,
 				69ECC5ED1D50D1170030CF87 /* separator.png */,
 				69ECC5EE1D50D1170030CF87 /* separator1.png */,
@@ -3621,7 +3621,7 @@
 				6987A86D1D6C67DB00E9D183 /* colors.json in Resources */,
 				6926CDAD1D59BE3600A16E22 /* ic_previous_press.png in Resources */,
 				69ECC6401D50D1170030CF87 /* iTunesArtwork in Resources */,
-				E7299E1B1ECB470100926509 /* logoWhite@2x.png in Resources */,
+				E7890AF41ECC335900B5A1BB /* logoWhite@2x.png in Resources */,
 				69ECC6441D50D1170030CF87 /* loginScreenImage@2x.png in Resources */,
 				6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */,
 				69ECC61D1D50D1170030CF87 /* bt_logout_default.png in Resources */,
@@ -3629,7 +3629,7 @@
 				69ECC6341D50D1170030CF87 /* ic_next_deactive.png in Resources */,
 				1AFEB1B91BBD88F3004C471D /* languages.json in Resources */,
 				9E7D1BCC1AEA5BF5000AF768 /* OEXDownloadViewController.storyboard in Resources */,
-				E7299E1C1ECB470100926509 /* logoWhite@3x.png in Resources */,
+				E7890AF51ECC335900B5A1BB /* logoWhite@3x.png in Resources */,
 				69ECC61A1D50D1170030CF87 /* bt_grey_default.png in Resources */,
 				69ECC6161D50D1170030CF87 /* bt_facebook_RTL.png in Resources */,
 				69ECC6411D50D1170030CF87 /* iTunesArtwork@2x in Resources */,
