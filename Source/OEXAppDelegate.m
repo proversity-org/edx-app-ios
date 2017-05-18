@@ -202,7 +202,7 @@
 #pragma mark Environment
 
 - (void)setupGlobalEnvironment {
-    [UserAgentOverrideOperation overrideUserAgent:nil];
+    [UserAgentOverrideOperation overrideUserAgentWithCompletion:nil];
     
     self.environment = [[OEXEnvironment alloc] init];
     [self.environment setupEnvironment];
