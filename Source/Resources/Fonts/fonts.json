@@ -1,12 +1,12 @@
 {
-    "regular":"ArialMT",
-    "semiBold":"Arial-BoldMT",
-    "semiBoldItalic":"Arial-BoldItalicMT ",
-    "bold":"Arial-BoldMT",
-    "boldItalic":"Arial-BoldItalicMT ",
-    "extraBold":"Arial-BoldMT",
-    "extraBoldItalic":"Arial-BoldItalicMT ",
-    "light":"ArialMT",
-    "lightItalic":"Arial-ItalicMT ",
-    "italic":"Arial-ItalicMT "
+    "regular":"NexaLight",
+    "semiBold":"NexaBold",
+    "semiBoldItalic":"NexaBold",
+    "bold":"NexaBold",
+    "boldItalic":"NexaBold",
+    "extraBold":"NexaBold",
+    "extraBoldItalic":"NexaBold ",
+    "light":"NexaLight",
+    "lightItalic":"NexaLight",
+    "italic":"NexaLight"
 }

@@ -698,6 +698,8 @@
 		E770688A1ECC8787007FE119 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = E77068881ECC8787007FE119 /* iTunesArtwork@2x */; };
 		E7890AF41ECC335900B5A1BB /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7890AF21ECC335900B5A1BB /* logoWhite@2x.png */; };
 		E7890AF51ECC335900B5A1BB /* logoWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7890AF31ECC335900B5A1BB /* logoWhite@3x.png */; };
+		E7940A751ECF1B05004B2242 /* NexaBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7940A731ECF1B05004B2242 /* NexaBold.otf */; };
+		E7940A761ECF1B05004B2242 /* NexaLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7940A741ECF1B05004B2242 /* NexaLight.otf */; };
 		E7A4506B1ECD836A008C9A73 /* Cause4UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4506A1ECD836A008C9A73 /* Cause4UITests.swift */; };
 		E7A450741ECD839E008C9A73 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A450731ECD839E008C9A73 /* SnapshotHelper.swift */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
@@ -1610,6 +1612,8 @@
 		E77068881ECC8787007FE119 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		E7890AF21ECC335900B5A1BB /* logoWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@2x.png"; sourceTree = "<group>"; };
 		E7890AF31ECC335900B5A1BB /* logoWhite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@3x.png"; sourceTree = "<group>"; };
+		E7940A731ECF1B05004B2242 /* NexaBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaBold.otf; sourceTree = "<group>"; };
+		E7940A741ECF1B05004B2242 /* NexaLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NexaLight.otf; sourceTree = "<group>"; };
 		E7A450681ECD836A008C9A73 /* Cause4UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Cause4UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A4506A1ECD836A008C9A73 /* Cause4UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cause4UITests.swift; sourceTree = "<group>"; };
 		E7A4506C1ECD836A008C9A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1983,6 +1987,8 @@
 			isa = PBXGroup;
 			children = (
 				BD7C6C3F1DCA329A0004D135 /* fonts.json */,
+				E7940A731ECF1B05004B2242 /* NexaBold.otf */,
+				E7940A741ECF1B05004B2242 /* NexaLight.otf */,
 				69ECC5A31D50D1170030CF87 /* FontAwesome.otf */,
 				69ECC5A41D50D1170030CF87 /* OpenSans-Bold.ttf */,
 				69ECC5A51D50D1170030CF87 /* OpenSans-BoldItalic.ttf */,
@@ -3704,6 +3710,7 @@
 				190AF7951A4061950029E23E /* Main.storyboard in Resources */,
 				69ECC6181D50D1170030CF87 /* bt_google_RTL.png in Resources */,
 				6926CDB01D59BE3600A16E22 /* ic_seek_thumb.png in Resources */,
+				E7940A751ECF1B05004B2242 /* NexaBold.otf in Resources */,
 				B47780591AADA95400436DB4 /* Terms-and-Services.htm in Resources */,
 				69ECC6201D50D1170030CF87 /* bt_signin_deactive.png in Resources */,
 				69ECC62F1D50D1170030CF87 /* ic_cancel@3x.png in Resources */,
@@ -3730,6 +3737,7 @@
 				1905BFF11A31B037001917FA /* COURSE_NOT_LISTED.htm in Resources */,
 				69ECC6291D50D1170030CF87 /* check@2x.png in Resources */,
 				B4B6D64A1A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib in Resources */,
+				E7940A761ECF1B05004B2242 /* NexaLight.otf in Resources */,
 				BD837BB81DC8D5D400341EFD /* Icon-76.png in Resources */,
 				69ECC63E1D50D1170030CF87 /* icon_google_white.png in Resources */,
 				69ECC63D1D50D1170030CF87 /* icon_facebook_white@2x.png in Resources */,
@@ -5374,6 +5382,7 @@
 				E7A450721ECD836A008C9A73 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -97,6 +97,8 @@
 		<string>OpenSans-LightItalic.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
 		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>NexaBold.otf</string>
+		<string>NexaLight.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
