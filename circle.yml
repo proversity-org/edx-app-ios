@@ -6,6 +6,8 @@ machine:
     XCODE_SCHEME: edX
 
 dependencies:
+  pre:
+    - brew update && brew install imagemagick
   override:
     - sudo gem install fastlane -NV
     - sudo gem uninstall fastimage -v 2.0.1
