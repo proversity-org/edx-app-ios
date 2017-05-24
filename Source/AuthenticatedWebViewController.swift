@@ -125,6 +125,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     }
     
     public init(environment : Environment, blockID: String) {
+        print(blockID)
         self.environment = environment
         self.blockID = blockID
         loadController = LoadStateViewController()
@@ -332,17 +333,17 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     }
     
     public func generatePdf() {
-        let pdfJS : String = "var doc = new jsPDF('p', 'pt', 'letter');" +
-            "doc.fromHTML($('#recap_answers_" + blockID + "').get(0), 30, 20, {" +
-            "'width': 550," +
-            "'elementHandlers': {" +
-            "'#recap_editor_" + blockID + "': function(element, renderer){" +
-            "return true;" +
-            "}" +
-            "}" +
-            "}, function(){" +
-            "window.webkit.messageHandlers.downloadPDF.postMessage(doc.output('datauristring'))" +
-        "}, { top: 10, bottom: 10 });"
+        let pdfJS : String = "var pdf_element = document.getElementById('recap_answers_" + blockID + "').innerHTML;" +
+            "html2pdf(pdf_element, {" +
+            "margin: [0.8, 1, 0.5, 1]," +
+            "filename: 'PDF.pdf'," +
+            "image: { type: 'jpeg',quality: 0.98 }," +
+            "html2canvas: { dpi: 192, letterRendering: true }," +
+            "jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }" +
+            "}, function(pdf) {" +
+            "window.webkit.messageHandlers.downloadPDF.postMessage(pdf.output('datauristring'));" +
+        "});";
+        
         let webView = webController.view as! WKWebView
         webView.evaluateJavaScript(pdfJS, completionHandler: { (result, error) -> Void in
             print(result)
