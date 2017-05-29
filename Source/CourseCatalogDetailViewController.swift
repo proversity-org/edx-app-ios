@@ -60,12 +60,43 @@ class CourseCatalogDetailViewController: UIViewController {
         self.courseStream.listen(self,
             success: {[weak self] (course, enrolled) in
                 self?.aboutView.applyCourse(course: course)
+                var isOldEnough = true
+                let minimumAge = course.minimum_age
+                let profile = self?.environment.dataManager.userProfileManager.feedForCurrentUser().map(f: { (profile: UserProfile) -> UserProfile in
+                    return profile
+                })
+                
+                let yearOfBirthProfile = profile!.output.value?.birthYear!
+                let yearOfBirthDetails = self?.environment.session.currentUser?.year_of_birth
+                
+                if (yearOfBirthProfile != nil || yearOfBirthDetails != nil) {
+                    if (yearOfBirthDetails != nil && yearOfBirthDetails! == 0) {
+                        isOldEnough = false
+                    } else if (yearOfBirthProfile != nil && yearOfBirthProfile == 0) {
+                        isOldEnough = false
+                    } else {
+                        let date = NSDate()
+                        let calendar = NSCalendar.current
+                        let year =  calendar.component(.year, from: date as Date)
+                        if (yearOfBirthProfile != nil && Float(year - yearOfBirthProfile!) <= minimumAge) {
+                            isOldEnough = false
+                        } else if (yearOfBirthDetails != nil && Float(year - yearOfBirthDetails!) <= minimumAge) {
+                            isOldEnough = false
+                        }
+                    }
+                }
                 if enrolled {
                     self?.aboutView.actionText = Strings.CourseDetail.viewCourse
                     self?.aboutView.action = {completion in
                         self?.showCourseScreen()
                         completion()
                     }
+                }
+                else if !isOldEnough {
+                    self?.aboutView.invitationOnlyBtn(text: "You are not old enough to enrol")
+                }
+                else if course.invitation_only {
+                    self?.aboutView.invitationOnlyBtn(text: "Invitation only")
                 }
                 else {
                     self?.aboutView.actionText = Strings.CourseDetail.enrollNow
