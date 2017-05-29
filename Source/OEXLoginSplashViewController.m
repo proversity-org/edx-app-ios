@@ -38,7 +38,7 @@
     [super viewDidLoad];
 
     [self.signInButton setTitle:[Strings loginSplashSignIn] forState:UIControlStateNormal];
-    [self.signUpButton applyButtonStyle:[[OEXStyles sharedStyles] filledSecondaryButtonStyle] withTitle:[Strings loginSplashSignUp]];
+    [self.signUpButton applyButtonStyleWithStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings loginSplashSignUp]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

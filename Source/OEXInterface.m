@@ -43,6 +43,7 @@ NSString* const OEXCourseListKey = @"OEXCourseListKey";
 NSString* const OEXVideoStateChangedNotification = @"OEXVideoStateChangedNotification";
 NSString* const OEXDownloadProgressChangedNotification = @"OEXDownloadProgressChangedNotification";
 NSString* const OEXDownloadEndedNotification = @"OEXDownloadEndedNotification";
+NSString* const OEXSavedAppVersionKey = @"OEXSavedAppVersionKey";
 
 @interface OEXInterface () <OEXDownloadManagerProtocol>
 
@@ -102,6 +103,8 @@ static OEXInterface* _sharedInterface = nil;
     }];
 
     [self firstLaunchWifiSetting];
+    [self saveAppVersion];
+    
     return self;
 }
 
@@ -608,17 +611,17 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 - (void)downloadProgressNotification:(NSNotification*)notification {
-    NSDictionary* dictProgress = (NSDictionary*)notification.userInfo;
-
-    NSURLSessionTask* task = [dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
-    NSString* url = [task.originalRequest.URL absoluteString];
-    double totalBytesWritten = [[dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_WRITTEN] doubleValue];
-    double totalBytesExpectedToWrite = [[dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_TO_WRITE] doubleValue];
-
-    double completed = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
-    float completedPercent = completed * OEXMaxDownloadProgress;
-
-    [self markDownloadProgress:completedPercent forURL:url andVideoId:nil];
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            NSDictionary* dictProgress = (NSDictionary*)notification.userInfo;
+            NSURLSessionTask* task = [dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
+            NSString* url = [task.originalRequest.URL absoluteString];
+            double totalBytesWritten = [[dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_WRITTEN] doubleValue];
+            double totalBytesExpectedToWrite = [[dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TOTAL_BYTES_TO_WRITE] doubleValue];
+            
+            double completed = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
+            float completedPercent = completed * OEXMaxDownloadProgress;
+            [self markDownloadProgress:completedPercent forURL:url andVideoId:nil];
+    });
 }
 
 - (void)reachabilityDidChange:(NSNotification*)notification {
@@ -674,26 +677,24 @@ static OEXInterface* _sharedInterface = nil;
 
 #pragma mark Video management
 - (void)markDownloadProgress:(float)progress forURL:(NSString*)URLString andVideoId:(NSString*)videoId {
-    for(OEXHelperVideoDownload* video in [self allVideos]) {
-        NSString* videoUrl = video.summary.videoURL;
-        if (video.summary.downloadVideo) {
-            videoUrl = video.summary.downloadVideo;
-        }
-        if(([videoUrl isEqualToString:URLString] && video.downloadState == OEXDownloadStatePartial)
-           || [video.summary.videoID isEqualToString:videoId]) {
-            video.downloadProgress = progress;
-            video.isVideoDownloading = YES;
-            if(progress == OEXMaxDownloadProgress) {
-                video.downloadState = OEXDownloadStateComplete;
-                video.isVideoDownloading = NO;
-                video.completedDate = [NSDate date];
-            }
-            else if(progress > 0) {
-                video.downloadState = OEXDownloadStatePartial;
-            }
-            else {
-                video.downloadState = OEXDownloadStateNew;
-                video.isVideoDownloading = NO;
+    @autoreleasepool {
+        for(OEXHelperVideoDownload* video in [self allVideos]) {
+            if(([video.summary.videoURL isEqualToString:URLString] && video.downloadState == OEXDownloadStatePartial)
+               || [video.summary.videoID isEqualToString:videoId]) {
+                video.downloadProgress = progress;
+                video.isVideoDownloading = YES;
+                if(progress == OEXMaxDownloadProgress) {
+                    video.downloadState = OEXDownloadStateComplete;
+                    video.isVideoDownloading = NO;
+                    video.completedDate = [NSDate date];
+                }
+                else if(progress > 0) {
+                    video.downloadState = OEXDownloadStatePartial;
+                }
+                else {
+                    video.downloadState = OEXDownloadStateNew;
+                    video.isVideoDownloading = NO;
+                }
             }
         }
     }
@@ -1339,7 +1340,7 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)setLastAccessedDataToDB:(NSString*)subsectionID withTimeStamp:(NSString*)timestamp forCourseID:(NSString*)courseID {
     OEXHelperVideoDownload* video = [self getSubsectionNameForSubsectionID:subsectionID];
-    [self setLastAccessedSubSectionWithID:subsectionID subsectionName: video.summary.sectionPathEntry.entryID courseID:courseID timeStamp:timestamp];
+    [self setLastAccessedSubSectionWithIDWithSubsectionID:subsectionID subsectionName: video.summary.sectionPathEntry.entryID courseID:courseID timeStamp:timestamp];
 }
 
 - (void)getLastVisitedModuleForCourseID:(NSString*)courseID {
@@ -1505,6 +1506,17 @@ static OEXInterface* _sharedInterface = nil;
         }
     }
     return nil;
+}
+
+#pragma mark - App Version
+
+- (void) saveAppVersion {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSBundle mainBundle].oex_buildVersionString forKey:OEXSavedAppVersionKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (nullable NSString*) getSavedAppVersion {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:OEXSavedAppVersionKey];
 }
 
 @end

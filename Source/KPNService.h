@@ -2,8 +2,8 @@
 //  KPNService.h
 //  edX
 //
-//  Created by José Antonio González on 12/12/16.
-//  Copyright © 2016 edX. All rights reserved.
+//  Created by Pro_Dev on 2017/03/23.
+//  Copyright © 2017 edX. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,12 +12,12 @@ typedef void (^onComplete)(NSDictionary * __nullable data, NSError * __nullable 
 
 @interface KPNService : NSObject
 
-@property (nonnull, nonatomic, strong) NSString *username;
-@property (nonnull, nonatomic, strong) NSString *email;
-
 + (id __nonnull)instance;
-+ (id __nonnull)initWithDeviceToken:(NSString * __nonnull)deviceToken;
++ (id __nonnull)initWithDeviceToken:(NSString * __nonnull)deviceToken
+                               Mode:(NSString * __nonnull)mode;
+
 - (NSString * __nonnull)getDeviceToken;
+- (NSString * __nonnull)getMode;
 
 - (void)createMobileEndpoint:(NSDictionary * __nonnull)payload
            CompletionHandler:(onComplete __nullable)completionHandler;

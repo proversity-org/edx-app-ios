@@ -34,6 +34,7 @@
 #import "OEXRouter.h"
 #import "SWRevealViewController.h"
 #import "OEXStyles.h"
+#import <Masonry/Masonry.h>
 
 #define RECENT_HEADER_HEIGHT 30.0
 #define ALL_HEADER_HEIGHT 8.0
@@ -105,7 +106,7 @@ typedef  enum OEXAlertType
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //Analytics Screen record
-    [[OEXAnalytics sharedAnalytics] trackScreenWithName: @"My Videos - All Videos"];
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosAllVideos];
 
     [self.navigationController setNavigationBarHidden:false animated:animated];
 
@@ -169,7 +170,7 @@ typedef  enum OEXAlertType
 }
 
 - (void)toggleReveal {
-    [self.revealViewController toggleDrawerAnimated:YES];
+    [self.revealViewController toggleDrawerAnimatedWithAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -226,6 +227,11 @@ typedef  enum OEXAlertType
     // set select all button color to white so it look prominent on blue navigation bar
     self.btn_SelectAllEditing.tintColor = [[OEXStyles sharedStyles] navigationItemTintColor];
     [self performSelector:@selector(reloadTable) withObject:self afterDelay:5.0];
+    
+    //Apply Tap Gesture to remove settings menu options
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] init];
+    [tapGesture addTarget:self action:@selector(tableViewTapped:)];
+    [self.table_RecentVideos addGestureRecognizer:tapGesture];
 }
 
 - (void)reloadTable {
@@ -247,6 +253,7 @@ typedef  enum OEXAlertType
         if(_videoPlayerInterface) {
             [self.videoPlayerInterface videoPlayerShouldRotate];
         }
+        self.videoPlayerInterface.moviePlayerController.controls.isShownOnMyVideos = YES;
     }
 }
 
@@ -370,7 +377,7 @@ typedef  enum OEXAlertType
         UILabel* courseTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, tableView.frame.size.width - 20, RECENT_HEADER_HEIGHT)];
         courseTitle.numberOfLines = 2;
         courseTitle.text = obj_course.name;
-        courseTitle.font = [UIFont fontWithName:@"OpenSans-Semibold" size:14.0f];
+        courseTitle.font = [[OEXStyles sharedStyles] semiBoldSansSerifOfSize:14.0f];
         courseTitle.textColor = [UIColor colorWithRed:69.0 / 255.0 green:73.0 / 255.0 blue:81.0 / 255.0 alpha:1.0];
         [view addSubview:courseTitle];
 
@@ -426,7 +433,7 @@ typedef  enum OEXAlertType
         }
         NSString* videoDetails = [NSString stringWithFormat:@"%@, %@", Vcount, [dictVideo objectForKey:CAV_KEY_VIDEOS_SIZE]];
         
-        [[CourseCardViewModel onMyVideos:obj_course collectionInfo:videoDetails] apply:infoView networkManager:self.environment.networkManager];
+        [[CourseCardViewModel onMyVideosWithCourse:obj_course collectionInfo:videoDetails] applyWithCard:infoView networkManager:self.environment.networkManager];
         
         return cell;
     }
@@ -748,7 +755,10 @@ typedef  enum OEXAlertType
 
 - (void)handleComponentsFrame {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.videoViewHeight.constant = 225;
+        self.videoViewHeight.constant = self.view.bounds.size.width * STANDARD_VIDEO_ASPECT_RATIO;
+        self.videoPlayerInterface.height = self.view.bounds.size.width * STANDARD_VIDEO_ASPECT_RATIO;
+        self.videoPlayerInterface.width = self.view.bounds.size.width;
+        
         [self.recentEditViewHeight setConstant:0.0f];
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
@@ -838,7 +848,7 @@ typedef  enum OEXAlertType
             [self cancelTableClicked:nil];
 
             //Analytics Screen record
-            [[OEXAnalytics sharedAnalytics] trackScreenWithName: @"My Videos - All Videos"];
+            [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosAllVideos];
 
             break;
 
@@ -859,7 +869,7 @@ typedef  enum OEXAlertType
             }
             
             //Analytics Screen record
-            [[OEXAnalytics sharedAnalytics] trackScreenWithName: @"My Videos - Recent Videos"];
+            [[OEXAnalytics sharedAnalytics] trackScreenWithName: OEXAnalyticsScreenMyVideosRecentVideos];
 
             break;
 
@@ -1132,8 +1142,8 @@ typedef  enum OEXAlertType
 }
 
 - (void)addPlayerObserver {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_NEXT_VIDEO object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_PREVIOUS_VIDEO object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
 
     //Add oserver
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -1145,8 +1155,8 @@ typedef  enum OEXAlertType
 }
 
 - (void)removePlayerObserver {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_NEXT_VIDEO object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PREVIOUS_VIDEO object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:_videoPlayerInterface.moviePlayerController];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:_videoPlayerInterface.moviePlayerController];
 }
@@ -1155,7 +1165,7 @@ typedef  enum OEXAlertType
 
 - (void)movieTimedOut {
     if(!_videoPlayerInterface.moviePlayerController.isFullscreen) {
-        [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
+        [self showOverlayWithMessage:[Strings timeoutCheckInternetConnection]];
         [_videoPlayerInterface.moviePlayerController stop];
     }
     else {
@@ -1256,7 +1266,7 @@ typedef  enum OEXAlertType
 
     switch(OEXAlertType) {
         case OEXAlertTypeDeleteConfirmationAlert: {
-            NSString* message = [Strings confirmDeleteMessage:_arr_SelectedObjects.count];
+            NSString* message = [Strings confirmDeleteMessageWithCount:_arr_SelectedObjects.count];
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings confirmDeleteTitle]
                                                             message:[NSString stringWithFormat:message, _arr_SelectedObjects.count]
                                                            delegate:self
@@ -1330,6 +1340,20 @@ typedef  enum OEXAlertType
 
 - (BOOL)prefersStatusBarHidden {
     return self.videoPlayerInterface.moviePlayerController.fullscreen;
+}
+
+- (void)tableViewTapped:(UITapGestureRecognizer *)tap {
+    CGPoint location = [tap locationInView:self.table_RecentVideos];
+    NSIndexPath *path = [self.table_RecentVideos indexPathForRowAtPoint:location];
+    
+    if(path) {
+        // tap was on existing row, so pass it to the delegate method
+        [self tableView:self.table_RecentVideos didSelectRowAtIndexPath:path];
+    }
+    else {
+        // handle tap on empty space below existing rows
+        [self.videoPlayerInterface.moviePlayerController.controls hideOptionsAndValues];
+    }
 }
 
 @end

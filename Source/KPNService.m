@@ -2,13 +2,13 @@
 //  KPNService.m
 //  edX
 //
-//  Created by José Antonio González on 12/12/16.
-//  Copyright © 2016 edX. All rights reserved.
+//  Created by José Antonio González on 1/17/17.
+//  Copyright © 2017 edX. All rights reserved.
 //
 
 #import "KPNService.h"
 
-#define KONNEKTEER_API_URL "http://konnekteer-api.proversity.org"
+#define KONNEKTEER_API_URL "https://konnekteer-api.proversity.org"
 #define MOBILE_ENDPOINT "/mobileEndpoints"
 #define SUBSCRIBE "/subscribe"
 
@@ -29,8 +29,10 @@
 }
 
 + (id __nonnull)initWithDeviceToken:(NSString * __nonnull)deviceToken
+                               Mode:(NSString * _Nonnull)mode
 {
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults] setObject:mode forKey:@"mode"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     return self;
 }
@@ -38,6 +40,11 @@
 - (NSString * __nonnull)getDeviceToken
 {
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+}
+
+- (NSString * __nonnull)getMode
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"mode"];
 }
 
 #pragma mark - Konnekteer

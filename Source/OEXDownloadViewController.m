@@ -48,6 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenDownloads];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -197,29 +198,26 @@
 }
 
 - (void)downloadProgressNotification:(NSNotification*)notification {
-    NSDictionary* progress = (NSDictionary*)notification.userInfo;
-    NSURLSessionTask* task = [progress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
-    NSString* url = [task.originalRequest.URL absoluteString];
-    for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
-        NSString* videoUrl = video.summary.videoURL;
-        if (video.summary.downloadVideo) {
-            videoUrl = video.summary.downloadVideo;
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        @autoreleasepool {
+            NSDictionary* progress = (NSDictionary*)notification.userInfo;
+            NSURLSessionTask* task = [progress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
+            NSString* url = [task.originalRequest.URL absoluteString];
+            
+            for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
+                if([video.summary.videoURL isEqualToString:url]) {
+                    [self updateProgressForVisibleRows];
+                    break;
+                }
+            }
         }
-        if([videoUrl isEqualToString:url]) {
-//            //NSLog(@"progress for video  %@   id  %@ download  %f", video.name , video.str_VideoTitle , video.DownloadProgress);
-            [self updateProgressForVisibleRows];
-            break;
-        }
-    }
+    });
 }
 
 - (void)downloadCompleteNotification:(NSNotification*)notification {
-//    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-//
-////        self.edxInterface.numberOfRecentDownloads++;
-//
-//    } completion:^(BOOL finished) {
-//            }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateProgressForVisibleRows];
+    });
 }
 
 /// Update progress for visible rows
@@ -228,7 +226,7 @@
     NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterPercentStyle;
     NSString* formatted = [formatter stringFromNumber:@(percentage)];
-    return [Strings accessibilityDownloadViewCell:video percentComplete:formatted](percentage);
+    return [Strings accessibilityDownloadViewCellWithVideoName:video percentComplete:formatted](percentage);
 }
 
 - (void)updateProgressForVisibleRows {

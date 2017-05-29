@@ -13,6 +13,7 @@ public extension OEXCourse {
     
     public static func testData(
         courseHasDiscussions hasDiscussions : Bool = true,
+        hasHandoutsUrl : Bool = true,
         accessible : Bool = true,
         overview: String? = nil,
         shortDescription : String? = nil,
@@ -20,27 +21,31 @@ public extension OEXCourse {
         mediaInfo: [String:CourseMediaInfo] = [:],
         startInfo : OEXCourseStartDisplayInfo? = nil,
         end: NSDate? = nil,
-        aboutUrl: String? = nil) -> [String : AnyObject]
+        aboutUrl: String? = nil) -> [String : Any]
     {
-        let courseID = NSUUID().UUIDString
-        let imagePath = NSBundle.mainBundle().URLForResource("placeholderCourseCardImage", withExtension: "png")
+        let courseID = NSUUID().uuidString
+        let imagePath = Bundle.main.url(forResource: "placeholderCourseCardImage", withExtension: "png")
         
-        var courseDictionary : [String : AnyObject] = [
-            "id" : courseID ?? "someID",
-            "subscription_id" : courseID ?? "someSubscriptionID",
+        var courseDictionary : [String : Any] = [
+            "id" : courseID ,
+            "subscription_id" : courseID ,
             "name" : "A Great Course",
-            "course_image" : imagePath!.absoluteString ?? imagePath!.URLString,
+            "course_image" : imagePath!.absoluteString ,
             "org" : "edX",
             "courseware_access" : ["has_access" : accessible]
         ]
         if let overview = overview {
-            courseDictionary["overview"] = overview
+            courseDictionary["overview"] = overview as AnyObject
         }
         if hasDiscussions {
             courseDictionary["discussion_url"] = "http://www.url.com"
         }
         
-        var unparsedMediaInfos : [String:AnyObject] = [:]
+        if hasHandoutsUrl {
+            courseDictionary["course_handouts"] = "http://www.url.com"
+        }
+        
+        var unparsedMediaInfos : [String:Any] = [:]
         for (name, info) in mediaInfo {
             unparsedMediaInfos[name] = info.dictionary
         }
@@ -53,10 +58,10 @@ public extension OEXCourse {
             courseDictionary["effort"] = effort
         }
         if let end = end {
-            courseDictionary["end"] = OEXDateFormatting.serverStringWithDate(end)
+            courseDictionary["end"] = OEXDateFormatting.serverString(with: end as Date)
         }
         if let startInfo = startInfo {
-            courseDictionary = courseDictionary.concat(startInfo.jsonFields)
+            courseDictionary = courseDictionary.concat(dictionary: startInfo.jsonFields)
         }
         if let about = aboutUrl {
             courseDictionary["course_about"] = about
@@ -67,6 +72,7 @@ public extension OEXCourse {
 
     public static func freshCourse(
         discussionsEnabled hasDiscussions: Bool = true,
+                           hasHandoutsUrl: Bool = true,
         accessible : Bool = true,
         shortDescription: String? = nil,
         overview: String? = nil,
@@ -78,9 +84,10 @@ public extension OEXCourse {
     {
         let courseData = OEXCourse.testData(
             courseHasDiscussions: hasDiscussions,
+            hasHandoutsUrl: hasHandoutsUrl,
             accessible: accessible,
-            shortDescription: shortDescription,
             overview: overview,
+            shortDescription: shortDescription,
             effort:effort,
             mediaInfo: mediaInfo,
             startInfo: startInfo,

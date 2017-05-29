@@ -27,6 +27,7 @@ public struct CourseOutline {
         case StudentViewURL = "student_view_url"
         case StudentViewData = "student_view_data"
         case Summary = "summary"
+        case MinifiedBlockID = "block_id"
     }
     
     public let root : CourseBlockID
@@ -47,7 +48,7 @@ public struct CourseOutline {
     }
     
     public init?(json : JSON) {
-        if let root = json[Fields.Root].string, blocks = json[Fields.Blocks].dictionaryObject {
+        if let root = json[Fields.Root].string, let blocks = json[Fields.Blocks].dictionaryObject {
             var validBlocks : [CourseBlockID:CourseBlock] = [:]
             for (blockID, blockBody) in blocks {
                 let body = JSON(blockBody)
@@ -62,6 +63,7 @@ public struct CourseOutline {
                     $0 as? Int ?? 0
                 } ?? [:]
                 let graded = body[Fields.Graded].bool ?? false
+                let minifiedBlockID = body[Fields.MinifiedBlockID].string
                 
                 var type : CourseBlockType
                 if let category = CourseBlock.Category(rawValue: typeName) {
@@ -88,7 +90,7 @@ public struct CourseOutline {
                         // Inline discussion is in progress feature. Will remove this code when it's ready to ship
                         type = .Unknown(typeName)
                         
-                        if OEXConfig.sharedConfig().discussionsEnabled {
+                        if OEXConfig.shared().discussionsEnabled {
                             let bodyData = body[Fields.StudentViewData].object as? NSDictionary
                             let discussionModel = DiscussionModel(dictionary: bodyData ?? [:])
                             type = .Discussion(discussionModel)
@@ -103,6 +105,7 @@ public struct CourseOutline {
                     type: type,
                     children: children,
                     blockID: blockID,
+                    minifiedBlockID: minifiedBlockID,
                     name: name,
                     blockCounts : blockCounts,
                     blockURL : blockURL,
@@ -161,6 +164,8 @@ public class CourseBlock {
     
     public let type : CourseBlockType
     public let blockID : CourseBlockID
+    /// This is the alpha numeric identifier at the end of the blockID above.
+    public let minifiedBlockID: String?
     
     /// Children in the navigation hierarchy.
     /// Note that this may be different than the block's list of children, server side
@@ -177,7 +182,7 @@ public class CourseBlock {
     
     /// User visible name of the block.
     public var displayName : String {
-        guard let name = name where !name.isEmpty else {
+        guard let name = name, !name.isEmpty else {
             return Strings.untitled
         }
         return name
@@ -209,6 +214,7 @@ public class CourseBlock {
     public init(type : CourseBlockType,
         children : [CourseBlockID],
         blockID : CourseBlockID,
+        minifiedBlockID: String?,
         name : String?,
         blockCounts : [String:Int] = [:],
         blockURL : NSURL? = nil,
@@ -221,6 +227,7 @@ public class CourseBlock {
         self.name = name
         self.blockCounts = blockCounts
         self.blockID = blockID
+        self.minifiedBlockID = minifiedBlockID
         self.blockURL = blockURL
         self.webURL = webURL
         self.graded = graded

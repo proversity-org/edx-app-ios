@@ -11,6 +11,7 @@
 @class CourseMediaInfo;
 @class OEXLatestUpdates;
 @class OEXCoursewareAccess;
+@class CourseShareUtmParameters;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,12 +57,14 @@ OEXStartType OEXStartTypeForString(NSString* type);
 @property (readonly, nonatomic, copy, nullable) NSString* course_updates;         //  ANNOUNCEMENTS URL
 @property (readonly, nonatomic, copy, nullable) NSString* course_handouts;        //  HANDOUTS URL
 @property (readonly, nonatomic, copy, nullable) NSString* course_about;           // COURSE INFO URL
+@property (readonly, nonatomic) Boolean invitation_only;
+@property (readonly, nonatomic) float minimum_age;
 @property (readonly, nonatomic, strong, nullable) OEXCoursewareAccess* courseware_access;
 @property (readonly, nonatomic, copy, nullable) NSString* discussionUrl;
 @property (readonly, nonatomic, copy, nullable) NSDictionary<NSString*, CourseMediaInfo*>* mediaInfo;
 @property (readonly, nonatomic, strong, nullable) CourseMediaInfo* courseImageMediaInfo;
 @property (readonly, nonatomic, strong, nullable) CourseMediaInfo* courseVideoMediaInfo;
-
+@property (nonatomic, readonly) CourseShareUtmParameters *courseShareUtmParams;
 @property (readonly, nonatomic, assign) BOOL isStartDateOld;
 @property (readonly, nonatomic, assign) BOOL isEndDateOld;
 
