@@ -1,6 +1,4 @@
 machine:
-  pre:
-    - sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
   xcode:
     version: 8.2.1
   environment:
