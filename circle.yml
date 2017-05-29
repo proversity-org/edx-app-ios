@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: 8.3
+    version: 8.2.1
   environment:
     XCODE_WORKSPACE: edX.xcworkspace
     XCODE_SCHEME: edX
@@ -8,6 +8,7 @@ machine:
 dependencies:
   override:
     - sudo gem install fastlane -NV
+    - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
     - ./gradlew dependencies --stacktrace --info
   post:
