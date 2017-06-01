@@ -97,7 +97,6 @@
                BlueprintIdentifier = "E7A450581ECD823E008C9A73"
                BuildableName = "Cause4UITests.xctest"
                BlueprintName = "Cause4UITests"
-               ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

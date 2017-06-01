@@ -2,15 +2,13 @@
 //  KPNService.m
 //  edX
 //
-//  Created by Pro_Dev on 2017/03/23.
+//  Created by José Antonio González on 1/17/17.
 //  Copyright © 2017 edX. All rights reserved.
 //
 
 #import "KPNService.h"
 
-#import "KPNService.h"
-
-#define KONNEKTEER_API_URL "http://konnekteer-api.proversity.org"
+#define KONNEKTEER_API_URL "https://konnekteer-api.proversity.org"
 #define MOBILE_ENDPOINT "/mobileEndpoints"
 #define SUBSCRIBE "/subscribe"
 
