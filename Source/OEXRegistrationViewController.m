@@ -21,7 +21,6 @@
 #import "OEXExternalRegistrationOptionsView.h"
 #import "OEXFacebookAuthProvider.h"
 #import "OEXFacebookConfig.h"
-#import "OEXFlowErrorViewController.h"
 #import "OEXGoogleAuthProvider.h"
 #import "OEXGoogleConfig.h"
 #import "OEXHTTPStatusCodes.h"
@@ -79,7 +78,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.loadController = [[LoadStateViewController alloc] init];
-    [self.loadController setupInController:self contentView:self.scrollView];
+    [self.loadController setupInControllerWithController:self contentView:self.scrollView];
     
     self.navigationController.navigationBarHidden = NO;
     
@@ -99,7 +98,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
 - (void)getFormFields {
     
-    [self getRegistrationFormDescription:^(OEXRegistrationDescription * _Nonnull response) {
+    [self getRegistrationFormDescriptionWithSuccess:^(OEXRegistrationDescription * _Nonnull response) {
         self.registrationDescription = response;
         [self makeFieldControllers];
         [self initializeViews];
@@ -134,7 +133,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         [self createAccount:nil];
     } forEvents:UIControlEventTouchUpInside];
     
-    [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+    [self.registerButton applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
     self.registerButton.accessibilityIdentifier = @"register";
 
     ////Create progrssIndicator as subview to btnCreateAccount
@@ -384,7 +383,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         }
         else if([error oex_isNoInternetConnectionError]){
             [view endIndicatingActivity];
-            [[OEXFlowErrorViewController sharedInstance] showNoConnectionErrorOnView:self.view];
+            [self showNoNetworkError];
         }
         else {
             [view endIndicatingActivity];
@@ -436,7 +435,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                     [self.delegate registrationViewControllerDidRegister:weakSelf completion:nil];
                 }
                 else if([error oex_isNoInternetConnectionError]) {
-                    [[OEXFlowErrorViewController sharedInstance] showNoConnectionErrorOnView:self.view];
+                    [self showNoNetworkError];
                 }
                 [self showProgress:NO];
             };
@@ -473,9 +472,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         }
         else {
             if([error oex_isNoInternetConnectionError]) {
-                NSString* title = [Strings networkNotAvailableTitle];
-                NSString* message = [Strings networkNotAvailableMessage];
-                [[OEXFlowErrorViewController sharedInstance] showErrorWithTitle:title message:message onViewController:self.view shouldHide:YES];
+                [self showNoNetworkError];
             }
             [self showProgress:NO];
         }
@@ -521,6 +518,10 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
 }
 
+- (void) showNoNetworkError {
+    [[UIAlertController alloc] showAlertWithTitle:[Strings networkNotAvailableTitle] message:[Strings networkNotAvailableMessage] onViewController:self];
+}
+
 - (void)scrollViewTapped:(id)sender {
     [self.view endEditing:YES];
 }
@@ -534,12 +535,12 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)showProgress:(BOOL)status {
     if(status) {
         [self.progressIndicator startAnimating];
-        [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
+        [self.registerButton applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     }
     else {
         [self.progressIndicator stopAnimating];
-        [self.registerButton applyButtonStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+        [self.registerButton applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }

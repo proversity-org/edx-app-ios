@@ -10,35 +10,30 @@ import Foundation
 
 class EnrolledCoursesFooterView : UIView {
     private let promptLabel = UILabel()
-    private let findCoursesButton = UIButton(type:.System)
-    private let missingCourseButton = UIButton(type: .System)
+    private let findCoursesButton = UIButton(type:.system)
     
     private let container = UIView()
     
     var findCoursesAction : (() -> Void)?
-    var missingCoursesAction : (() -> Void)?
     
     private var findCoursesTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight: .Normal, size: .Base, color: OEXStyles.sharedStyles().neutralDark())
+        return OEXTextStyle(weight: .normal, size: .base, color: OEXStyles.shared().neutralDark())
     }
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         addSubview(container)
         container.addSubview(promptLabel)
         container.addSubview(findCoursesButton)
-        container.addSubview(missingCourseButton)
         
-        self.promptLabel.attributedText = findCoursesTextStyle.attributedStringWithText(Strings.EnrollmentList.findCoursesPrompt)
-        self.promptLabel.textAlignment = .Center
+        self.promptLabel.attributedText = findCoursesTextStyle.attributedString(withText: Strings.EnrollmentList.findCoursesPrompt)
+        self.promptLabel.textAlignment = .center
         
-        self.findCoursesButton.applyButtonStyle(OEXStyles.sharedStyles().filledPrimaryButtonStyle, withTitle: Strings.EnrollmentList.findCourses.oex_uppercaseStringInCurrentLocale())
+        self.findCoursesButton.applyButtonStyle(style: OEXStyles.shared().filledPrimaryButtonStyle, withTitle: Strings.EnrollmentList.findCourses.oex_uppercaseStringInCurrentLocale())
         
-        self.missingCourseButton.applyButtonStyle(OEXStyles.sharedStyles().linkButtonStyle, withTitle: Strings.EnrollmentList.lookingForCourse)
-        
-        container.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
-        container.applyBorderStyle(BorderStyle())
+        container.backgroundColor = OEXStyles.shared().standardBackgroundColor()
+        container.applyBorderStyle(style: BorderStyle())
         
         container.snp_makeConstraints {make in
             make.top.equalTo(self).offset(CourseCardCell.margin)
@@ -57,22 +52,12 @@ class EnrolledCoursesFooterView : UIView {
             make.leading.equalTo(promptLabel)
             make.trailing.equalTo(promptLabel)
             make.top.equalTo(promptLabel.snp_bottom).offset(StandardVerticalMargin)
-        }
-        
-        self.missingCourseButton.snp_makeConstraints {make in
-            make.leading.equalTo(promptLabel)
-            make.trailing.equalTo(promptLabel)
-            make.top.equalTo(findCoursesButton.snp_bottom).offset(StandardVerticalMargin)
             make.bottom.equalTo(container).offset(-StandardVerticalMargin)
         }
         
         findCoursesButton.oex_addAction({[weak self] _ in
             self?.findCoursesAction?()
-            }, forEvents: .TouchUpInside)
-        
-        missingCourseButton.oex_addAction({[weak self] _ in
-            self?.missingCoursesAction?()
-            }, forEvents: .TouchUpInside)
+            }, for: .touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {

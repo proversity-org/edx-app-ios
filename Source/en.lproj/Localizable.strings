@@ -20,6 +20,8 @@
 "ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED" = "Tap to select";
 /* Appending By before course organization and number on My Find Courses*/
 "ACCESSIBILITY_BY" = "By";
+/* Accessibility hint for close button*/
+"ACCESSIBILITY.CLOSE_HINT" = "Double tap to close.";
 /* Accessibility label for posted data of discussion responses*/
 "ACCESSIBILITY.DISCUSSION_POSTED_ON" = "Posted on {date}";
 /* Accessibility hint for Vote button for discussion responses*/
@@ -112,6 +114,16 @@
 "ACCESSIBILITY.DISCUSSION_SORT_BY" = "Sort by {sort_by}";
 /*Accessibility hint for filter button(Posts Screen)*/
 "ACCESSIBILITY.DISCUSSION_FILTER_BY" = "Filter by {filter_by}";
+/*Accessibility label for user profile in left drawer*/
+"ACCESSIBILITY.LEFT_DRAWER.PROFILE_LABEL" = "Currently signed in as {user_name}, {user_email}";
+/*Accessibility hint for user profile in left drawer*/
+"ACCESSIBILITY.LEFT_DRAWER.PROFILE_HINT" = "Double tap to open your profile";
+/*Accessibility text for close button on whats new screen*/
+"ACCESSIBILITY.WHATSNEW.CLOSE_LABEL"="Close";
+/*Accessibility label for header on new screen*/
+"ACCESSIBILITY.WHATSNEW.HEADER_LABEL"="Version {app_version}, New Features";
+/*Accessibility text for course share button on course dashboard*/
+"ACCESSIBILITY.SHARE_A_COURSE"="Share a course";
 /* Title of user profile section for user accomplishments (like badges) */
 "ACCOMPLISHMENTS.TITLE" = "Accomplishments";
 /* Default text template when user shares an accomplishment */
@@ -140,6 +152,28 @@
 "ANSWER"="Answer";
 /* Navigation title for a Question Post which has endorsed answers */
 "ANSWERED_QUESTION"="Answered Question";
+/* Accessibility label for rating control of app review. */
+"APP_REVIEW.RATING_CONTROL_ACCESSIBILITY_LABEL" = "Rating control.";
+/* Accessibility hint for rating control of app review. */
+"APP_REVIEW.RATING_CONTROL_ACCESSIBILITY_HINT" = "Double tap and hold to change value.";
+/* Alert title for positive app review */
+"APP_REVIEW.RATE_THE_APP" = "Rate The App";
+/* Positive review message */
+"APP_REVIEW.POSITIVE_REVIEW_MESSAGE" = "Tell others what you think of the app by writing a quick review in the app store";
+/* Send feedback message for negative app review */
+"APP_REVIEW.SEND_FEEDBACK" = "Send Feedback?";
+/* Help us improve message for negative app review */
+"APP_REVIEW.HELP_US_IMPROVE" = "Help us improve!";
+/* Maybe later message for positive/negative app review */
+"APP_REVIEW.MAYBE_LATER" = "Maybe Later";
+/* Send feedback message for negative app review */
+"APP_REVIEW.SEND_FEEDBACK" = "Send Feedback";
+/* Question for rating view */
+"APP_REVIEW.RATE_THE_APP_QUESTION" = "How would you rate the app?";
+/* Submit button for rating view */
+"APP_REVIEW.SUBMIT" = "Submit";
+/* App Review message email title */
+"APP_REVIEW.MESSAGE_SUBJECT" = "Customer Review";
 /*Asteric for marking fields required*/
 "ASTERIC" = "*";
 /* Prefix used with Staff of Community TA on the posts screen */
@@ -160,6 +194,8 @@
 "COURSE_ANNOUNCEMENTS"="Announcements";
 /* Title of course handouts section */
 "COURSE_HANDOUTS"="Handouts";
+/* Title of course important dates screen */
+"COURSEDATES.COURSE_IMPORTANT_DATES_TITLE"="Course Dates and Deadlines";
 /* Button text for cancelling any action */
 "CANCEL"="Cancel";
 /* Alert explaining charges will apply since the "Wi-fi only" switch was turned off */
@@ -212,22 +248,29 @@
 "COURSEWARE_UNAVAILABLE"="No course content is currently available.";
 /* Message shown when attempting to display content not available on the app */
 "COURSE_CONTENT_UNKNOWN" = "This interactive component isn't yet available on mobile. \n\n Explore other parts of this course or view this on the web.";
+/* Message shown when there is no course dates */
+"COURSEDATES.COURSE_DATE_UNAVAILABLE"="Course dates are not currently available.";
 /* Title text for the Announcements section within the course dashboard */
-"COURSE_DASHBOARD_ANNOUNCEMENTS"="Announcements";
+"DASHBOARD.COURSE_ANNOUNCEMENTS"="Announcements";
 /* Text describing the Announcements section within the course dashboard */
-"COURSE_DASHBOARD_ANNOUNCEMENTS_DETAIL"="Keep up with the latest news";
+"DASHBOARD.COURSE_ANNOUNCEMENTS_DETAIL"="Keep up with the latest news";
 /* Title text for the Courseware section of the course dashboard */
-"COURSE_DASHBOARD_COURSEWARE"="Course";
+"DASHBOARD.COURSE_COURSEWARE"="Course";
 /* Text describing the Courseware section within the course dashboard */
-"COURSE_DASHBOARD_COURSE_DETAIL"="Access videos and assignments";
+"DASHBOARD.COURSE_COURSE_DETAIL"="Access videos and assignments";
 /* Title text for the Discussions section of the course dashboard */
-"COURSE_DASHBOARD_DISCUSSION"="Discussion";
+"DASHBOARD.COURSE_DISCUSSION"="Discussion";
 /* Text describing the Discussions section within the course dashboard */
-"COURSE_DASHBOARD_DISCUSSION_DETAIL"="Join the conversation";
+"DASHBOARD.COURSE_DISCUSSION_DETAIL"="Join the conversation";
 /* Title text for the Handouts section of the course dashboard  */
-"COURSE_DASHBOARD_HANDOUTS"="Handouts";
+"DASHBOARD.COURSE_HANDOUTS"="Handouts";
 /* Text describing the Handouts section within the course dashboard */
-"COURSE_DASHBOARD_HANDOUTS_DETAIL"="Find important course information";
+"DASHBOARD.COURSE_HANDOUTS_DETAIL"="Find important course information";
+/* Title text for the Important dates section of the course dashboard  */
+"DASHBOARD.COURSE_IMPORTANT_DATES"="Important dates";
+/* Text describing the Important dates section of the course dashboard  */
+"DASHBOARD.COURSE_IMPORTANT_DATES_DETAIL"="Keep track of deadlines and stay on track";
+
 /* Label indicated that a course has ended */
 "COURSE_ENDED"="Ended - {end_date}";
 /* Label indicating that a course will end */
@@ -301,9 +344,7 @@
 /* Prompt shown to users on the course list encouraging them to find new courses */
 "ENROLLMENT_LIST.FIND_COURSES_PROMPT" = "Looking for a new challenge?";
 /* Button title opening course catalog */
-"ENROLLMENT_LIST.FIND_COURSES" = "Find a mobile-friendly course";
-/* Button title showing screen providing information about why a course may not be visible */
-"ENROLLMENT_LIST.LOOKING_FOR_COURSE" = "Can't find one of your courses?";
+"ENROLLMENT_LIST.FIND_COURSES" = "Find a course";
 /* Error message when user is not enrolled to any course and course discovery is also disabled.*/
 "ENROLLMENT_LIST.NO_ENROLLMENT" = "It looks like you are not enrolled in any courses yet.";
 /* Prompt indicating user needs to enter an email address */
@@ -527,9 +568,9 @@
 /* Button text allowing user to show hidden optional registration fields */
 "REGISTRATION_SHOW_OPTIONAL_FIELDS"="Show optional fields";
 /* Heading on registration screen allowing users to sign up using external services like Facebook and Google. Will be followed by text "or sign up with an email". */
-"REGISTRATION_SIGN_UP_PROMPT"="Sign up with";
+"REGISTRATION_REGISTER_PROMPT"="Register with";
 /* Heading on registration screen allowing users to sign up using external services like Facebook and Google. Will be preceded by text "Sign up with" */
-"REGISTRATION_SIGN_UP_ALTERNATE_PROMPT"="or sign up with email";
+"REGISTRATION_REGISTER_ALTERNATE_PROMPT"="or register with email";
 /* Alert dialog title prompting user to enter an email address to reset their password */
 "RESET_PASSWORD_TITLE"="Reset Password";
 /* Alert dialog content prompting user to enter an email address to reset their password */
@@ -575,9 +616,9 @@
 /* Label for date when course starts */
 "STARTING"="Starting - {start_date}";
 /* Discover Courses button text on the first screen */
-"STARTUP.DISCOVERCOURSES"="Discover Courses";
+"STARTUP.DISCOVER_COURSES"="Discover Courses";
 /* Explore Subjects button text on the first screen */
-"STARTUP.EXPLORE_SUBJECTS"="Explore Subjects";
+"STARTUP_EXPLORE_SUBJECTS"="Explore Subjects";
 /* Button allowing user to submit feedback about the app via email */
 "SUBMIT_FEEDBACK.OPTION_TITLE" = "Submit Feedback";
 /* Support message email title */
@@ -661,16 +702,22 @@
 /* Discussion vote - {count} is a number of votes */
 "VOTE##{other}"="{count} Votes";
 /*Title of update button on fullscreen error and SnackBar*/
-"VERSION_UPGRADE.UPDATE" = "Update";
+"VERSION_UPGRADE_UPDATE" = "Update";
 /*Title of dismiss button on SnackBar*/
 "VERSION_UPGRADE.DISMISS" = "Dismiss";
 /*Deprecated version detail message*/
 "VERSION_UPGRADE.DEPRECATED_MESSAGE" = "A new version of the app is available.";
 /*Outdated version detail message*/
 "VERSION_UPGRADE.OUT_DATED_MESSAGE" = "Your version of the app is no longer supported.";
+/*Outdated version alert message for login screen*/
+"VERSION_UPGRADE_OUT_DATED_LOGIN_MESSAGE" = "Your version of the app is no longer supported. Update to the latest version to login.";
 /*New version available without deadline message*/
 "VERSION_UPGRADE.NEW_VERSION_AVAILABLE" = "A new version of the app is available.";
 /* Overlay shown after a network request has started, telling the user to wait for the response */
 "WAITING_FOR_RESPONSE"="Please wait...";
+/* Header of 'whats new screen'*/
+"WHATS_NEW.HEADER_TEXT"="Version {app_version} New Features";
+/*Whats new screen done button title*/
+"WHATS_NEW.DONE"="Done";
 /* Alert dialog button title to confirm an action */
 "YES"="Yes";

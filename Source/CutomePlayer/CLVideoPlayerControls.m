@@ -83,6 +83,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 @property (nonatomic, strong) AccessibilityCLButton* playPauseButton;
 @property (nonatomic, strong) MPVolumeView* volumeView;
 @property (nonatomic, strong) CLButton* fullscreenButton;
+@property (nonatomic, strong) CLButton* dismissOptionsOverlayButton;
 @property (nonatomic, strong) UILabel* timeElapsedLabel;
 @property (nonatomic, strong) UILabel* timeRemainingLabel;
 @property (nonatomic, strong) UILabel* videoTitleLabel;
@@ -148,12 +149,12 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     return self.video.summary;
 }
 
-- (void)showSubSettings:(UIAlertController * __nonnull)chooser
+- (void)showSubSettingsWithChooser:(UIAlertController * __nonnull)chooser
 {
     UIViewController* controller = [UIApplication sharedApplication].keyWindow.rootViewController;
     [controller presentViewController:chooser animated:true completion:nil];
 
-    self.tableSettings.hidden = YES;
+    [self hideOptionsAndValues];
 }
 
 #pragma mark Closed Captions
@@ -190,7 +191,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     }
 }
 
-- (void) setCaption:(NSString*)language{
+- (void) setCaptionWithLanguage:(NSString*)language{
     [self hideTables];
     [OEXInterface setCCSelectedLanguage:language];
     
@@ -228,7 +229,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 
 #pragma mark Playback Speed
 
-- (void)setPlaybackSpeed:(OEXVideoSpeed)speed {
+- (void)setPlaybackSpeedWithSpeed:(OEXVideoSpeed)speed {
     [self hideTables];
     
     NSString* oldSpeed = [NSString stringWithFormat:@"%.1f", self.playbackRate];
@@ -504,7 +505,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         NSString* captionURL = self.video.summary.transcripts[ccSelectedLanguage];
         if(ccSelectedLanguage && ![ccSelectedLanguage isEqualToString:@""] && captionURL) {
             self.subtitleActivated = YES;
-            [self setCaption:ccSelectedLanguage];
+            [self setCaptionWithLanguage:ccSelectedLanguage];
         }
         else{
             if (captionURL == nil) {
@@ -610,9 +611,6 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         _seekRate = 3.f;
         _state = CLVideoPlayerControlsStateIdle;
 
-        _hideNext = YES;
-        _hidePrevious = YES;
-        
         _stateBeforeSeek = MPMoviePlaybackStatePlaying;
         
         float speed = [OEXInterface getOEXVideoSpeed:[OEXInterface getCCSelectedPlaybackSpeed]];
@@ -776,6 +774,16 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     self.view_OptionsOverlay.backgroundColor = [UIColor blackColor];
     self.view_OptionsOverlay.alpha = 0.5f;
     [self addSubview:self.view_OptionsOverlay];
+    
+    //Overlay button to remove options list
+    _dismissOptionsOverlayButton = [[CLButton alloc] initWithFrame:CGRectZero];
+    [_dismissOptionsOverlayButton oex_addAction:^(id  _Nonnull control) {
+        [self hideOptionsAndValues];
+    } forEvents:UIControlEventTouchUpInside];
+    
+    _dismissOptionsOverlayButton.delegate = self;
+    _dismissOptionsOverlayButton.backgroundColor = [UIColor clearColor];
+    [self.view_OptionsOverlay addSubview:_dismissOptionsOverlayButton];
 
     self.view_OptionsInner = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.view_OptionsInner.backgroundColor = GREY_COLOR;
@@ -1014,7 +1022,6 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 }
 
 - (void)settingsBtnClicked:(id)sender {
-
     // Hide unhide the option tableview
     self.view_OptionsOverlay.hidden = NO;
     self.tableSettings.hidden = NO;
@@ -1041,7 +1048,10 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     _dataInterface.selectedCCIndex = -1;
     _dataInterface.selectedVideoSpeedIndex = -1;
     [self hideSubtitles];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PREVIOUS_VIDEO object:self userInfo:nil];
+    if (!_isShownOnMyVideos) {
+        [self.moviePlayer setFullscreen:NO];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:self userInfo:nil];
 }
 
 - (void)nextBtnClicked:(id)sender {
@@ -1055,7 +1065,10 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     _dataInterface.selectedCCIndex = -1;
     _dataInterface.selectedVideoSpeedIndex = -1;
     [self hideSubtitles];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NEXT_VIDEO object:self userInfo:nil];
+    if (!_isShownOnMyVideos) {
+        [self.moviePlayer setFullscreen:NO];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_VIDEO_PLAYER_NEXT object:self userInfo:nil];
 }
 
 - (void)durationSliderTouchBegan:(UISlider*)slider {
@@ -1489,6 +1502,10 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         if(self.video.summary.videoID) {
             [_dataInterface sendAnalyticsEvents:OEXVideoStateStop withCurrentTime:[weakSelf getMoviePlayerCurrentTime] forVideo:self.video];
         }
+        
+        if([self.delegate respondsToSelector:@selector(didFinishVideoPlaying)]) {
+            [self.delegate didFinishVideoPlaying];
+        }
     }
     else if(reason == MPMovieFinishReasonUserExited) {
         OEXLogInfo(@"VIDEO", @"Movie Finished Playing: User Exited");
@@ -1497,6 +1514,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         OEXLogInfo(@"VIDEO", @"Movie Finished Playing: Playback Error");
         [self.activityIndicator stopAnimating];
     }
+    
 }
 
 - (void)movieLoadStateDidChange:(NSNotification*)note {
@@ -1741,6 +1759,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
         [_fullscreenButton setImage:[UIImage ExpandIcon] forState:UIControlStateNormal];
         _fullscreenButton.accessibilityLabel = [Strings accessibilityFullscreen];
         [self voiceOverOnSettings];
+        [self didHidePrevNext];
     }
 
     self.rewindButton.frame = CGRectMake(paddingFromBezel, self.barHeight / 2 - rewindHeightWidth / 2 + 1.f, rewindHeightWidth, rewindHeightWidth);
@@ -1760,9 +1779,9 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 
     [_activityBackgroundView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [_activityIndicator setFrame:CGRectMake((self.frame.size.width / 2) - (activityIndicatorSize / 2), (self.frame.size.height / 2) - (activityIndicatorSize / 2), activityIndicatorSize, activityIndicatorSize)];
+    [_dismissOptionsOverlayButton setFrame:CGRectMake(0, 0, self.view_OptionsOverlay.frame.size.width, self.view_OptionsOverlay.frame.size.height)];
 
     self.tapButton.frame = self.frame;
-    [self didHidePrevNext];
 }
 
 - (void) voiceOverOnSettings {

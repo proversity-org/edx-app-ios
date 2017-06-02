@@ -28,7 +28,6 @@ extern NSString* const OEXVideoStateChangedNotification;
 extern NSString* const OEXDownloadProgressChangedNotification;
 extern NSString* const OEXDownloadEndedNotification;
 
-
 // This class requires significant refactoring
 // Think very hard before adding anything to it
 @interface OEXInterface : NSObject <OEXNetworkInterfaceDelegate, UIAlertViewDelegate>
@@ -71,7 +70,7 @@ extern NSString* const OEXDownloadEndedNotification;
 // videos : OEXHelperVideoDownload
 #pragma CC methods
 + (void)setCCSelectedLanguage:(NSString*)language;
-+ (NSString*)getCCSelectedLanguage;
++ (NSString* _Nullable)getCCSelectedLanguage;
 
 + (void)setCCSelectedPlaybackSpeed:(OEXVideoSpeed) speed;
 + (OEXVideoSpeed)getCCSelectedPlaybackSpeed;

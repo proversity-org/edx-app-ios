@@ -29,12 +29,11 @@
 #import "OEXRouter.h"
 #import "Reachability.h"
 #import "OEXCustomEditingView.h"
-
+#import <Masonry/Masonry.h>
 
 #define HEADER_HEIGHT 80.0
 #define SHIFT_LEFT 40.0
 #define ORIGINAL_RIGHT_SPACE_PROGRESSBAR 8
-#define VIDEO_VIEW_HEIGHT  225
 
 typedef NS_ENUM (NSUInteger, OEXAlertType) {
     OEXAlertTypeNextVideoAlert,
@@ -45,7 +44,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     OEXAlertTypePlayBackContentUnAvailable
 };
 
-@interface OEXMyVideosSubSectionViewController () <UITableViewDelegate>
+@interface OEXMyVideosSubSectionViewController () <UITableViewDelegate, OEXVideoPlayerInterfaceDelegate>
 {
     NSIndexPath* clickedIndexpath;
 }
@@ -116,8 +115,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 }
 
 - (void)removePlayerObserver {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_NEXT_VIDEO object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PREVIOUS_VIDEO object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackStateDidChangeNotification object:_videoPlayerInterface.moviePlayerController];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:_videoPlayerInterface.moviePlayerController];
 }
@@ -138,9 +137,11 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     //Init video view and video player
     self.videoPlayerInterface = [[OEXVideoPlayerInterface alloc] init];
     [self.videoPlayerInterface enableFullscreenAutorotation];
+    self.videoPlayerInterface.delegate = self;
     [self addChildViewController:self.videoPlayerInterface];
     [self.videoPlayerInterface didMoveToParentViewController:self];
     _videoPlayerInterface.videoPlayerVideoView = self.videoVideo;
+    self.videoPlayerInterface.moviePlayerController.controls.isShownOnMyVideos = YES;
     self.videoViewHeight.constant = 0;
     self.videoVideo.exclusiveTouch = YES;
     
@@ -173,11 +174,15 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     self.isTableEditing = NO;           // Check Edit button is clicked
     self.selectAll = NO;        // Check if all are selected
     
+    //Apply Tap Gesture to remove settings menu options
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] init];
+    [tapGesture addTarget:self action:@selector(tableViewTapped:)];
+    [self.table_SubSectionVideos addGestureRecognizer:tapGesture];
 }
 
 - (void)addObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_NEXT_VIDEO object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_PREVIOUS_VIDEO object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playNextVideo) name:NOTIFICATION_VIDEO_PLAYER_NEXT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playPreviousVideo) name:NOTIFICATION_VIDEO_PLAYER_PREVIOUS object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTotalDownloadProgress:) name:OEXDownloadProgressChangedNotification object:nil];
 
@@ -512,7 +517,10 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (void)handleComponentsFrame {
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.videoViewHeight.constant = VIDEO_VIEW_HEIGHT;
+        self.videoViewHeight.constant = self.view.bounds.size.width * STANDARD_VIDEO_ASPECT_RATIO;
+        self.videoPlayerInterface.height = self.view.bounds.size.width * STANDARD_VIDEO_ASPECT_RATIO;
+        self.videoPlayerInterface.width = self.view.bounds.size.width;
+
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
@@ -909,12 +917,16 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (void)movieTimedOut {
     if(!_videoPlayerInterface.moviePlayerController.isFullscreen) {
-        [self showOverlayMessage:[Strings timeoutCheckInternetConnection]];
+        [self showOverlayWithMessage:[Strings timeoutCheckInternetConnection]];
         [_videoPlayerInterface.moviePlayerController stop];
     }
     else {
         [self showAlert:OEXAlertTypeVideoTimeOutAlert];
     }
+}
+
+- (void) videoPlayerTapped:(UIGestureRecognizer *)sender {
+    // TODO: Handle player tap
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -1005,7 +1017,7 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
         break;
 
         case OEXAlertTypeDeleteConfirmationAlert: {
-            NSString* message = [Strings confirmDeleteMessage:_arr_SelectedObjects.count];
+            NSString* message = [Strings confirmDeleteMessageWithCount:_arr_SelectedObjects.count];
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings confirmDeleteTitle]
                                                             message:message
                                                            delegate:self
@@ -1066,6 +1078,20 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
 
 - (BOOL)prefersStatusBarHidden {
     return self.videoPlayerInterface.moviePlayerController.fullscreen;
+}
+
+- (void)tableViewTapped:(UITapGestureRecognizer *)tap {
+    CGPoint location = [tap locationInView:self.table_SubSectionVideos];
+    NSIndexPath *path = [self.table_SubSectionVideos indexPathForRowAtPoint:location];
+    
+    if(path) {
+        // tap was on existing row, so pass it to the delegate method
+        [self tableView:self.table_SubSectionVideos didSelectRowAtIndexPath:path];
+    }
+    else {
+        // handle tap on empty space below existing rows
+        [self.videoPlayerInterface.moviePlayerController.controls hideOptionsAndValues];
+    }
 }
 
 @end

@@ -46,6 +46,7 @@ extern NSString* const CLVideoPlayerkText;
 @protocol CLVideoPlayerControlsDelegate <NSObject>
 - (void) videoPlayerTapped:(id) sender;
 - (void) transcriptLoaded:(NSArray *)transcript;
+- (void) didFinishVideoPlaying;
 @end
 
 
@@ -112,6 +113,9 @@ extern NSString* const CLVideoPlayerkText;
 
 /// Are the next/previous buttons hidden
 @property (assign, nonatomic) BOOL hidesNextPrev;
+
+/// Are the controls presented on My Videos?
+@property (assign, nonatomic) BOOL isShownOnMyVideos;
 
 /**
  The default initializer method. The parameter may not be nil.

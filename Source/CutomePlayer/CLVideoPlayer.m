@@ -41,6 +41,7 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
 @property (nonatomic, strong) UIView* movieBackgroundView;
 @property (nonatomic, readwrite) BOOL movieFullscreen;
 @property(nonatomic, strong) NSURL* currentContentUrl;
+@property (nonatomic, readwrite) NSArray *transcript;
 @end
 
 @implementation CLVideoPlayer
@@ -151,6 +152,7 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
 - (void)setFullscreen:(BOOL)fullscreen animated:(BOOL)animated withOrientation:(UIInterfaceOrientation)deviceOrientation forceRotate:(BOOL)rotate {
     _movieFullscreen = fullscreen;
     if(fullscreen) {
+        [self.controls setStyle:CLVideoPlayerControlsStyleFullscreen];
         [[NSNotificationCenter defaultCenter] postNotificationName:MPMoviePlayerWillEnterFullscreenNotification object:nil];
 
         UIWindow* keyWindow = [[UIApplication sharedApplication] keyWindow];
@@ -335,19 +337,21 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
     [super pause];
 }
 
+- (void)saveLastPlayedTime {
+    if(_currentContentUrl) {
+        if([self.delegate respondsToSelector:@selector(playerDidStopPlaying:atPlayBackTime:)]) {
+            [self.delegate playerDidStopPlaying:_currentContentUrl atPlayBackTime:self.currentPlaybackTime];
+        }
+    }
+}
+
+#pragma mark- CLVideoPlayerControllerDelegate methods
+
 - (void)movieTimedOut {
     if(!(self.loadState & MPMovieLoadStatePlayable) || !(self.loadState & MPMovieLoadStatePlaythroughOK)) {
         [self stop];
         if([self.delegate respondsToSelector:@selector(movieTimedOut)]) {
             [self.delegate performSelector:@selector(movieTimedOut)];
-        }
-    }
-}
-
-- (void)saveLastPlayedTime {
-    if(_currentContentUrl) {
-        if([self.delegate respondsToSelector:@selector(playerDidStopPlaying:atPlayBackTime:)]) {
-            [self.delegate playerDidStopPlaying:_currentContentUrl atPlayBackTime:self.currentPlaybackTime];
         }
     }
 }
@@ -359,10 +363,20 @@ static const NSTimeInterval fullscreenAnimationDuration = 0.3;
 }
 
 - (void)transcriptLoaded:(NSArray *)transcript {
+    //Saving transcript for callback on complete parent view rendering.
+    self.transcript = transcript;
     if([self.delegate respondsToSelector:@selector(transcriptLoaded:)]) {
         [self.delegate transcriptLoaded:transcript];
     }
 }
+
+- (void)didFinishVideoPlaying {
+    if([self.delegate respondsToSelector:@selector(didFinishVideoPlaying)]) {
+        [self.delegate didFinishVideoPlaying];
+    }
+}
+
+#pragma mark-
 
 - (void)resetMoviePlayer {
     [self.controls resetControls];
