@@ -68,33 +68,36 @@
         [OEXFileUtility nukeUserData];
     }
 #endif
-
+    
     // logout user automatically if server changed
     [[[ServerChangedChecker alloc] init] logoutIfServerChanged];
-
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
+    
     [self setupGlobalEnvironment];
     [self.environment.session performMigrations];
-
+    
     [self.environment.router openInWindow:self.window];
     
+    if (self.environment.config.pushNotificationsEnabled) {
 #ifdef __IPHONE_10_0
-    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
-                                                                        completionHandler:^(BOOL granted, NSError * _Nullable error)
-     {
-         if (granted) {
-             [application registerForRemoteNotifications];
-         }
-     }];
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                            completionHandler:^(BOOL granted, NSError * _Nullable error)
+         {
+             if (granted) {
+                 [application registerForRemoteNotifications];
+             }
+         }];
 #else
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
 #endif
+    }
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -113,14 +116,14 @@
         if(handled) {
             return handled;
         }
-
+        
     }
     
     if (self.environment.config.googleConfig.enabled){
         handled = [[GIDSignIn sharedInstance] handleURL:url sourceApplication:sourceApplication annotation:annotation];
         [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:YES];
     }
-   
+    
     return handled;
 }
 
@@ -136,7 +139,6 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     const char *data = [deviceToken bytes];
     NSMutableString *token = [NSMutableString string];
     
@@ -201,20 +203,20 @@
 #pragma mark Environment
 
 - (void)setupGlobalEnvironment {
-    [UserAgentOverrideOperation overrideUserAgent:nil];
+    [UserAgentOverrideOperation overrideUserAgentWithCompletion:nil];
     
     self.environment = [[OEXEnvironment alloc] init];
     [self.environment setupEnvironment];
-
+    
     OEXConfig* config = self.environment.config;
-
+    
     //Logging
     [DebugMenuLogger setup];
-
+    
     //Rechability
     self.reachability = [[InternetReachability alloc] init];
     [_reachability startNotifier];
-
+    
     //SegmentIO
     OEXSegmentConfig* segmentIO = [config segmentConfig];
     if(segmentIO.apiKey && segmentIO.isEnabled) {
@@ -226,14 +228,14 @@
         [FIRApp configure];
         [[FIRAnalyticsConfiguration sharedInstance] setAnalyticsCollectionEnabled:YES];
     }
-
+    
     //NewRelic Initialization with edx key
     OEXNewRelicConfig* newrelic = [config newRelicConfig];
     if(newrelic.apiKey && newrelic.isEnabled) {
         [NewRelicAgent enableCrashReporting:NO];
         [NewRelicAgent startWithApplicationToken:newrelic.apiKey];
     }
-
+    
     //Initialize Fabric
     OEXFabricConfig* fabric = [config fabricConfig];
     if(fabric.appKey && fabric.isEnabled) {
