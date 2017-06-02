@@ -12,6 +12,8 @@ import Foundation
 public enum AnalyticsCategory : String {
     case Conversion = "conversion"
     case Discovery = "discovery"
+    case AppReviews = "app-reviews"
+    case WhatsNew = "whats-new"
 }
 
 public enum AnalyticsEventName: String {
@@ -20,6 +22,20 @@ public enum AnalyticsEventName: String {
     case ExploreSubjects = "edx.bi.app.discover.explore.tapped"
     case UserLogin = "edx.bi.app.user.login"
     case UserRegistration = "edx.bi.app.user.register.clicked"
+    case ViewRating = "edx.bi.app.app_reviews.view_rating"
+    case DismissRating = "edx.bi.app.app_reviews.dismiss_rating"
+    case SubmitRating = "edx.bi.app.app_reviews.submit_rating"
+    case SendFeedback = "edx.bi.app.app_reviews.send_feedback"
+    case MaybeLater = "edx.bi.app.app_reviews.maybe_later"
+    case RateTheApp = "edx.bi.app.app_reviews.rate_the_app"
+    case WhatsNewClose = "edx.bi.app.whats_new.close"
+    case WhatsNewDone = "edx.bi.app.whats_new.done"
+}
+
+public enum AnalyticsScreenName: String {
+    case AppReviews = "AppReviews: View Rating"
+    case CourseDates = "Course Dates"
+    case WhatsNew = "WhatsNew: Whats New"
 }
 
 extension OEXAnalytics {
@@ -52,7 +68,7 @@ extension OEXAnalytics {
         event.name = AnalyticsEventName.UserRegistration.rawValue
         event.displayName = "Create Account Clicked"
         event.category = AnalyticsCategory.Conversion.rawValue
-        event.label = "iOS v\(NSBundle.mainBundle().oex_shortVersionString())"
+        event.label = "iOS v\(Bundle.main.oex_shortVersionString())"
         return event
     }
 

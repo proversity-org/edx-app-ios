@@ -68,6 +68,13 @@
             if(segmentConfig.apiKey != nil && segmentConfig.isEnabled) {
                 [[SEGAnalyticsConfiguration configurationWithWriteKey:segmentConfig.apiKey] use:[SEGGoogleAnalyticsIntegrationFactory instance]];
                 [analytics addTracker:[[SegmentAnalyticsTracker alloc] init]];
+            }
+            
+            if (env.config.isFirebaseEnabled) {
+                [analytics addTracker:[[FirebaseAnalyticsTracker alloc] init]];
+            }
+            
+            if((segmentConfig.apiKey != nil && segmentConfig.isEnabled) || env.config.isFirebaseEnabled) {
                 [analytics addTracker:[[LoggingAnalyticsTracker alloc] init]];
             }
             return analytics;
@@ -131,7 +138,7 @@
             [env.postSetupActions addObject:^(OEXEnvironment* env) {
                 [manager addStandardInterceptors];
                 [manager addResponseInterceptors];
-                [manager addRefreshTokenAuthenticator:env.router session:env.session clientId:env.config.oauthClientID];
+                [manager addRefreshTokenAuthenticatorWithRouter:env.router session:env.session clientId:env.config.oauthClientID];
             }];
             return manager;
         };

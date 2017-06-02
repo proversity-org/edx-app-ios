@@ -17,7 +17,6 @@
 #import "OEXConstants.h"
 #import "OEXCourse.h"
 #import "OEXFindCoursesViewController.h"
-#import "OEXFlowErrorViewController.h"
 #import "OEXInterface.h"
 #import "OEXNetworkManager.h"
 #import "OEXNetworkConstants.h"
@@ -73,20 +72,22 @@ static NSString* const OEXCourseInfoLinkPathIDPlaceholder = @"{path_id}";
     if ([[OEXSession sharedSession] currentUser]) {
         [self.webViewHelper.bottomBar removeFromSuperview];
     }
+    
+    [[OEXAnalytics sharedAnalytics] trackScreenWithName:OEXAnalyticsScreenCourseInfo];
 }
 
-- (BOOL)webViewHelper:(FindCoursesWebViewHelper *)helper shouldLoadLinkWithRequest:(NSURLRequest *)request {
+- (BOOL)webViewHelperWithHelper:(FindCoursesWebViewHelper *)helper shouldLoadLinkWithRequest:(NSURLRequest *)request {
     NSString* courseID = nil;
     BOOL emailOptIn = false;
     [self parseURL:request.URL getCourseID:&courseID emailOptIn:&emailOptIn];
     if(courseID != nil) {
-        [self enrollInCourse:courseID emailOpt:emailOptIn];
+        [self  enrollInCourseWithCourseID:courseID emailOpt:emailOptIn];
         return NO;
     }
     return YES;
 }
 
-- (UIViewController*)containingControllerForWebViewHelper:(FindCoursesWebViewHelper *)helper {
+- (UIViewController *)containingControllerForWebViewHelperWithHelper:(FindCoursesWebViewHelper *)helper {
     return self;
 }
 

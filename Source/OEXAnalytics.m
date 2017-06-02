@@ -15,7 +15,7 @@
 #import "NSMutableDictionary+OEXSafeAccess.h"
 #import "NSNotificationCenter+OEXSafeAccess.h"
 #import "OEXSession.h"
-#import "edx-Swift.h"
+#import "edX-Swift.h"
 
 @implementation OEXAnalyticsEvent
 
@@ -270,7 +270,7 @@ static OEXAnalytics* sAnalytics;
                     SkipType:(NSString*)skip_value {
 
     OEXAnalyticsVideoEvent* event = [[OEXAnalyticsVideoEvent alloc] init];
-    event.displayName = @"Video Seeked";
+    event.displayName = @"Seeked Video";
     event.name = value_video_seeked;
     event.courseID = courseId;
     event.openInBrowserURL = unitUrl;
@@ -379,7 +379,7 @@ static OEXAnalytics* sAnalytics;
     [info safeSetObject:@(currentTime) forKey:key_current_time];
 
     OEXAnalyticsVideoEvent* event = [[OEXAnalyticsVideoEvent alloc] init];
-    event.name = value_single_download;
+    event.name = value_fullscreen;
     event.displayName = @"Screen Toggled";
     event.courseID = courseId;
     event.openInBrowserURL = unitUrl;
@@ -488,7 +488,7 @@ static OEXAnalytics* sAnalytics;
 }
 
 - (void)trackUserEnrolledInCourse:(NSString*)courseID {
-    OEXAnalyticsEvent* event = [OEXAnalytics enrollEvent:courseID];
+    OEXAnalyticsEvent* event = [OEXAnalytics enrollEventWithCourseId:courseID];
     [self trackEvent:event forComponent:nil withInfo:@{}];
 }
 

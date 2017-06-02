@@ -12,6 +12,5 @@ build
 default_config/local.yaml
 *.gcda
 
-fastlane/
 custom_config/
-Preview.html
+fastlane/
