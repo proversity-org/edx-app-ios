@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QZv-Oh-XSY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="QZv-Oh-XSY">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -22,7 +22,7 @@
             <objects>
                 <navigationController navigationBarHidden="YES" id="QZv-Oh-XSY" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="d3D-qd-xvw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d3D-qd-xvw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -311,7 +311,7 @@
                                                     <state key="selected" backgroundImage="bt_logout_active.png"/>
                                                     <state key="highlighted" backgroundImage="bt_logout_active.png"/>
                                                     <connections>
-                                                        <action selector="logoutClicked:" destination="pnJ-Xb-ZVe" eventType="touchUpInside" id="gDL-xP-fWM"/>
+                                                        <action selector="logoutClickedWithSender:" destination="pnJ-Xb-ZVe" eventType="touchUpInside" id="GKi-xm-TDr"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5R-D1-1Ec">
