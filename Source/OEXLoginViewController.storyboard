@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -320,8 +320,6 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="8VG-bG-bsd"/>
-                                        <exclude reference="Ogo-10-kPE"/>
-                                        <exclude reference="QMK-RP-Dwj"/>
                                         <exclude reference="5At-WC-HPh"/>
                                         <exclude reference="A46-z9-ghc"/>
                                         <exclude reference="DY6-ao-1rI"/>
@@ -330,6 +328,8 @@
                                         <exclude reference="ZBt-RH-5zI"/>
                                         <exclude reference="aGr-2P-jxF"/>
                                         <exclude reference="mDT-tx-307"/>
+                                        <exclude reference="Ogo-10-kPE"/>
+                                        <exclude reference="QMK-RP-Dwj"/>
                                         <exclude reference="6Fh-e6-fEp"/>
                                         <exclude reference="CRV-47-xcF"/>
                                         <exclude reference="X0j-N8-9ZC"/>
@@ -339,10 +339,10 @@
                                         <exclude reference="06n-uK-Qm2"/>
                                         <exclude reference="qGY-UC-u4o"/>
                                         <exclude reference="Uuj-wm-SUE"/>
-                                        <exclude reference="hB1-YP-FkD"/>
                                         <exclude reference="mEF-9f-cVA"/>
                                         <exclude reference="Jpr-eN-Jam"/>
                                         <exclude reference="RNV-2E-14V"/>
+                                        <exclude reference="hB1-YP-FkD"/>
                                         <exclude reference="l0T-3k-yIM"/>
                                         <exclude reference="DeT-Ul-YDQ"/>
                                         <exclude reference="itP-fL-BN2"/>
@@ -422,7 +422,7 @@
     <resources>
         <image name="bt_grey_default.png" width="525" height="100"/>
         <image name="loginScreenImage.png" width="320" height="171"/>
-        <image name="logo.png" width="512" height="384"/>
+        <image name="logo.png" width="141" height="65"/>
         <image name="separator.png" width="526" height="2"/>
     </resources>
 </document>
