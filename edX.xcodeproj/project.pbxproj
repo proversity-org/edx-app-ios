@@ -695,8 +695,6 @@
 		E711B4A21E83C7C4006FFD31 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E711B4A11E83C7C4006FFD31 /* logo@2x.png */; };
 		E711B4A41E83C892006FFD31 /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E711B4A31E83C892006FFD31 /* logoWhite@2x.png */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
-		E7C649CD1E83E55400C288FD /* FamilyMosaicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C649CC1E83E55400C288FD /* FamilyMosaicUITests.swift */; };
-		E7C649DA1E83E69900C288FD /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C649D91E83E69900C288FD /* SnapshotHelper.swift */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -1605,9 +1603,6 @@
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
 		E7C649CA1E83E55400C288FD /* FamilyMosaicUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FamilyMosaicUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7C649CC1E83E55400C288FD /* FamilyMosaicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMosaicUITests.swift; sourceTree = "<group>"; };
-		E7C649CE1E83E55400C288FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E7C649D91E83E69900C288FD /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -3052,7 +3047,6 @@
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
 				BE76FEAA193C8D9C00BB9BDD /* External Libraries */,
-				E7C649CB1E83E55400C288FD /* FamilyMosaicUITests */,
 				BECB7B0D1924C0C3009C77F1 /* Frameworks */,
 				BECB7B0C1924C0C3009C77F1 /* Products */,
 				01AAC8755C861B14E810FE8B /* Pods */,
@@ -3386,16 +3380,6 @@
 				E0AF4E8D1BFB19CC0083753C /* PassthroughView.swift */,
 			);
 			name = PassthroughView;
-			sourceTree = "<group>";
-		};
-		E7C649CB1E83E55400C288FD /* FamilyMosaicUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E7C649D91E83E69900C288FD /* SnapshotHelper.swift */,
-				E7C649CC1E83E55400C288FD /* FamilyMosaicUITests.swift */,
-				E7C649CE1E83E55400C288FD /* Info.plist */,
-			);
-			path = FamilyMosaicUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4514,8 +4498,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7C649CD1E83E55400C288FD /* FamilyMosaicUITests.swift in Sources */,
-				E7C649DA1E83E69900C288FD /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
