@@ -716,17 +716,17 @@
 		E0E27FC41EC46D4000D1AEFE /* test_screen_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E27FC31EC46D4000D1AEFE /* test_screen_1.png */; };
 		E0ED96E71D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0ED96E61D6EED1C00B48B64 /* OEXCourseInfoViewController+Swift.swift */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
-		E782F7651E7158670048564D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = E782F7631E7158670048564D /* iTunesArtwork */; };
-		E782F7661E7158670048564D /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = E782F7641E7158670048564D /* iTunesArtwork@2x */; };
+		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
 		E782F76B1E7158AA0048564D /* logoBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E782F7671E7158AA0048564D /* logoBlack@2x.png */; };
 		E782F76C1E7158AA0048564D /* logoBlack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E782F7681E7158AA0048564D /* logoBlack@3x.png */; };
 		E782F76D1E7158AA0048564D /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E782F7691E7158AA0048564D /* logoWhite@2x.png */; };
 		E782F76E1E7158AA0048564D /* logoWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E782F76A1E7158AA0048564D /* logoWhite@3x.png */; };
 		E782F7701E71598A0048564D /* Cosmos.otf in Resources */ = {isa = PBXBuildFile; fileRef = E782F76F1E71598A0048564D /* Cosmos.otf */; };
-		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
 		E793E2BB1EDC5ACA00DCDAA7 /* edXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2BA1EDC5ACA00DCDAA7 /* edXUITests.swift */; };
 		E793E2C41EDC5B2D00DCDAA7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
+		E7F06BFF1EE15C080040C415 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = E7F06BFD1EE15C080040C415 /* iTunesArtwork */; };
+		E7F06C001EE15C080040C415 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = E7F06BFE1EE15C080040C415 /* iTunesArtwork@2x */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -1654,8 +1654,6 @@
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewObjectTests.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E782F7631E7158670048564D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		E782F7641E7158670048564D /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		E782F7671E7158AA0048564D /* logoBlack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoBlack@2x.png"; sourceTree = "<group>"; };
 		E782F7681E7158AA0048564D /* logoBlack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoBlack@3x.png"; sourceTree = "<group>"; };
 		E782F7691E7158AA0048564D /* logoWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoWhite@2x.png"; sourceTree = "<group>"; };
@@ -1667,6 +1665,8 @@
 		E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
+		E7F06BFD1EE15C080040C415 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		E7F06BFE1EE15C080040C415 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -2128,14 +2128,14 @@
 				69ECC5E51D50D1170030CF87 /* icon_facebook_white@2x.png */,
 				69ECC5E61D50D1170030CF87 /* icon_google_white.png */,
 				69ECC5E71D50D1170030CF87 /* icon_google_white@2x.png */,
+				E7F06BFD1EE15C080040C415 /* iTunesArtwork */,
+				E7F06BFE1EE15C080040C415 /* iTunesArtwork@2x */,
 				69ECC5EA1D50D1170030CF87 /* logo@2x.png */,
 				69ECC5EB1D50D1170030CF87 /* logo@3x.png */,
 				E782F7671E7158AA0048564D /* logoBlack@2x.png */,
 				E782F7681E7158AA0048564D /* logoBlack@3x.png */,
 				E782F7691E7158AA0048564D /* logoWhite@2x.png */,
 				E782F76A1E7158AA0048564D /* logoWhite@3x.png */,
-				E782F7631E7158670048564D /* iTunesArtwork */,
-				E782F7641E7158670048564D /* iTunesArtwork@2x */,
 				69ECC5EC1D50D1170030CF87 /* loginScreenImage@2x.png */,
 				69ECC5ED1D50D1170030CF87 /* separator.png */,
 				69ECC5EE1D50D1170030CF87 /* separator1.png */,
@@ -3810,7 +3810,6 @@
 				6926CDB01D59BE3600A16E22 /* ic_seek_thumb.png in Resources */,
 				B47780591AADA95400436DB4 /* Terms-and-Services.htm in Resources */,
 				69ECC64A1D50D1170030CF87 /* launchBackground.png in Resources */,
-				E782F7651E7158670048564D /* iTunesArtwork in Resources */,
 				69ECC6201D50D1170030CF87 /* bt_signin_deactive.png in Resources */,
 				E782F76C1E7158AA0048564D /* logoBlack@3x.png in Resources */,
 				69ECC62F1D50D1170030CF87 /* ic_cancel@3x.png in Resources */,
@@ -3829,6 +3828,7 @@
 				BD7C6C401DCA329A0004D135 /* fonts.json in Resources */,
 				69ECC6021D50D1170030CF87 /* OpenSans-Italic.ttf in Resources */,
 				69ECC6481D50D1170030CF87 /* separator5.png in Resources */,
+				E7F06BFF1EE15C080040C415 /* iTunesArtwork in Resources */,
 				69ECC6141D50D1170030CF87 /* bt_blue2.png in Resources */,
 				69ECC6321D50D1170030CF87 /* ic_download_arrow.png in Resources */,
 				69ECC6091D50D1170030CF87 /* Icon-29@2x.png in Resources */,
@@ -3851,7 +3851,6 @@
 				69ECC6431D50D1170030CF87 /* logo@3x.png in Resources */,
 				69ECC6031D50D1170030CF87 /* OpenSans-Light.ttf in Resources */,
 				5D836DC91B2FA12E00411CAB /* DiscussionNewCommentViewController.xib in Resources */,
-				E782F7661E7158670048564D /* iTunesArtwork@2x in Resources */,
 				69ECC6101D50D1170030CF87 /* profilePhotoPlaceholder.png in Resources */,
 				69ECC6051D50D1170030CF87 /* OpenSans-Regular.ttf in Resources */,
 				1A03DEA31BBC72BA006783FB /* countries.json in Resources */,
@@ -3877,6 +3876,7 @@
 				6926CDB11D59BE3600A16E22 /* ic_seek_thumb@2x.png in Resources */,
 				69ECC6351D50D1170030CF87 /* ic_next_default.png in Resources */,
 				69ECC6311D50D1170030CF87 /* ic_download.png in Resources */,
+				E7F06C001EE15C080040C415 /* iTunesArtwork@2x in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				BD837BB91DC8D5D400341EFD /* Icon-76@2x.png in Resources */,
 				BD837BBB1DC8D5DF00341EFD /* Icon-40.png in Resources */,
@@ -5501,6 +5501,7 @@
 				E793E2C11EDC5ACA00DCDAA7 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
