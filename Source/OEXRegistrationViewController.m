@@ -78,8 +78,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.loadController = [[LoadStateViewController alloc] init];
-    [self.loadController setupInController:self contentView:self.scrollView];
-
+    [self.loadController setupInControllerWithController:self contentView:self.scrollView];
     self.navigationController.navigationBarHidden = NO;
 
     [self setTitle:[Strings registerText]];
@@ -95,8 +94,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 }
 
 - (void)getFormFields {
-
-    [self getRegistrationFormDescription:^(OEXRegistrationDescription * _Nonnull response) {
+    [self getRegistrationFormDescriptionWithSuccess:^(OEXRegistrationDescription * _Nonnull response) {
         self.registrationDescription = response;
         [self makeFieldControllers];
         [self initializeViews];
@@ -130,7 +128,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [self.registerButton oex_addAction:^(id  _Nonnull control) {
         [self createAccount:nil];
     } forEvents:UIControlEventTouchUpInside];
-    [self.registerButton applyButtonStyle:[self.environment.styles filledButtonStyle:self.environment.styles.secondaryBaseColor] withTitle:[Strings registrationCreateMyAccount]];
+    [self.registerButton applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
     self.registerButton.accessibilityIdentifier = @"register";
 
     ////Create progrssIndicator as subview to btnCreateAccount
@@ -532,12 +530,12 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)showProgress:(BOOL)status {
     if(status) {
         [self.progressIndicator startAnimating];
-        [self.registerButton applyButtonStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
+        [self.registerButton applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreatingAccount]];
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     }
     else {
         [self.progressIndicator stopAnimating];
-        [self.registerButton applyButtonStyle:[self.environment.styles filledSecondaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
+        [self.registerButton applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings registrationCreateMyAccount]];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }

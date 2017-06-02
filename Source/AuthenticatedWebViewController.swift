@@ -36,11 +36,19 @@ private protocol WebContentController {
     func resetState()
 }
 
+// A class should implement AlwaysRequireAuthenticationOverriding protocol if it always require authentication.
+protocol AuthenticatedWebViewControllerRequireAuthentication {
+}
+
+protocol AuthenticatedWebViewControllerDelegate {
+    func authenticatedWebViewController(authenticatedController: AuthenticatedWebViewController, didFinishLoading webview: WKWebView)
+}
+
 private class WKWebViewContentController : WebContentController {
-    let webView : WKWebView
+    fileprivate let webView : WKWebView
     
     init(configuration: WKWebViewConfiguration) {
-        self.webView = WKWebView(frame: CGRectZero, configuration: configuration)
+        self.webView = WKWebView(frame: CGRect.zero, configuration: configuration)
     }
     
     var view : UIView {
@@ -56,7 +64,7 @@ private class WKWebViewContentController : WebContentController {
     }
     
     func loadURLRequest(request: NSURLRequest) {
-        webView.loadRequest(request)
+        webView.load(request as URLRequest)
     }
     
     func resetState() {
@@ -79,14 +87,14 @@ private let OAuthExchangePath = "/oauth2/login/"
 // Forwarding our oauth token to the server so we can get a web based cookie
 public class AuthenticatedWebViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate, UIDocumentInteractionControllerDelegate {
     
-    private enum State {
+    fileprivate enum State {
         case CreatingSession
         case LoadingContent
         case NeedingSession
     }
-    
-    public typealias Environment = protocol<OEXAnalyticsProvider, OEXConfigProvider, OEXSessionProvider>
-    
+
+    public typealias Environment = OEXAnalyticsProvider & OEXConfigProvider & OEXSessionProvider
+    var delegate: AuthenticatedWebViewControllerDelegate?
     internal let environment : Environment
     private let blockID: CourseBlockID
     private let loadController : LoadStateViewController
@@ -96,23 +104,23 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     private lazy var webController : WebContentController = {
         let js : String = "$(document).ready(function() {" +
             "$('#recap_cmd_" + self.blockID + "').click(function() {" +
-            "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
+                "window.webkit.messageHandlers.clickPDFDownload.postMessage('clickPDF')" +
             "});" +
         "});"
         
         let userScript: WKUserScript =  WKUserScript(source: js,
-                                                     injectionTime: WKUserScriptInjectionTime.AtDocumentEnd,
+                                                     injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
                                                      forMainFrameOnly: false)
         
         let contentController = WKUserContentController();
         contentController.addUserScript(userScript)
-        contentController.addScriptMessageHandler(self, name: "clickPDFDownload")
-        contentController.addScriptMessageHandler(self, name: "downloadPDF")
+        contentController.add(self, name: "clickPDFDownload")
+        contentController.add(self, name: "downloadPDF")
         let config = WKWebViewConfiguration();
         config.userContentController = contentController;
         let controller = WKWebViewContentController(configuration: config)
         controller.webView.navigationDelegate = self
-        controller.webView.UIDelegate = self
+        controller.webView.uiDelegate = self
         return controller
         
     }()
@@ -121,7 +129,11 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     
     private var contentRequest : NSURLRequest? = nil
     var currentUrl: NSURL? {
-        return contentRequest?.URL
+        return contentRequest?.url as NSURL?
+    }
+    
+    public func setLoadControllerState(withState state: LoadState) {
+        loadController.state = state
     }
     
     public init(environment : Environment, blockID: String) {
@@ -130,7 +142,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         loadController = LoadStateViewController()
         insetsController = ContentInsetsController()
         headerInsets = HeaderViewInsets()
-        insetsController.addSource(headerInsets)
+        insetsController.addSource(source: headerInsets)
         
         super.init(nibName: nil, bundle: nil)
         
@@ -155,15 +167,15 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         webController.view.snp_makeConstraints {make in
             make.edges.equalTo(self.view)
         }
-        self.loadController.setupInController(self, contentView: webController.view)
-        webController.view.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
-        webController.scrollView.backgroundColor = OEXStyles.sharedStyles().standardBackgroundColor()
+        self.loadController.setupInController(controller: self, contentView: webController.view)
+        webController.view.backgroundColor = OEXStyles.shared().standardBackgroundColor()
+        webController.scrollView.backgroundColor = OEXStyles.shared().standardBackgroundColor()
         
-        self.insetsController.setupInController(self, scrollView: webController.scrollView)
+        self.insetsController.setupInController(owner: self, scrollView: webController.scrollView)
         
         
         if let request = self.contentRequest {
-            loadRequest(request)
+            loadRequest(request: request)
         }
     }
     
@@ -188,7 +200,8 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     }
     
     public func showError(error : NSError?, icon : Icon? = nil, message : String? = nil) {
-        loadController.state = LoadState.failed(error, icon : icon, message : message)
+        loadController.state = LoadState.failed(error: error, icon : icon, message : message)
+        refreshAccessibility()
     }
     
     // MARK: Header View
@@ -203,12 +216,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             if let headerView = newValue {
                 webController.view.addSubview(headerView)
                 headerView.snp_makeConstraints {make in
-                    if #available(iOS 9.0, *) {
-                        make.top.equalTo(self.topLayoutGuide.bottomAnchor)
-                    }
-                    else {
-                        make.top.equalTo(self.snp_topLayoutGuideBottom)
-                    }
+                    make.top.equalTo(self.snp_topLayoutGuideBottom)
                     make.leading.equalTo(webController.view)
                     make.trailing.equalTo(webController.view)
                 }
@@ -220,14 +228,20 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     
     private func loadOAuthRefreshRequest() {
         if let hostURL = environment.config.apiHostURL() {
-            guard let URL = hostURL.URLByAppendingPathComponent(OAuthExchangePath) else { return }
-            let exchangeRequest = NSMutableURLRequest(URL: URL)
-            exchangeRequest.HTTPMethod = HTTPMethod.POST.rawValue
+            let URL = hostURL.appendingPathComponent(OAuthExchangePath)
+            let exchangeRequest = NSMutableURLRequest(url: URL)
+            exchangeRequest.httpMethod = HTTPMethod.POST.rawValue
             
             for (key, value) in self.environment.session.authorizationHeaders {
                 exchangeRequest.addValue(value, forHTTPHeaderField: key)
             }
-            self.webController.loadURLRequest(exchangeRequest)
+            self.webController.loadURLRequest(request: exchangeRequest)
+        }
+    }
+    
+    private func refreshAccessibility() {
+        DispatchQueue.main.async {
+            UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil)
         }
     }
     
@@ -238,147 +252,149 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         loadController.state = .Initial
         state = webController.initialContentState
         
-        if webController.alwaysRequiresOAuthUpdate {
+        let isAuthRequestRequire = ((parent as? AuthenticatedWebViewControllerRequireAuthentication) != nil) ? true: webController.alwaysRequiresOAuthUpdate
+
+        if isAuthRequestRequire {
+            self.state = State.CreatingSession
             loadOAuthRefreshRequest()
         }
         else {
-            webController.loadURLRequest(request)
+            webController.loadURLRequest(request: request)
         }
     }
     
     // MARK: WKWebView delegate
-    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         switch navigationAction.navigationType {
-        case .LinkActivated, .FormSubmitted, .FormResubmitted:
-            if let URL = navigationAction.request.URL {
-                UIApplication.sharedApplication().openURL(URL)
+        case .linkActivated, .formSubmitted, .formResubmitted:
+            if let URL = navigationAction.request.url {
+                UIApplication.shared.openURL(URL)
             }
-            decisionHandler(.Cancel)
+            decisionHandler(.cancel)
         default:
-            decisionHandler(.Allow)
+            decisionHandler(.allow)
         }
     }
     
-    public func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         
-        if let
-            httpResponse = navigationResponse.response as? NSHTTPURLResponse,
-            statusCode = OEXHTTPStatusCode(rawValue: httpResponse.statusCode),
-            errorGroup = statusCode.errorGroup
-            where state == .LoadingContent
-        {
+        if let httpResponse = navigationResponse.response as? HTTPURLResponse, let statusCode = OEXHTTPStatusCode(rawValue: httpResponse.statusCode), let errorGroup = statusCode.errorGroup, state == .LoadingContent {
             switch errorGroup {
-            case .Http4xx:
+            case HttpErrorGroup.http4xx:
                 self.state = .NeedingSession
-            case .Http5xx:
+            case HttpErrorGroup.http5xx:
                 self.loadController.state = LoadState.failed()
-                decisionHandler(.Cancel)
+                decisionHandler(.cancel)
             }
         }
-        decisionHandler(.Allow)
+        decisionHandler(.allow)
         
     }
     
-    public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         switch state {
         case .CreatingSession:
             if let request = contentRequest {
                 state = .LoadingContent
-                webController.loadURLRequest(request)
+                webController.loadURLRequest(request: request)
+                
             }
             else {
                 loadController.state = LoadState.failed()
             }
         case .LoadingContent:
-            loadController.state = .Loaded
+            //The class which will implement this protocol method will be responsible to set the loadController state as Loaded
+            if delegate?.authenticatedWebViewController(authenticatedController: self, didFinishLoading: webView) == nil {
+              loadController.state = .Loaded
+            }
         case .NeedingSession:
             state = .CreatingSession
             loadOAuthRefreshRequest()
         }
+        
+        refreshAccessibility()
     }
     
-    public func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        showError(error)
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        showError(error: error as NSError?)
     }
     
-    public func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        showError(error)
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        showError(error: error as NSError?)
     }
     
-    public func webView(webView: WKWebView, didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    public func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         // Don't use basic auth on exchange endpoint. That is explicitly non protected
         // and it screws up the authorization headers
-        if let URL = webView.URL where ((URL.absoluteString?.hasSuffix(OAuthExchangePath)) != nil) {
-            completionHandler(.PerformDefaultHandling, nil)
+        if let URL = webView.url, ((URL.absoluteString.hasSuffix(OAuthExchangePath)) != false) {
+            completionHandler(.performDefaultHandling, nil)
         }
-        else if let credential = environment.config.URLCredentialForHost(challenge.protectionSpace.host)  {
-            completionHandler(.UseCredential, credential)
+        else if let credential = environment.config.URLCredentialForHost(challenge.protectionSpace.host as NSString)  {
+            completionHandler(.useCredential, credential)
         }
         else {
-            completionHandler(.PerformDefaultHandling, nil)
+            completionHandler(.performDefaultHandling, nil)
         }
     }
     
-    public func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == "clickPDFDownload") {
             generatePdf()
         } else if (message.name == "downloadPDF") {
-            showPdf(message.body);
+            showPdf(pdf: message.body as AnyObject);
         }
     }
     
-    public func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
+    public func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self
     }
     
     public func generatePdf() {
-        let pdfJS : String = "var doc = new jsPDF('p', 'pt', 'letter');" +
-            "doc.fromHTML($('#recap_answers_" + blockID + "').get(0), 30, 20, {" +
-            "'width': 550," +
-            "'elementHandlers': {" +
-            "'#recap_editor_" + blockID + "': function(element, renderer){" +
-            "return true;" +
-            "}" +
-            "}" +
-            "}, function(){" +
-            "window.webkit.messageHandlers.downloadPDF.postMessage(doc.output('datauristring'))" +
-        "}, { top: 10, bottom: 10 });"
+        let pdfJS : String = "var pdf_element = document.getElementById('recap_answers_" + blockID + "').innerHTML;" +
+            "html2pdf(pdf_element, {" +
+                "margin: [0.8, 1, 0.5, 1]," +
+                "filename: 'PDF.pdf'," +
+                "image: { type: 'jpeg',quality: 0.98 }," +
+                "html2canvas: { dpi: 192, letterRendering: true }," +
+                "jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }" +
+            "}, function(pdf) {" +
+                "window.webkit.messageHandlers.downloadPDF.postMessage(pdf.output('datauristring'));" +
+            "});";
         let webView = webController.view as! WKWebView
         webView.evaluateJavaScript(pdfJS, completionHandler: { (result, error) -> Void in
-            print(result)
-            print(error)
+            print(result ?? "")
+            print(error ?? "")
         })
     }
     
     public func showPdf(pdf: AnyObject) {
         let url = NSURL(string: pdf as! String)
-        let request = NSURLRequest(URL: url!)
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        let task = session.downloadTaskWithRequest(request, completionHandler: { (location, response, error) in
-            let fileManager = NSFileManager.defaultManager()
-            let documents = try! fileManager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-            let fileURL = documents.URLByAppendingPathComponent("PDF.pdf")
-            let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let request = NSURLRequest(url: url! as URL)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.downloadTask(with: request as URLRequest, completionHandler: { (location, response, error) in
+            let fileManager = FileManager.default
+            let documents = try! fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            let fileURL = documents.appendingPathComponent("PDF.pdf")
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
             let url = NSURL(fileURLWithPath: path)
-            let filePath = url.URLByAppendingPathComponent("PDF.pdf")!.path!
-            if fileManager.fileExistsAtPath(filePath) {
+            let filePath = url.appendingPathComponent("PDF.pdf")!.path
+            if fileManager.fileExists(atPath: filePath) {
                 do {
-                    try fileManager.removeItemAtPath(filePath)
+                    try fileManager.removeItem(atPath: filePath)
                 } catch {
                     print(error)
                 }
             }
             
             do {
-                let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-                let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-                try fileManager.moveItemAtURL(location!, toURL: fileURL!)
-                dispatch_async(backgroundQueue, {
-                    let documentController = UIDocumentInteractionController.init(URL: fileURL!)
+                let backgroundQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+                try fileManager.moveItem(at: location!, to: fileURL)
+                backgroundQueue.async(execute: { 
+                    let documentController = UIDocumentInteractionController.init(url: fileURL)
                     documentController.delegate = self
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        documentController.presentPreviewAnimated(true)
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        documentController.presentPreview(animated: true)
                     })
                 })
             } catch {

@@ -56,19 +56,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BD578FA01DF57D3500826069"
-               BuildableName = "Family Mosaic | ProversityUITests.xctest"
-               BlueprintName = "Family Mosaic | ProversityUITests"
-               ReferencedContainer = "container:edX.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E7C649C91E83E55400C288FD"
-               BuildableName = "FamilyMosaicUITests.xctest"
-               BlueprintName = "FamilyMosaicUITests"
+               BlueprintIdentifier = "E793E2B71EDC5ACA00DCDAA7"
+               BuildableName = "edXUITests.xctest"
+               BlueprintName = "edXUITests"
                ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </TestableReference>
