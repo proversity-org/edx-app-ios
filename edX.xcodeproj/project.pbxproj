@@ -641,8 +641,6 @@
 		BD837BBB1DC8D5DF00341EFD /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = BD837BBA1DC8D5DF00341EFD /* Icon-40.png */; };
 		BDA917BB1E190B7400211931 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA917B91E190B7400211931 /* logo.png */; };
 		BDA917BC1E190B7400211931 /* logoColor.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA917BA1E190B7400211931 /* logoColor.png */; };
-		BDA917C41E190F4A00211931 /* YoungEnterpriseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA917C31E190F4A00211931 /* YoungEnterpriseUITests.swift */; };
-		BDA917CE1E19106600211931 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA917CC1E19106600211931 /* SnapshotHelper.swift */; };
 		BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */; };
 		BE0D4551192DE65200D720D6 /* OEXInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4550192DE65200D720D6 /* OEXInterface.m */; };
 		BE0EE287192B78C400F9FF98 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0EE286192B78C400F9FF98 /* CoreTelephony.framework */; };
@@ -1532,9 +1530,6 @@
 		BDA917B91E190B7400211931 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		BDA917BA1E190B7400211931 /* logoColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoColor.png; sourceTree = "<group>"; };
 		BDA917C11E190F4900211931 /* YoungEnterpriseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YoungEnterpriseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDA917C31E190F4A00211931 /* YoungEnterpriseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoungEnterpriseUITests.swift; sourceTree = "<group>"; };
-		BDA917C51E190F4A00211931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BDA917CC1E19106600211931 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		BE0D4547192DD16300D720D6 /* OEXNetworkConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXNetworkConstants.h; sourceTree = "<group>"; };
 		BE0D4548192DD4F800D720D6 /* OEXNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXNetworkInterface.h; sourceTree = "<group>"; };
 		BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXNetworkInterface.m; sourceTree = "<group>"; };
@@ -2965,16 +2960,6 @@
 			name = "Registration Field Controllers";
 			sourceTree = "<group>";
 		};
-		BDA917C21E190F4A00211931 /* YoungEnterpriseUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BDA917CC1E19106600211931 /* SnapshotHelper.swift */,
-				BDA917C31E190F4A00211931 /* YoungEnterpriseUITests.swift */,
-				BDA917C51E190F4A00211931 /* Info.plist */,
-			);
-			path = YoungEnterpriseUITests;
-			sourceTree = "<group>";
-		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -3062,7 +3047,6 @@
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
 				BE76FEAA193C8D9C00BB9BDD /* External Libraries */,
-				BDA917C21E190F4A00211931 /* YoungEnterpriseUITests */,
 				BECB7B0D1924C0C3009C77F1 /* Frameworks */,
 				BECB7B0C1924C0C3009C77F1 /* Products */,
 				01AAC8755C861B14E810FE8B /* Pods */,
@@ -4016,8 +4000,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDA917C41E190F4A00211931 /* YoungEnterpriseUITests.swift in Sources */,
-				BDA917CE1E19106600211931 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
