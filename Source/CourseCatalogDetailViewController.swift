@@ -14,7 +14,7 @@ import edXCore
 class CourseCatalogDetailViewController: UIViewController {
     private let courseID: String
     
-    typealias Environment = OEXAnalyticsProvider & DataManagerProvider & NetworkManagerProvider & OEXRouterProvider & OEXSessionProvider
+    typealias Environment = OEXAnalyticsProvider & DataManagerProvider & NetworkManagerProvider & OEXRouterProvider & OEXStylesProvider & OEXSessionProvider
     
     private let environment: Environment
     private lazy var loadController = LoadStateViewController()
@@ -95,8 +95,8 @@ class CourseCatalogDetailViewController: UIViewController {
                 else if !isOldEnough {
                     self?.aboutView.invitationOnlyBtn(text: "You are not old enough to enrol")
                 }
-                else if course.invitation_only {
-                    self?.aboutView.invitationOnlyBtn(text: "Invitation only")
+                else if course.invitationOnly {
+                    self?.aboutView.invitationOnlyText = Strings.CourseDetail.invitationOnly
                 }
                 else {
                     self?.aboutView.actionText = Strings.CourseDetail.enrollNow

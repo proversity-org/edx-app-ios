@@ -84,7 +84,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
 @property (nonatomic, copy) NSString* course_updates;         //  ANNOUNCEMENTS
 @property (nonatomic, copy) NSString* course_handouts;        //  HANDOUTS
 @property (nonatomic, copy) NSString* course_about;           // COURSE INFO
-@property (nonatomic) Boolean invitation_only;
+@property (nonatomic) Boolean invitationOnly;
 @property (nonatomic) float minimum_age;
 @property (nonatomic, strong) OEXCoursewareAccess* courseware_access;
 @property (nonatomic, copy) NSString* discussionUrl;
@@ -120,7 +120,7 @@ NSString* NSStringForOEXStartType(OEXStartType type) {
         self.course_handouts = [info objectForKey:@"course_handouts"];
         self.course_about = [info objectForKey:@"course_about"];
         self.subscription_id = [info objectForKey:@"subscription_id"];
-        self.invitation_only = [[info objectForKey:@"invitation_only"] boolValue];
+        self.invitationOnly = [[info objectForKey:@"invitation_only"] boolValue];
         self.minimum_age = [[info objectForKey:@"minimum_age"] floatValue];
         NSDictionary* accessInfo = [info objectForKey:@"courseware_access"];
         self.courseware_access = [[OEXCoursewareAccess alloc] initWithDictionary: accessInfo];
