@@ -9,6 +9,7 @@ dependencies:
   override:
     - sudo gem install fastlane -NV
     - sudo gem uninstall fastimage -v 2.0.1
+    - sudo gem uninstall fastimage -v 1.6
     - sudo gem cleanup
     - brew install libpng jpeg imagemagick
     - ./gradlew dependencies --stacktrace --info
