@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Cliffe Dekker Hofmeyr</string>
+	<string>CDH</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -38,7 +38,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSpokenName</key>
-	<string>Cliffe Dekker Hofmeyr</string>
+	<string>CDH</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
