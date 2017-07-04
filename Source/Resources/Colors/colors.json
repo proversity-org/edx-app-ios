@@ -1,13 +1,13 @@
 {
-    "primaryXDarkColor":"#003654",
-    "primaryDarkColor":"#005483",
-    "primaryBaseColor":"#0079BC",
+    "primaryXDarkColor":"#0084b6",
+    "primaryDarkColor":"#0084b6",
+    "primaryBaseColor":"#0084b6",
     "primaryLightColor":"#4CA1D0",
     "primaryXLightColor":"#D9EBF5",
     
-    "secondaryXDarkColor":"#5B283F",
-    "secondaryDarkColor":"#8E3E62",
-    "secondaryBaseColor":"#CB598D",
+    "secondaryXDarkColor":"#ffffff",
+    "secondaryDarkColor":"#ffffff",
+    "secondaryBaseColor":"#ffffff",
     "secondaryLightColor":"#DA8AAF",
     "secondaryXLightColor":"#EFCDDC",
     
