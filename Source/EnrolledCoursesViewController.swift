@@ -148,7 +148,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
                     self?.hideSnackBar()
                 }
             }
-            isFirstLoad = false
         }
     }
     
