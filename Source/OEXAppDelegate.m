@@ -81,7 +81,6 @@
 
     [self.environment.router openInWindow:self.window];
     
-    if (self.environment.config.pushNotificationsEnabled) {
 #ifdef __IPHONE_10_0
     [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
@@ -96,7 +95,6 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
 #endif
-    }
 
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
