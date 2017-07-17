@@ -264,10 +264,12 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             cellItems.append(item)
         }
         
-        item = StandardCourseDashboardItem(title: Strings.Dashboard.courseAnnouncements, detail: Strings.Dashboard.courseAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
-            self?.showAnnouncements()
+        if shouldShowAnnouncements() {
+            item = StandardCourseDashboardItem(title: Strings.Dashboard.courseAnnouncements, detail: Strings.Dashboard.courseAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
+                self?.showAnnouncements()
+            }
+            cellItems.append(item)
         }
-        cellItems.append(item)
         
         if environment.config.courseDatesEnabled {
             item = StandardCourseDashboardItem(title: Strings.Dashboard.courseImportantDates, detail:Strings.Dashboard.courseImportantDatesDetail, icon:.Calendar, action: {[weak self] () -> Void in
@@ -285,6 +287,10 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     private func shouldShowHandouts(course: OEXCourse) -> Bool {
         return !(course.course_handouts?.isEmpty ?? true)
+    }
+    
+    private func shouldShowAnnouncements() -> Bool {
+        return self.environment.config.isAnnouncementsEnabled
     }
 
     private func getCertificateUrl(enrollment: UserCourseEnrollment) -> String? {
