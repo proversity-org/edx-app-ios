@@ -33,7 +33,7 @@ def send_uuids(dev_uuid, store_uuid, org_code):
     authorization_key = 'e6005c3173671458fee3b322a73178ca2c900ab8b433c302dbd560ec0ed71570'
     action = 'save_ios_uuids'
 
-    url = "https://consola-api/organizations/%s/circleci/webhook?authorization=%s&action=%s&devUUID=%s&storeUUID-=%s" % (org_code, authorization_key, action, dev_uuid, store_uuid)
+    url = "https://consola-api.proversity.org/organizations/%s/circleci/webhook?authorization=%s&action=%s&devUUID=%s&storeUUID-=%s" % (org_code, authorization_key, action, dev_uuid, store_uuid)
     r = requests.post(url)
     print r.json()
 
