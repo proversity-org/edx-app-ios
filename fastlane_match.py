@@ -35,7 +35,7 @@ def send_uuids(dev_uuid, store_uuid, org_code):
 
     url = "https://consola-api.proversity.org/organizations/%s/circleci/webhook?authorization=%s&action=%s&devUUID=%s&storeUUID-=%s" % (org_code, authorization_key, action, dev_uuid, store_uuid)
     r = requests.post(url)
-    print r.json()
+    print r.text
 
 if __name__ == '__main__':
     org_code = sys.argv[1]
