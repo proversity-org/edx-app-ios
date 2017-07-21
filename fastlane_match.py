@@ -17,7 +17,7 @@ def not_in(x):
     return not is_in
 
 def run_fastlane(mode):
-    subprocess.check_output(['fastlane', 'create'])
+    # subprocess.check_output(['fastlane', 'create'])
     print "\t=> Mode: %s" % mode
     print "\t=> fastlane match %s" % mode
     output = subprocess.check_output(['fastlane', 'match', mode])
