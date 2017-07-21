@@ -15,7 +15,6 @@ dependencies:
     - sudo gem install fastlane -NV
     - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
-    - sudo pip install requests
     - ./gradlew dependencies --stacktrace --info
   post:
     - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
