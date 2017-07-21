@@ -34,7 +34,7 @@ def send_uuids(dev_uuid, store_uuid, org_code):
     action = 'save_ios_uuids'
     url = "/organizations/%s/circleci/webhook?authorization=%s&action=%s&devUUID=%s&storeUUID-=%s" % (org_code, authorization_key, action, dev_uuid, store_uuid)
     headers = {"Content-type": "application/json", "Accept": "application/json"}
-    conn = httplib.HTTPConnection("https://consola-api.proversity.org")
+    conn = httplib.HTTPConnection("https://consola-api.proversity.org:443")
     conn.request("POST", url, {}, headers)
     response = conn.getresponse()
     print response.status, response.reason
