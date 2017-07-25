@@ -53,7 +53,7 @@ static OEXStyles* sSharedStyles;
 }
 
 - (UIColor*)navigationItemTintColor {
-    return [self standardBackgroundColor];
+    return [self secondaryBaseColor];
 }
 
 - (void) applyMockBackButtonStyleToButton : (UIButton*) button {

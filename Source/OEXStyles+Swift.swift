@@ -111,7 +111,7 @@ extension OEXStyles {
     func filledButtonStyle(color: UIColor) -> ButtonStyle {
         let buttonMargins : CGFloat = 8
         let borderStyle = BorderStyle()
-        let textStyle = OEXTextStyle(weight: .semiBold, size: .base, color: self.neutralWhite())
+        let textStyle = OEXTextStyle(weight: .semiBold, size: .base, color: self.secondaryBaseColor())
         return ButtonStyle(textStyle: textStyle, backgroundColor: color, borderStyle: borderStyle,
                            contentInsets : UIEdgeInsetsMake(buttonMargins, buttonMargins, buttonMargins, buttonMargins))
     }
