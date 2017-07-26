@@ -259,9 +259,9 @@
 /* Text describing the Announcements section within the course dashboard */
 "DASHBOARD.COURSE_ANNOUNCEMENTS_DETAIL"="Keep up with the latest news";
 /* Title text for the Courseware section of the course dashboard */
-"DASHBOARD.COURSE_COURSEWARE"="Course";
+"DASHBOARD.COURSE_COURSEWARE"="Nugget";
 /* Text describing the Courseware section within the course dashboard */
-"DASHBOARD.COURSE_COURSE_DETAIL"="Access course content and assignments";
+"DASHBOARD.COURSE_COURSE_DETAIL"="Access nugget content";
 /* Title text for the videos section of the course dashboard */
 "DASHBOARD.COURSE_Videos"="Videos";
 /* Text describing the Videos section within the course dashboard */
