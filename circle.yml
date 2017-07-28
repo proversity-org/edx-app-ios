@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - proversity/pro
+      - proversity/pea
       
 machine:
   xcode:
@@ -18,7 +18,7 @@ dependencies:
     - sudo pip install requests
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pea ./deployment
     - cp -R deployment/custom_config custom_config
     - cp -R deployment/fastlane fastlane
     - cp -R deployment/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
@@ -35,6 +35,6 @@ test:
 
 deployment:
   beta:
-    branch: proversity/pro
+    branch: proversity/pea
     commands:
-      - python fastlane_match.py
+      - python fastlane_match.py pea
