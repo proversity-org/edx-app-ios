@@ -13,6 +13,7 @@
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <NewRelicAgent/NewRelic.h>
 #import <SEGAnalytics.h>
+#import <linkedin-sdk/LISDK.h>
 
 #import "OEXAppDelegate.h"
 
@@ -103,6 +104,10 @@
     if (self.environment.config.googleConfig.enabled){
         handled = [[GIDSignIn sharedInstance] handleURL:url sourceApplication:sourceApplication annotation:annotation];
         [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:YES];
+    }
+    
+    if ([LISDKCallbackHandler shouldHandleUrl:url]) {
+        return [LISDKCallbackHandler application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
     }
    
     return handled;
