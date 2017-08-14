@@ -27,6 +27,7 @@
 #import "OEXFabricConfig.h"
 #import "OEXFacebookConfig.h"
 #import "OEXGoogleConfig.h"
+#import "OEXLinkedInConfig.h"
 #import "OEXGoogleSocial.h"
 #import "OEXInterface.h"
 #import "OEXNewRelicConfig.h"
@@ -106,8 +107,10 @@
         [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:YES];
     }
     
-    if ([LISDKCallbackHandler shouldHandleUrl:url]) {
-        return [LISDKCallbackHandler application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    if (self.environment.config.linkedInConfig.enabled) {
+        if ([LISDKCallbackHandler shouldHandleUrl:url]) {
+            return [LISDKCallbackHandler application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+        }
     }
    
     return handled;
