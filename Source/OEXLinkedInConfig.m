@@ -10,9 +10,11 @@
 
 static NSString* const OEXLinkedInConfigKey = @"LINKEDIN";
 static NSString* const OEXLinkedInEnabledKey = @"ENABLED";
+static NSString* const OEXLinkedInGetProfileKey = @"GET_PROFILE";
 
 @interface OEXLinkedInConfig () {
     BOOL _enabled;
+    BOOL _getProfile;
 }
 
 @end
@@ -23,6 +25,7 @@ static NSString* const OEXLinkedInEnabledKey = @"ENABLED";
     self = [super init];
     if(self) {
         _enabled = [dictionary[@"ENABLED"] boolValue];
+        _getProfile = [dictionary[@"GET_PROFILE"] boolValue];
     }
     return self;
 }

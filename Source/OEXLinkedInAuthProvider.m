@@ -14,45 +14,43 @@
 #import "OEXLinkedInSocial.h"
 #import "OEXRegisteringUserDetails.h"
 
-@implementation OEXFacebookAuthProvider
+@implementation OEXLinkedInAuthProvider
 
-- (UIColor*)facebookBlue {
-    return [UIColor colorWithRed:49./255. green:80./255. blue:178./255. alpha:1];
+- (UIColor*)linkedInBlue {
+    return [UIColor colorWithRed:0./255. green:119./255. blue:181./255. alpha:1];
 }
 
 - (NSString*)displayName {
-    return [Strings facebook];
+    return @"LinkedIn";
 }
 
 - (NSString*)backendName {
-    return @"facebook";
+    return @"linkedin-oauth2";
 }
 
 - (OEXExternalAuthProviderButton*)freshAuthButton {
     OEXExternalAuthProviderButton* button = [[OEXExternalAuthProviderButton alloc] initWithFrame:CGRectZero];
     button.provider = self;
-    [button setImage:[UIImage imageNamed:@"icon_facebook_white"] forState:UIControlStateNormal];
-    [button useBackgroundImageOfColor:[self facebookBlue]];
+    [button setImage:[UIImage imageNamed:@"icon_linkedin_white"] forState:UIControlStateNormal];
+    [button useBackgroundImageOfColor:[self linkedInBlue]];
     return button;
 }
 
 - (void)authorizeServiceFromController:(UIViewController *)controller requestingUserDetails:(BOOL)loadUserDetails withCompletion:(void (^)(NSString *, OEXRegisteringUserDetails *, NSError *))completion {
-    OEXFBSocial* facebookManager = [[OEXFBSocial alloc] init]; //could be named facebookHelper.
-    [facebookManager loginFromController:controller completion:^(NSString *accessToken, NSError *error) {
+    OEXLinkedInSocial* linkedInManager = [[OEXLinkedInSocial alloc] init];
+    [linkedInManager loginFromController:controller completion:^(NSString *accessToken, NSError *error) {
         if(error) {
-            if([error.domain isEqual:FBSDKErrorDomain] && error.code == FBSDKNetworkErrorCode) {
-                // Hide FB specific errors inside this abstraction barrier
-                error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorNetworkConnectionLost userInfo:error.userInfo];
-            }
             completion(accessToken, nil, error);
             return;
         }
         if(loadUserDetails) {
-            [facebookManager requestUserProfileInfoWithCompletion:^(NSDictionary *userInfo, NSError *error) {
-                // userInfo is a facebook user object
+            [linkedInManager requestUserProfileInfoWithCompletion:^(NSDictionary *userInfo, NSError *error) {
+                NSLog(@"successfully call linkedin api");
+                NSLog(@"%@", userInfo);
+                // userInfo is a linkedIn user object
                 OEXRegisteringUserDetails* profile = [[OEXRegisteringUserDetails alloc] init];
-                profile.email = userInfo[@"email"];
-                profile.name = userInfo[@"name"];
+                profile.email = userInfo[@"emailAddress"];
+                profile.name = [NSString stringWithFormat:@"%@ %@", userInfo[@"firstName"], userInfo[@"lastName"]];
                 completion(accessToken, profile, error);
             }];
         }

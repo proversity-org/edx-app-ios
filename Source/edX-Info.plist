@@ -49,6 +49,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>org.edx.mobile</string>
+				<string>li5242056</string>
 			</array>
 		</dict>
 	</array>
@@ -64,12 +65,17 @@
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LIAppId</key>
+	<string>5242056</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 		<string>fb-messenger-api</string>
+		<string>linkedin</string>
+		<string>linkedin-sdk2</string>
+		<string>linkedin-sdk</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

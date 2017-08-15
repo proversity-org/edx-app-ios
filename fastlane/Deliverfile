@@ -1,0 +1,15 @@
+app_identifier "org.proversity.tf"
+username "antonio@proversity.org"
+price_tier 0
+copyright "#{Time.now.year} Proversity.org Ltd"
+app_rating_config_path "./fastlane/rating_config.json"
+app_icon "./iTunesArtwork@2x.png"
+app_review_information(
+  first_name: "Jose Antonio",
+  last_name: "Gonzalez",
+  phone_number: "+5214421444698",
+  email_address: "antonio@proversity.org",
+  demo_user: "jagonzalr",
+  demo_password: "Fender182",
+  notes: "Login with provided credentials."
+)

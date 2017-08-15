@@ -1,0 +1,121 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.12.0"
+
+default_platform :ios
+
+platform :ios do
+  before_all do
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+    # cocoapods
+    
+  end
+
+  # Create new app in iTunesConnect
+  lane :create do
+    produce(
+      username: 'antonio@proversity.org',
+      app_identifier: 'org.proversity.',
+      app_name: 'MyApp'
+    )
+  end
+
+
+  # Screenshots
+  lane :screenshots do
+    snapshot
+    frameit
+    sh "bash ./clean.sh"
+    deliver(
+      force: true,
+      skip_screenshots: false,
+      skip_metadata: true,
+      skip_binary_upload: true
+    )
+  end
+
+  # Metadata
+  desc "Upload metadata"
+  lane :metadata do
+    deliver(
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      skip_binary_upload: true
+    )
+  end
+
+  desc "Build"
+  private_lane :build do
+    match(type: 'appstore')
+    clear_derived_data
+    xcversion(version: "8.2.1")
+    gym(scheme: "edX", export_method: "app-store")
+  end
+
+  desc "Submit to TestFlight"
+  lane :beta do
+    build
+    screenshots
+    metadata
+    testflight(
+      skip_submission: true,
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Deploy to the AppStore"
+  lane :release do
+    build
+    metadata
+    deliver(
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: true,
+      skip_binary_upload: false,
+      submit_for_review: false,
+      automatic_release: false
+    )
+  end
+
+  after_all do |lane|
+    if lane == :beta
+      slack(
+        message: "Successfully deployed Teach First app to TestFlight.",
+        username: "Circle CI iOS Bot",
+        channel: "#team-engineering",
+        success: true,
+        payload: {
+          "Build Date" => Time.new.to_s,
+          "Built by" => "Circle CI",
+        },
+        default_payloads: [:git_branch, :git_author]
+      )
+    end
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer

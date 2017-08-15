@@ -1,0 +1,36 @@
+{
+  "device_frame_version": "latest",
+  "default": {
+    "background": "./background.jpg",
+    "padding": 50,
+    "show_complete_frame": false,
+    "stack_title" : false
+  },
+
+  "data": [
+    {
+      "filter": "courses",
+      "keyword": {
+        "color": "#323538"
+      }
+    },
+    {
+      "filter": "login",
+      "keyword": {
+        "color": "#323538"
+      }
+    },
+    {
+      "filter": "profile",
+      "keyword": {
+        "color": "#323538"
+      }
+    },
+    {
+      "filter": "splash",
+      "keyword": {
+        "color": "#323538"
+      }
+    }
+  ]
+}

@@ -19,6 +19,9 @@
 #import "OEXFacebookConfig.h"
 #import "OEXGoogleAuthProvider.h"
 #import "OEXGoogleConfig.h"
+#import "OEXLinkedInConfig.h"
+#import "OEXLinkedInSocial.h"
+#import "OEXLinkedInAuthProvider.h"
 #import "OEXHTTPStatusCodes.h"
 #import "OEXRegistrationAgreementController.h"
 #import "OEXRegistrationDescription.h"
@@ -177,6 +180,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     }
     if(self.environment.config.facebookConfig.enabled) {
         [providers addObject:[[OEXFacebookAuthProvider alloc] init]];
+    }
+    if(self.environment.config.linkedInConfig.enabled) {
+        [providers addObject:[[OEXLinkedInAuthProvider alloc] init]];
     }
     if(providers.count > 0) {
         OEXExternalRegistrationOptionsView* headingView = [[OEXExternalRegistrationOptionsView alloc] initWithFrame:CGRectZero providers:providers];
@@ -356,6 +362,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 #pragma mark ExternalRegistrationOptionsDelegate
 
 - (void)optionsView:(OEXExternalRegistrationOptionsView *)view choseProvider:(id<OEXExternalAuthProvider>)provider {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     [provider authorizeServiceFromController:self requestingUserDetails:YES withCompletion:^(NSString *accessToken, OEXRegisteringUserDetails *userProfile, NSError *error) {
         if(error == nil) {
             [view beginIndicatingActivity];
@@ -370,6 +377,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                     }];
                 }
                 else {
+                    NSLog(@"IM HERE!!");
                     // No account already, so continue registration process
                     UIView* headingView = [[OEXUsingExternalAuthHeadingView alloc] initWithFrame:CGRectZero serviceName:provider.displayName];
                     [self useHeadingView:headingView];
@@ -424,7 +432,8 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
             NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:&error];
             OEXLogInfo(@"REGISTRATION", @"Register user response ==>> %@", dictionary);
             NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
-
+            NSLog(@"%ld", (long)httpResp.statusCode);
+            NSLog(@"%@", dictionary);
             void(^completion)(NSData*, NSURLResponse*, NSError*) = ^(NSData* data, NSURLResponse* response, NSError* error){
                 NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
                 if(httpResp.statusCode == OEXHTTPStatusCode200OK) {
@@ -443,6 +452,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                     [OEXAuthentication requestTokenWithUser:username password:password completionHandler:completion];
                 }
                 else {
+                    NSLog(@"NOW IM HERE");
                     [self attemptExternalLoginWithProvider:self.externalProvider token:self.externalAccessToken completion:completion];
                 }
 

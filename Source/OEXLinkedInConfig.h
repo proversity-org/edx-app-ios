@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OEXLinkedInConfig : NSObject
 @property(nonatomic, readonly, assign, getter = isEnabled) BOOL enabled;
+@property(nonatomic, readonly, assign, getter = isGetProfile) BOOL getProfile;
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 

@@ -81,6 +81,7 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     NSURL* endpoint = [NSURL URLWithString:path relativeToURL:hostURL];
     
     NSString* body = [parameters oex_stringByUsingFormEncoding];
+    NSLog(@"%@", body);
     NSData* bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
     
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:endpoint];
@@ -95,17 +96,20 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 }
 
 + (void)requestTokenWithProvider:(id <OEXExternalAuthProvider>)provider externalToken:(NSString *)token completion:(OEXURLRequestHandler)completionBlock {
-    
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
     [parameters setSafeObject:token forKey:@"access_token"];
     [parameters setSafeObject:[[OEXConfig sharedConfig] oauthClientID] forKey:@"client_id"];
     NSString* path = [NSString oex_stringWithFormat:URL_EXCHANGE_TOKEN parameters:@{@"backend" : provider.backendName}];
+    NSLog(@"%@", path);
     
     [self executePOSTRequestWithPath:path parameters:parameters completion:^(NSData *data, NSHTTPURLResponse *response, NSError *error) {
         if(!error) {
             NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
+            NSLog(@"%ld", (long)httpResp.statusCode);
+            NSLog(@"%@", [NSJSONSerialization JSONObjectWithData:data options:0 error:&error]);
             if(httpResp.statusCode == 200) {
                 NSError* error;
                 NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
@@ -116,6 +120,9 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
             }
             else if(httpResp.statusCode == 401) {
                 error = [NSError errorWithDomain:@"Not valid user" code:401 userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObject:@"You are not associated with edx please signup up from website"] forKeys:[NSArray arrayWithObject:@"failed"]]];
+            }
+            else if(httpResp.statusCode == 500) {
+                error = [NSError errorWithDomain:@"Server" code:500 userInfo:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObject:@"An error ocurred in the server. Please try again."] forKeys:[NSArray arrayWithObject:@"failed"]]];
             }
         }
         OEXWrapURLCompletion(completionBlock)(data, response, error);
@@ -211,6 +218,8 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 }
 
 + (void)registerUserWithParameters:(NSDictionary*)parameters completionHandler:(OEXURLRequestHandler)handler {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%@", parameters);
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [OEXConfig sharedConfig].apiHostURL, SIGN_UP_URL]]];
     [request setHTTPMethod:@"POST"];

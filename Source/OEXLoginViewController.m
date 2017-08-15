@@ -29,6 +29,9 @@
 #import "OEXGoogleAuthProvider.h"
 #import "OEXGoogleConfig.h"
 #import "OEXGoogleSocial.h"
+#import "OEXLinkedInConfig.h"
+#import "OEXLinkedInSocial.h"
+#import "OEXLinkedInAuthProvider.h"
 #import "OEXInterface.h"
 #import "OEXNetworkConstants.h"
 #import "OEXNetworkUtility.h"
@@ -169,6 +172,10 @@
     return ![OEXNetworkUtility isOnZeroRatedNetwork] && [self.environment.config googleConfig].enabled;
 }
 
+- (BOOL)isLinkedInEnabled {
+    return ![OEXNetworkUtility isOnZeroRatedNetwork] && [self.environment.config linkedInConfig].enabled;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -180,6 +187,10 @@
     }
     if([self isFacebookEnabled]) {
         [providers addObject:[[OEXFacebookAuthProvider alloc] init]];
+    }
+    
+    if ([self isLinkedInEnabled]) {
+        [providers addObject:[[OEXLinkedInAuthProvider alloc] init]];
     }
 
     __weak __typeof(self) owner = self;
@@ -490,6 +501,7 @@
     }
     
     OEXURLRequestHandler handler = ^(NSData* data, NSHTTPURLResponse* response, NSError* error) {
+        NSLog(@"%@", error);
         if(!response) {
             [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
             return;
@@ -499,8 +511,13 @@
         [self handleLoginResponseWith:data response:response error:error];
     };
     
+    BOOL requestUserDetails = NO;
+    if ([self.authProvider.backendName isEqualToString:@"linkedIn"]) {
+        requestUserDetails = self.environment.config.linkedInConfig.getProfile;
+    }
+    
     [provider authorizeServiceFromController:self
-                       requestingUserDetails:NO
+                       requestingUserDetails:requestUserDetails
                               withCompletion:^(NSString* accessToken, OEXRegisteringUserDetails* details, NSError* error) {
                                   if(accessToken) {
                                       [OEXAuthentication requestTokenWithProvider:provider externalToken:accessToken completion:handler];
