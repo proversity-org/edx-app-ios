@@ -37,4 +37,4 @@ deployment:
   beta:
     branch: proversity/bsg
     commands:
-      - python fastlane_match.py bsg
+      - fastlane beta
