@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol OEXRegistrationViewControllerDelegate <NSObject>
 
 - (void)registrationViewControllerDidRegister:(OEXRegistrationViewController*)controller completion:(nullable void(^)(void))completion;
+- (void)registrationViewControllerDidRegisterFailedLogin:(OEXRegistrationViewController *)controller completion:(nullable void (^)(void))completion;
 
 @end
 

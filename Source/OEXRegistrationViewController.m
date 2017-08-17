@@ -367,7 +367,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         if(error == nil) {
             [view beginIndicatingActivity];
             self.view.userInteractionEnabled = NO;
-            [self attemptExternalLoginWithProvider:provider token:accessToken completion:^(NSData* data, NSHTTPURLResponse* response, NSError *error) {
+            [self attemptExternalLoginWithProvider:provider token:accessToken profile:userProfile completion:^(NSData* data, NSHTTPURLResponse* response, NSError *error) {
                 [view endIndicatingActivity];
                 self.view.userInteractionEnabled = YES;
                 if(response.statusCode == OEXHTTPStatusCode200OK) {
@@ -415,8 +415,8 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [self refreshFormFields];
 }
 
-- (void)attemptExternalLoginWithProvider:(id <OEXExternalAuthProvider>)provider token:(NSString*)token completion:(void(^)(NSData* data, NSHTTPURLResponse* response, NSError* error))completion {
-    [OEXAuthentication requestTokenWithProvider:provider externalToken:token completion:completion];
+- (void)attemptExternalLoginWithProvider:(id <OEXExternalAuthProvider>)provider token:(NSString*)token profile:(OEXRegisteringUserDetails *)profile completion:(void(^)(NSData* data, NSHTTPURLResponse* response, NSError* error))completion {
+    [OEXAuthentication requestTokenWithProvider:provider externalToken:token profile:profile completion:completion];
 }
 
 #pragma mark IBAction
@@ -424,9 +424,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 - (void)registerWithParameters:(NSDictionary*)parameters {
     __weak id weakSelf = self;
     [self showProgress:YES];
-
     [self.environment.analytics trackRegistrationWithProvider:self.externalProvider.backendName];
-
     [OEXAuthentication registerUserWithParameters:parameters completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         if(!error) {
             NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:&error];
@@ -438,13 +436,12 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                 NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
                 if(httpResp.statusCode == OEXHTTPStatusCode200OK) {
                     [self.delegate registrationViewControllerDidRegister:weakSelf completion:nil];
-                }
-                else if([error oex_isNoInternetConnectionError]) {
+                } else if([error oex_isNoInternetConnectionError]) {
                     [self showNoNetworkError];
                 }
                 [self showProgress:NO];
             };
-
+            
             if(httpResp.statusCode == OEXHTTPStatusCode200OK) {
                 if(self.externalProvider == nil) {
                     NSString* username = parameters[@"username"];
@@ -453,7 +450,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                 }
                 else {
                     NSLog(@"NOW IM HERE");
-                    [self attemptExternalLoginWithProvider:self.externalProvider token:self.externalAccessToken completion:completion];
+                    OEXRegisteringUserDetails *profile = [[OEXRegisteringUserDetails alloc] init];
+                    profile.email = parameters[@"email"];
+                    [self attemptExternalLoginWithProvider:self.externalProvider token:self.externalAccessToken profile:profile completion:completion];
                 }
 
             }
@@ -518,6 +517,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         [parameters setSafeObject:self.externalAccessToken forKey: @"access_token"];
         [parameters setSafeObject:self.externalProvider.backendName forKey:@"provider"];
         [parameters setSafeObject:self.environment.config.oauthClientID forKey:@"client_id"];
+        if ([self.externalProvider.backendName isEqualToString:@"linkedin-oauth2"]) {
+            [parameters setSafeObject:@"True" forKey: @"is_linkedin_mobile"];
+        }
     }
 
     [self registerWithParameters:parameters];

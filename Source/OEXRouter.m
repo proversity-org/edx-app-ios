@@ -223,6 +223,15 @@ OEXRegistrationViewControllerDelegate
     }
 }
 
+- (void)registrationViewControllerDidRegisterFailedLogin:(OEXRegistrationViewController *)controller completion:(void (^)(void))completion {
+    [controller dismissViewControllerAnimated:YES completion:^{
+        if (self.registrationCompletion) {
+            self.registrationCompletion();
+            self.registrationCompletion = nil;
+        }
+    }];
+}
+
 - (void)loginViewControllerDidLogin:(OEXLoginViewController *)loginController {
     [self showLoggedInContent];
     [loginController dismissViewControllerAnimated:YES completion:nil];

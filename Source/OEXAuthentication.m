@@ -23,6 +23,7 @@
 #import "OEXNetworkConstants.h"
 #import "OEXUserDetails.h"
 #import "OEXSession.h"
+#import "OEXRegisteringUserDetails.h"
 #import "edX-Swift.h"
 
 NSString* const facebook_login_endpoint = @"facebook";
@@ -95,13 +96,19 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
     [[session dataTaskWithRequest:request completionHandler:OEXWrapURLCompletion(completion)] resume];
 }
 
-+ (void)requestTokenWithProvider:(id <OEXExternalAuthProvider>)provider externalToken:(NSString *)token completion:(OEXURLRequestHandler)completionBlock {
++ (void)requestTokenWithProvider:(id <OEXExternalAuthProvider>)provider externalToken:(NSString *)token profile:(OEXRegisteringUserDetails *)profile completion:(OEXURLRequestHandler)completionBlock {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
     NSMutableDictionary* parameters = [[NSMutableDictionary alloc] init];
     [parameters setSafeObject:token forKey:@"access_token"];
     [parameters setSafeObject:[[OEXConfig sharedConfig] oauthClientID] forKey:@"client_id"];
+    if ([provider.backendName isEqualToString:@"linkedin-oauth2"]) {
+        [parameters setSafeObject:@"True" forKey:@"is_linkedin_mobile"];
+        [parameters setSafeObject:profile.email forKey:@"email"];
+    }
+    
+    NSLog(@"%@", parameters);
+    
     NSString* path = [NSString oex_stringWithFormat:URL_EXCHANGE_TOKEN parameters:@{@"backend" : provider.backendName}];
     NSLog(@"%@", path);
     
@@ -218,8 +225,6 @@ OEXNSDataTaskRequestHandler OEXWrapURLCompletion(OEXURLRequestHandler completion
 }
 
 + (void)registerUserWithParameters:(NSDictionary*)parameters completionHandler:(OEXURLRequestHandler)handler {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"%@", parameters);
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [OEXConfig sharedConfig].apiHostURL, SIGN_UP_URL]]];
     [request setHTTPMethod:@"POST"];

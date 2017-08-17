@@ -46,7 +46,6 @@
         if(loadUserDetails) {
             [linkedInManager requestUserProfileInfoWithCompletion:^(NSDictionary *userInfo, NSError *error) {
                 NSLog(@"successfully call linkedin api");
-                NSLog(@"%@", userInfo);
                 // userInfo is a linkedIn user object
                 OEXRegisteringUserDetails* profile = [[OEXRegisteringUserDetails alloc] init];
                 profile.email = userInfo[@"emailAddress"];

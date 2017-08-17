@@ -501,7 +501,6 @@
     }
     
     OEXURLRequestHandler handler = ^(NSData* data, NSHTTPURLResponse* response, NSError* error) {
-        NSLog(@"%@", error);
         if(!response) {
             [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
             return;
@@ -511,16 +510,11 @@
         [self handleLoginResponseWith:data response:response error:error];
     };
     
-    BOOL requestUserDetails = NO;
-    if ([self.authProvider.backendName isEqualToString:@"linkedIn"]) {
-        requestUserDetails = self.environment.config.linkedInConfig.getProfile;
-    }
-    
     [provider authorizeServiceFromController:self
-                       requestingUserDetails:requestUserDetails
+                       requestingUserDetails:YES
                               withCompletion:^(NSString* accessToken, OEXRegisteringUserDetails* details, NSError* error) {
                                   if(accessToken) {
-                                      [OEXAuthentication requestTokenWithProvider:provider externalToken:accessToken completion:handler];
+                                      [OEXAuthentication requestTokenWithProvider:provider externalToken:accessToken profile:details completion:handler];
                                   }
                                   else {
                                       handler(nil, nil, error);
