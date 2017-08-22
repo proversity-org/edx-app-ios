@@ -228,7 +228,7 @@ extension OEXRouter {
         fromController.navigationController?.pushViewController(controller, animated: animated)
     }
     
-    func showCourseCatalog(bottomBar: UIView?) {
+    func showCourseCatalog(fromController: UIViewController? = nil, bottomBar: UIView? = nil) {
         let controller: UIViewController
         switch environment.config.courseEnrollmentConfig.type {
         case .Webview:
@@ -237,7 +237,7 @@ extension OEXRouter {
             controller = CourseCatalogViewController(environment: self.environment)
         }
         if revealController != nil {
-            showContentStack(withRootController: controller, animated: true)
+            fromController?.navigationController?.pushViewController(controller, animated: true)
         } else {
             showControllerFromStartupScreen(controller: controller)
         }
