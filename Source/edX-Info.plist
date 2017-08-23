@@ -97,6 +97,11 @@
 		<string>OpenSans-LightItalic.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
 		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>PxGroteskBold.ttf</string>
+		<string>PxGroteskLight.ttf</string>
+		<string>PxGroteskLightItalic.ttf</string>
+		<string>PxGroteskRegular.ttf</string>
+		<string>PxGroteskRegularItalic.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

@@ -725,6 +725,11 @@
 		E793E2BB1EDC5ACA00DCDAA7 /* edXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2BA1EDC5ACA00DCDAA7 /* edXUITests.swift */; };
 		E793E2C41EDC5B2D00DCDAA7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
+		E7C975E41F4D88BF008E75FC /* PxGroteskBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7C975DF1F4D88BF008E75FC /* PxGroteskBold.ttf */; };
+		E7C975E51F4D88BF008E75FC /* PxGroteskLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7C975E01F4D88BF008E75FC /* PxGroteskLight.ttf */; };
+		E7C975E61F4D88BF008E75FC /* PxGroteskLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7C975E11F4D88BF008E75FC /* PxGroteskLightItalic.ttf */; };
+		E7C975E71F4D88BF008E75FC /* PxGroteskRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7C975E21F4D88BF008E75FC /* PxGroteskRegular.ttf */; };
+		E7C975E81F4D88BF008E75FC /* PxGroteskRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7C975E31F4D88BF008E75FC /* PxGroteskRegularItalic.ttf */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -1662,6 +1667,11 @@
 		E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
+		E7C975DF1F4D88BF008E75FC /* PxGroteskBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskBold.ttf; sourceTree = "<group>"; };
+		E7C975E01F4D88BF008E75FC /* PxGroteskLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskLight.ttf; sourceTree = "<group>"; };
+		E7C975E11F4D88BF008E75FC /* PxGroteskLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskLightItalic.ttf; sourceTree = "<group>"; };
+		E7C975E21F4D88BF008E75FC /* PxGroteskRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegular.ttf; sourceTree = "<group>"; };
+		E7C975E31F4D88BF008E75FC /* PxGroteskRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegularItalic.ttf; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -2049,6 +2059,11 @@
 				69ECC5AB1D50D1170030CF87 /* OpenSans-Regular.ttf */,
 				69ECC5AC1D50D1170030CF87 /* OpenSans-Semibold.ttf */,
 				69ECC5AD1D50D1170030CF87 /* OpenSans-SemiboldItalic.ttf */,
+				E7C975DF1F4D88BF008E75FC /* PxGroteskBold.ttf */,
+				E7C975E01F4D88BF008E75FC /* PxGroteskLight.ttf */,
+				E7C975E11F4D88BF008E75FC /* PxGroteskLightItalic.ttf */,
+				E7C975E21F4D88BF008E75FC /* PxGroteskRegular.ttf */,
+				E7C975E31F4D88BF008E75FC /* PxGroteskRegularItalic.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -3836,6 +3851,7 @@
 				69ECC64F1D50D1170030CF87 /* Default-Landscape@3x.png in Resources */,
 				69ECC6331D50D1170030CF87 /* ic_lms_blue.png in Resources */,
 				69ECC6511D50D1170030CF87 /* handouts-announcements.css in Resources */,
+				E7C975E71F4D88BF008E75FC /* PxGroteskRegular.ttf in Resources */,
 				69ECC6431D50D1170030CF87 /* logo@3x.png in Resources */,
 				69ECC6031D50D1170030CF87 /* OpenSans-Light.ttf in Resources */,
 				5D836DC91B2FA12E00411CAB /* DiscussionNewCommentViewController.xib in Resources */,
@@ -3843,6 +3859,7 @@
 				69ECC6051D50D1170030CF87 /* OpenSans-Regular.ttf in Resources */,
 				1A03DEA31BBC72BA006783FB /* countries.json in Resources */,
 				69ECC63F1D50D1170030CF87 /* icon_google_white@2x.png in Resources */,
+				E7C975E51F4D88BF008E75FC /* PxGroteskLight.ttf in Resources */,
 				69ECC6301D50D1170030CF87 /* ic_circle.png in Resources */,
 				69ECC64B1D50D1170030CF87 /* placeholderCourseCardImage.png in Resources */,
 				69ECC61F1D50D1170030CF87 /* bt_signin_active.png in Resources */,
@@ -3860,12 +3877,15 @@
 				805329101B0E80E50093B177 /* DiscussionResponses.storyboard in Resources */,
 				22A4191D1EB1CF1500BBC8CA /* shareCourse.png in Resources */,
 				6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */,
+				E7C975E41F4D88BF008E75FC /* PxGroteskBold.ttf in Resources */,
 				1905BFF31A31B097001917FA /* NEW_USER.htm in Resources */,
 				6926CDB11D59BE3600A16E22 /* ic_seek_thumb@2x.png in Resources */,
 				69ECC6351D50D1170030CF87 /* ic_next_default.png in Resources */,
+				E7C975E81F4D88BF008E75FC /* PxGroteskRegularItalic.ttf in Resources */,
 				69ECC6311D50D1170030CF87 /* ic_download.png in Resources */,
 				69ECC6001D50D1170030CF87 /* OpenSans-ExtraBold.ttf in Resources */,
 				BD837BB91DC8D5D400341EFD /* Icon-76@2x.png in Resources */,
+				E7C975E61F4D88BF008E75FC /* PxGroteskLightItalic.ttf in Resources */,
 				BD837BBB1DC8D5DF00341EFD /* Icon-40.png in Resources */,
 				69ECC60B1D50D1170030CF87 /* Icon-40@2x.png in Resources */,
 			);
@@ -5216,7 +5236,7 @@
 				PODS_CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.udi;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = 6141cdee-6d60-48a5-83a6-558350858466;
+				PROVISIONING_PROFILE = "6141cdee-6d60-48a5-83a6-558350858466";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.udi";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
