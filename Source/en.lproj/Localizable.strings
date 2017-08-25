@@ -243,7 +243,7 @@
 /* Button title allowing user to enroll in a course */
 "COURSE_DETAIL.ENROLL_NOW" = "Enroll now";
 /* Button title allowing user to view a course from the course's catalog detail page */
-"COURSE_DETAIL.VIEW_COURSE" = "View nugget";
+"COURSE_DETAIL.VIEW_COURSE" = "View Powerful Insight";
 /* Button title describing that the course is invitation only */
 "COURSE_DETAIL.INVITATION_ONLY" = "Invitation only";
 /* Message shown when there is no course content */
@@ -259,9 +259,9 @@
 /* Text describing the Announcements section within the course dashboard */
 "DASHBOARD.COURSE_ANNOUNCEMENTS_DETAIL"="Keep up with the latest news";
 /* Title text for the Courseware section of the course dashboard */
-"DASHBOARD.COURSE_COURSEWARE"="Nugget";
+"DASHBOARD.COURSE_COURSEWARE"="Powerful Insight";
 /* Text describing the Courseware section within the course dashboard */
-"DASHBOARD.COURSE_COURSE_DETAIL"="Access nugget content";
+"DASHBOARD.COURSE_COURSE_DETAIL"="Access content";
 /* Title text for the videos section of the course dashboard */
 "DASHBOARD.COURSE_Videos"="Videos";
 /* Text describing the Videos section within the course dashboard */
@@ -352,7 +352,7 @@
 /* Prompt shown to users on the course list encouraging them to find new courses */
 "ENROLLMENT_LIST.FIND_COURSES_PROMPT" = "Looking for a new challenge?";
 /* Button title opening course catalog */
-"ENROLLMENT_LIST.FIND_COURSES" = "Find a nugget";
+"ENROLLMENT_LIST.FIND_COURSES" = "Find a Powerful Insight";
 /* Error message when user is not enrolled to any course and course discovery is also disabled.*/
 "ENROLLMENT_LIST.NO_ENROLLMENT" = "It looks like you are not enrolled in any courses yet.";
 /* Prompt indicating user needs to enter an email address */
@@ -370,7 +370,7 @@
 /* Overlay message shown when facebook login fails because the user's account isn't linked */
 "FAILED_TO_LOAD_TOPICS"="Failed to load topics.";
 /* Title of find courses screen */
-"FIND_COURSES"="Find Nuggets";
+"FIND_COURSES"="Find Powerful Insights";
 /* Overlay message shown when enrolling in a course fails because the user is already in the course */
 "FIND_COURSES_ALREADY_ENROLLED_MESSAGE"="You are already enrolled in this course";
 /* Overlay message shown when enrolling in a course fails */
@@ -420,7 +420,7 @@
 /* Option to sort discussion post list by most votes */
 "MOST_VOTES"="Most Votes";
 /* Screen title showing a user's courses */
-"MY_COURSES"="My Nuggets";
+"MY_COURSES"="My Powerful Insights";
 /* Screen title showing a user's settings */
 "MY_SETTINGS"="My Settings";
 /* Screen title showing a user's downloaded videos */
