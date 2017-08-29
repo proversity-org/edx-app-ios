@@ -40,6 +40,7 @@ extension CourseBlock {
     var displayType : CourseBlockDisplayType {
         switch self.type {
         case .Unknown("recap"): return .HTML(.Base)
+        case .Unknown("word_cloud"): return .HTML(.Base)
         case .Unknown(_), .HTML: return multiDevice ? .HTML(.Base) : .Unknown
         case .Problem: return multiDevice ? .HTML(.Problem) : .Unknown
         case .Course: return .Outline
