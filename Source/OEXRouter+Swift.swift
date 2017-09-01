@@ -197,11 +197,23 @@ extension OEXRouter {
         controller.navigationController?.pushViewController(handoutsViewController, animated: true)
     }
 
+    func showMySettings(controller: UIViewController? = nil) {
+        let settingController = OEXMySettingsViewController(nibName: nil, bundle: nil)
+        controller?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        controller?.navigationController?.pushViewController(settingController, animated: true)
+    }
+    
+    func showAccount() {
+        let controller = AccountViewController(environment: environment)
+        self.showContentStack(withRootController: controller, animated: true)
+    }
+    
     func showProfileForUsername(controller: UIViewController? = nil, username : String, editable: Bool = true) {
         OEXAnalytics.shared().trackProfileViewed(username: username)
         let editable = self.environment.session.currentUser?.username == username
         let profileController = UserProfileViewController(environment: environment, username: username, editable: editable)
         if let controller = controller {
+            controller.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             controller.navigationController?.pushViewController(profileController, animated: true)
         } else {
             self.showContentStack(withRootController: profileController, animated: true)
@@ -237,7 +249,13 @@ extension OEXRouter {
             controller = CourseCatalogViewController(environment: self.environment)
         }
         if revealController != nil {
-            fromController?.navigationController?.pushViewController(controller, animated: true)
+            if let fromController = fromController {
+                fromController.navigationController?.pushViewController(controller, animated: true)
+            }
+            else {
+                showContentStack(withRootController: controller, animated: true)
+            }
+            
         } else {
             showControllerFromStartupScreen(controller: controller)
         }

@@ -342,6 +342,8 @@
 "DOWNLOADS"="Descargas";
 /* Overlay message after user chooses to download a video */
 "DOWNLOADING_1_VIDEO"="Descargando 1 video.";
+/*Discover in left drawer(used for courses and programs discovery)*/
+"DISCOVER"="Discover";
 /* Title for Edit button on My Videos Screen */
 "EDIT" = "Editar";
 /* Alert message shown when user tries to send an email, but email isn't setup */
@@ -681,6 +683,10 @@
 "USERNAME_PLACEHOLDER" = "Nombre de usuario o correo electrónico";
 /*Error message when operation failed with unknow error*/
 "UNKNOWN_ERROR" = "Su acción no pudo ser completada.";
+/* Screen title showing a user's account */
+"USER_ACCOUNT"="Account";
+/* Button title for profile view in account*/
+"USER_ACCOUNT.PROFILE"= "Profile";
 /* Text shown to display the current version number. Environment is a server name like "prod", "dev", stage" and may be empty. For example "Version 1.2.3 Prod" */
 "VERSION_DISPLAY" = "Versión {number} {environment}";
 /* Error shown when video download fails */
