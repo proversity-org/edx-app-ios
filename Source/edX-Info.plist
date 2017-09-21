@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>[ORGANIZATION_NAME]</string>
+	<string>Pearson FinTech Navigator</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -30,7 +30,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>[ORGANIZATION_NAME]</string>
+	<string>Pearson FinTech Navigator</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -38,7 +38,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSpokenName</key>
-	<string>[ORGANIZATION_NAME]</string>
+	<string>Pearson FinTech Navigator</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -57,7 +57,7 @@
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
 	<key>FacebookDisplayName</key>
-	<string>[ORGANIZATION_NAME]</string>
+	<string>Pearson FinTech Navigator</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>FirebaseAutomaticScreenReportingEnabled</key>

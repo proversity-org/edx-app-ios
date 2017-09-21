@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)org.proversity.[ORGANIZATION_CODE]</string>
+		<string>$(AppIdentifierPrefix)org.proversity.pfn</string>
 	</array>
 </dict>
 </plist>
