@@ -64,9 +64,11 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
                         else if
                             let video = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID), block.type.asVideo?.preferredEncoding != nil
                         {
+                            print("I AM HERE!!!")
                             self?.showLoadedBlock(block: block, forVideo: video)
                         }
                         else {
+                            print("ERROR ON VIDEO !!!")
                             self?.showError(error: nil)
                         }
             }, failure : {[weak self] error in

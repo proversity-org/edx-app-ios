@@ -63,6 +63,7 @@
         }
         
         NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);
+        NSLog(@"%@", rawEncodings);
         NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
         [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {
             OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name];
@@ -127,6 +128,7 @@
 }
 
 - (BOOL) isYoutubeVideo {
+    NSLog(@"isYoutubeVideo");
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
         OEXVideoEncoding* encoding = self.encodings[name];
         
@@ -144,10 +146,17 @@
 }
 
 - (BOOL) isSupportedVideo {
+    NSLog(@"isSupportedVideo");
     BOOL isSupportedEncoding = false;
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
         OEXVideoEncoding* encoding = self.encodings[name];
         NSString *name = [encoding name];
+        NSLog(@"%@", name);
+        NSLog(@"%@", [encoding URL]);
+        if ([OEXInterface isURLForVideo:[encoding URL]]) {
+            NSLog(@"is url for video");
+        }
+        
         // fallback encoding can be with unsupported type like webm
         if (([encoding URL] && [OEXInterface isURLForVideo:[encoding URL]]) && ([name isEqualToString:OEXVideoEncodingMobileHigh] || [name isEqualToString:OEXVideoEncodingMobileLow] || [name isEqualToString:OEXVideoEncodingFallback])) {
             isSupportedEncoding = true;
@@ -155,10 +164,19 @@
         }
     }
     
+    if (isSupportedEncoding) {
+        NSLog(@"supported video");
+    }
+    if (self.onlyOnWeb) {
+        NSLog(@"only web");
+    }
+    
     return !self.onlyOnWeb && isSupportedEncoding;
 }
 
 - (NSString*)videoURL {
+    NSLog(@"videoURL");
+    NSLog(@"%@", self.preferredEncoding.URL);
     return self.preferredEncoding.URL;
 }
 
