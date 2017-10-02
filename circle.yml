@@ -15,7 +15,7 @@ dependencies:
     - sudo gem install fastlane -NV
     - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
-    - sudo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     - brew install graphicsmagick
     - sudo pip install requests
     - ./gradlew dependencies --stacktrace --info
