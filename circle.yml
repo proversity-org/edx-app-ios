@@ -38,4 +38,4 @@ deployment:
   beta:
     branch: proversity/hal
     commands:
-      - python fastlane_match.py hal
+      - fastlane beta
