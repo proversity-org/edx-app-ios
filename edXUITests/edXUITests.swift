@@ -57,10 +57,10 @@ class edXUITests: XCTestCase {
             snapshot("courses")
             app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
             snapshot("profile")
-            app.buttons["ACCOUNT"].tap()
-            app.buttons["Logout"].tap()
-            userFieldTextField.tap()
-            userFieldTextField.typeText("")
+//            app.buttons["ACCOUNT"].tap()
+//            app.buttons["Logout"].tap()
+//            userFieldTextField.tap()
+//            userFieldTextField.typeText("")
         }
     }
 }
