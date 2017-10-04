@@ -61,6 +61,6 @@ class edXUITests: XCTestCase {
 //            app.buttons["Logout"].tap()
 //            userFieldTextField.tap()
 //            userFieldTextField.typeText("")
-//        }
+        }
     }
 }
