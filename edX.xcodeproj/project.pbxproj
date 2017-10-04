@@ -5275,7 +5275,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.pfn;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = a2cce2fd-dac9-44ca-9b8a-d9518124f214;
+				PROVISIONING_PROFILE = "a2cce2fd-dac9-44ca-9b8a-d9518124f214";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.pfn";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
