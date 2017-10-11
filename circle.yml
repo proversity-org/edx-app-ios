@@ -17,7 +17,6 @@ dependencies:
     - sudo gem cleanup
     - sudo pip install requests
     - brew update
-    - brew doctor
     - brew install imagemagick
     - brew cleanup
     - ./gradlew dependencies --stacktrace --info
