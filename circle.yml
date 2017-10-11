@@ -16,7 +16,6 @@ dependencies:
     - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
     - brew update
-    - brew doctor
     - brew install imagemagick
     - brew cleanup
     - sudo pip install requests
