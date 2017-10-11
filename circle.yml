@@ -15,7 +15,11 @@ dependencies:
     - sudo gem install fastlane -NV
     - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
-    - brew install graphicsmagick
+    - brew uninstall imagemagick
+    - brew update
+    - brew cleanup
+    - brew doctor
+    - brew install imagemagick
     - sudo pip install requests
     - ./gradlew dependencies --stacktrace --info
   post:
