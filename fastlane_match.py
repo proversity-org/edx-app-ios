@@ -40,6 +40,8 @@ def send_uuids(dev_uuid, store_uuid, org_code):
 if __name__ == '__main__':
     org_code = sys.argv[1]
     print "=> Running fastlane match"
+    run_fastlane('development')
+    run_fastlane('appstore')
     dev_uuid = run_fastlane('development')
     store_uuid = run_fastlane('appstore')
     print "=> Send UUIDS to Consola"

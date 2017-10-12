@@ -149,6 +149,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
 - (void)showSubSettingsWithChooser:(UIAlertController * __nonnull)chooser
 {
     UIViewController* controller = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [chooser configurePresentationControllerWithSourceView:self.btnSettings];
     [controller presentViewController:chooser animated:true completion:nil];
 
     [self hideOptionsAndValues];
@@ -718,7 +719,7 @@ static const CGFloat iPhoneScreenPortraitWidth = 320.f;
     _timeRemainingLabel.backgroundColor = [UIColor clearColor];
     _timeRemainingLabel.textColor = [UIColor lightTextColor];
     _timeRemainingLabel.textAlignment = NSTextAlignmentCenter;
-    _timeRemainingLabel.text = @"0:00/0:00";
+    _timeRemainingLabel.text = [Strings videoPlayerDefaultRemainingTime];
     _timeRemainingLabel.layer.shadowColor = [UIColor blackColor].CGColor;
     _timeRemainingLabel.layer.shadowRadius = 1.f;
     _timeRemainingLabel.layer.shadowOffset = CGSizeMake(1.f, 1.f);
