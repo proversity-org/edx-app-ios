@@ -278,7 +278,10 @@
 "DASHBOARD.COURSE_IMPORTANT_DATES"="Important Dates";
 /* Text describing the Important dates section of the course dashboard  */
 "DASHBOARD.COURSE_IMPORTANT_DATES_DETAIL"="Keep track of deadlines and stay on track";
-
+/* Text describing the course due date for same day*/
+"COURSE_DUE_DATE_SAME_DAY"="due today at {due_date} {time_zone}";
+/* Text describing the course due date*/
+"COURSE_DUE_DATE"="due {due_date}";
 /* Label indicated that a course has ended */
 "COURSE_ENDED"="Ended - {end_date}";
 /* Label indicating that a course will end */
@@ -339,6 +342,8 @@
 "DOWNLOADS"="Downloads";
 /* Overlay message after user chooses to download a video */
 "DOWNLOADING_1_VIDEO"="Downloading 1 video.";
+/*Discover in left drawer(used for courses and programs discovery)*/
+"DISCOVER"="Discover";
 /* Title for Edit button on My Videos Screen */
 "EDIT" = "Edit";
 /* Alert message shown when user tries to send an email, but email isn't setup */
@@ -425,6 +430,13 @@
 "MY_SETTINGS"="My Settings";
 /* Screen title showing a user's downloaded videos */
 "MY_VIDEOS" = "My Videos";
+/* Video count title in My Videos section*/
+"MY_VIDEOS_VIDEO_COUNT_LABEL" = "{count} Video";
+/* Videos count in My Videos section*/
+"MY_VIDEOS_VIDEOS_COUNT_LABEL" = "{count} Videos";
+/* Time Label in My Videos section*/
+"MY_VIDEOS_TIME_LABEL" = "NA";
+
 /* Marked as answer for endorsed responses */
 "MARKED_ANSWER" = "Marked as answer";
 /* Overlay error shown when attempting an action without an internet connection */
@@ -671,6 +683,10 @@
 "USERNAME_PLACEHOLDER" = "User name or e-mail address";
 /*Error message when operation failed with unknow error*/
 "UNKNOWN_ERROR" = "Your action could not be completed.";
+/* Screen title showing a user's account */
+"USER_ACCOUNT"="Account";
+/* Button title for profile view in account*/
+"USER_ACCOUNT.PROFILE"= "Profile";
 /* Text shown to display the current version number. Environment is a server name like "prod", "dev", stage" and may be empty. For example "Version 1.2.3 Prod" */
 "VERSION_DISPLAY" = "Version {number} {environment}";
 /* Error shown when video download fails */
@@ -719,11 +735,17 @@
 "VERSION_UPGRADE_OUT_DATED_LOGIN_MESSAGE" = "Your version of the app is no longer supported. Update to the latest version to login.";
 /*New version available without deadline message*/
 "VERSION_UPGRADE.NEW_VERSION_AVAILABLE" = "A new version of the app is available.";
+/*Video player remaining time default value*/
+"VIDEO_PLAYER_DEFAULT_REMAINING_TIME" = "0:00/0:00";
 /* Overlay shown after a network request has started, telling the user to wait for the response */
 "WAITING_FOR_RESPONSE"="Please wait...";
 /* Header of 'whats new screen'*/
 "WHATS_NEW.HEADER_TEXT"="Version {app_version} New Features";
 /*Whats new screen done button title*/
 "WHATS_NEW.DONE"="Done";
+/*Title for wifi only switch at Settings screen*/
+"WIFI_ONLY_TITLE" = "Wi-fi only download";
+/*Detail message for wifi only switch at Settings screen*/
+"WIFI_ONLY_DETAIL_MESSAGE" = "Only download content when Wi-Fi is turned on";
 /* Alert dialog button title to confirm an action */
 "YES"="Yes";

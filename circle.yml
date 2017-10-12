@@ -14,7 +14,9 @@ dependencies:
   override:
     - sudo gem install fastlane -NV
     - sudo gem cleanup
-    - brew install graphicsmagick
+    - brew update
+    - brew install imagemagick
+    - brew cleanup
     - sudo pip install requests
     - ./gradlew dependencies --stacktrace --info
   post:

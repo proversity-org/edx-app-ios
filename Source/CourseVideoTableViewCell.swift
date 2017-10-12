@@ -12,17 +12,20 @@ import UIKit
 protocol CourseVideoTableViewCellDelegate : class {
     func videoCellChoseDownload(cell : CourseVideoTableViewCell, block : CourseBlock)
     func videoCellChoseShowDownloads(cell : CourseVideoTableViewCell)
+    func reloadCell(cell: UITableViewCell)
 }
 
 private let titleLabelCenterYOffset = -12
 
-class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
+class CourseVideoTableViewCell: SwipeableCell, CourseBlockContainerCell {
     
     static let identifier = "CourseVideoTableViewCellIdentifier"
     weak var delegate : CourseVideoTableViewCellDelegate?
     
     private let content = CourseOutlineItemView()
-    private let downloadView = DownloadsAccessoryView()
+    fileprivate let downloadView = DownloadsAccessoryView()
+    fileprivate var spinnerTimer = Timer()
+    var courseID: String?
     
     var block : CourseBlock? = nil {
         didSet {
@@ -32,11 +35,25 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
             }
         }
     }
-        
+    
     var localState : OEXHelperVideoDownload? {
         didSet {
             updateDownloadViewForVideoState()
-            content.setDetailText(title: OEXDateFormatting.formatSeconds(asVideoLength: localState?.summary?.duration ?? 0))
+            
+            guard let hasVideoDuration = localState?.summary?.hasVideoDuration, let hasVideoSize = localState?.summary?.hasVideoSize else {
+                return
+            }
+            
+            if (hasVideoDuration && hasVideoSize) {
+                content.setDetailText(title: DateFormatting.formatSeconds(asVideoLength: localState?.summary?.duration ?? 0), blockType: block?.type, videoSize: localState?.summary?.videoSize())
+            }
+            else if(hasVideoDuration) {
+                content.setDetailText(title: DateFormatting.formatSeconds(asVideoLength: localState?.summary?.duration ?? 0), blockType: block?.type)
+            }
+            else if(hasVideoSize)
+            {
+                content.setDetailText(title: localState?.summary?.videoSize() ?? "", blockType: block?.type)
+            }
         }
     }
     
@@ -70,7 +87,7 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         content.trailingView = downloadView
         downloadView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -101,5 +118,42 @@ class CourseVideoTableViewCell: UITableViewCell, CourseBlockContainerCell {
         
         content.trailingView = downloadView
         downloadView.state = downloadState
+    }
+    
+   fileprivate func isVideoDownloaded() -> Bool{
+        return (localState?.downloadState == OEXDownloadState.complete)
+    }
+    
+   fileprivate func deleteVideo()  {
+        if let video = localState {
+            OEXInterface.shared().deleteDownloadedVideo(video) { _ in }
+            OEXAnalytics.shared().trackUnitDeleteVideo(courseID: courseID ?? "", unitID: block?.blockID ?? "")
+        }
+    }
+}
+
+extension CourseVideoTableViewCell: SwipeableCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeActionButton]? {
+        
+        if(!isVideoDownloaded()) {
+            return nil
+        }
+        
+        let deleteButton = SwipeActionButton(title: nil, image: Icon.DeleteIcon.imageWithFontSize(size: 20)) {[weak self] action, indexPath in
+        //Showing a spinner while deleting video
+            if let owner = self {
+                owner.deleteVideo()
+                owner.downloadView.state = .Deleting
+                owner.spinnerTimer = Timer.scheduledTimer(timeInterval: 0.4, target:owner, selector: #selector(owner.invalidateTimer), userInfo: nil, repeats: true)
+            }
+            tableView.hideSwipeCell()
+        }
+        return [deleteButton]
+    }
+
+    @objc private func invalidateTimer(){
+        spinnerTimer.invalidate()
+        downloadView.state = .Done
+        delegate?.reloadCell(cell: self)
     }
 }

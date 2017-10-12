@@ -13,7 +13,6 @@
 #import "NSString+OEXFormatting.h"
 #import "OEXAppDelegate.h"
 #import "OEXCustomLabel.h"
-#import "OEXDateFormatting.h"
 #import "OEXDownloadTableCell.h"
 #import "OEXOpenInBrowserViewController.h"
 #import "OEXHelperVideoDownload.h"
@@ -163,19 +162,18 @@
         
         NSString* videoName = downloadingVideo.summary.name;
         if([videoName length] == 0) {
-            videoName = @"(Untitled)";
+            videoName = [Strings parenthesisWithText:[Strings untitled]];
         }
         cell.lbl_title.text = videoName;
 
         if(!downloadingVideo.summary.duration) {
-            cell.lbl_time.text = @"NA";
+            cell.lbl_time.text = [Strings myVideosTimeLabel];
         }
         else {
-            cell.lbl_time.text = [OEXDateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
+            cell.lbl_time.text = [DateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
         }
-
-        float result = (([downloadingVideo.summary.size doubleValue] / 1024) / 1024);
-        cell.lbl_totalSize.text = [NSString stringWithFormat:@"%.2fMB", result];
+        
+        cell.lbl_totalSize.text = [downloadingVideo.summary videoSize];
         float progress = (float)downloadingVideo.downloadProgress;
         [cell.progressView setProgress:progress];
         //

@@ -18,7 +18,6 @@
 #import "OEXCourseVideosTableViewCell.h"
 #import "OEXCustomLabel.h"
 #import "OEXDataParser.h"
-#import "OEXDateFormatting.h"
 #import "OEXInterface.h"
 #import "OEXHelperVideoDownload.h"
 #import "OEXStyles.h"
@@ -397,17 +396,16 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
     OEXHelperVideoDownload* obj_video = [videos objectAtIndex:indexPath.row];
     cell.lbl_Title.text = obj_video.summary.name;
     if([cell.lbl_Title.text length] == 0) {
-        cell.lbl_Title.text = @"(Untitled)";
+        cell.lbl_Title.text = [Strings parenthesisWithText:[Strings untitled]];
     }
-    double size = [obj_video.summary.size doubleValue];
-    float result = ((size / 1024) / 1024);
-    cell.lbl_Size.text = [NSString stringWithFormat:@"%.2fMB", result];
+    
+    cell.lbl_Size.text = [obj_video.summary videoSize];
 
     if(!obj_video.summary.duration) {
-        cell.lbl_Time.text = @"NA";
+        cell.lbl_Time.text = [Strings myVideosTimeLabel];
     }
     else {
-        cell.lbl_Time.text = [OEXDateFormatting formatSecondsAsVideoLength: obj_video.summary.duration];
+        cell.lbl_Time.text = [DateFormatting formatSecondsAsVideoLength: obj_video.summary.duration];
     }
 
     //Played state
@@ -948,11 +946,8 @@ typedef NS_ENUM (NSUInteger, OEXAlertType) {
                     for(OEXHelperVideoDownload* videos in arrCopy) {
                         if(selectedVideo == videos) {
                             [arr removeObject:videos];
-
-                            [[OEXInterface sharedInterface] deleteDownloadedVideoForVideoId:selectedVideo.summary.videoID completionHandler:^(BOOL success) {
+                            [self.dataInterface deleteDownloadedVideo:selectedVideo completionHandler:^(BOOL success) {
                                 selectedVideo.downloadState = OEXDownloadStateNew;
-                                selectedVideo.downloadProgress = 0.0;
-                                selectedVideo.isVideoDownloading = NO;
                             }];
                             deleteCount++;
 
