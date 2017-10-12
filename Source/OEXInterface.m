@@ -196,6 +196,9 @@ static OEXInterface* _sharedInterface = nil;
     } else if ([URLString rangeOfString:URL_EXTENSION_HLS].location != NSNotFound) {
         return YES;
     }
+    else if ([URLString rangeOfString:URL_EXTENSION_HLS].location != NSNotFound) {
+        return YES;
+    }
     return NO;
 }
 
