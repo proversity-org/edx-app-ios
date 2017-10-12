@@ -7,14 +7,13 @@
 //
 
 #import "OEXVideoSummary.h"
+#import "OEXConfig.h"
 
 #import "edX-Swift.h"
 #import "OEXVideoEncoding.h"
 #import "OEXVideoPathEntry.h"
-#import "NSMutableDictionary+OEXSafeAccess.h"
 #import "NSArray+OEXFunctional.h"
 #import "NSArray+OEXSafeAccess.h"
-#import "NSMutableDictionary+OEXSafeAccess.h"
 
 @interface OEXVideoSummary ()
 
@@ -33,7 +32,10 @@
 @property (nonatomic, assign) BOOL onlyOnWeb;
 @property (nonatomic, strong) NSDictionary* transcripts;
 @property (nonatomic, strong) OEXVideoEncoding *defaultEncoding;
-    
+@property (nonatomic, strong) NSMutableArray *supportedEncodings;
+
+- (BOOL)isSupportedEncoding:(NSString *) encodingName;
+
 @end
 
 @implementation OEXVideoSummary
@@ -45,18 +47,18 @@
         if([[dictionary objectForKey:@"section_url"] isKindOfClass:[NSString class]]) {
             self.sectionURL = [dictionary objectForKey:@"section_url"];
         }
-
+        
         self.path = [[dictionary objectForKey:@"path"] oex_map:^(NSDictionary* pathEntryDict){
             return [[OEXVideoPathEntry alloc] initWithDictionary:pathEntryDict];
         }];
-
+        
         self.unitURL = [dictionary objectForKey:@"unit_url"];
-
+        
         NSDictionary* summary = [dictionary objectForKey:@"summary"];
-
+        
         // Data from inside summary dictionary
         self.category = [summary objectForKey:@"category"];
-
+        
         self.name = [summary objectForKey:@"name"];
         if([self.name length] == 0 || self.name == nil) {
             self.name = [Strings untitled];
@@ -67,22 +69,27 @@
         NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
         [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {
             OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name];
-            [encodings safeSetObject:encoding forKey:name];
+            [encodings setSafeObject:encoding forKey:name];
         }];
         self.encodings = encodings;
-
+        
         self.videoThumbnailURL = [summary objectForKey:@"video_thumbnail_url"];
         self.videoID = [summary objectForKey:@"id"] ;
-
+        
         self.duration = [OEXSafeCastAsClass([summary objectForKey:@"duration"], NSNumber) doubleValue];
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
-
+        
         self.transcripts = [summary objectForKey:@"transcripts"];
         
         if (_encodings.count <=0)
             _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+        
+        self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
+        if (![[OEXConfig sharedConfig] isUsingVideoPipeline]) {
+            [self.supportedEncodings addObject:OEXVideoEncodingFallback];
+        }
     }
-
+    
     return self;
 }
 
@@ -128,15 +135,11 @@
 }
 
 - (BOOL) isYoutubeVideo {
-    NSLog(@"isYoutubeVideo");
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
         OEXVideoEncoding* encoding = self.encodings[name];
         
         NSString *name = [encoding name];
-        if ([name isEqualToString:OEXVideoEncodingMobileHigh] || [name isEqualToString:OEXVideoEncodingMobileLow]) {
-            return false;
-        } else if ([name isEqualToString:OEXVideoEncodingFallback]) {
-            return false;
+        if ([self isSupportedEncoding:name]) {
         } else if ([[encoding name] isEqualToString:OEXVideoEncodingYoutube]) {
             return true;
         }
@@ -145,30 +148,26 @@
     return false;
 }
 
+- (BOOL)hasVideoDuration {
+    
+    return (self.duration > 0.0);
+}
+
+- (BOOL)hasVideoSize {
+    
+    return ([[self size] doubleValue] > 0.0);
+}
+
 - (BOOL) isSupportedVideo {
-    NSLog(@"isSupportedVideo");
     BOOL isSupportedEncoding = false;
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
         OEXVideoEncoding* encoding = self.encodings[name];
         NSString *name = [encoding name];
-        NSLog(@"%@", name);
-        NSLog(@"%@", [encoding URL]);
-        if ([OEXInterface isURLForVideo:[encoding URL]]) {
-            NSLog(@"is url for video");
-        }
-        
         // fallback encoding can be with unsupported type like webm
-        if (([encoding URL] && [OEXInterface isURLForVideo:[encoding URL]]) && ([name isEqualToString:OEXVideoEncodingMobileHigh] || [name isEqualToString:OEXVideoEncodingMobileLow] || [name isEqualToString:OEXVideoEncodingFallback])) {
+        if (([encoding URL] && [OEXInterface isURLForVideo:[encoding URL]]) && [self isSupportedEncoding:name]) {
             isSupportedEncoding = true;
             break;
         }
-    }
-    
-    if (isSupportedEncoding) {
-        NSLog(@"supported video");
-    }
-    if (self.onlyOnWeb) {
-        NSLog(@"only web");
     }
     
     return !self.onlyOnWeb && isSupportedEncoding;
@@ -182,6 +181,10 @@
 
 - (NSNumber*)size {
     return self.preferredEncoding.size;
+}
+
+- (NSString *)videoSize {
+    return [NSString stringWithFormat:@"%.2fMB", (([[self size] doubleValue] / 1024) / 1024)];
 }
 
 - (OEXVideoPathEntry*)chapterPathEntry {
@@ -221,5 +224,8 @@
     return [NSString stringWithFormat:@"<%@: %p, video_id=%@>", [self class], self, self.videoID];
 }
 
+- (BOOL)isSupportedEncoding:(NSString *) encodingName {
+    return [self.supportedEncodings containsObject:encodingName];
+}
 
 @end

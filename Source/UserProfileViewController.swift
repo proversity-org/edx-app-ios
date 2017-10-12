@@ -10,14 +10,14 @@ import UIKit
 
 class UserProfileViewController: OfflineSupportViewController, UserProfilePresenterDelegate, LoadStateViewReloadSupport {
     
-    typealias Environment = OEXAnalyticsProvider & OEXConfigProvider & NetworkManagerProvider & OEXRouterProvider & ReachabilityProvider & OEXStylesProvider
+    typealias Environment = OEXAnalyticsProvider & OEXConfigProvider & NetworkManagerProvider & OEXRouterProvider & ReachabilityProvider & OEXStylesProvider & OEXSessionProvider
     
     private let environment : Environment
 
     private let editable: Bool
 
     private let loadController = LoadStateViewController()
-    fileprivate let contentView = UserProfileView(frame: CGRect.zero)
+    fileprivate var contentView : UserProfileView
     private let presenter : UserProfilePresenter
     
     convenience init(environment : UserProfileNetworkPresenter.Environment & Environment, username : String, editable: Bool) {
@@ -31,6 +31,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
         self.editable = editable
         self.environment = environment
         self.presenter = presenter
+        self.contentView = UserProfileView(environment: self.environment, frame: CGRect.zero)
         super.init(env: environment)
     }
 
@@ -50,7 +51,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
         loadController.state = .Initial
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
-
+        navigationItem.title = Strings.UserAccount.profile
         addProfileListener()
         addExtraTabsListener()
 
@@ -87,6 +88,7 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
     private func addProfileListener() {
         let editable = self.editable
         let networkManager = environment.networkManager
+        
         presenter.profileStream.listen(self, success: { [weak self] profile in
             // TODO: Refactor UserProfileView to take a dumb model so we don't need to pass it a network manager
             self?.contentView.populateFields(profile: profile, editable: editable, networkManager: networkManager)

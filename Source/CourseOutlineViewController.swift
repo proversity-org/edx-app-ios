@@ -25,7 +25,7 @@ public class CourseOutlineViewController :
     LoadStateViewReloadSupport
 {
     public typealias Environment = OEXAnalyticsProvider & DataManagerProvider & OEXInterfaceProvider & NetworkManagerProvider & ReachabilityProvider & OEXRouterProvider
-
+    
     
     private var rootID : CourseBlockID?
     private var environment : Environment
@@ -60,9 +60,8 @@ public class CourseOutlineViewController :
         
         loadController = LoadStateViewController()
         insetsController = ContentInsetsController()
-        
-        tableController = CourseOutlineTableController(environment : self.environment, courseID: courseID)
         courseOutlineMode = mode ?? .Full
+        tableController = CourseOutlineTableController(environment: self.environment, courseID: courseID, forMode: courseOutlineMode)
         lastAccessedController = CourseLastAccessedController(blockID: rootID , dataManager: environment.dataManager, networkManager: environment.networkManager, courseQuerier: courseQuerier, forMode: courseOutlineMode)
         
         super.init(env: environment)
@@ -76,7 +75,7 @@ public class CourseOutlineViewController :
         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
-
+    
     public required init?(coder aDecoder: NSCoder) {
         // required by the compiler because UIViewController implements NSCoding,
         // but we don't actually want to serialize these things
@@ -106,17 +105,22 @@ public class CourseOutlineViewController :
         lastAccessedController.saveLastAccessed()
         let stream = joinStreams(courseQuerier.rootID, courseQuerier.blockWithID(id: blockID))
         stream.extendLifetimeUntilFirstResult (success :
-            { (rootID, block) in
-                if self.blockID == rootID || self.blockID == nil {
-                    self.environment.analytics.trackScreen(withName: OEXAnalyticsScreenCourseOutline, courseID: self.courseID, value: nil)
+            { [weak self] (rootID, block) in
+                if self?.blockID == rootID || self?.blockID == nil {
+                    if self?.courseOutlineMode == .Full {
+                        self?.environment.analytics.trackScreen(withName: OEXAnalyticsScreenCourseOutline, courseID: self?.courseID, value: nil)
+                    }
+                    else {
+                        self?.environment.analytics.trackScreen(withName: AnalyticsScreenName.CourseVideos.rawValue, courseID: self?.courseID, value: nil)
+                    }
                 }
                 else {
-                    self.environment.analytics.trackScreen(withName: OEXAnalyticsScreenSectionOutline, courseID: self.courseID, value: block.internalName)
+                    self?.environment.analytics.trackScreen(withName: OEXAnalyticsScreenSectionOutline, courseID: self?.courseID, value: block.internalName)
                 }
-            },
-            failure: {
-                Logger.logError("ANALYTICS", "Unable to load block: \($0)")
-            }
+        },
+                                               failure: {
+                                                Logger.logError("ANALYTICS", "Unable to load block: \($0)")
+        }
         )
     }
     
@@ -163,7 +167,7 @@ public class CourseOutlineViewController :
             self.loadController.state = LoadState.failed(error: error)
         }
     }
-
+    
     private func addListeners() {
         headersLoader.backWithStream(blockIDStream.transform {[weak self] blockID in
             if let owner = self {
@@ -188,33 +192,33 @@ public class CourseOutlineViewController :
         self.blockIDStream.backWithStream(OEXStream(value: rootID))
         
         headersLoader.listen(self,
-            success: {[weak self] headers in
-                self?.setupNavigationItem(block: headers.block)
+                             success: {[weak self] headers in
+                                self?.setupNavigationItem(block: headers.block)
             },
-            failure: {[weak self] error in
-                self?.showErrorIfNecessary(error: error)
+                             failure: {[weak self] error in
+                                self?.showErrorIfNecessary(error: error)
             }
         )
         
         rowsLoader.listen(self,
-            success : {[weak self] groups in
-                if let owner = self {
-                    owner.tableController.groups = groups
-                    owner.tableController.tableView.reloadData()
-                    owner.loadController.state = groups.count == 0 ? owner.emptyState() : .Loaded
-                }
+                          success : {[weak self] groups in
+                            if let owner = self {
+                                owner.tableController.groups = groups
+                                owner.tableController.tableView.reloadData()
+                                owner.loadController.state = groups.count == 0 ? owner.emptyState() : .Loaded
+                            }
             },
-            failure : {[weak self] error in
-                self?.showErrorIfNecessary(error: error)
+                          failure : {[weak self] error in
+                            self?.showErrorIfNecessary(error: error)
             },
-            finally: {[weak self] in
-                if let active = self?.rowsLoader.active, !active {
-                    self?.tableController.refreshController.endRefreshing()
-                }
+                          finally: {[weak self] in
+                            if let active = self?.rowsLoader.active, !active {
+                                self?.tableController.refreshController.endRefreshing()
+                            }
             }
         )
     }
-
+    
     // MARK: Outline Table Delegate
     
     func outlineTableControllerChoseShowDownloads(controller: CourseOutlineTableController) {
@@ -222,7 +226,7 @@ public class CourseOutlineViewController :
     }
     
     private func canDownloadVideo() -> Bool {
-        let hasWifi = environment.reachability.isReachableViaWiFi() 
+        let hasWifi = environment.reachability.isReachableViaWiFi()
         let onlyOnWifi = environment.dataManager.interface?.shouldDownloadOnlyOnWifi ?? false
         return !onlyOnWifi || hasWifi
     }
@@ -241,10 +245,10 @@ public class CourseOutlineViewController :
         courseQuerier.parentOfBlockWithID(blockID: block.blockID).listenOnce(self, success:
             { parentID in
                 analytics.trackSubSectionBulkVideoDownload(parentID, subsection: block.blockID, courseID: courseID, videoCount: videos.count)
-            },
-            failure: {error in
-                Logger.logError("ANALYTICS", "Unable to find parent of block: \(block). Error: \(error.localizedDescription)")
-            }
+        },
+                                                                             failure: {error in
+                                                                                Logger.logError("ANALYTICS", "Unable to find parent of block: \(block). Error: \(error.localizedDescription)")
+        }
         )
     }
     
@@ -261,6 +265,11 @@ public class CourseOutlineViewController :
     
     func outlineTableController(controller: CourseOutlineTableController, choseBlock block: CourseBlock, withParentID parent : CourseBlockID) {
         self.environment.router?.showContainerForBlockWithID(blockID: block.blockID, type:block.displayType, parentID: parent, courseID: courseQuerier.courseID, fromController:self, forMode: courseOutlineMode)
+    }
+    
+    func outlineTableControllerReload(controller: CourseOutlineTableController) {
+        courseQuerier.needsRefresh = true
+        reload()
     }
     
     //MARK: PullRefreshControllerDelegate
@@ -306,11 +315,15 @@ extension CourseOutlineViewController {
     public func t_populateLastAccessedItem(item : CourseLastAccessed) -> Bool {
         self.tableController.showLastAccessedWithItem(item: item)
         return self.tableController.tableView.tableHeaderView != nil
-
+        
     }
     
     public func t_didTriggerSetLastAccessed() -> Bool {
         return t_hasTriggeredSetLastAccessed
+    }
+    
+    public func t_tableView() -> UITableView {
+        return self.tableController.tableView
     }
     
 }

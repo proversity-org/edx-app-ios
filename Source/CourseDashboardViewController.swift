@@ -184,6 +184,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }, url: url, utmParams: course.courseShareUtmParams, analyticsCallback: { analyticsType in
                 analytics.trackCourseShared(courseID, url: urlString, socialTarget: analyticsType)
             })
+            controller.configurePresentationController(withSourceView: shareButton)
             self.present(controller, animated: true, completion: nil)
         }
     }
@@ -264,7 +265,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             cellItems.append(item)
         }
         
-        if shouldShowAnnouncements() {
+        if environment.config.isAnnouncementsEnabled {
             item = StandardCourseDashboardItem(title: Strings.Dashboard.courseAnnouncements, detail: Strings.Dashboard.courseAnnouncementsDetail, icon: .Announcements) {[weak self] () -> Void in
                 self?.showAnnouncements()
             }
@@ -287,10 +288,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
     
     private func shouldShowHandouts(course: OEXCourse) -> Bool {
         return !(course.course_handouts?.isEmpty ?? true)
-    }
-    
-    private func shouldShowAnnouncements() -> Bool {
-        return self.environment.config.isAnnouncementsEnabled
     }
 
     private func getCertificateUrl(enrollment: UserCourseEnrollment) -> String? {
@@ -372,6 +369,10 @@ extension CourseDashboardViewController {
     func t_canVisitHandouts() -> Bool {
         return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is StandardCourseDashboardItem) && (item as! StandardCourseDashboardItem).icon == .Handouts }) != nil
     }
+    
+    func t_canVisitAnnouncements() -> Bool {
+        return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is StandardCourseDashboardItem) && (item as! StandardCourseDashboardItem).icon == .Announcements }) != nil
+    }
 
     func t_canVisitCertificate() -> Bool {
         return self.cellItems.firstIndexMatching({ (item: CourseDashboardItem) in return (item is CertificateDashboardItem)}) != nil
@@ -387,3 +388,11 @@ extension CourseDashboardViewController {
     
 }
 
+public extension UIViewController {
+    func configurePresentationController(withSourceView sourceView: UIView) {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            popoverPresentationController?.sourceView = sourceView
+            popoverPresentationController?.sourceRect = sourceView.bounds
+        }
+    }
+}

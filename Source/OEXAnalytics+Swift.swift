@@ -30,13 +30,33 @@ public enum AnalyticsEventName: String {
     case RateTheApp = "edx.bi.app.app_reviews.rate_the_app"
     case WhatsNewClose = "edx.bi.app.whats_new.close"
     case WhatsNewDone = "edx.bi.app.whats_new.done"
+    case VideosSubsectionDelete = "edx.bi.app.video.delete.subsection"
+    case VideosUnitDelete = "edx.bi.app.video.delete.unit"
+    
 }
 
 public enum AnalyticsScreenName: String {
     case AppReviews = "AppReviews: View Rating"
     case CourseDates = "Course Dates"
     case WhatsNew = "WhatsNew: Whats New"
+    case ViewTopicThreads = "Forum: View Topic Threads"
+    case CreateTopicThread = "Forum: Create Topic Thread"
+    case ViewThread = "Forum: View Thread"
+    case AddThreadResponse = "Forum: Add Thread Response"
+    case AddResponseComment = "Forum: Add Response Comment"
+    case ViewResponseComments = "Forum: View Response Comments"
+    case CourseVideos = "Videos: Course Videos"
 }
+
+public enum AnalyticsEventDataKey: String {
+    case ThreadID = "thread_id"
+    case TopicID = "topic_id"
+    case ResponseID = "response_id"
+    case Author = "author"
+    case SubsectionID = "subsection_id"
+    case UnitID = "unit_id"
+}
+
 
 extension OEXAnalytics {
 
@@ -80,4 +100,40 @@ extension OEXAnalytics {
         event.label = courseId
         return event
     }
+
+    func trackDiscussionScreen(
+            withName: AnalyticsScreenName,
+            courseId: String,
+            value: String?,
+            threadId: String?,
+            topicId: String?,
+            responseID: String?,
+            author: String? = String?.none) {
+        
+        var info: [String:String] = [:]
+        info.setObjectOrNil(threadId, forKey: AnalyticsEventDataKey.ThreadID.rawValue)
+        info.setObjectOrNil(topicId, forKey: AnalyticsEventDataKey.TopicID.rawValue)
+        info.setObjectOrNil(responseID, forKey: AnalyticsEventDataKey.ResponseID.rawValue)
+        info.setObjectOrNil(author, forKey: AnalyticsEventDataKey.Author.rawValue)
+        self.trackScreen(withName: withName.rawValue, courseID: courseId, value: value, additionalInfo: info)
+    }
+    
+    func trackSubsectionDeleteVideos(courseID: String, subsectionID: String){
+        let event = OEXAnalyticsEvent()
+        event.courseID = courseID
+        event.name = AnalyticsEventName.VideosSubsectionDelete.rawValue
+        event.displayName = "Videos: Subsection Delete"
+        
+        trackEvent(event, forComponent: nil, withInfo: [AnalyticsEventDataKey.SubsectionID.rawValue : subsectionID])
+    }
+    
+    func trackUnitDeleteVideo(courseID: String, unitID: String) {
+        let event = OEXAnalyticsEvent()
+        event.courseID = courseID
+        event.name = AnalyticsEventName.VideosUnitDelete.rawValue
+        event.displayName = "Videos: Unit Delete"
+        
+        trackEvent(event, forComponent: nil, withInfo: [AnalyticsEventDataKey.UnitID.rawValue : unitID])
+    }
+
 }

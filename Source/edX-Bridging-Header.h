@@ -2,14 +2,14 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#import <SEGAnalytics.h>
+#import <Analytics/SEGAnalytics.h>
 #import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseAnalytics/FirebaseAnalytics.h>
 
 #import "CLVideoPlayer.h"
 #import "CLButton.h"
 #import "DACircularProgressView.h"
-#import "NSDate+DateTools.h"
+#import <DateTools/NSDate+DateTools.h>
 #import "LastAccessed.h"
 #import "NSAttributedString+OEXFormatting.h"
 #import "NSDate+OEXComparisons.h"
@@ -32,7 +32,6 @@
 #import "OEXCourse.h"
 #import "OEXCoursewareAccess.h"
 #import "OEXDataParser.h"
-#import "OEXDateFormatting.h"
 #import "OEXFindCoursesViewController.h"
 #import "OEXFileUtility.h"
 #import "OEXHelperVideoDownload.h"
@@ -72,7 +71,6 @@
 #import "NSDate+OEXComparisons.h"
 
 #import "NSJSONSerialization+OEXSafeAccess.h"
-#import "NSMutableDictionary+OEXSafeAccess.h"
 
 #import "KPNService.h"
 

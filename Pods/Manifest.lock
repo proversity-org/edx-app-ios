@@ -6,10 +6,13 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.8.3):
+  - Branch (0.17.9):
+    - Branch/Core (= 0.17.9)
+  - Branch/Core (0.17.9)
+  - Crashlytics (3.8.5):
     - Fabric (~> 1.6.3)
   - DateTools (1.6.1)
-  - Fabric (1.6.11)
+  - Fabric (1.6.12)
   - FBSDKCoreKit (4.17.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.17.0):
@@ -76,6 +79,7 @@ PODS:
 
 DEPENDENCIES:
   - Analytics (~> 3.0.0)
+  - Branch (= 0.17.9)
   - Crashlytics (~> 3.2)
   - DateTools (~> 1.6.1)
   - Fabric (~> 1.5)
@@ -95,9 +99,10 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Analytics: b342fb4f43fa4f97ca6f4358b44d3295217ba294
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Branch: 38100c961f1838d0b0dbd7377839d530374762ff
+  Crashlytics: dfbae35ef22ca189240d230ad501feea4ee85d2d
   DateTools: 9bcc89e4f2f9004d8a7a2bd1b49269cf78968e65
-  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
   FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
   FBSnapshotTestCase: bdb997ab2397495205f11156d4d444606daebd27
@@ -123,6 +128,6 @@ SPEC CHECKSUMS:
   Segment-GoogleAnalytics: ffea73c99196720b28b58ea93bcc0e6d11f172e1
   Smartling.i18n: 03ef7a5643965212c6ca9ed7d65385950ca4a989
 
-PODFILE CHECKSUM: 734d5b0fe4bbac0f66677de571e2448cc8dfde8d
+PODFILE CHECKSUM: 79b2666a498bcfc3d404241e4776964e27bec7fd
 
 COCOAPODS: 1.1.1
