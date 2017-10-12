@@ -43,7 +43,7 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
             self.dataModel = dataModel
         }
         else {
-            self.dataModel = WhatsNewDataModel(environment: environment as? RouterEnvironment)
+            self.dataModel = WhatsNewDataModel(environment: environment as? RouterEnvironment, version: Bundle.main.oex_buildVersionString())
         }
         titleString = title ?? Strings.WhatsNew.headerText(appVersion: Bundle.main.oex_buildVersionString())
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -203,7 +203,6 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
                 return contentController(withItem: item, direction: .reverse)
             }
         }
-        
         return nil
     }
     
@@ -213,8 +212,6 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
                 return contentController(withItem: item, direction: .forward)
             }
         }
-        
-        doneButton.isHidden = false
         return nil
     }
     
@@ -224,6 +221,8 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
             currentPageIndex = dataModel.itemIndex(item: controller.whatsNew)
         }
         
+        let totalScreens = dataModel.fields?.count ?? 0
+        doneButton.isHidden = currentPageIndex != totalScreens - 1
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
