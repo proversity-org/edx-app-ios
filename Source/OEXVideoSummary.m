@@ -147,6 +147,16 @@
     return false;
 }
 
+- (BOOL)hasVideoDuration {
+    
+    return (self.duration > 0.0);
+}
+
+- (BOOL)hasVideoSize {
+    
+    return ([[self size] doubleValue] > 0.0);
+}
+
 - (BOOL) isSupportedVideo {
     BOOL isSupportedEncoding = false;
     for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
@@ -168,6 +178,10 @@
 
 - (NSNumber*)size {
     return self.preferredEncoding.size;
+}
+
+- (NSString *)videoSize {
+    return [NSString stringWithFormat:@"%.2fMB", (([[self size] doubleValue] / 1024) / 1024)];
 }
 
 - (OEXVideoPathEntry*)chapterPathEntry {

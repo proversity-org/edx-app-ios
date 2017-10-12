@@ -13,6 +13,7 @@
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <NewRelicAgent/NewRelic.h>
 #import <Analytics/SEGAnalytics.h>
+#import <Branch/Branch.h>
 
 #import "OEXAppDelegate.h"
 #import "KPNService.h"
@@ -98,6 +99,8 @@
 #endif
     }
 
+    [self configureFabricKits:launchOptions];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -125,6 +128,25 @@
     }
    
     return handled;
+}
+
+// Respond to URI scheme links
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    // pass the url to the handle deep link call
+    if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
+        [[Branch getInstance] application:app openURL:url options:options];
+    }
+    
+    return YES;
+}
+
+// Respond to Universal Links
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+    
+    if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
+        return [[Branch getInstance] continueUserActivity:userActivity];
+    }
+    return NO;
 }
 
 #pragma mark Push Notifications
@@ -242,6 +264,18 @@
         [Fabric with:@[CrashlyticsKit]];
     }
     
+}
+
+- (void) configureFabricKits:(NSDictionary*) launchOptions {
+    if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
+        [Branch setBranchKey:self.environment.config.fabricConfig.kits.branchConfig.branchKey];
+        if ([Branch branchKey]){
+            [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+                // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
+                // params will be empty if no data found
+            }];
+        }
+    }
 }
 
 @end
