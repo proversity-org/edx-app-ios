@@ -40,4 +40,4 @@ deployment:
   beta:
     branch: proversity/emi
     commands:
-      - python fastlane_match.py emi
+      - fastlane beta
