@@ -68,6 +68,7 @@
         [[[OEXSession alloc] init] closeAndClearSession];
         [OEXFileUtility nukeUserData];
     }
+    
 #endif
 
     // logout user automatically if server changed

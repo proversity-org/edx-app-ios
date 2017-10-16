@@ -97,6 +97,9 @@
 		<string>OpenSans-LightItalic.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
 		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>EmiratesBold.otf</string>
+		<string>EmiratesMedium.otf</string>
+		<string>EmiratesLight.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

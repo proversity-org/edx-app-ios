@@ -736,6 +736,9 @@
 		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
 		E793E2BB1EDC5ACA00DCDAA7 /* edXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2BA1EDC5ACA00DCDAA7 /* edXUITests.swift */; };
 		E793E2C41EDC5B2D00DCDAA7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */; };
+		E79B0F971F94FFB50085506F /* EmiratesBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E79B0F941F94FFB50085506F /* EmiratesBold.otf */; };
+		E79B0F981F94FFB50085506F /* EmiratesLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E79B0F951F94FFB50085506F /* EmiratesLight.otf */; };
+		E79B0F991F94FFB50085506F /* EmiratesMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E79B0F961F94FFB50085506F /* EmiratesMedium.otf */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
@@ -1690,6 +1693,9 @@
 		E793E2BA1EDC5ACA00DCDAA7 /* edXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edXUITests.swift; sourceTree = "<group>"; };
 		E793E2BC1EDC5ACA00DCDAA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		E79B0F941F94FFB50085506F /* EmiratesBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EmiratesBold.otf; sourceTree = "<group>"; };
+		E79B0F951F94FFB50085506F /* EmiratesLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EmiratesLight.otf; sourceTree = "<group>"; };
+		E79B0F961F94FFB50085506F /* EmiratesMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EmiratesMedium.otf; sourceTree = "<group>"; };
 		E7C40C2A1E83AEEA00300C68 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
 		E7C40C2B1E83AEEA00300C68 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
@@ -2087,6 +2093,9 @@
 			isa = PBXGroup;
 			children = (
 				BD7C6C3F1DCA329A0004D135 /* fonts.json */,
+				E79B0F941F94FFB50085506F /* EmiratesBold.otf */,
+				E79B0F951F94FFB50085506F /* EmiratesLight.otf */,
+				E79B0F961F94FFB50085506F /* EmiratesMedium.otf */,
 				69ECC5A31D50D1170030CF87 /* FontAwesome.otf */,
 				69ECC5A41D50D1170030CF87 /* OpenSans-Bold.ttf */,
 				69ECC5A51D50D1170030CF87 /* OpenSans-BoldItalic.ttf */,
@@ -3845,6 +3854,7 @@
 				69ECC6161D50D1170030CF87 /* bt_facebook_RTL.png in Resources */,
 				69ECC6411D50D1170030CF87 /* iTunesArtwork@2x in Resources */,
 				6926CDAE1D59BE3600A16E22 /* ic_previous.png in Resources */,
+				E79B0F991F94FFB50085506F /* EmiratesMedium.otf in Resources */,
 				69ECC61E1D50D1170030CF87 /* bt_scrollbar_tap.png in Resources */,
 				69ECC62B1D50D1170030CF87 /* downloading.png in Resources */,
 				69ECC60D1D50D1170030CF87 /* Icon-60@2x.png in Resources */,
@@ -3875,6 +3885,7 @@
 				9ED269CC1AF0E67200328A34 /* OEXMyVideosViewController.storyboard in Resources */,
 				69ECC6471D50D1170030CF87 /* separator3.png in Resources */,
 				1A55019C1BBA30C900D5F9DD /* profiles.json in Resources */,
+				E79B0F981F94FFB50085506F /* EmiratesLight.otf in Resources */,
 				22D73B5D1ED575C000220280 /* course-dates.js in Resources */,
 				BD7C6C401DCA329A0004D135 /* fonts.json in Resources */,
 				69ECC6021D50D1170030CF87 /* OpenSans-Italic.ttf in Resources */,
@@ -3895,6 +3906,7 @@
 				69ECC6361D50D1170030CF87 /* ic_partiallywatched@2x.png in Resources */,
 				69ECC6081D50D1170030CF87 /* Icon-29.png in Resources */,
 				69ECC6041D50D1170030CF87 /* OpenSans-LightItalic.ttf in Resources */,
+				E79B0F971F94FFB50085506F /* EmiratesBold.otf in Resources */,
 				E0EEC6E71F1CD279006C8D62 /* whats_new.json in Resources */,
 				69ECC64F1D50D1170030CF87 /* Default-Landscape@3x.png in Resources */,
 				E039A8041F74C0D80064ABDB /* logo~ipad.png in Resources */,
@@ -5310,7 +5322,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.proversity.emi;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = d88ecd3f-bf35-4466-8f6b-01d15bd04919;
+				PROVISIONING_PROFILE = "d88ecd3f-bf35-4466-8f6b-01d15bd04919";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development org.proversity.emi";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
