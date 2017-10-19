@@ -58,10 +58,10 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="KSL-zR-AIM">
-                    <rect key="frame" x="66" y="109" width="242" height="119"/>
+                    <rect key="frame" x="29" y="109" width="317" height="168"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="119" id="Kh2-yP-de1"/>
-                        <constraint firstAttribute="width" constant="242" id="XfE-b3-qdR"/>
+                        <constraint firstAttribute="width" constant="317" id="SBE-TF-ZlH"/>
+                        <constraint firstAttribute="height" constant="168" id="br7-Qe-1lD"/>
                     </constraints>
                 </imageView>
             </subviews>
