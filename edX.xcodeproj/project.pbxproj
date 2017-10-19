@@ -1689,6 +1689,12 @@
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewObjectTests.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E77F8C821F98E18C002207A3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E77F8C831F98E18C002207A3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E77F8C841F98E18D002207A3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ar; path = ar.lproj/profiles.json; sourceTree = "<group>"; };
+		E77F8C851F98E18D002207A3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ar; path = ar.lproj/countries.json; sourceTree = "<group>"; };
+		E77F8C861F98E18D002207A3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ar; path = ar.lproj/languages.json; sourceTree = "<group>"; };
+		E77F8C871F98E18D002207A3 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ar; path = ar.lproj/whats_new.json; sourceTree = "<group>"; };
 		E793E2B81EDC5ACA00DCDAA7 /* edXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = edXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E793E2BA1EDC5ACA00DCDAA7 /* edXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edXUITests.swift; sourceTree = "<group>"; };
 		E793E2BC1EDC5ACA00DCDAA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3776,6 +3782,7 @@
 			knownRegions = (
 				en,
 				"es-419",
+				ar,
 			);
 			mainGroup = BECB7B021924C0C3009C77F1;
 			productRefGroup = BECB7B0C1924C0C3009C77F1 /* Products */;
@@ -4775,6 +4782,7 @@
 			children = (
 				1A03DEA41BBC72BA006783FB /* en */,
 				E08CC57D1F33269D0092ACED /* es-419 */,
+				E77F8C851F98E18D002207A3 /* ar */,
 			);
 			name = countries.json;
 			sourceTree = "<group>";
@@ -4784,6 +4792,7 @@
 			children = (
 				1A55019D1BBA30C900D5F9DD /* en */,
 				E08CC57C1F33269C0092ACED /* es-419 */,
+				E77F8C841F98E18D002207A3 /* ar */,
 			);
 			name = profiles.json;
 			sourceTree = "<group>";
@@ -4793,6 +4802,7 @@
 			children = (
 				1AFEB1BA1BBD88F3004C471D /* en */,
 				E08CC57E1F33269D0092ACED /* es-419 */,
+				E77F8C861F98E18D002207A3 /* ar */,
 			);
 			name = languages.json;
 			sourceTree = "<group>";
@@ -4802,6 +4812,7 @@
 			children = (
 				773BE0001AAA07DD0074C3CA /* en */,
 				E08CC57A1F33269C0092ACED /* es-419 */,
+				E77F8C821F98E18C002207A3 /* ar */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4811,6 +4822,7 @@
 			children = (
 				E04A932A1F13846B00D4615D /* en */,
 				E08CC57B1F33269C0092ACED /* es-419 */,
+				E77F8C831F98E18C002207A3 /* ar */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -4820,6 +4832,7 @@
 			children = (
 				E0EEC6E81F1CD279006C8D62 /* en */,
 				E08CC57F1F33269D0092ACED /* es-419 */,
+				E77F8C871F98E18D002207A3 /* ar */,
 			);
 			name = whats_new.json;
 			sourceTree = "<group>";
