@@ -1,12 +1,12 @@
 {
-    "regular":"Emirates-Medium",
-    "semiBold":"Emirates-Medium",
+    "regular":"Helvetica",
+    "semiBold":"Helvetica",
     "semiBoldItalic":"Emirates-Medium",
     "bold":"Emirates-Bold",
     "boldItalic":"Emirates-Bold",
     "extraBold":"Emirates-Bold",
     "extraBoldItalic":"Emirates-Bold",
-    "light":"Emirates-Light",
-    "lightItalic":"Emirates-Light",
-    "italic":"Emirates-Medium"
+    "light":"Helvetica",
+    "lightItalic":"Helvetica",
+    "italic":"Helvetica"
 }
