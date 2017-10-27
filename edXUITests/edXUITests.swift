@@ -60,7 +60,9 @@ class edXUITests: XCTestCase {
             app.buttons["ACCOUNT"].tap()
             expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
             waitForExpectations(timeout: 5, handler: nil)
-            app.buttons["Logout"].tap()
+            app.tables.staticTexts["Logout"].tap()
+            let app = XCUIApplication()
+            app.buttons["login"].tap()
             userFieldTextField.tap()
             userFieldTextField.typeText("")
         }
