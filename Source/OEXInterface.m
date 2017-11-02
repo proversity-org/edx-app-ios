@@ -195,7 +195,7 @@ static OEXInterface* _sharedInterface = nil;
         }
     }
     else {
-        URLString = [NSMutableString stringWithString:type];
+        return nil;
     }
 
     //Append tail
