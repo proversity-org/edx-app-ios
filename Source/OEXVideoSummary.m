@@ -32,6 +32,7 @@
 @property (nonatomic, assign) BOOL onlyOnWeb;
 @property (nonatomic, strong) NSDictionary* transcripts;
 @property (nonatomic, strong) OEXVideoEncoding *defaultEncoding;
+@property (nonatomic, strong) OEXVideoEncoding *fallbackEncoding;
 @property (nonatomic, strong) NSMutableArray *supportedEncodings;
 
 - (BOOL)isSupportedEncoding:(NSString *) encodingName;
@@ -41,8 +42,10 @@
 @implementation OEXVideoSummary
 
 - (id)initWithDictionary:(NSDictionary*)dictionary {
+    NSLog(@"creating a VideoSummary");
     self = [super init];
     if(self != nil) {
+        NSLog(@"%@", dictionary);
         //Section url
         if([[dictionary objectForKey:@"section_url"] isKindOfClass:[NSString class]]) {
             self.sectionURL = [dictionary objectForKey:@"section_url"];
@@ -65,6 +68,7 @@
         }
         
         NSDictionary* rawEncodings = OEXSafeCastAsClass(summary[@"encoded_videos"], NSDictionary);
+        NSLog(@"%@", rawEncodings);
         NSMutableDictionary* encodings = [[NSMutableDictionary alloc] init];
         [rawEncodings enumerateKeysAndObjectsUsingBlock:^(NSString* name, NSDictionary* encodingInfo, BOOL *stop) {
             OEXVideoEncoding* encoding = [[OEXVideoEncoding alloc] initWithDictionary:encodingInfo name:name];
@@ -80,12 +84,25 @@
         
         self.transcripts = [summary objectForKey:@"transcripts"];
         
+        if ([summary objectForKey:@"video_alternatives"]) {
+            NSArray *videoAlternatives = [[NSArray alloc] initWithArray:[summary objectForKey:@"video_alternatives"]];
+            if ([videoAlternatives count] > 0) {
+                self.videoAlternative = [videoAlternatives objectAtIndex:0];
+            }
+        } else {
+            self.videoAlternative = @"";
+        }
+        
+        NSLog(@"VIDEO ALTERNATIVE");
+        NSLog(@"%@", self.videoAlternative);
+        
         if (_encodings.count <=0)
-            _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+            _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingHls URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
         
         self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
         if (![[OEXConfig sharedConfig] isUsingVideoPipeline]) {
             [self.supportedEncodings addObject:OEXVideoEncodingFallback];
+            [self.supportedEncodings addObject:OEXVideoEncodingHls];
         }
     }
     
@@ -170,6 +187,23 @@
     }
     
     return !self.onlyOnWeb && isSupportedEncoding;
+}
+
+- (BOOL) isDownloadableVideo {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    BOOL canDownload = self.isSupportedVideo;
+    if(canDownload) {
+        NSLog(@"can download");
+        for (NSString *extension in ONLINE_ONLY_VIDEO_URL_EXTENSIONS) {
+            if([self.videoURL localizedCaseInsensitiveContainsString:extension]){
+                if (self.videoAlternative.length == 0) {
+                    canDownload = NO;
+                    break;
+                }
+            }
+        }
+    }
+    return canDownload;
 }
 
 - (NSString*)videoURL {

@@ -42,6 +42,7 @@ public struct CourseOutlineAPI {
     }
     
     public static func requestWithCourseID(courseID : String, username : String?) -> NetworkRequest<CourseOutline> {
+        print("IM CALLING requestWithCourseID")
         let parameters = Parameters(
             courseID: courseID,
             username: username,
@@ -49,6 +50,7 @@ public struct CourseOutlineAPI {
             blockCount : [CourseBlock.Category.Video.rawValue],
             studentViewData : [CourseBlock.Category.Video, CourseBlock.Category.Discussion]
         )
+        print(parameters)
         return NetworkRequest(
             method : .GET,
             path : "/api/courses/v1/blocks/",

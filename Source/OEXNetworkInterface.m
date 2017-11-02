@@ -96,14 +96,23 @@
         [URLString appendFormat:@"%@/%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username];
     }
     else if([type isEqualToString:URL_COURSE_ENROLLMENTS]) {
-        [URLString appendFormat:@"%@/%@%@?org=%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS, [OEXConfig sharedConfig].organizationCode];
+        if ([OEXConfig sharedConfig].organizationCode) {
+            [URLString appendFormat:@"%@/%@%@?org=%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS, [OEXConfig sharedConfig].organizationCode];
+        } else {
+            [URLString appendFormat:@"%@/%@%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS];
+        }
     }
     else {
         URLString = [NSMutableString stringWithString:type];
     }
 
     //Append tail
-    [URLString appendString:@"?format=json"];
+    if ([OEXConfig sharedConfig].organizationCode && [type isEqualToString:URL_COURSE_ENROLLMENTS]) {
+        [URLString appendString:@"&format=json"];
+    } else {
+        [URLString appendString:@"?format=json"];
+    }
+    
 
     return URLString;
 }

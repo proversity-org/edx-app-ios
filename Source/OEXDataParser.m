@@ -105,19 +105,24 @@
 }
 
 - (NSArray*)videoSummaryListWithData:(NSData*)receivedData {
+    NSLog(@"videoSummaryListWithData");
     NSMutableArray* arrSummary = [[NSMutableArray alloc] init];
     NSError* error;
     NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];
     for(NSDictionary* dict in arrResponse) {
+        NSLog(@"FOR");
         if(![dict isKindOfClass:[NSDictionary class]]) {
             continue;
         }
         NSDictionary* dictResponse = [dict oex_replaceNullsWithEmptyStrings];
+        NSLog(@"%@", dictResponse);
         OEXVideoSummary* summaryList = [[OEXVideoSummary alloc] initWithDictionary:dictResponse];
         if(summaryList.chapterPathEntry.entryID != nil && summaryList.sectionPathEntry.entryID != nil) {
             [arrSummary addObject:summaryList];
         }
+        NSLog(@"END FOR");
     }
+    
     return arrSummary;
 }
 @end
