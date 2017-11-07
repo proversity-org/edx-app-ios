@@ -107,7 +107,6 @@ public class CourseOutlineQuerier : NSObject {
             }
             else {
                 let request = CourseOutlineAPI.requestWithCourseID(courseID: courseID, username : session?.currentUser?.username)
-                print(request)
                 if let loader = networkManager?.streamForRequest(request, persistResponse: true) {
                     courseOutline.backWithStream(loader)
                 }

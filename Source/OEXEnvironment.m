@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) OEXAnalytics* analytics;
 @property (strong, nonatomic) OEXConfig* config;
+@property (strong, nonatomic) OEXInterface* interface;
 @property (strong, nonatomic) DataManager* dataManager;
 @property (strong, nonatomic) Logger* logger;
 @property (strong, nonatomic) NetworkManager* networkManager;
@@ -55,10 +56,20 @@
 - (id)init {
     self = [super init];
     if(self != nil) {
+        
         self.postSetupActions = [[NSMutableArray alloc] init];
         
         self.loggerBuilder = ^(OEXEnvironment* env) {
             return Logger.sharedLogger;
+        };
+        
+        self.configBuilder = ^(OEXEnvironment* env){
+            return [[OEXConfig alloc] initWithAppBundleData];
+        };
+        
+        self.interfaceBuilder = ^(OEXEnvironment* env){
+            NSCAssert(env.config != nil, @"Config should be enabled before interface is set up");
+            return [[OEXInterface alloc] initWitConfig:env.config];
         };
         
         self.analyticsBuilder = ^(OEXEnvironment* env){
@@ -83,9 +94,6 @@
             }
             
             return analytics;
-        };
-        self.configBuilder = ^(OEXEnvironment* env){
-            return [[OEXConfig alloc] initWithAppBundleData];
         };
         self.pushNotificationManagerBuilder = ^OEXPushNotificationManager*(OEXEnvironment* env) {
             NSCAssert(env.config != nil, @"Config should be enabled before analytics are set up");
@@ -181,6 +189,7 @@
     self.logger = self.loggerBuilder(self);
     
     self.config = self.configBuilder(self);
+    self.interface = self.interfaceBuilder(self);
     self.analytics = self.analyticsBuilder(self);
     
     self.session = self.sessionBuilder(self);
@@ -195,6 +204,7 @@
     // We should minimize the use of these singletons and mostly use explicitly passed in dependencies
     // But occasionally that's very inconvenient and also much existing code is not structured to deal with that
     [OEXConfig setSharedConfig:self.config];
+    [OEXInterface setSharedInterface:self.interface];
     [OEXRouter setSharedRouter:self.router];
     [OEXAnalytics setSharedAnalytics:self.analytics];
     [OEXSession setSharedSession:self.session];

@@ -103,7 +103,7 @@
         }
     }
     else {
-        URLString = [NSMutableString stringWithString:type];
+        return nil;
     }
 
     //Append tail

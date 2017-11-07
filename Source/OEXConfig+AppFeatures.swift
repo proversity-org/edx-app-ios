@@ -87,4 +87,8 @@ extension OEXConfig {
     var isTabsDashboardEnabled: Bool {
         return bool(forKey: "TABS_DASHBOARD_ENABLED")
     }
+    
+    var isUsingDeprecatedVideoOutlineApi: Bool {
+        return bool(forKey: "USING_DEPRECATED_VIDEO_OUTLINE_API", defaultValue: false)
+    }
 }

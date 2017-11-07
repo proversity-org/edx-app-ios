@@ -31,7 +31,6 @@ class CourseVideoTableViewCell: SwipeableCell, CourseBlockContainerCell {
         didSet {
             content.setTitleText(title: block?.displayName)
             if let video = block?.type.asVideo {
-                print("the video is downloadable")
                 video.isDownloadableVideo ? (downloadView.isHidden = false) : (downloadView.isHidden = true)
             }
         }

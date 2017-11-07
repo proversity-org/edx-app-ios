@@ -126,8 +126,6 @@ static NSURLSession* videosBackgroundSession = nil;
         completionHandler(nil);
         return;
     }
-    
-    NSLog(@"%@", video.video_url);
 
     [videosBackgroundSession getTasksWithCompletionHandler:^(NSArray* dataTasks, NSArray* uploadTasks, NSArray* downloadTasks) {
         CLS_LOG(@"checkIfVideoIsDownloading: getTasksWithCompletionHandler");
@@ -144,7 +142,6 @@ static NSURLSession* videosBackgroundSession = nil;
             }
         }
         if(alreadyInProgress) {
-            NSLog(@"already in progress");
             NSURLSessionDownloadTask* downloadTask = [downloadTasks objectAtIndex:taskIndex];
             video.download_state = [NSNumber numberWithInt:OEXDownloadStatePartial];
             video.dm_id = [NSNumber numberWithUnsignedInteger:downloadTask.taskIdentifier];
@@ -199,10 +196,8 @@ static NSURLSession* videosBackgroundSession = nil;
 }
 
 - (NSURLSessionDownloadTask*)startBackgroundDownloadForVideo:(VideoData*)video {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     //Request
     NSURL* url = [NSURL URLWithString:video.video_url];
-    NSLog(@"%@", video.video_url);
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     //Task
     NSURLSessionDownloadTask* downloadTask = nil;

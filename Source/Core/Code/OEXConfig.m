@@ -51,10 +51,12 @@ static OEXConfig* sSharedConfig;
 }
 
 - (id)initWithDictionary:(NSDictionary*)dictionary {
+
     self = [super init];
     if(self != nil) {
         self.properties = dictionary;
     }
+    
     return self;
 }
 
@@ -87,7 +89,7 @@ static OEXConfig* sSharedConfig;
     if (![_properties objectForKey:key]) {
         return defaultValue;
     }
-    
+
     return [self boolForKey:key];
 }
 

@@ -349,8 +349,6 @@ static OEXDBManager* _sharedManager = nil;
 }
 
 - (NSData*)dataForURLString:(NSString*)URLString {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"%@", URLString);
     NSString* filePath = [OEXFileUtility filePathForRequestKey:URLString];
 
     if([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
