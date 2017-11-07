@@ -42,7 +42,6 @@
 @implementation OEXVideoSummary
 
 - (id)initWithDictionary:(NSDictionary*)dictionary {
-    NSLog(@"creating video summary");
     self = [super init];
     if(self != nil) {
         //Section url
@@ -73,7 +72,6 @@
             [encodings setSafeObject:encoding forKey:name];
         }];
         self.encodings = encodings;
-        NSLog(@"%@", self.encodings);
         
         self.videoThumbnailURL = [summary objectForKey:@"video_thumbnail_url"];
         self.videoID = [summary objectForKey:@"id"] ;
@@ -82,8 +80,24 @@
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
         
         self.transcripts = [summary objectForKey:@"transcripts"];
-        if (_encodings.count <=0)
-            _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingHls URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+        if (_encodings.count <=0) {
+            if ([summary objectForKey:@"video_alternatives"]) {
+                NSArray *videoAlternatives = [summary objectForKey:@"video_alternatives"];
+                if (videoAlternatives.count > 0) {
+                    NSLog(@"VIDEO ALTERNATIVES");
+                    NSLog(@"%@", videoAlternatives[0]);
+                    if ([videoAlternatives[0] containsString:@".mp4"]) {
+                        _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:videoAlternatives[0] size:[summary objectForKey:@"size"]];
+                    } else {
+                        _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+                    }
+                } else {
+                    _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+                }
+            } else {
+                _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+            }
+        }
         
         self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
         if (![[OEXConfig sharedConfig] isUsingVideoPipeline]) {
@@ -176,19 +190,37 @@
 }
 
 - (BOOL) isDownloadableVideo {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     BOOL canDownload = self.isSupportedVideo;
     if(canDownload) {
         for (NSString *extension in ONLINE_ONLY_VIDEO_URL_EXTENSIONS) {
             if([self.videoURL localizedCaseInsensitiveContainsString:extension]){
-                canDownload = NO;
-                break;
+                NSLog(@"%@", self.defaultEncoding.URL);
+                if (![self.defaultEncoding.URL containsString:@".mp4"]) {
+                    canDownload = NO;
+                    break;
+                }
             }
         }
+    }
+
+    if (canDownload) {
+        NSLog(@"it can download");
     }
     return canDownload;
 }
 
 - (NSString*)videoURL {
+    return self.preferredEncoding.URL;
+}
+
+- (NSString*)streamingURL {
+    for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
+        OEXVideoEncoding* encoding = self.encodings[name];
+        if ([encoding.name containsString:@"hls"]) {
+            return encoding.URL;
+        }
+    }
     return self.preferredEncoding.URL;
 }
 

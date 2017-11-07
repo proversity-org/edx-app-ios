@@ -517,6 +517,7 @@ static OEXDBManager* _sharedManager = nil;
 }
 
 - (void)completedDownloadForVideo:(VideoData*)videoData {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     if(videoData) {
         videoData.download_state = [NSNumber numberWithFloat:OEXDownloadStateComplete];
         videoData.downloadCompleteDate = [NSDate date];
@@ -756,6 +757,8 @@ static OEXDBManager* _sharedManager = nil;
     videoObj.played_state = [NSNumber numberWithInt:played_state];
 
     [self saveCurrentStateToDB];
+    
+    NSLog(@"%@", videoObj.video_url);
 
     return videoObj;
 }

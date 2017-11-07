@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class OEXHelperVideoDownload;
 @class OEXUserDetails;
 @class UserCourseEnrollment;
-@class RouterEnvironment;
 
 /// Fires when the course list changes
 extern NSString* const OEXCourseListChangedNotification;
@@ -33,9 +32,7 @@ extern NSString* const OEXDownloadEndedNotification;
 // Think very hard before adding anything to it
 @interface OEXInterface : NSObject <OEXNetworkInterfaceDelegate, UIAlertViewDelegate>
 
-+ (void)setSharedInterface:(OEXInterface*)interface;
 + (instancetype)sharedInterface;
-- (id)initWitConfig:(OEXConfig *)config;
 
 //Common Data
 

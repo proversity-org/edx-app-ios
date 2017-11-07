@@ -73,6 +73,8 @@ static OEXNetworkManager* _sharedManager = nil;
 }
 
 - (void)downloadInBackground:(NSURL*)url {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%@", url);
     if([OEXInterface isURLForVideo:url.absoluteString]) {
         return;
     }

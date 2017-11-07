@@ -105,7 +105,6 @@
 }
 
 - (NSArray*)videoSummaryListWithData:(NSData*)receivedData {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSMutableArray* arrSummary = [[NSMutableArray alloc] init];
     NSError* error;
     NSArray* arrResponse = [NSJSONSerialization oex_JSONObjectWithData:receivedData error:&error];

@@ -64,6 +64,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
                         else if
                             let video = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID), block.type.asVideo?.preferredEncoding != nil
                         {
+                            print(block.type.asVideo?.preferredEncoding?.url as Any)
                             self?.showLoadedBlock(block: block, forVideo: video)
                         }
                         else {
@@ -273,6 +274,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
     
     private func showLoadedBlock(block : CourseBlock, forVideo video: OEXHelperVideoDownload) {
         navigationItem.title = block.displayName
+        print(block.displayName)
         
         DispatchQueue.main.async {
             self.loadController.state = .Loaded

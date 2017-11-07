@@ -196,6 +196,7 @@ static NSURLSession* videosBackgroundSession = nil;
 }
 
 - (NSURLSessionDownloadTask*)startBackgroundDownloadForVideo:(VideoData*)video {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     //Request
     NSURL* url = [NSURL URLWithString:video.video_url];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -395,7 +396,6 @@ static NSURLSession* videosBackgroundSession = nil;
                     OEXLogInfo(@"DOWNLOADS", @"Updating record for Downloaded Video ==>> %@", videoData.title);
 
                     [[OEXAnalytics sharedAnalytics] trackDownloadComplete:videoData.video_id CourseID:videoData.enrollment_id UnitURL:videoData.unit_url];
-
                     [self.storage completedDownloadForVideo:videoData];
                 }
 

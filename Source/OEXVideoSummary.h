@@ -38,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic, copy, nullable) NSString* category;
 // This property is deprecated. We should be reading it from the CourseBlock itself
 @property (readonly, nonatomic, copy, nullable) NSString* name;
-@property (readonly, nonatomic, copy, nullable) NSString* videoURL; 
+@property (readonly, nonatomic, copy, nullable) NSString* videoURL;
+@property (readonly, nonatomic, copy, nullable) NSString* streamingURL;
 @property (readonly, nonatomic, copy, nullable) NSString* videoThumbnailURL;
 // TODO: Make this readonly again, once we completely migrate to the new API
 @property (nonatomic, assign) double duration;

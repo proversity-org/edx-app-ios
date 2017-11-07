@@ -60,6 +60,7 @@
 }
 
 - (void)downloadWithURLString:(NSString*)URLString {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSURL* URL = [NSURL URLWithString:URLString];
     [_network downloadInBackground:URL];
 }
@@ -91,7 +92,7 @@
 
 - (NSString*)URLStringForType:(NSString*)type {
     NSMutableString* URLString = [OEXConfig sharedConfig].apiHostURL.absoluteString.mutableCopy;
-
+    
     if([type isEqualToString:URL_USER_DETAILS]) {
         [URLString appendFormat:@"%@/%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username];
     }
@@ -103,9 +104,9 @@
         }
     }
     else {
-        return nil;
+        URLString = [NSMutableString stringWithString:type];
     }
-
+    
     //Append tail
     if ([OEXConfig sharedConfig].organizationCode && [type isEqualToString:URL_COURSE_ENROLLMENTS]) {
         [URLString appendString:@"&format=json"];
@@ -113,7 +114,7 @@
         [URLString appendString:@"?format=json"];
     }
     
-
+    
     return URLString;
 }
 

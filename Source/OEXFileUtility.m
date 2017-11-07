@@ -108,6 +108,7 @@
             NSAssert(@"Error creating directory: %@", error.localizedDescription);
         }
         
+        NSLog(@"%@", url);
         NSString* totalPath = [containerPath stringByAppendingPathComponent:url.oex_md5];
         
         // We used to use just the regular old Cocoa hash function for file paths.
@@ -143,7 +144,9 @@
 
 
 + (NSString*)filePathForVideoURL:(NSString*)videoUrl username:(nullable NSString *)username {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSString* filepath = [[OEXFileUtility filePathForRequestKey:videoUrl username:username] stringByAppendingPathExtension:@"mp4"];
+    NSLog(@"%@", filepath);
     return filepath;
 }
 
