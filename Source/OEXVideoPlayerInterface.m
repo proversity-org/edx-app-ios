@@ -83,14 +83,10 @@
     }
 }
 
-- (void) enableFullscreenAutorotation {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
 - (void)playVideoFor:(OEXHelperVideoDownload*)video {
     _moviePlayerController.videoTitle = video.summary.name;
     _moviePlayerController.controls.video = video;
-    NSURL* url = [NSURL URLWithString:video.summary.videoURL];
+    NSURL* url = [NSURL URLWithString:video.summary.streamingURL];
 
     NSFileManager* filemgr = [NSFileManager defaultManager];
     NSString* path = [video.filePath stringByAppendingPathExtension:@"mp4"];
