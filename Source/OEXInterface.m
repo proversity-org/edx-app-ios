@@ -407,7 +407,6 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 - (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)array {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     BOOL isValid = [self canDownloadVideos:array];
     
     if(!isValid) {
@@ -416,7 +415,6 @@ static OEXInterface* _sharedInterface = nil;
     
     NSInteger count = 0;
     for(OEXHelperVideoDownload* video in array) {
-        NSLog(@"%@", video.summary.videoURL);
         if(video.summary.videoURL.length > 0 && video.downloadState == OEXDownloadStateNew) {
             [self downloadAllTranscriptsForVideo:video];
             [self addVideoForDownload:video completionHandler:^(BOOL success){}];
