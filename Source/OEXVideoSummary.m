@@ -215,7 +215,7 @@
         }
     }
     return self.preferredEncoding.URL;
-
+}
 
 - (NSNumber*)size {
     return self.preferredEncoding.size;
