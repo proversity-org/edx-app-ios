@@ -175,13 +175,21 @@ static OEXInterface* _sharedInterface = nil;
         [URLString appendFormat:@"%@/%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username];
     }
     else if([type isEqualToString:URL_COURSE_ENROLLMENTS]) {
-        [URLString appendFormat:@"%@/%@%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS];
+        if ([OEXConfig sharedConfig].organizationCode) {
+            [URLString appendFormat:@"%@/%@%@?org=%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS, [OEXConfig sharedConfig].organizationCode];
+        } else {
+            [URLString appendFormat:@"%@/%@%@", URL_USER_DETAILS, [OEXSession sharedSession].currentUser.username, URL_COURSE_ENROLLMENTS];
+        }
     }
     else {
         return nil;
     }
     //Append tail
-    [URLString appendString:@"?format=json"];
+    if ([OEXConfig sharedConfig].organizationCode && [type isEqualToString:URL_COURSE_ENROLLMENTS]) {
+        [URLString appendString:@"&format=json"];
+    } else {
+        [URLString appendString:@"?format=json"];
+    }
 
     return URLString;
 }
