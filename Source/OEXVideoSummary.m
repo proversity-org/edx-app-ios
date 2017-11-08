@@ -80,12 +80,27 @@
         
         self.transcripts = [summary objectForKey:@"transcripts"];
         
-        if (_encodings.count <=0)
-            _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+        if (_encodings.count <=0) {
+            if ([summary objectForKey:@"video_alternatives"]) {
+                NSArray *videoAlternatives = [summary objectForKey:@"video_alternatives"];
+                if (videoAlternatives.count > 0) {
+                    if ([videoAlternatives[0] containsString:@".mp4"]) {
+                        _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:videoAlternatives[0] size:[summary objectForKey:@"size"]];
+                    } else {
+                        _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+                    }
+                } else {
+                    _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+                }
+            } else {
+                _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+            }
+        }
         
         self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
         if (![[OEXConfig sharedConfig] isUsingVideoPipeline]) {
             [self.supportedEncodings addObject:OEXVideoEncodingFallback];
+            [self.supportedEncodings addObject:OEXVideoEncodingHls];
         }
     }
     
@@ -172,9 +187,35 @@
     return !self.onlyOnWeb && isSupportedEncoding;
 }
 
+- (BOOL) isDownloadableVideo {
+    BOOL canDownload = self.isSupportedVideo;
+    if(canDownload) {
+        for (NSString *extension in ONLINE_ONLY_VIDEO_URL_EXTENSIONS) {
+            if([self.videoURL localizedCaseInsensitiveContainsString:extension]){
+                if (![self.defaultEncoding.URL containsString:@".mp4"]) {
+                    canDownload = NO;
+                    break;
+                }
+            }
+        }
+    }
+
+    return canDownload;
+}
+
 - (NSString*)videoURL {
     return self.preferredEncoding.URL;
 }
+
+- (NSString*)streamingURL {
+    for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
+        OEXVideoEncoding* encoding = self.encodings[name];
+        if ([encoding.name containsString:@"hls"]) {
+            return encoding.URL;
+        }
+    }
+    return self.preferredEncoding.URL;
+
 
 - (NSNumber*)size {
     return self.preferredEncoding.size;
