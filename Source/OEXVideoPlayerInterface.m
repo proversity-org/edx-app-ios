@@ -84,19 +84,12 @@
 }
 
 - (void)playVideoFor:(OEXHelperVideoDownload*)video {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     _moviePlayerController.videoTitle = video.summary.name;
     _moviePlayerController.controls.video = video;
     NSURL* url = [NSURL URLWithString:video.summary.streamingURL];
-<<<<<<< HEAD
-    NSLog(@"%@", url);
-=======
->>>>>>> origin/master
 
     NSFileManager* filemgr = [NSFileManager defaultManager];
     NSString* path = [video.filePath stringByAppendingPathExtension:@"mp4"];
-    NSLog(@"%@", path);
-
     if([filemgr fileExistsAtPath:path]) {
         url = [NSURL fileURLWithPath:path];
     }
