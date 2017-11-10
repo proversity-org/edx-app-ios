@@ -113,8 +113,7 @@
     } else {
         [URLString appendString:@"?format=json"];
     }
-    
-    
+
     return URLString;
 }
 

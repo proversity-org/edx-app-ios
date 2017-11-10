@@ -192,7 +192,9 @@ static OEXInterface* _sharedInterface = nil;
         [URLString appendString:@"?format=json"];
     }
     
-    return URLString;}
+    return URLString;
+}
+
 
 + (BOOL)isURLForVideo:(NSString*)URLString {
     //    https://d2f1egay8yehza.cloudfront.net/mit-6002x/MIT6002XT214-V043800_MB2.mp4

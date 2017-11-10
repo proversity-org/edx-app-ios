@@ -80,12 +80,11 @@
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
         
         self.transcripts = [summary objectForKey:@"transcripts"];
+
         if (_encodings.count <=0) {
             if ([summary objectForKey:@"video_alternatives"]) {
                 NSArray *videoAlternatives = [summary objectForKey:@"video_alternatives"];
                 if (videoAlternatives.count > 0) {
-                    NSLog(@"VIDEO ALTERNATIVES");
-                    NSLog(@"%@", videoAlternatives[0]);
                     if ([videoAlternatives[0] containsString:@".mp4"]) {
                         _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:videoAlternatives[0] size:[summary objectForKey:@"size"]];
                     } else {
@@ -190,12 +189,10 @@
 }
 
 - (BOOL) isDownloadableVideo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     BOOL canDownload = self.isSupportedVideo;
     if(canDownload) {
         for (NSString *extension in ONLINE_ONLY_VIDEO_URL_EXTENSIONS) {
             if([self.videoURL localizedCaseInsensitiveContainsString:extension]){
-                NSLog(@"%@", self.defaultEncoding.URL);
                 if (![self.defaultEncoding.URL containsString:@".mp4"]) {
                     canDownload = NO;
                     break;
@@ -204,9 +201,6 @@
         }
     }
 
-    if (canDownload) {
-        NSLog(@"it can download");
-    }
     return canDownload;
 }
 
