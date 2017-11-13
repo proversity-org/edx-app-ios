@@ -12,25 +12,29 @@ machine:
 
 dependencies:
   override:
-    - sudo gem install fastlane -NV
     - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
     - brew update
+    - brew cask install fastlane
     - brew install imagemagick
     - brew cleanup
     - sudo pip install requests
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
-    - cp -R deployment/custom_config custom_config
-    - cp -R deployment/fastlane fastlane
-    - cp -R deployment/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
-    - cp -R deployment/assets/app_icons/ Source/Resources/Icons
-    - cp -R deployment/assets/logos/ Source/Resources/Images
-    - cp -R deployment/assets/splash_screens/ Source/Resources/Splash
-    - cp -R deployment/assets/images/ Source/Resources/Images
-    - cp -R deployment/colors.json Source/Resources/Colors
-    - cp -R deployment/fonts.json Source/Resources/Fonts
+    - git clone git@github.com:proversity-org/edx-mobile-config.git --single-branch --branch proversity/pro ./deployment
+    - cp -R deployment/iOS/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
+    - cp -R deployment/iOS/assets/app_icons/ edx-appResources/Icons
+    - cp -R deployment/iOS/assets/logos/ edx-appResources/Images
+    - cp -R deployment/iOS/assets/splash_screens/ Source/Resources/Splash
+    - cp -R deployment/iOS/assets/images/ Source/Resources/Images
+    - cp -R deployment/iOS/colors.json Source/Resources/Colors
+    - cp -R deployment/iOS/fonts.json Source/Resources/Fonts
+    - cp -R deployment/iOS/custom_config custom_config
+    - cp -R deployment/iOS/default_config default_config
+    - cp -R deployment/iOS/fastlane fastlane
+    - cp -R deployment/iOS/files/edX-Info.plist Source/edX-Info.plist
+    - cp -R deployment/iOS/files/edX.entitlements edX.entitlements
+    - cp -R deployment/iOS/files/project.pbxproj edX.xcodeproj/project.pbxproj
 
 test:
   override:
@@ -40,4 +44,4 @@ deployment:
   beta:
     branch: proversity/pro
     commands:
-      - python fastlane_match.py
+      - fastlane beta
