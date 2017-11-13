@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - proversity/pro
+      - master
       
 machine:
   xcode:
@@ -42,6 +42,6 @@ test:
 
 deployment:
   beta:
-    branch: proversity/pro
+    branch: master
     commands:
       - fastlane beta
