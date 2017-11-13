@@ -23,8 +23,8 @@ dependencies:
   post:
     - git clone git@github.com:proversity-org/edx-mobile-config.git --single-branch --branch proversity/pro ./deployment
     - cp -R deployment/iOS/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
-    - cp -R deployment/iOS/assets/app_icons/ edx-appResources/Icons
-    - cp -R deployment/iOS/assets/logos/ edx-appResources/Images
+    - cp -R deployment/iOS/assets/app_icons/ Source/Resources/Icons
+    - cp -R deployment/iOS/assets/logos/ Source/Resources/Images
     - cp -R deployment/iOS/assets/splash_screens/ Source/Resources/Splash
     - cp -R deployment/iOS/assets/images/ Source/Resources/Images
     - cp -R deployment/iOS/colors.json Source/Resources/Colors
