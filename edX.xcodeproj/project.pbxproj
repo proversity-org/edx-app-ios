@@ -740,6 +740,9 @@
 		E7EC205E1FB9B330008F2F89 /* PxGroteskLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20591FB9B330008F2F89 /* PxGroteskLightItalic.ttf */; };
 		E7EC205F1FB9B330008F2F89 /* PxGroteskRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC205A1FB9B330008F2F89 /* PxGroteskRegular.ttf */; };
 		E7EC20601FB9B330008F2F89 /* PxGroteskRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC205B1FB9B330008F2F89 /* PxGroteskRegularItalic.ttf */; };
+		E7EC20641FB9BF73008F2F89 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20611FB9BF73008F2F89 /* Lato-Black.ttf */; };
+		E7EC20651FB9BF73008F2F89 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20621FB9BF73008F2F89 /* Lato-Light.ttf */; };
+		E7EC20661FB9BF73008F2F89 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20631FB9BF73008F2F89 /* Lato-Regular.ttf */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -1694,6 +1697,9 @@
 		E7EC20591FB9B330008F2F89 /* PxGroteskLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskLightItalic.ttf; sourceTree = "<group>"; };
 		E7EC205A1FB9B330008F2F89 /* PxGroteskRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegular.ttf; sourceTree = "<group>"; };
 		E7EC205B1FB9B330008F2F89 /* PxGroteskRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegularItalic.ttf; sourceTree = "<group>"; };
+		E7EC20611FB9BF73008F2F89 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		E7EC20621FB9BF73008F2F89 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		E7EC20631FB9BF73008F2F89 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -2106,6 +2112,9 @@
 				E7EC20591FB9B330008F2F89 /* PxGroteskLightItalic.ttf */,
 				E7EC205A1FB9B330008F2F89 /* PxGroteskRegular.ttf */,
 				E7EC205B1FB9B330008F2F89 /* PxGroteskRegularItalic.ttf */,
+				E7EC20611FB9BF73008F2F89 /* Lato-Black.ttf */,
+				E7EC20621FB9BF73008F2F89 /* Lato-Light.ttf */,
+				E7EC20631FB9BF73008F2F89 /* Lato-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -3822,6 +3831,7 @@
 				69ECC6461D50D1170030CF87 /* separator1.png in Resources */,
 				69ECC6491D50D1170030CF87 /* share.pdf in Resources */,
 				69ECC64D1D50D1170030CF87 /* Default-375w-667h@2x.png in Resources */,
+				E7EC20651FB9BF73008F2F89 /* Lato-Light.ttf in Resources */,
 				6926CDAF1D59BE3600A16E22 /* ic_progressbar.png in Resources */,
 				6987A86D1D6C67DB00E9D183 /* colors.json in Resources */,
 				6926CDAD1D59BE3600A16E22 /* ic_previous_press.png in Resources */,
@@ -3830,6 +3840,7 @@
 				6960892C1D53935500EE66DD /* courseCertificate@2x.png in Resources */,
 				69ECC61D1D50D1170030CF87 /* bt_logout_default.png in Resources */,
 				69ECC6501D50D1170030CF87 /* Default@2x.png in Resources */,
+				E7EC20641FB9BF73008F2F89 /* Lato-Black.ttf in Resources */,
 				69ECC6341D50D1170030CF87 /* ic_next_deactive.png in Resources */,
 				1AFEB1B91BBD88F3004C471D /* languages.json in Resources */,
 				E08EFCD31EC1E4A1008ECEC9 /* screen_2.png in Resources */,
@@ -3885,6 +3896,7 @@
 				E7EC205F1FB9B330008F2F89 /* PxGroteskRegular.ttf in Resources */,
 				22A4191E1EB1CF1500BBC8CA /* shareCourse@2x.png in Resources */,
 				E021F46C1F739599007A26E7 /* loginScreenImage@2x~ipad.png in Resources */,
+				E7EC20661FB9BF73008F2F89 /* Lato-Regular.ttf in Resources */,
 				B4B6D64A1A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib in Resources */,
 				BD837BB81DC8D5D400341EFD /* Icon-76.png in Resources */,
 				69ECC63E1D50D1170030CF87 /* icon_google_white.png in Resources */,
