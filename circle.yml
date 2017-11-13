@@ -36,6 +36,7 @@ dependencies:
     - cp -R deployment/iOS/files/edX-Info.plist Source/edX-Info.plist
     - cp -R deployment/iOS/files/edX.entitlements edX.entitlements
     - cp -R deployment/iOS/files/project.pbxproj edX.xcodeproj/project.pbxproj
+    - fastlane snapshot update
 
 test:
   override:
