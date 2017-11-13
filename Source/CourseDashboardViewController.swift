@@ -194,7 +194,6 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
             }
         }
     }
-    
 
     private func addShareButton(courseView: CourseCardView) {
         if environment.config.courseSharingEnabled {
