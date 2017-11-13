@@ -38,10 +38,10 @@ class edXUITests: XCTestCase {
         snapshot("login")
         let userFieldTextField = app.textFields["User name or e-mail address"]
         userFieldTextField.tap()
-        userFieldTextField.typeText("jagonzalr")
+        userFieldTextField.typeText("chester")
         let passwordFieldSecureTextField = app.secureTextFields["Password"]
         passwordFieldSecureTextField.tap()
-        passwordFieldSecureTextField.typeText("Fender182")
+        passwordFieldSecureTextField.typeText("8253eQ3$744b")
         app.buttons["Sign In"].tap()
         expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["My Courses"], handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
