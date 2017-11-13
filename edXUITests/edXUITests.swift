@@ -38,10 +38,10 @@ class edXUITests: XCTestCase {
         snapshot("login")
         let userFieldTextField = app.textFields["User name or e-mail address"]
         userFieldTextField.tap()
-        userFieldTextField.typeText("chester")
+        userFieldTextField.typeText("jagonzalr")
         let passwordFieldSecureTextField = app.secureTextFields["Password"]
         passwordFieldSecureTextField.tap()
-        passwordFieldSecureTextField.typeText("8253eQ3$744b")
+        passwordFieldSecureTextField.typeText("Fender182")
         app.buttons["Sign In"].tap()
         expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["My Courses"], handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
@@ -57,7 +57,10 @@ class edXUITests: XCTestCase {
             snapshot("courses")
             app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
             snapshot("profile")
-            app.buttons["LOGOUT"].tap()
+            app.buttons["ACCOUNT"].tap()
+            expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
+            waitForExpectations(timeout: 5, handler: nil)
+            app.tables.staticTexts["Logout"].tap()
             userFieldTextField.tap()
             userFieldTextField.typeText("")
         }

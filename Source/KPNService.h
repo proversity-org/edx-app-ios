@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Foundation/Foundation.h>
-
 typedef void (^onComplete)(NSDictionary * __nullable data, NSError * __nullable error);
 
 @interface KPNService : NSObject

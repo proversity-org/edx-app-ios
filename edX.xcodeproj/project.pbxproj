@@ -731,6 +731,15 @@
 		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
 		E715059A1FB99DA3006CB3CC /* edXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71505991FB99DA3006CB3CC /* edXUITests.swift */; };
 		E71505A31FB99DDC006CB3CC /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71505A21FB99DDC006CB3CC /* SnapshotHelper.swift */; };
+		E7EC20501FB9A3BC008F2F89 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7EC204F1FB9A3BC008F2F89 /* KPNService.m */; };
+		E7EC20541FB9B2E8008F2F89 /* EmiratesBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20511FB9B2E8008F2F89 /* EmiratesBold.otf */; };
+		E7EC20551FB9B2E8008F2F89 /* EmiratesLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20521FB9B2E8008F2F89 /* EmiratesLight.otf */; };
+		E7EC20561FB9B2E8008F2F89 /* EmiratesMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20531FB9B2E8008F2F89 /* EmiratesMedium.otf */; };
+		E7EC205C1FB9B330008F2F89 /* PxGroteskBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20571FB9B330008F2F89 /* PxGroteskBold.ttf */; };
+		E7EC205D1FB9B330008F2F89 /* PxGroteskLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20581FB9B330008F2F89 /* PxGroteskLight.ttf */; };
+		E7EC205E1FB9B330008F2F89 /* PxGroteskLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC20591FB9B330008F2F89 /* PxGroteskLightItalic.ttf */; };
+		E7EC205F1FB9B330008F2F89 /* PxGroteskRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC205A1FB9B330008F2F89 /* PxGroteskRegular.ttf */; };
+		E7EC20601FB9B330008F2F89 /* PxGroteskRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7EC205B1FB9B330008F2F89 /* PxGroteskRegularItalic.ttf */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
 		F2586E061CF5F8C7007C1118 /* NetworkManager+AuthenticatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */; };
@@ -1675,6 +1684,16 @@
 		E71505991FB99DA3006CB3CC /* edXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = edXUITests.swift; sourceTree = "<group>"; };
 		E715059B1FB99DA3006CB3CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E71505A21FB99DDC006CB3CC /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		E7EC204E1FB9A3BC008F2F89 /* KPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPNService.h; sourceTree = "<group>"; };
+		E7EC204F1FB9A3BC008F2F89 /* KPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPNService.m; sourceTree = "<group>"; };
+		E7EC20511FB9B2E8008F2F89 /* EmiratesBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EmiratesBold.otf; sourceTree = "<group>"; };
+		E7EC20521FB9B2E8008F2F89 /* EmiratesLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EmiratesLight.otf; sourceTree = "<group>"; };
+		E7EC20531FB9B2E8008F2F89 /* EmiratesMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EmiratesMedium.otf; sourceTree = "<group>"; };
+		E7EC20571FB9B330008F2F89 /* PxGroteskBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskBold.ttf; sourceTree = "<group>"; };
+		E7EC20581FB9B330008F2F89 /* PxGroteskLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskLight.ttf; sourceTree = "<group>"; };
+		E7EC20591FB9B330008F2F89 /* PxGroteskLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskLightItalic.ttf; sourceTree = "<group>"; };
+		E7EC205A1FB9B330008F2F89 /* PxGroteskRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegular.ttf; sourceTree = "<group>"; };
+		E7EC205B1FB9B330008F2F89 /* PxGroteskRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegularItalic.ttf; sourceTree = "<group>"; };
 		F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+Authenticators.swift"; sourceTree = "<group>"; };
 		F22A0ABC1CE660B300D50DFF /* LoginApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginApi.swift; sourceTree = SOURCE_ROOT; };
 		F2808CF91CF374FA002EAD1D /* NetworkManager+AuthenticatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkManager+AuthenticatorTests.swift"; sourceTree = "<group>"; };
@@ -2079,6 +2098,14 @@
 				69ECC5AB1D50D1170030CF87 /* OpenSans-Regular.ttf */,
 				69ECC5AC1D50D1170030CF87 /* OpenSans-Semibold.ttf */,
 				69ECC5AD1D50D1170030CF87 /* OpenSans-SemiboldItalic.ttf */,
+				E7EC20511FB9B2E8008F2F89 /* EmiratesBold.otf */,
+				E7EC20521FB9B2E8008F2F89 /* EmiratesLight.otf */,
+				E7EC20531FB9B2E8008F2F89 /* EmiratesMedium.otf */,
+				E7EC20571FB9B330008F2F89 /* PxGroteskBold.ttf */,
+				E7EC20581FB9B330008F2F89 /* PxGroteskLight.ttf */,
+				E7EC20591FB9B330008F2F89 /* PxGroteskLightItalic.ttf */,
+				E7EC205A1FB9B330008F2F89 /* PxGroteskRegular.ttf */,
+				E7EC205B1FB9B330008F2F89 /* PxGroteskRegularItalic.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -2345,6 +2372,8 @@
 				77BC3E681AE0091400E51529 /* OEXPushNotificationProcessor.m */,
 				775434871AD8121200635A40 /* OEXParsePushProvider.h */,
 				775434881AD8121200635A40 /* OEXParsePushProvider.m */,
+				E7EC204E1FB9A3BC008F2F89 /* KPNService.h */,
+				E7EC204F1FB9A3BC008F2F89 /* KPNService.m */,
 			);
 			name = "Push Notifications";
 			sourceTree = "<group>";
@@ -3776,9 +3805,11 @@
 				E021F46D1F739599007A26E7 /* logo@2x~ipad.png in Resources */,
 				69ECC6151D50D1170030CF87 /* bt_facebook.png in Resources */,
 				69ECC6171D50D1170030CF87 /* bt_google.png in Resources */,
+				E7EC205C1FB9B330008F2F89 /* PxGroteskBold.ttf in Resources */,
 				69ECC62E1D50D1170030CF87 /* ic_cancel.png in Resources */,
 				69ECC64E1D50D1170030CF87 /* Default-414w-736h@3x.png in Resources */,
 				B4B6D5EA1A9490FC000F44E8 /* OEXRegistrationViewController.xib in Resources */,
+				E7EC20601FB9B330008F2F89 /* PxGroteskRegularItalic.ttf in Resources */,
 				69ECC5FE1D50D1170030CF87 /* OpenSans-Bold.ttf in Resources */,
 				69ECC60F1D50D1170030CF87 /* arrow_next@2x.png in Resources */,
 				69ECC6451D50D1170030CF87 /* separator.png in Resources */,
@@ -3806,16 +3837,19 @@
 				69ECC6421D50D1170030CF87 /* logo@2x.png in Resources */,
 				69ECC61A1D50D1170030CF87 /* bt_grey_default.png in Resources */,
 				69ECC6161D50D1170030CF87 /* bt_facebook_RTL.png in Resources */,
+				E7EC205E1FB9B330008F2F89 /* PxGroteskLightItalic.ttf in Resources */,
 				69ECC6411D50D1170030CF87 /* iTunesArtwork@2x in Resources */,
 				6926CDAE1D59BE3600A16E22 /* ic_previous.png in Resources */,
 				69ECC61E1D50D1170030CF87 /* bt_scrollbar_tap.png in Resources */,
 				69ECC62B1D50D1170030CF87 /* downloading.png in Resources */,
 				69ECC60D1D50D1170030CF87 /* Icon-60@2x.png in Resources */,
+				E7EC20541FB9B2E8008F2F89 /* EmiratesBold.otf in Resources */,
 				69ECC60A1D50D1170030CF87 /* Icon-29@3x.png in Resources */,
 				69ECC6191D50D1170030CF87 /* bt_grey_deactive.png in Resources */,
 				6926CDAC1D59BE3600A16E22 /* ic_next.png in Resources */,
 				19BB62311A9C656B007DBF47 /* OEXMySettingsViewController.xib in Resources */,
 				9ED269D21AF114B900328A34 /* OEXLoginViewController.storyboard in Resources */,
+				E7EC205D1FB9B330008F2F89 /* PxGroteskLight.ttf in Resources */,
 				69ECC62C1D50D1170030CF87 /* ic_back.png in Resources */,
 				69ECC60E1D50D1170030CF87 /* Icon-60@3x.png in Resources */,
 				E054B09F1EC3178200FACBA6 /* screen_1.png in Resources */,
@@ -3848,6 +3882,7 @@
 				69ECC61B1D50D1170030CF87 /* bt_logout_active.png in Resources */,
 				1905BFF11A31B037001917FA /* COURSE_NOT_LISTED.htm in Resources */,
 				69ECC6291D50D1170030CF87 /* check@2x.png in Resources */,
+				E7EC205F1FB9B330008F2F89 /* PxGroteskRegular.ttf in Resources */,
 				22A4191E1EB1CF1500BBC8CA /* shareCourse@2x.png in Resources */,
 				E021F46C1F739599007A26E7 /* loginScreenImage@2x~ipad.png in Resources */,
 				B4B6D64A1A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib in Resources */,
@@ -3858,6 +3893,7 @@
 				69ECC6081D50D1170030CF87 /* Icon-29.png in Resources */,
 				69ECC6041D50D1170030CF87 /* OpenSans-LightItalic.ttf in Resources */,
 				E0EEC6E71F1CD279006C8D62 /* whats_new.json in Resources */,
+				E7EC20551FB9B2E8008F2F89 /* EmiratesLight.otf in Resources */,
 				69ECC64F1D50D1170030CF87 /* Default-Landscape@3x.png in Resources */,
 				E039A8041F74C0D80064ABDB /* logo~ipad.png in Resources */,
 				69ECC6331D50D1170030CF87 /* ic_lms_blue.png in Resources */,
@@ -3887,6 +3923,7 @@
 				19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */,
 				805329101B0E80E50093B177 /* DiscussionResponses.storyboard in Resources */,
 				22A4191D1EB1CF1500BBC8CA /* shareCourse.png in Resources */,
+				E7EC20561FB9B2E8008F2F89 /* EmiratesMedium.otf in Resources */,
 				6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */,
 				1905BFF31A31B097001917FA /* NEW_USER.htm in Resources */,
 				6926CDB11D59BE3600A16E22 /* ic_seek_thumb@2x.png in Resources */,
@@ -4163,6 +4200,7 @@
 				9E71B73F1B1D9DBD009C81E2 /* OEXStyles+Swift.swift in Sources */,
 				1AB539FC1C0396770065501F /* OEXAnayltics+Certificates.swift in Sources */,
 				1A6E86241BB9C6500039A216 /* OEXStyles+Profile.swift in Sources */,
+				E7EC20501FB9A3BC008F2F89 /* KPNService.m in Sources */,
 				193B504519459C2F0038E11C /* OEXCustomButton.m in Sources */,
 				1A2CCDAB1BDE6F6500D03022 /* OEXAnalytics+Profiles.swift in Sources */,
 				E0A1A0431E93A7CB00510488 /* ViewController+SnapKit.swift in Sources */,
@@ -5561,6 +5599,7 @@
 				E71505A01FB99DA3006CB3CC /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
