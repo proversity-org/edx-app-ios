@@ -193,6 +193,7 @@ public class CourseDashboardViewController: UIViewController, UITableViewDataSou
                 }
             }
         }
+    }
     
 
     private func addShareButton(courseView: CourseCardView) {
