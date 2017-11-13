@@ -12,10 +12,11 @@ machine:
 
 dependencies:
   override:
+    - sudo gem install fastlane -NV
+    - sudo gem update fastlane
     - sudo gem uninstall fastimage -v 2.0.1
     - sudo gem cleanup
     - brew update
-    - brew cask install fastlane
     - brew install imagemagick
     - brew cleanup
     - sudo pip install requests
