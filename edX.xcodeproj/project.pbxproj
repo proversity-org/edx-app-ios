@@ -167,7 +167,6 @@
 		69ECC60D1D50D1170030CF87 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B41D50D1170030CF87 /* Icon-60@2x.png */; };
 		69ECC60E1D50D1170030CF87 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B51D50D1170030CF87 /* Icon-60@3x.png */; };
 		69ECC60F1D50D1170030CF87 /* arrow_next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B71D50D1170030CF87 /* arrow_next@2x.png */; };
-		69ECC6101D50D1170030CF87 /* profilePhotoPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5B81D50D1170030CF87 /* profilePhotoPlaceholder.png */; };
 		69ECC6131D50D1170030CF87 /* loginScreenImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BB1D50D1170030CF87 /* loginScreenImage.png */; };
 		69ECC6141D50D1170030CF87 /* bt_blue2.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BC1D50D1170030CF87 /* bt_blue2.png */; };
 		69ECC6151D50D1170030CF87 /* bt_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 69ECC5BD1D50D1170030CF87 /* bt_facebook.png */; };
@@ -727,6 +726,7 @@
 		E0EEC6E71F1CD279006C8D62 /* whats_new.json in Resources */ = {isa = PBXBuildFile; fileRef = E0EEC6E91F1CD279006C8D62 /* whats_new.json */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
 		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
+		E71A9BA31FB981910027D5D5 /* profilePhotoPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = E71A9BA21FB981910027D5D5 /* profilePhotoPlaceholder.png */; };
 		E738E8601F98C39700D25DFC /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E738E85E1F98C39700D25DFC /* logo@2x.png */; };
 		E738E8611F98C39700D25DFC /* logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E738E85F1F98C39700D25DFC /* logo@3x.png */; };
 		E793E2BB1EDC5ACA00DCDAA7 /* edXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2BA1EDC5ACA00DCDAA7 /* edXUITests.swift */; };
@@ -976,7 +976,6 @@
 		69ECC5B41D50D1170030CF87 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		69ECC5B51D50D1170030CF87 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
 		69ECC5B71D50D1170030CF87 /* arrow_next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_next@2x.png"; sourceTree = "<group>"; };
-		69ECC5B81D50D1170030CF87 /* profilePhotoPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profilePhotoPlaceholder.png; sourceTree = "<group>"; };
 		69ECC5BB1D50D1170030CF87 /* loginScreenImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginScreenImage.png; sourceTree = "<group>"; };
 		69ECC5BC1D50D1170030CF87 /* bt_blue2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_blue2.png; sourceTree = "<group>"; };
 		69ECC5BD1D50D1170030CF87 /* bt_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bt_facebook.png; sourceTree = "<group>"; };
@@ -1670,6 +1669,7 @@
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewObjectTests.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E71A9BA21FB981910027D5D5 /* profilePhotoPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profilePhotoPlaceholder.png; sourceTree = "<group>"; };
 		E738E85E1F98C39700D25DFC /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		E738E85F1F98C39700D25DFC /* logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@3x.png"; sourceTree = "<group>"; };
 		E793E2B81EDC5ACA00DCDAA7 /* edXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = edXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2123,8 +2123,8 @@
 				696089291D53935500EE66DD /* courseCertificate@2x.png */,
 				6960892A1D53935500EE66DD /* courseCertificate@3x.png */,
 				69ECC5B71D50D1170030CF87 /* arrow_next@2x.png */,
-				69ECC5B81D50D1170030CF87 /* profilePhotoPlaceholder.png */,
 				69ECC5BB1D50D1170030CF87 /* loginScreenImage.png */,
+				E71A9BA21FB981910027D5D5 /* profilePhotoPlaceholder.png */,
 				69ECC5BC1D50D1170030CF87 /* bt_blue2.png */,
 				69ECC5BD1D50D1170030CF87 /* bt_facebook.png */,
 				69ECC5BE1D50D1170030CF87 /* bt_facebook_RTL.png */,
@@ -3870,7 +3870,6 @@
 				69ECC6511D50D1170030CF87 /* handouts-announcements.css in Resources */,
 				69ECC6031D50D1170030CF87 /* OpenSans-Light.ttf in Resources */,
 				5D836DC91B2FA12E00411CAB /* DiscussionNewCommentViewController.xib in Resources */,
-				69ECC6101D50D1170030CF87 /* profilePhotoPlaceholder.png in Resources */,
 				69ECC6051D50D1170030CF87 /* OpenSans-Regular.ttf in Resources */,
 				1A03DEA31BBC72BA006783FB /* countries.json in Resources */,
 				69ECC63F1D50D1170030CF87 /* icon_google_white@2x.png in Resources */,
@@ -3892,6 +3891,7 @@
 				19A1339519CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.xib in Resources */,
 				805329101B0E80E50093B177 /* DiscussionResponses.storyboard in Resources */,
 				22A4191D1EB1CF1500BBC8CA /* shareCourse.png in Resources */,
+				E71A9BA31FB981910027D5D5 /* profilePhotoPlaceholder.png in Resources */,
 				6960892D1D53935500EE66DD /* courseCertificate@3x.png in Resources */,
 				1905BFF31A31B097001917FA /* NEW_USER.htm in Resources */,
 				6926CDB11D59BE3600A16E22 /* ic_seek_thumb@2x.png in Resources */,
