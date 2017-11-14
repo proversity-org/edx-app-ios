@@ -8,12 +8,12 @@ jobs:
       - run:
           name: Install  dependencies
           command: |
-            sudo gem install fastlane -NV
-            sudo gem update fastlane
             sudo gem cleanup
             brew update
+            brew cask install fastlane
             brew install imagemagick
             brew cleanup
+            fastlane update_fastlane
             sudo pip install requests
             ./gradlew dependencies --stacktrace --info
       - run:
