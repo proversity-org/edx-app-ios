@@ -8,11 +8,15 @@ jobs:
       - run:
           name: Install  dependencies
           command: |
+            brew update && brew upgrade openssl
             brew update && brew install ruby
             brew cask install fastlane
             brew install imagemagick
             brew cleanup
             sudo pip install requests
+            gem install rubygems-update
+            update_rubygems
+            gem update --system
             sudo fastlane update_fastlane
             ./gradlew dependencies --stacktrace --info
       - run:
