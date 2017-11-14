@@ -17,7 +17,9 @@ jobs:
             gem install rubygems-update
             update_rubygems
             gem update --system
+            gem cleanup
             sudo fastlane update_fastlane
+            sudo gem install fastlane
             ./gradlew dependencies --stacktrace --info
       - run:
           name: Clone config repo
