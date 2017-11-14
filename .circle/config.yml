@@ -19,7 +19,7 @@ jobs:
             ./gradlew dependencies --stacktrace --info
       - run:
           name: Clone config repo
-          command: git clone git@github.com:proversity-org/edx-mobile-config.git --single-branch --branch proversity/pro ./deployment
+          command: git clone git@github.com:proversity-org/edx-mobile-config.git --single-branch --branch no-branch ./deployment
       - run:
           name: Copy config files
           command: |
