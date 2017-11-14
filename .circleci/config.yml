@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  beta:
+  build:
     macos:
       xcode: "8.3.3"
     steps:
@@ -38,12 +38,3 @@ jobs:
       - run:
         name: Deploy
         command: fastlane beta
-
-workflows:
-  version: 2
-  build-beta:
-    jobs:
-      - beta
-          filters:
-            branches:
-              only: master
