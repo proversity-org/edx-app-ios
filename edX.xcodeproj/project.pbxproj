@@ -731,6 +731,7 @@
 		E0EEC6E71F1CD279006C8D62 /* whats_new.json in Resources */ = {isa = PBXBuildFile; fileRef = E0EEC6E91F1CD279006C8D62 /* whats_new.json */; };
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
 		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
+		E7383D041FBADCDA00C294FD /* edXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0D801FBA014300AAEF0D /* edXUITests.swift */; };
 		E77C5C4E1FB9E4A200271A00 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C5C4D1FB9E4A200271A00 /* KPNService.m */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
@@ -3596,13 +3597,10 @@
 			buildConfigurationList = BD9A0D881FBA014300AAEF0D /* Build configuration list for PBXNativeTarget "edXUITests" */;
 			buildPhases = (
 				BD9A0D7A1FBA014300AAEF0D /* Sources */,
-				BD9A0D7B1FBA014300AAEF0D /* Frameworks */,
-				BD9A0D7C1FBA014300AAEF0D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BD9A0D841FBA014300AAEF0D /* PBXTargetDependency */,
 			);
 			name = edXUITests;
 			productName = edXUITests;
@@ -4348,6 +4346,7 @@
 				77D6A9A41C28F32900E67CCF /* CoursesAPI.swift in Sources */,
 				778B40D91C2F62520009F33E /* EnrollmentManager.swift in Sources */,
 				BECB7B5A1924D760009C77F1 /* SWRevealViewController.m in Sources */,
+				E7383D041FBADCDA00C294FD /* edXUITests.swift in Sources */,
 				B4B6D62B1A949F1B000F44E8 /* OEXRegistrationFieldTextController.m in Sources */,
 				774B393B1B5EEF8A00595D33 /* UIAlertController+Selection.swift in Sources */,
 				69EFBB0B1E36259D00FF66C4 /* RatingViewController.swift in Sources */,
