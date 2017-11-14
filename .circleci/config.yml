@@ -36,5 +36,5 @@ jobs:
             cp -R deployment/iOS/files/edX.entitlements edX.entitlements
             cp -R deployment/iOS/files/project.pbxproj edX.xcodeproj/project.pbxproj
       - run:
-        name: Deploy
-        command: fastlane beta
+          name: Deploy
+          command: fastlane beta
