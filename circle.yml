@@ -1,0 +1,47 @@
+general:
+  branches:
+    only:
+      - master
+      
+machine:
+  xcode:
+    version: 8.3.3
+  environment:
+    XCODE_WORKSPACE: edX.xcworkspace
+    XCODE_SCHEME: edX
+
+dependencies:
+  override:
+    - sudo pip install requests
+    - brew update && brew upgrade openssl
+    - brew update && brew install ruby
+    - brew cask install fastlane
+    - brew install imagemagick
+    - brew cleanup
+    - sudo gem install fastlane
+    - ./gradlew dependencies --stacktrace --info
+  post:
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
+    - cp -R deployment/iOS/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
+    - cp -R deployment/iOS/assets/app_icons/ Source/Resources/Icons
+    - cp -R deployment/iOS/assets/logos/ Source/Resources/Images
+    - cp -R deployment/iOS/assets/splash_screens/ Source/Resources/Splash
+    - cp -R deployment/iOS/assets/images/ Source/Resources/Images
+    - cp -R deployment/iOS/colors.json Source/Resources/Colors
+    - cp -R deployment/iOS/fonts.json Source/Resources/Fonts
+    - cp -R deployment/iOS/custom_config custom_config
+    - cp -R deployment/iOS/default_config default_config
+    - cp -R deployment/iOS/fastlane fastlane
+    - cp -R deployment/iOS/files/edX-Info.plist Source/edX-Info.plist
+    - cp -R deployment/iOS/files/edX.entitlements edX.entitlements
+    - cp -R deployment/iOS/files/project.pbxproj edX.xcodeproj/project.pbxproj
+
+test:
+  override:
+    - sleep 10
+
+deployment:
+  beta:
+    branch: master
+    commands:
+      - fastlane beta
