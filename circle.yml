@@ -16,7 +16,6 @@ dependencies:
     - brew update
     - brew upgrade openssl
     - brew install ruby
-    - brew cask install fastlane
     - brew install imagemagick
     - brew cleanup
     - sudo gem install fastlane
