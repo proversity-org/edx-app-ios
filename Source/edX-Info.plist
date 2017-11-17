@@ -97,6 +97,10 @@
 		<string>OpenSans-LightItalic.ttf</string>
 		<string>OpenSans-ExtraBold.ttf</string>
 		<string>OpenSans-ExtraBoldItalic.ttf</string>
+		<string>DubaiBold.ttf</string>
+		<string>DubaiLight.ttf</string>
+		<string>DubaiMedium.ttf</string>
+		<string>DubaiRegular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
