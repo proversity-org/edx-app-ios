@@ -21,7 +21,7 @@ dependencies:
     - sudo gem install fastlane
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/pro ./deployment
+    - git clone git@github.com:proversity-org/edx-app-ios-deployment.git --branch proversity/sys ./deployment
     - cp -R deployment/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
     - cp -R deployment/assets/app_icons/ Source/Resources/Icons
     - cp -R deployment/assets/logos/ Source/Resources/Images
@@ -44,4 +44,4 @@ deployment:
   beta:
     branch: master
     commands:
-      - fastlane beta
+      - python fastlane_match.py sys
