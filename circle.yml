@@ -44,4 +44,4 @@ deployment:
   beta:
     branch: proversity/sys
     commands:
-      - python fastlane_match.py sys
+      - fastlane beta
