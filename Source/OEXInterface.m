@@ -622,6 +622,7 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 - (void)downloadProgressNotification:(NSNotification*)notification {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
             NSDictionary* dictProgress = (NSDictionary*)notification.userInfo;
             NSURLSessionTask* task = [dictProgress objectForKey:DOWNLOAD_PROGRESS_NOTIFICATION_TASK];
@@ -631,7 +632,7 @@ static OEXInterface* _sharedInterface = nil;
             
             double completed = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
             float completedPercent = completed * OEXMaxDownloadProgress;
-            [self markDownloadProgress:completedPercent forURL:url andVideoId:nil];
+            [weakSelf markDownloadProgress:completedPercent forURL:url andVideoId:nil];
     });
 }
 
@@ -1500,7 +1501,7 @@ static OEXInterface* _sharedInterface = nil;
 #pragma mark - Course Enrollments
 - (UserCourseEnrollment*)enrollmentForCourseWithID:(NSString*)courseID {
     for (UserCourseEnrollment* enrollment in self.courses) {
-        if(enrollment.course.course_id == courseID) {
+        if([enrollment.course.course_id isEqualToString:courseID]) {
             return enrollment;
         }
     }
