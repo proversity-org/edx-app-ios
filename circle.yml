@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - master
+      - proversity/sys
       
 machine:
   xcode:
@@ -42,6 +42,6 @@ test:
 
 deployment:
   beta:
-    branch: master
+    branch: proversity/sys
     commands:
       - python fastlane_match.py sys
