@@ -56,6 +56,9 @@ def apply_configuration(
 
 def entitlements_configuration(file_str, org_code):
     replacement = 'org.proversity.{}'.format(org_code)
+    if org_code == 'pro':
+        replacement = 'org.proversity.edx'
+
     return re.sub(r'\b{}\b'.format(EDX_REVERSED_URL), replacement, file_str)
 
 def info_plist_configuration(file_str, name, version, edx_version):
@@ -63,8 +66,7 @@ def info_plist_configuration(file_str, name, version, edx_version):
     version_replacement = '{}'.format(version)
     file_str = re.sub(r'\bedX\b', name_replacement, file_str)
     file_str = re.sub(r'\bed ex\b', name_replacement, file_str)
-    return file_str
-    # return file_str.replace(edx_version, version_replacement)
+    return file_str.replace('<string>{}</string>'.format(edx_version), '<string>{}</string>'.format(version))
 
 def project_configuration(file_str, org_code, dev_uuid, store_uuid):
     file_str = re.sub(r'\bAutomatic\b', 'Manual', file_str)
@@ -74,12 +76,20 @@ def project_configuration(file_str, org_code, dev_uuid, store_uuid):
     file_str =\
         re.sub(r'\b{}\b'.format(PRO_STORE_UUID), store_uuid, file_str)
 
-    file_str =\
-        re.sub(
-            r'\b{}\b'.format(EDX_REVERSED_URL),
-            'org.proversity.{}'.format(org_code),
-            file_str
-        )
+    if org_code == 'pro':
+        file_str =\
+            re.sub(
+                r'\b{}\b'.format(EDX_REVERSED_URL),
+                'org.proversity.edx',
+                file_str
+            )
+    else:
+        file_str =\
+            re.sub(
+                r'\b{}\b'.format(EDX_REVERSED_URL),
+                'org.proversity.{}'.format(org_code),
+                file_str
+            )
 
     file_str =\
         re.sub(
