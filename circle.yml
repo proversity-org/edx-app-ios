@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - master
+      - no-branch
       
 machine:
   xcode:
@@ -32,9 +32,6 @@ dependencies:
     - cp -R deployment/custom_config custom_config
     - cp -R deployment/default_config default_config
     - cp -R deployment/fastlane fastlane
-  #   - cp -R deployment/iOS/files/edX-Info.plist Source/edX-Info.plist
-  #   - cp -R deployment/iOS/files/edX.entitlements edX.entitlements
-  #   - cp -R deployment/iOS/files/project.pbxproj edX.xcodeproj/project.pbxproj
 
 test:
   override:
@@ -42,6 +39,6 @@ test:
 
 deployment:
   beta:
-    branch: master
+    branch: no-branch
     commands:
       - fastlane beta
