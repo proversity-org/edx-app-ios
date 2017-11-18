@@ -29,8 +29,8 @@ dependencies:
     - cp -R deployment/iOS/assets/images/ Source/Resources/Images
     - cp -R deployment/iOS/colors.json Source/Resources/Colors
     - cp -R deployment/iOS/fonts.json Source/Resources/Fonts
-    - cp -R deployment/iOS/custom_config custom_config
-    - cp -R deployment/iOS/default_config default_config
+    - cp -R deployment/iOS/custom_config/ios.yml custom_config
+    - cp -R deployment/iOS/default_config/edx.properties default_config
     - cp -R deployment/iOS/fastlane fastlane
 
 test:
@@ -41,5 +41,5 @@ deployment:
   beta:
     branch: master
     commands:
-      - python configuration.py pro Proversity 2.11.8 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1a989c17-7d12-49b0-b3c2-3fcbd2635978
+      - python configuration.py pro Proversity 2.11.9 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1a989c17-7d12-49b0-b3c2-3fcbd2635978
       - fastlane beta

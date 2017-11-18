@@ -105,6 +105,9 @@
 		<string>EmiratesBold.otf</string>
 		<string>EmiratesMedium.otf</string>
 		<string>EmiratesLight.otf</string>
+		<string>Lato-Black.ttf</string>
+		<string>Lato-Light.ttf</string>
+		<string>Lato-Regular.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
