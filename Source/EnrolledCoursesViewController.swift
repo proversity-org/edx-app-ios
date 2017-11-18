@@ -110,31 +110,37 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             switch result {
             case let Result.success(enrollments):
                 if let enrollments = enrollments {
-                    let payload: [String: String] = ["organizationCode": (self?.environment.config.organizationCode())!,
-                                                     "token": (KPNService.instance() as AnyObject).getDeviceToken(),
-                                                     "username": (self?.environment.router?.environment.session.currentUser?.username)!,
-                                                     "email": (self?.environment.router?.environment.session.currentUser?.email)!,
-                                                     "apiKey": (self?.environment.config.konnekteerApiKey())!,
-                                                     "topicType": "organization"]
-                    
-                    (KPNService.instance() as AnyObject).subscribe(payload, completionHandler: {data, error in
-                        print(data ?? "")
-                    })
-                    
-                    for userCourse in enrollments {
-                        let course = userCourse.course as OEXCourse
-                        
-                        // Subscribe to course
-                        let payload: [String: String] = ["courseKey": course.course_id!,
+                    if (self?.environment.config.pushNotificationsEnabled)! {
+                        var orgCode = "PRO"
+                        if (self?.environment.config.organizationCode()) != nil {
+                            orgCode = (self?.environment.config.organizationCode())!
+                        }
+                        let payload: [String: String] = ["organizationCode": orgCode,
                                                          "token": (KPNService.instance() as AnyObject).getDeviceToken(),
                                                          "username": (self?.environment.router?.environment.session.currentUser?.username)!,
                                                          "email": (self?.environment.router?.environment.session.currentUser?.email)!,
                                                          "apiKey": (self?.environment.config.konnekteerApiKey())!,
-                                                         "topicType": "course"]
+                                                         "topicType": "organization"]
                         
                         (KPNService.instance() as AnyObject).subscribe(payload, completionHandler: {data, error in
                             print(data ?? "")
-                        }) 
+                        })
+                        
+                        for userCourse in enrollments {
+                            let course = userCourse.course as OEXCourse
+                            
+                            // Subscribe to course
+                            let payload: [String: String] = ["courseKey": course.course_id!,
+                                                             "token": (KPNService.instance() as AnyObject).getDeviceToken(),
+                                                             "username": (self?.environment.router?.environment.session.currentUser?.username)!,
+                                                             "email": (self?.environment.router?.environment.session.currentUser?.email)!,
+                                                             "apiKey": (self?.environment.config.konnekteerApiKey())!,
+                                                             "topicType": "course"]
+                            
+                            (KPNService.instance() as AnyObject).subscribe(payload, completionHandler: {data, error in
+                                print(data ?? "")
+                            }) 
+                        }
                     }
 
                     self?.tableController.courses = enrollments.flatMap { $0.course }

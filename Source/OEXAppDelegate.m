@@ -84,18 +84,18 @@
     
     if (self.environment.config.pushNotificationsEnabled) {
 #ifdef __IPHONE_10_0
-        // [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-        // [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
-        //                                                                     completionHandler:^(BOOL granted, NSError * _Nullable error)
-        //  {
-        //      if (granted) {
-        //          [application registerForRemoteNotifications];
-        //      }
-        //  }];
+         [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+         [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                             completionHandler:^(BOOL granted, NSError * _Nullable error)
+          {
+              if (granted) {
+                  [application registerForRemoteNotifications];
+              }
+          }];
 #else
-        // UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
-        // [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        // [application registerForRemoteNotifications];
+         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
+         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+         [application registerForRemoteNotifications];
 #endif
     }
 
