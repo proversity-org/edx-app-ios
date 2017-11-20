@@ -13,9 +13,9 @@ machine:
 dependencies:
   override:
     - sudo pip install requests
-    # - brew update
-    - brew install ruby
+    - brew update
     - brew upgrade openssl
+    - brew install ruby
     - brew install imagemagick
     - brew cleanup
     - sudo gem install fastlane
