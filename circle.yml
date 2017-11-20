@@ -13,7 +13,7 @@ machine:
 dependencies:
   override:
     - sudo pip install requests
-    - brew update
+    # - brew update
     - brew upgrade openssl
     - brew install ruby
     - brew install imagemagick
@@ -27,11 +27,13 @@ dependencies:
     - cp -R deployment/iOS/assets/logos/ Source/Resources/Images
     - cp -R deployment/iOS/assets/splash_screens/ Source/Resources/Splash
     - cp -R deployment/iOS/assets/images/ Source/Resources/Images
-    - cp -R deployment/iOS/colors.json Source/Resources/Colors
-    - cp -R deployment/iOS/fonts.json Source/Resources/Fonts
-    - cp -R deployment/iOS/default_config/ default_config
     - cp -R deployment/iOS/custom_config custom_config
+    - cp -R deployment/iOS/default_config/ default_config
     - cp -R deployment/iOS/fastlane fastlane
+    - cp -R deployment/iOS/colors.json Source/Resources/Colors
+    - cp -R deployment/iOS/config_project.py config_project.py
+    - cp -R deployment/iOS/fonts.json Source/Resources/Fonts
+    - cp -R deployment/iOS/setup_certificates.py setup_certificates.py
 
 test:
   override:
@@ -41,5 +43,5 @@ deployment:
   beta:
     branch: master
     commands:
-      - python configuration.py pro Proversity 2.11.12 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1e8e4e06-34c2-48a7-8182-4f4216359bc2
+      - python config_project.py pro Proversity 2.11.13 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1e8e4e06-34c2-48a7-8182-4f4216359bc2
       - fastlane beta
