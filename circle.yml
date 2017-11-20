@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - master
+      - no-branch
       
 machine:
   xcode:
@@ -21,7 +21,7 @@ dependencies:
     - sudo gem install fastlane
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-mobile-config.git --branch proversity/pro ./deployment
+    - git clone git@github.com:proversity-org/edx-mobile-config.git --branch proversity/no-branch ./deployment
     - cp -R deployment/iOS/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
     - cp -R deployment/iOS/assets/app_icons/ Source/Resources/Icons
     - cp -R deployment/iOS/assets/logos/ Source/Resources/Images
@@ -41,7 +41,7 @@ test:
 
 deployment:
   beta:
-    branch: master
+    branch: no-branch
     commands:
-      - python config_project.py pro Proversity 2.11.13 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1e8e4e06-34c2-48a7-8182-4f4216359bc2
-      - fastlane beta
+      - echo "config"
+      - echo "build"
