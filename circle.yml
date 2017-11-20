@@ -41,5 +41,5 @@ deployment:
   beta:
     branch: master
     commands:
-      - python configuration.py pro Proversity 2.11.10 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1e8e4e06-34c2-48a7-8182-4f4216359bc2
+      - python configuration.py pro Proversity 2.11.11 2.11 aea18a23-fe25-4446-9e19-291ffb82c59f 1e8e4e06-34c2-48a7-8182-4f4216359bc2
       - fastlane beta
