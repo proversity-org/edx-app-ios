@@ -190,8 +190,13 @@
     NSString *mode = isRunningDev ? @"dev" : @"prod";
     [KPNService initWithDeviceToken:[token copy] Mode:mode];
     
+    NSString *orgCode = @"PRO";
+    if (self.environment.config.organizationCode != nil) {
+        orgCode = self.environment.config.organizationCode;
+    }
+    
     NSDictionary *payload = @{
-                              @"organizationCode": self.environment.config.organizationCode,
+                              @"organizationCode": orgCode,
                               @"token": [[KPNService instance] getDeviceToken],
                               @"platform": @"iOS",
                               @"apiKey": self.environment.config.konnekteerApiKey,

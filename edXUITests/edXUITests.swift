@@ -57,7 +57,10 @@ class edXUITests: XCTestCase {
             snapshot("courses")
             app.navigationBars["My Powerful Insights"].buttons["Navigation Menu"].tap()
             snapshot("profile")
-            app.buttons["LOGOUT"].tap()
+            app.buttons["ACCOUNT"].tap()
+            expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
+            waitForExpectations(timeout: 5, handler: nil)
+            app.tables.staticTexts["Logout"].tap()
             userFieldTextField.tap()
             userFieldTextField.typeText("")
         }
