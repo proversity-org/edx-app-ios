@@ -543,39 +543,39 @@
 /* Question used in the segmented control Creating a new post */
 "QUESTION"="Cwestiwn";
 /* Option to sort discussion post list by recent activity */
-"RECENT_ACTIVITY" = "Recent Activity";
+"RECENT_ACTIVITY" = "Gweithgarwch diweddar";
 /* Section title to display recently downloaded videos */
-"RECENT_VIDEOS"="Recent Videos";
+"RECENT_VIDEOS"="Fideos diweddar";
 /* Create account agreement. Followed by agreement name like "End User License Agreement */
-"REDIRECT_TEXT" = "By signing in to this app, you agree to the";
+"REDIRECT_TEXT" = "Trwy fewngofnodi yn yr app hwn, rydych yn cytuno i";
 /* Label before Sort and Filter buttons on Posts Screen ( The Colon(:) is part of the string) */
-"REFINE" = "Refine:";
+"REFINE" = "Mireinio:";
 /* Button title when responses are closed for a thread */
-"RESPONSES_CLOSED"="Responses are closed for this post";
+"RESPONSES_CLOSED"="Ni cheir ymateb i'r postiad hwn mwyach";
 /* Title of registration agreement */
-"REGISTRATION_AGREEMENT_BUTTON_TITLE"="{platform_name} Terms of Service and Honor Code";
+"REGISTRATION_AGREEMENT_BUTTON_TITLE"="Delerau Gwasanaeth a Chôd Anrhydedd {platform_name}";
 /* Create account agreement. Followed by list of agreement names like "End User License Agreement" */
-"REGISTRATION_AGREEMENT_MESSAGE"="By creating an account, you agree to the ";
+"REGISTRATION_AGREEMENT_MESSAGE"="Trwy greu cyfrif rydych yn cytuno i ";
 /* Button text allowing user create an account */
-"REGISTRATION_CREATE_MY_ACCOUNT"="Create my account";
+"REGISTRATION_CREATE_MY_ACCOUNT"="Creu fy nghyfrif";
 /* Text shown while waiting for registration request */
-"REGISTRATION_CREATING_ACCOUNT"="Creating account...";
+"REGISTRATION_CREATING_ACCOUNT"="Creu cyfrif...";
 /* Error prompt shown during registration to indicate an empty field. {field_name} is the name of a registration field like 'password' */
-"REGISTRATION_FIELD_EMPTY_ERROR"="Please enter your {field_name}.";
+"REGISTRATION_FIELD_EMPTY_ERROR"="Rhowch ein {field_name}.";
 /* Error prompt shown during registration to indicate a field missing a selection. {field_name} is the name of a registration field like 'year of birth' */
-"REGISTRATION_FIELD_EMPTY_SELECT_ERROR"="Please select your {field_name}.";
+"REGISTRATION_FIELD_EMPTY_SELECT_ERROR"="Dewiswch eich {field_name}.";
 /* Error prompt shown during registration when a field entry is too long. {field_name} is the name of a registration field like 'password'. {count} is a number of characters */
-"REGISTRATION_FIELD_MAX_LENGTH_ERROR##{one}"="{field_name} cannot have more than {count} character.";
+"REGISTRATION_FIELD_MAX_LENGTH_ERROR##{one}"="Ni all {field_name} gynnwys mwy na {count} nod/cymeriad.";
 /* Error prompt shown during registration when a field entry is too long. {field_name} is the name of a registration field like 'password'. {count} is a number of characters */
-"REGISTRATION_FIELD_MAX_LENGTH_ERROR##{other}"="{field_name} cannot have more than {count} characters.";
+"REGISTRATION_FIELD_MAX_LENGTH_ERROR##{other}"="Ni all {field_name} gynnwys mwy na {count} o nodau/gymeriadau.";
 /* Error prompt shown during registration when a field entry is too short.  {field_name} is the name of a registration field like 'password'. {count} is a number of characters */
-"REGISTRATION_FIELD_MIN_LENGTH_ERROR##{one}"="{field_name} must have at least {count} character.";
+"REGISTRATION_FIELD_MIN_LENGTH_ERROR##{one}"="{Rhaid i {field_name} gynnwys o leiaf {count} nod/cymeriad.";
 /* Error prompt shown during registration when a field entry is too short.  {field_name} is the name of a registration field like 'password'. {count} is a number of characters */
-"REGISTRATION_FIELD_MIN_LENGTH_ERROR##{other}"="{field_name} must have at least {count} characters.";
+"REGISTRATION_FIELD_MIN_LENGTH_ERROR##{other}"="Rhaid i {field_name} gynnwys o leiaf {count} o nodau/gymeriadau.";
 /* Button text allowing user to hide visible optional registration fields */
-"REGISTRATION_HIDE_OPTIONAL_FIELDS"="Hide optional fields";
+"REGISTRATION_HIDE_OPTIONAL_FIELDS"="Cuddio meysydd opsiynol";
 /* Button text allowing user to show hidden optional registration fields */
-"REGISTRATION_SHOW_OPTIONAL_FIELDS"="Show optional fields";
+"REGISTRATION_SHOW_OPTIONAL_FIELDS"="Dangos meysydd opsiynol";
 /* Heading on registration screen allowing users to sign up using external services like Facebook and Google. Will be followed by text "or sign up with an email". */
 "REGISTRATION_REGISTER_PROMPT"="Register with";
 /* Heading on registration screen allowing users to sign up using external services like Facebook and Google. Will be preceded by text "Sign up with" */
@@ -585,31 +585,31 @@
 /* Detailed info message for registration error alert*/
 "REGISTRATION_ERROR_ALERT_MESSAGE"="Update the highlighted fields and try again";
 /* Alert dialog title prompting user to enter an email address to reset their password */
-"RESET_PASSWORD_TITLE"="Reset Password";
+"RESET_PASSWORD_TITLE"="Ailosod cyfrinair";
 /* Alert dialog content prompting user to enter an email address to reset their password */
-"RESET_PASSWORD_POPUP_TEXT"="Enter the e-mail address for your account, and we'll send you instructions to reset your password.";
+"RESET_PASSWORD_POPUP_TEXT"="Rhowch gyfeiriad e-bost eich cyfrif a byddwn yn anfon cyfarwyddiadau atoch er mwyn ailosod eich cyfrinair.";
 /* Alert dialog title confirming to the user that a reset password was sent to them */
-"RESET_PASSWORD_CONFIRMATION_TITLE"="Password Reset E-Mail Sent";
+"RESET_PASSWORD_CONFIRMATION_TITLE"="Anfonwyd e-bost ailosod cyfrinair";
 /* Alert dialog content confirming to the user that a reset password was sent to them */
-"RESET_PASSWORD_CONFIRMATION_MESSAGE"="We've sent a message with password reset instructions to your e-mail address. If you don't see it in the next few minutes, make sure to check your spam folder.";
+"RESET_PASSWORD_CONFIRMATION_MESSAGE"="Rydym wedi anfon neges gyda chyfarwyddiadau ar sut i ailosod eich cyfrinair i'ch cyfeiriad e-bost. Os na allwch ei weld yn yr ychydig funudau nesaf, edrychwch yn eich ffolder sbam.";
 /* Button that allows user to retry an operation that did not succeed */
-"RETRY" = "Retry";
+"RETRY" = "Ceisio eto";
 /*Offline snackbar button that allows user to reload data*/
-"RELOAD" = "Reload";
+"RELOAD" = "Ail-lwytho";
 /* Response back title in adding a new response */
 "ADD_A_RESPONSE"="Add a response";
 /* Discussion response - {count} is a number of responses */
-"RESPONSE##{one}"="{count} response";
+"RESPONSE##{one}"="{count} ymateb";
 /* Discussion response - {count} is a number of responses */
-"RESPONSE##{other}"="{count} responses";
+"RESPONSE##{other}"="{count} ymateb";
 /* Discussion topics search placeholder */
-"SEARCH_ALL_POSTS"="Search all posts";
+"SEARCH_ALL_POSTS"="Chwilio pob postiad";
 /* Discussion search results  */
-"SEARCH_RESULTS"="Search results";
+"SEARCH_RESULTS"="Canlyniadau'r chwiliad";
 /* Text shown below the video, in portrait mode */
-"ROTATE_DEVICE"="Rotate your device to view this video in full screen";
+"ROTATE_DEVICE"="Trowch eich dyfais i weld y fideo hwn ar sgrîn lawn";
 /*if filter applied then append this string to error message*/
-"REMOVE_FILTER" = "Try removing your post filter.";
+"REMOVE_FILTER" = "Ceisiwch ddiddymu eich hidlydd postiad.";
 /* Label shown when user attempts to view a course section that hasn't been synced  */
 "SECTION_UNAVAILABLE_OFFLINE"="This section is not available in offline mode.\nIf you've downloaded content for a different section, go to that section to view the content.";
 /* Screen title showing a user's settings */
