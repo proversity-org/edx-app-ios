@@ -1582,6 +1582,12 @@
 		BDA096511FBB73E900E24CB1 /* PxGroteskLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskLightItalic.ttf; sourceTree = "<group>"; };
 		BDA096521FBB73E900E24CB1 /* PxGroteskRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegular.ttf; sourceTree = "<group>"; };
 		BDA096531FBB73E900E24CB1 /* PxGroteskRegularItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PxGroteskRegularItalic.ttf; sourceTree = "<group>"; };
+		BDA33E391FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cy; path = cy.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BDA33E3A1FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cy; path = cy.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BDA33E3B1FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/profiles.json; sourceTree = "<group>"; };
+		BDA33E3C1FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/countries.json; sourceTree = "<group>"; };
+		BDA33E3D1FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/languages.json; sourceTree = "<group>"; };
+		BDA33E3E1FCC880100EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/whats_new.json; sourceTree = "<group>"; };
 		BE0D4547192DD16300D720D6 /* OEXNetworkConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXNetworkConstants.h; sourceTree = "<group>"; };
 		BE0D4548192DD4F800D720D6 /* OEXNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXNetworkInterface.h; sourceTree = "<group>"; };
 		BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXNetworkInterface.m; sourceTree = "<group>"; };
@@ -3769,6 +3775,7 @@
 			knownRegions = (
 				en,
 				"es-419",
+				cy,
 			);
 			mainGroup = BECB7B021924C0C3009C77F1;
 			productRefGroup = BECB7B0C1924C0C3009C77F1 /* Products */;
@@ -4764,6 +4771,7 @@
 			children = (
 				1A03DEA41BBC72BA006783FB /* en */,
 				E08CC57D1F33269D0092ACED /* es-419 */,
+				BDA33E3C1FCC880000EC2FFC /* cy */,
 			);
 			name = countries.json;
 			sourceTree = "<group>";
@@ -4773,6 +4781,7 @@
 			children = (
 				1A55019D1BBA30C900D5F9DD /* en */,
 				E08CC57C1F33269C0092ACED /* es-419 */,
+				BDA33E3B1FCC880000EC2FFC /* cy */,
 			);
 			name = profiles.json;
 			sourceTree = "<group>";
@@ -4782,6 +4791,7 @@
 			children = (
 				1AFEB1BA1BBD88F3004C471D /* en */,
 				E08CC57E1F33269D0092ACED /* es-419 */,
+				BDA33E3D1FCC880000EC2FFC /* cy */,
 			);
 			name = languages.json;
 			sourceTree = "<group>";
@@ -4791,6 +4801,7 @@
 			children = (
 				773BE0001AAA07DD0074C3CA /* en */,
 				E08CC57A1F33269C0092ACED /* es-419 */,
+				BDA33E391FCC880000EC2FFC /* cy */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4800,6 +4811,7 @@
 			children = (
 				E04A932A1F13846B00D4615D /* en */,
 				E08CC57B1F33269C0092ACED /* es-419 */,
+				BDA33E3A1FCC880000EC2FFC /* cy */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -4809,6 +4821,7 @@
 			children = (
 				E0EEC6E81F1CD279006C8D62 /* en */,
 				E08CC57F1F33269D0092ACED /* es-419 */,
+				BDA33E3E1FCC880100EC2FFC /* cy */,
 			);
 			name = whats_new.json;
 			sourceTree = "<group>";
@@ -4887,8 +4900,8 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.edx.mobile";
 				PROVISIONING_PROFILE = "1e8e4e06-34c2-48a7-8182-4f4216359bc2";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.edx.mobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
