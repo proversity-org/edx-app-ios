@@ -91,4 +91,8 @@ extension OEXConfig {
     var isJumpToLastAccessedModuleEnabled: Bool {
         return bool(forKey: "JUMP_TO_LAST_ACCESSED_MODULE_ENABLED")
     }
+    
+    var invertColorLoginSlpashViewSignInBtn: Bool {
+        return bool(forKey: "INVERT_COLOR_LOGIN_SPLASH_VIEW_SIGN_IN_BTN")
+    }
 }
