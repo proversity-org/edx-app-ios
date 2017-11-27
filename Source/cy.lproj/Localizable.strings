@@ -123,33 +123,33 @@
 /*Accessibility text for course share button on course dashboard*/
 "ACCESSIBILITY.SHARE_A_COURSE"="Share a course";
 /* Title of user profile section for user accomplishments (like badges) */
-"ACCOMPLISHMENTS.TITLE" = "Accomplishments";
+"ACCOMPLISHMENTS.TITLE" = "Cyflawniadau";
 /* Default text template when user shares an accomplishment */
-"ACCOMPLISHMENTS.SHARE_TEXT" = "I earned a badge on {platform_name}! Check it out";
+"ACCOMPLISHMENTS.SHARE_TEXT" = "Dwi newydd ennill bathodyn ar {platform_name}! Cymerwch gip";
 /* Add a comment button title and place holder used in discussion comment text view */
-"ADD_A_COMMENT"="Add a comment";
+"ADD_A_COMMENT"="Ychwanegu sylw";
 /* Add a response button title used in discussion's responses screen */
-"ADD_A_RESPONSE"="Add a response";
+"ADD_A_RESPONSE"="Ychwanegu ymateb";
 /* Add comment button title used in discussion's Add a comment */
-"ADD_COMMENT"="Add comment";
+"ADD_COMMENT"="Ychwanegu sylw";
 /* Add post button title used in discussion's Create a new post */
-"ADD_POST"="Add post";
+"ADD_POST"="Ychwanegu postiad";
 /* Add response button title used in discussion's Add a response */
-"ADD_RESPONSE"="Add response";
+"ADD_RESPONSE"="Ychwanegu ymateb";
 /* Add your post button title used in discussion's add a post textview */
-"ADD_YOUR_POST"="Add your post";
+"ADD_YOUR_POST"="Ychwanegu eich postiad";
 /* Alert dialog button allowing user to chosing to allow downloads on cellular */
-"ALLOW"="Allow";
+"ALLOW"="Caniatáu";
 /* Filtering option to show all discussion posts */
-"ALL_POSTS"="All Posts";
+"ALL_POSTS"="Pob postiad";
 /* Tab allowing the user to see all videos */
-"ALL_VIDEOS"="All Videos";
+"ALL_VIDEOS"="Pob fideo";
 /* Message shown when there are no announcements for a course */
-"ANNOUNCEMENT_UNAVAILABLE"="There are currently no announcements for this course.";
+"ANNOUNCEMENT_UNAVAILABLE"="Nid oes unrhyw gyhoeddiadau ar gyfer y cwrs hwn ar hyn o bryd.";
 /* Label indicating the response answer in Discussion Add comment screen */
-"ANSWER"="Answer";
+"ANSWER"="Ateb";
 /* Navigation title for a Question Post which has endorsed answers */
-"ANSWERED_QUESTION"="Answered Question";
+"ANSWERED_QUESTION"="Cwestiwn wedi'i ateb";
 /* Accessibility label for rating control of app review. */
 "APP_REVIEW.RATING_CONTROL_ACCESSIBILITY_LABEL" = "Rating control.";
 /* Accessibility hint for rating control of app review. */
@@ -175,9 +175,9 @@
 /*Asteric for marking fields required*/
 "ASTERIC" = "*";
 /* Prefix used with Staff of Community TA on the posts screen */
-"BY_AUTHOR" = "By {author_name}";
+"BY_AUTHOR" = "Gan {author_name}";
 /* Prefix used with Staff of Community TA on the posts screen */
-"BY_AUTHOR_LOWER_CASE" = "by {author_name}";
+"BY_AUTHOR_LOWER_CASE" = "gan {author_name}";
 /* Course completion title */
 "CERTIFICATES.COURSE_COMPLETION_TITLE"="CONGRATULATIONS!";
 /* Course completion subtitle */
