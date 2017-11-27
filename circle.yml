@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - no-branch
+      - master
       
 machine:
   xcode:
@@ -41,7 +41,7 @@ test:
 
 deployment:
   beta:
-    branch: no-branch
+    branch: master
     commands:
-      - python config_project.py cit CITB 2.11 2.11 667fe046-6679-44c1-8f7a-1640e9b8a77c 68d7c0d4-70b6-4c97-a1b6-37843c56edc6
+      - python config_project.py cit CITB 2.11.1 2.11 667fe046-6679-44c1-8f7a-1640e9b8a77c 68d7c0d4-70b6-4c97-a1b6-37843c56edc6
       - fastlane beta
