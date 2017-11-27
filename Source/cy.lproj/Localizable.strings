@@ -419,129 +419,129 @@
 /* Button title to log out the current user */
 "LOGOUT"="Allgofnodi";
 /* Option to sort discussion post list by most activity */
-"MOST_ACTIVITY"="Most Activity";
+"MOST_ACTIVITY"="Prysuraf";
 /* Option to sort discussion post list by most votes */
-"MOST_VOTES"="Most Votes";
+"MOST_VOTES"="Y mwyaf o bleidleisiau";
 /* Screen title showing a user's courses */
-"MY_COURSES"="My Courses";
+"MY_COURSES"="Fy nhgyrsiau";
 /* Screen title showing a user's settings */
-"MY_SETTINGS"="My Settings";
+"MY_SETTINGS"="Fy ngosodiadau";
 /* Time Label in My Videos section*/
-"MY_VIDEOS_TIME_LABEL" = "NA";
+"MY_VIDEOS_TIME_LABEL" = "Ddim yn berthnasol";
 /* Marked as answer for endorsed responses */
-"MARKED_ANSWER" = "Marked as answer";
+"MARKED_ANSWER" = "Marciwyd fel ateb";
 /* Overlay error shown when attempting an action without an internet connection */
-"NETWORK_NOT_AVAILABLE_MESSAGE"="You are not connected to the Internet.";
+"NETWORK_NOT_AVAILABLE_MESSAGE"="Nid ydych wedi cysylltu â'r rhyngrwyd.";
 /* Alert dialog error shown when attempting an action without an internet connection */
-"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE"="You are not connected to the Internet. Please check your Internet connection.";
+"NETWORK_NOT_AVAILABLE_MESSAGE_TROUBLE"="Nid ydych wedi cysylltu â'r rhyngrwyd. Gwiriwch eich cysylltiad â'r rhyngrwyd.";
 /* Title of alert dialog shown when attempting an action without an internet connection */
-"NETWORK_NOT_AVAILABLE_TITLE"="Connection Error";
+"NETWORK_NOT_AVAILABLE_TITLE"="Gwall cysylltu";
 /* Button title for moving to the next block in the course */
-"NEXT" = "Next";
+"NEXT" = "Nesaf";
 /* Button title for moving to the next unit in the course */
-"NEXT_UNIT" = "Next Unit";
+"NEXT_UNIT" = "Yr uned nesaf";
 /* Message shown when tapping on enroll courses when in app course enrollment is disabled */
-"NO_ENROLLMENT_INTERSTITIAL_BOTTOM_LABEL" = "In the meantime, you can enroll in courses through our website - you'll need to log in, enroll, and then return to the app when you're done.";
+"NO_ENROLLMENT_INTERSTITIAL_BOTTOM_LABEL" = "Yn y cyfamser, gallwch gofrestru ar gyrsiau drwy ein gwefan - bydd angen i chi fewngofnodi, cofrestru ac yna ddychwelyd i'r app wedi i chi orffen.";
 /* Message shown when tapping on enroll courses when in app course enrollment is disabled */
-"NO_ENROLLMENT_INTERSTITIAL_TOP_LABEL" = "Our team is currently working hard to let you enroll in courses within the app.";
+"NO_ENROLLMENT_INTERSTITIAL_TOP_LABEL" = "Mae ein tîm yn gweithio'n galed ar hyn o bryd i ganiatáu i chi gofrestru ar gyrsiau drwy'r app.";
 /* Message shown when no results are found while filtering discussions */
-"NO_RESULTS_FOUND" = "There are no posts in this discussion category.";
+"NO_RESULTS_FOUND" = "Nid oes unrhyw bostiadau yn nhrafodaeth y categori hwn.";
 /* Message shown to indicate video transcript support has not yet been implemented */
-"NO_TRANSCRIPT" = "This video's transcript is not available yet.";
+"NO_TRANSCRIPT" = "Nid yw trawsgrifiad y fideo hwn ar gael eto.";
 /* Message shown when user attempts to download a video over cellular data, but has chosen to only allow video downloads over wifi */
-"NO_WIFI_MESSAGE" = "Your current download settings only allow downloads over Wi-Fi.\nPlease connect to a Wi-Fi network or change your download settings.";
+"NO_WIFI_MESSAGE" = "Mae eich gosodiadau lawrlwytho presennol yn caniatáu lawrwytho wi-fi yn unig.\nCysylltwch â rhwydwaith wi-fi neu newidiwch eich gosodiadau lawrlwytho.";
 /* Message shown on videos screen when user has not downloaded any videos */
-"NO_VIDEOS_DOWNLOADED" = "You haven't downloaded any videos.";
+"NO_VIDEOS_DOWNLOADED" = "Nid ydych wedi lawrlwytho unrhyw fideos.";
 /* Text shown when examining part of a course in video only mode, but that part of the course has no videos. {mode_switcher} will be replaced with a name or icon for the mode switch button */
-"NO_VIDEOS_TRY_MODE_SWITCHER" = "There are no videos in this section. To view other section content, select {mode_switcher} above and switch to full course mode.";
+"NO_VIDEOS_TRY_MODE_SWITCHER" = "Nid oes unrhyw fideos yn yr adran hon. I weld cynnwys adran arall, dewiswch {mode_switcher} uchod a newid i modd cwrs llawn.";
 /* Text displayed when no results are found for following*/
-"NO_FOLLOWING_RESULTS" = "You are not following any posts.";
+"NO_FOLLOWING_RESULTS" = "Nid ydych yn dilyn unrhyw bostiadau.";
 /* Message shown when no results are found for all posts*/
-"NO_COURSE_RESULTS" = "There are no posts in this course discussion.";
+"NO_COURSE_RESULTS" = "Nid oes unrhyw bostiadau yn nhrafodaeth y cwrs hwn.";
 /* Indicates a field that does not apply to the current context */
-"NOT_APPLICABLE" = "NA";
+"NOT_APPLICABLE" = "Ddim yn berthnasol";
 /* Label of switch that toggles push notification support */
-"NOTIFICATIONS_ENABLED" = "Allow Notifications";
+"NOTIFICATIONS_ENABLED" = "Caniatáu hysbysiadau";
 /*Text for author if post is by anonymous user*/
-"ANONYMOUS" = "Anonymous";
+"ANONYMOUS" = "Dienw";
 /* Label indicating user has on internet connection and is in offline mode */
-"OFFLINE" = "Offline";
+"OFFLINE" = "All-lein";
 /* Alert dialog okay button */
 "OK"="OK";
 /* Button title allowing user to open current page in their web browser */
-"OPEN_IN_BROWSER"="View in Safari";
+"OPEN_IN_BROWSER"="Gweld trwy Safari";
 /* Button title allowing user to open current page in their web browser */
-"OPEN_IN_BROWSER_TITLE"="Showing only videos";
+"OPEN_IN_BROWSER_TITLE"="Dangos fideos yn unig";
 /* Button label to bring up course finder */
-"OR_SIGN_IN_WITH"="Or Sign in with";
+"OR_SIGN_IN_WITH"="Neu fewngonodi gyda";
 /* Login screen password field placeholder text */
-"PASSWORD_PLACEHOLDER" = "Password";
+"PASSWORD_PLACEHOLDER" = "Cyfrinair";
 /* Alert dialog button shown when finishing a video to ask if user should continue by watching the next video */
-"PLAYBACK_COMPLETE_CONTINUE"="Continue";
+"PLAYBACK_COMPLETE_CONTINUE"="Parhau";
 /* Alert dialog button shown when finishing a video to ask if user should continue by watching the next video (negative option) */
-"PLAYBACK_COMPLETE_CONTINUE_CANCEL"="No";
+"PLAYBACK_COMPLETE_CONTINUE_CANCEL"="Na";
 /* Alert dialog content when finishing a video to ask if user should continue by watching the next video */
-"PLAYBACK_COMPLETE_MESSAGE"="Would you like to watch the next video?";
+"PLAYBACK_COMPLETE_MESSAGE"="Hoffech chi wylio'r fideo nesaf?";
 /* Alert dialog title when finishing a video to ask if user should continue by watching the next video */
-"PLAYBACK_COMPLETE_TITLE"="You've reached the end of this video.";
+"PLAYBACK_COMPLETE_TITLE"="Rydych wedi cyrraedd diwedd y fideo yma.";
 /* Post screen title in creating a new post */
-"POST" = "Create a new post";
+"POST" = "Creu postiad newydd";
 /* Title for Row on Discussion screen which opens the posts followed by the user */
-"POSTS_IM_FOLLOWING" = "Posts I'm Following";
+"POSTS_IM_FOLLOWING" = "Postiadau rwy'n eu dilyn";
 /* Navigation item title for post and responses */
-"DISCUSSION_POST" = "Discussion Post";
+"DISCUSSION_POST" = "Postiad trafod";
 /* Post discussion button title in Create a new post */
-"POST_DISCUSSION"="Post discussion";
+"POST_DISCUSSION"="Postio trafodaeth";
 /* Post question button title in Create a new post */
-"POST_QUESTION"="Post question";
+"POST_QUESTION"="Postio cwestiwn";
 /* Button title for moving to the previous block in the course */
-"PREVIOUS" = "Previous";
+"PREVIOUS" = "Blaenorol";
 /* Button title for moving to the next unit in the course */
-"PREVIOUS_UNIT" = "Previous Unit";
+"PREVIOUS_UNIT" = "Uned flaenorol";
 /* A10y hint for the change picture button. */
-"PROFILE.CHANGE_PICTURE_ACCESSIBILITY_HINT" = "Upload a new profile picture.";
+"PROFILE.CHANGE_PICTURE_ACCESSIBILITY_HINT" = "Llwytho llun proffil newydd i fyny.";
 /* Change picture button text on edit profile screen. */
-"PROFILE.CHANGE_PICTURE_BUTTON" = "Change";
+"PROFILE.CHANGE_PICTURE_BUTTON" = "Newid";
 /* Text for use a photo already in library for user profile photo alert */
-"PROFILE.CHOOSE_EXISTING" = "Choose a photo";
+"PROFILE.CHOOSE_EXISTING" = "Dewis llun";
 /* Instruction title text on the photo crop view. */
-"PROFILE.CROP_AND_RESIZE_PICTURE" = "Crop and resize";
+"PROFILE.CROP_AND_RESIZE_PICTURE" = "Tocio a newid maint";
 /* 'Current Language' label on top row of edit language in user's profile */
-"PROFILE.CURRENT_LANGUAGE_LABEL" = "Current language:";
+"PROFILE.CURRENT_LANGUAGE_LABEL" = "Iaith gyfredol:";
 /* 'Current Location' label on top row of edit country in user's profile */
-"PROFILE.CURRENT_LOCATION_LABEL" = "Current location:";
+"PROFILE.CURRENT_LOCATION_LABEL" = "Lleoliad cyfredol:";
 /* Profile edit view title */
-"PROFILE.EDIT_TITLE" = "Edit profile";
+"PROFILE.EDIT_TITLE" = "Golygu proffil";
 /* Accessibility label for edit profile button */
-"PROFILE.EDIT_ACCESSIBILITY" = "Edit profile";
+"PROFILE.EDIT_ACCESSIBILITY" = "Golygu proffil";
 /* Accessibility hint for country field in user profile */
-"PROFILE.COUNTRY_ACCESSIBILITY_HINT" = "Your country";
+"PROFILE.COUNTRY_ACCESSIBILITY_HINT" = "Eich gwlad";
 /* Accessibility hint for language field in user profile */
-"PROFILE.LANGUAGE_ACCESSIBILITY_HINT" = "Your preferred language";
+"PROFILE.LANGUAGE_ACCESSIBILITY_HINT" = "Eich dewis iaith";
 /* Shown when viewing someone else's limied profile. */
-"PROFILE.LEARNER_HAS_LIMITED_PROFILE" = "This {platform_name} learner is currently sharing a limited profile.";
+"PROFILE.LEARNER_HAS_LIMITED_PROFILE" = "Mae'r dysgwr {platform_name} hwn yn rhannu proffil cyfyngedig ar hyn o bryd.";
 /* User has not filled in an "about me" on their profile */
-"PROFILE.NO_BIO" = "No \"About me\" info provided.";
+"PROFILE.NO_BIO" = "Ni ddarparwyd gwybodaeth yn \"Amdanaf i\".";
 /* Text in the picture taker alert to delete the existing image */
-"PROFILE.REMOVE_IMAGE" = "Remove";
+"PROFILE.REMOVE_IMAGE" = "Dileu";
 /* Profile screen text indicating that the user is currently only displaying a limited profile */
-"PROFILE.SHOWING_LIMITED" = "You are currently sharing a limited profile";
+"PROFILE.SHOWING_LIMITED" = "Rydych yn rhannu proffil cyfyngedig ar hyn o bryd";
 /* Text for take picture for user profile photo alert */
-"PROFILE.TAKE_PICTURE" = "Take photo";
+"PROFILE.TAKE_PICTURE" = "Cymryd llun";
 /* Descriptive text for why a limited profile is shown for users under 13, first line */
-"PROFILE.AGE_LIMIT" = "You must be over 13 to share a full profile.";
+"PROFILE.AGE_LIMIT" = "Rhaid i chi fod dros 13 i rannu proffil llawn..";
 /* Error retrieving a profile */
-"PROFILE.UNABLE_TO_GET" = "We could not load this profile.";
+"PROFILE.UNABLE_TO_GET" = "Nid oeddem yn gallu llwytho'r proffil hwn.";
 /* Error message when removing profile picture */
-"PROFILE.UNABLE_TO_REMOVE_PHOTO" = "We weren't able to remove your photo.";
+"PROFILE.UNABLE_TO_REMOVE_PHOTO" = "Nid oeddem yn gallu tynnu'r llun i lawr..";
 /* Error saving user profile, for field `field_name` */
-"PROFILE.UNABLE_TO_SEND" = "We weren't able to update your {field_name}.";
+"PROFILE.UNABLE_TO_SEND" = "Nid oeddem yn gallu diweddaru eich {field_name}.";
 /* Error message when setting a new profile picture */
-"PROFILE.UNABLE_TO_SET_PHOTO" = "We weren't able to update your photo.";
+"PROFILE.UNABLE_TO_SET_PHOTO" = "Nid oeddem yn gallu diweddaru'ch llun.";
 /*Pipe sign using for formatting in discussion posts*/
 "PIPE_SIGN" = "|";
 /* Question used in the segmented control Creating a new post */
-"QUESTION"="Question";
+"QUESTION"="Cwestiwn";
 /* Option to sort discussion post list by recent activity */
 "RECENT_ACTIVITY" = "Recent Activity";
 /* Section title to display recently downloaded videos */
