@@ -611,129 +611,129 @@
 /*if filter applied then append this string to error message*/
 "REMOVE_FILTER" = "Ceisiwch ddiddymu eich hidlydd postiad.";
 /* Label shown when user attempts to view a course section that hasn't been synced  */
-"SECTION_UNAVAILABLE_OFFLINE"="This section is not available in offline mode.\nIf you've downloaded content for a different section, go to that section to view the content.";
+"SECTION_UNAVAILABLE_OFFLINE"="Nid yw'r adran hon ar gael all-lein.\nOs ydych wedi lawrlwytho cynnwys ar gyfer adran wahanol, ewch i'r adran honno i weld y cynnwys.";
 /* Screen title showing a user's settings */
-"SETTINGS"="Settings";
+"SETTINGS"="Gosodiadau";
 /* Text for a Twitter or Facebook post to a course about page */
-"SHARE_A_COURSE"="I'm taking a course on {platform_name}! Check it out:";
+"SHARE_A_COURSE"="Rwy'n dilyn cwrs ar {platform_name}! Cymerwch gip:";
 /* Sign in screen title and button initiating login process after user enters credentials like username and password */
-"SIGN_IN_TEXT"="Sign In";
+"SIGN_IN_TEXT"="Mewngofnodi";
 /* Message shown while user waits for response to a sign in request */
-"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN"="Signing In";
+"SIGN_IN_BUTTON_TEXT_ON_SIGN_IN"="Yn mewngofnodi";
 /*Sign up screen title and button initiating sign up process on the main screen */
-"REGISTER_TEXT"="Register";
+"REGISTER_TEXT"="Cofrestru";
 /* Indicates a date in the near future */
-"SOON"="Soon";
+"SOON"="Cyn hir";
 /* Label for posts pinned by Staff */
 "STAFF"="STAFF";
 /* Label for date when course starts */
-"STARTING"="Starting - {start_date}";
+"STARTING"="Dechrau - {start_date}";
 /* Discover Courses button text on the first screen */
-"STARTUP.DISCOVER_COURSES"="Discover Courses";
+"STARTUP.DISCOVER_COURSES"="Canfod Cyrsiau";
 /* Explore Subjects button text on the first screen */
-"STARTUP_EXPLORE_SUBJECTS"="Explore Subjects";
+"STARTUP_EXPLORE_SUBJECTS"="Archwilio pynciau";
 /* Button allowing user to submit feedback about the app via email */
-"SUBMIT_FEEDBACK.OPTION_TITLE" = "Submit Feedback";
+"SUBMIT_FEEDBACK.OPTION_TITLE" = "Cyflwyno adborth";
 /* Support message email title */
-"SUBMIT_FEEDBACK.MESSAGE_SUBJECT" = "Customer Feedback";
+"SUBMIT_FEEDBACK.MESSAGE_SUBJECT" = "Adborth cwsmeriaid";
 /* Marker in feedback email meant to separate feedback from prepopulated device information */
-"SUBMIT_FEEDBACK.MARKER" = "---- Leave feedback above this line ----";
+"SUBMIT_FEEDBACK.MARKER" = "---- Gadewch adborth uwch y llinell hon ----";
 /* Line in submit feedback email that supplies OS version information. For example, "iOS Version: 9.2" */
-"SUBMIT_FEEDBACK.OS_VERSION" = "iOS Version: {version}";
+"SUBMIT_FEEDBACK.OS_VERSION" = "Fersiwn iOS: {version}";
 /* Line in submit feedback email that supplies app version information. For example, "App Version: 2.2 (2.2.23)" */
-"SUBMIT_FEEDBACK.APP_VERSION" = "App Version: {version} ({build})";
+"SUBMIT_FEEDBACK.APP_VERSION" = "Fersiwn yr app: {version} ({build})";
 /* Line in submit feedback email that supplies device model information. For example, "Device Model: iPhone" */
-"SUBMIT_FEEDBACK.DEVICE_MODEL" = "Device Model: {model}";
+"SUBMIT_FEEDBACK.DEVICE_MODEL" = "Model y ddyfais: {model}";
 /* Text that indicates the visibility of the post */
-"POST_VISIBILITY"="This post is visible only to {cohort}.";
+"POST_VISIBILITY"="Caiff y postiad hwn ei weld gan {cohort} yn unig.";
 /* Text that indicates the visibility of the post to everyone */
-"POST_VISIBILITY_EVERYONE" = "This post is visible to everyone.";
+"POST_VISIBILITY_EVERYONE" = "Caiff y postiad hwn ei weld gan bawb.";
 /*Add parenthesis around text*/
 "PARENTHESIS" = "({text})";
 /* Alert dialog title shown when network request takes too long to complete */
-"TIMEOUT_ALERT_TITLE"="Time Out";
+"TIMEOUT_ALERT_TITLE"="Amser drosodd";
 /* Alert dialog content shown when network request takes too long to complete */
-"TIMEOUT_CHECK_INTERNET_CONNECTION"="Please check your internet connection.\nThis page is taking longer than expected to load.";
+"TIMEOUT_CHECK_INTERNET_CONNECTION"="Gwiriwch eich cysylltiad â'r rhyngrwyd.\nMae'r tudalen hwn yn cymryd yn hwy na'r disgwyl.";
 /* Title as place holder in Create a new post */
-"TITLE"="Title";
+"TITLE"="Teitl";
 /* Topic as button title in Create a new post */
-"TOPIC"="Topic: {topic}";
+"TOPIC"="Pwnc: {topic}";
 /* Back bar button topics */
-"TOPICS"="Topics";
+"TOPICS"="Pynciau";
 /* Button text allowing user to reset their password */
-"TROUBLE_IN_LOGIN_BUTTON"="Forgot your password?";
+"TROUBLE_IN_LOGIN_BUTTON"="Wedi anghofio eich cyfrinair?";
 /* Error shown when video download fails */
 "UNABLE_TO_DOWNLOAD"="Unable to download." ;
 /* Error shown when the course content could not for an unknown reason. */
-"UNABLE_TO_LOAD_COURSE_CONTENT"="Unable to load course content.\nTry again later.";
+"UNABLE_TO_LOAD_COURSE_CONTENT"="Methu llwytho cynnwys y cwrs.\nRhowch gynnig arall nes ymlaen.";
 /* Filtering option to show unanswered discussion posts */
-"UNANSWERED"="Unanswered";
+"UNANSWERED"="Heb eu hateb";
 /* Navigation title for a Question Post which has no endorsed answers */
-"UNANSWERED_QUESTION" = "Unanswered Question";
+"UNANSWERED_QUESTION" = "Cwestiwn heb ei ateb";
 /* Filtering option to show unread discussion posts*/
-"UNREAD"="Unread";
+"UNREAD"="Heb eu darllen";
 /* Placeholder title for course content with no title */
-"UNTITLED"="Untitled";
+"UNTITLED"="Heb deitl";
 /* Hint text for login field */
-"USERNAME_PLACEHOLDER" = "User name or e-mail address";
+"USERNAME_PLACEHOLDER" = "Enw defnyddiwr neu gyfeiriad e-bost";
 /*Error message when operation failed with unknow error*/
-"UNKNOWN_ERROR" = "Your action could not be completed.";
+"UNKNOWN_ERROR" = "Nid oedd modd cwblhau eich gweithred.";
 /* Screen title showing a user's account */
 "USER_ACCOUNT"="Account";
 /* Button title for profile view in account*/
 "USER_ACCOUNT.PROFILE"= "Profile";
 /* Text shown to display the current version number. Environment is a server name like "prod", "dev", stage" and may be empty. For example "Version 1.2.3 Prod" */
-"VERSION_DISPLAY" = "Version {number} {environment}";
+"VERSION_DISPLAY" = "Fersiwn {number} {environment}";
 /* Error shown when video download fails */
-"VIDEO_CONTENT_NOT_AVAILABLE"="This video is currently unavailable. Check back again later.";
+"VIDEO_CONTENT_NOT_AVAILABLE"="Nid yw'r fideo hwn ar gael ar hyn o bryd. Rhowch gynnig arall nes ymlaen.";
 /* Floating overlay text shown after deleting a video. {count} is a number of videos */
-"VIDEOS_DELETED##{one}" = "{count} video deleted";
+"VIDEOS_DELETED##{one}" = "{count} fideo wedi'i ddileu";
 /* Floating overlay text shown after deleting a video. {count} is a number of videos */
-"VIDEOS_DELETED##{other}" = "{count} videos deleted";
+"VIDEOS_DELETED##{other}" = "{count} fideo wedi'u dileu";
 /* Floating overlay text shown after video download begins. {count} is a number of videos  */
-"VIDEOS_DOWNLOADING##{one}" = "Downloading {count} video";
+"VIDEOS_DOWNLOADING##{one}" = "Yn lawrlwytho {count} fideo";
 /* Floating overlay text shown after video download begins. {count} is a number of videos  */
-"VIDEOS_DOWNLOADING##{other}" = "Downloading {count} videos";
+"VIDEOS_DOWNLOADING##{other}" = "Yn lawrlwytho {count} fideo";
 /* Message shown to indicate a number of already downloaded videos. {count} is a number of videos  */
-"VIDEOS_DOWNLOADED##{one}" = "Downloaded {count} video";
+"VIDEOS_DOWNLOADED##{one}" = "{count} fideo wedi'i lawrlwytho";
 /* Message shown to indicate a number of already downloaded videos. {count} is a number of videos  */
-"VIDEOS_DOWNLOADED##{other}" = "Downloaded {count} videos";
+"VIDEOS_DOWNLOADED##{other}" = "{count} fideo wedi'u lawrlwytho";
 /* Floating overlay text shown while videos download */
-"VIDEO_DOWNLOADS_IN_PROGRESS" = "Video Downloads in Progress";
+"VIDEO_DOWNLOADS_IN_PROGRESS" = "Lawrlwytho fideos ar waith";
 /* Message shown instead of a video when attempting to watch a video that is only availabe on the web */
-"VIDEO_ONLY_ON_WEB" = "This video is currently only on the web. Tap to view it in your web browser.";
+"VIDEO_ONLY_ON_WEB" = "Mae'r fideo yma ar gael ar y we yn unig ar hyn o bryd. Tapio i'w weld yn eich porwr gwe.";
 /* Alert dialog content shown when user attempts to view a video that hasn't been synced  */
-"VIDEO_NOT_AVAILABLE"="This video is not available in offline mode.\nPlease select a video that you've downloaded onto your device.";
+"VIDEO_NOT_AVAILABLE"="Nid yw'r fideo hwn ar gael all-lein.\nDewiswch fideo rydych wedi'i lawrlwytho i'ch dyfais.";
 /* Shows in the video setting sub-table which item is selected */
 "VIDEO_SETTING_SELECTED" = "✓ %@";
 /* Button action to open app on YouTube */
-"VIDEO.VIEW_ON_YOUTUBE" = "View video on YouTube";
+"VIDEO.VIEW_ON_YOUTUBE" = "Gweld y fideo ar YouTube";
 /* Message shown for videos that can only be played external the app via YouTube. */
-"VIDEO.ONLY_ON_YOUTUBE" = "This video can only be played on YouTube.";
+"VIDEO.ONLY_ON_YOUTUBE" = "Gellir ond chwarae'r fideo hwn ar YouTube.";
 /* Button text for showing an associated item */
-"VIEW" = "View";
+"VIEW" = "Gwylio";
 /* Button linking to course announcements */
-"VIEW_HANDOUTS" = "View course handouts";
+"VIEW_HANDOUTS" = "Gweld taflenni'r cwrs";
 /* Discussion vote - {count} is a number of votes */
-"VOTE##{one}"="{count} Vote";
+"VOTE##{one}"="{count} pleidlais";
 /* Discussion vote - {count} is a number of votes */
-"VOTE##{other}"="{count} Votes";
+"VOTE##{other}"="{count} o bleidleisiau";
 /*Title of update button on fullscreen error and SnackBar*/
-"VERSION_UPGRADE_UPDATE" = "Update";
+"VERSION_UPGRADE_UPDATE" = "Diweddaru";
 /*Title of dismiss button on SnackBar*/
-"VERSION_UPGRADE.DISMISS" = "Dismiss";
+"VERSION_UPGRADE.DISMISS" = "Gwrthod";
 /*Deprecated version detail message*/
-"VERSION_UPGRADE.DEPRECATED_MESSAGE" = "A new version of the app is available.";
+"VERSION_UPGRADE.DEPRECATED_MESSAGE" = "Mae fersiwn newydd o'r app ar gael.";
 /*Outdated version detail message*/
-"VERSION_UPGRADE.OUT_DATED_MESSAGE" = "Your version of the app is no longer supported.";
+"VERSION_UPGRADE.OUT_DATED_MESSAGE" = "Ni chefnogir eich fersiwn o'r app mwyach.";
 /*Outdated version alert message for login screen*/
 "VERSION_UPGRADE_OUT_DATED_LOGIN_MESSAGE" = "Your version of the app is no longer supported. Update to the latest version to login.";
 /*New version available without deadline message*/
-"VERSION_UPGRADE.NEW_VERSION_AVAILABLE" = "A new version of the app is available.";
+"VERSION_UPGRADE.NEW_VERSION_AVAILABLE" = "Mae fersiwn newydd o'r app ar gael.";
 /*Video player remaining time default value*/
 "VIDEO_PLAYER_DEFAULT_REMAINING_TIME" = "0:00/0:00";
 /* Overlay shown after a network request has started, telling the user to wait for the response */
-"WAITING_FOR_RESPONSE"="Please wait...";
+"WAITING_FOR_RESPONSE"="Arhoswch...";
 /* Header of 'whats new screen'*/
 "WHATS_NEW.HEADER_TEXT"="Version {app_version} New Features";
 /*Whats new screen done button title*/
@@ -743,4 +743,4 @@
 /*Detail message for wifi only switch at Settings screen*/
 "WIFI_ONLY_DETAIL_MESSAGE" = "Only download content when Wi-Fi is turned on";
 /* Alert dialog button title to confirm an action */
-"YES"="Yes";
+"YES"="Ie";
