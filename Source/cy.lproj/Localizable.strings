@@ -303,71 +303,71 @@
 /* Button text to initiate or confirm deletion */
 "DELETE"="Dileu";
 /* Discussion used in the segmented control Creating a new post */
-"DISCUSSION"="Discussion";
+"DISCUSSION"="Trafodaeth";
 /* Discussion comment overlay message when new comment added */
-"DISCUSSION_COMMENT_POSTED" = "Your comment has been added.";
+"DISCUSSION_COMMENT_POSTED" = "Ychwanegwyd eich sylw.";
 /* Title of button to allow user to follow a discussion post */
-"DISCUSSION_FOLLOW"="Follow";
+"DISCUSSION_FOLLOW"="Dilyn";
 /* Title of action to report a discussion post/response/comment to the course staff */
-"DISCUSSION_REPORT"="Report";
+"DISCUSSION_REPORT"="Adrodd am hyn";
 /* Discussion response overlay message when new response added */
-"DISCUSSION_THREAD_POSTED" = "Your response has been added.";
+"DISCUSSION_THREAD_POSTED" = "Ychwanegwyd eich ymateb.";
 /* Title of the navigation bar when entering the course discussion */
-"DISCUSSION_TOPICS"="Discussion topics";
+"DISCUSSION_TOPICS"="Pynciau trafod";
 /* Title of button to allow user to unfollow a discussion post */
-"DISCUSSION_UNFOLLOW"="Unfollow";
+"DISCUSSION_UNFOLLOW"="Gorffen dilyn";
 /* Title of action to unreport a discussion post/response/comment to the course staff */
-"DISCUSSION_UNREPORT"="Unreport";
+"DISCUSSION_UNREPORT"="Dadwneud yr adrodd";
 /* Discussion comments count (Posts screen) - {count} is a number of comments */
-"DISCUSSIONS.REPLIES_COUNT"="{count} Replies";
+"DISCUSSIONS.REPLIES_COUNT"="{count} atebs";
 /*Discussion posts screen last post date - {date} last updated thread date*/
-"DISCUSSIONS.LAST_POST" = "Last post: {date}";
+"DISCUSSIONS.LAST_POST" = "Postiad diwethaf: {dyddiad}";
 /* Alert dialog button for allowing/disallowing downloads on cellular data */
-"DO_NOT_ALLOW"="Don't allow";
+"DO_NOT_ALLOW"="Peidiwch â chaniatáu";
 /* Description about for button to download videos. For example, "Download 1 video" */
-"DOWNLOAD_MANY_VIDEOS##{one}" = "Download {video_count} video";
+"DOWNLOAD_MANY_VIDEOS##{one}" = "Lawrlwytho {video_count} fideo";
 /* Description about for button to download videos. For example, "Download 3 videos" */
-"DOWNLOAD_MANY_VIDEOS##{other}" = "Download {video_count} videos";
+"DOWNLOAD_MANY_VIDEOS##{other}" = "Lawrlwytho {video_count} fideo";
 /* Button text for confirming download */
-"DOWNLOAD" = "Download";
+"DOWNLOAD" = "Lawrlwytho";
 /* Label indicating that a video or videos have been downloaded */
-"DOWNLOADED" = "Downloaded";
+"DOWNLOADED" = "Wedi'u lawrlwytho";
 /* Description about downloaded videos. For example, "Downloaded 1 video" */
-"DOWNLOADED_MANY_VIDEOS##{one}" = "Download {video_count} video";
+"DOWNLOADED_MANY_VIDEOS##{one}" = "Lawrlwytho {video_count} fideo";
 /* Description about downloaded videos. For example, "Downloaded 3 videos" */
-"DOWNLOADED_MANY_VIDEOS##{other}" = "Download {video_count} videos";
+"DOWNLOADED_MANY_VIDEOS##{other}" = "Lawrlwytho {video_count} fideo";
 /* Label indicating that a video or videos are downloading */
-"DOWNLOADING" = "Downloading";
+"DOWNLOADING" = "Yn lawrlwytho";
 /* Title of video downloads screen */
-"DOWNLOADS"="Downloads";
+"DOWNLOADS"="Lawrlwythiadau";
 /* Overlay message after user chooses to download a video */
-"DOWNLOADING_1_VIDEO"="Downloading 1 video.";
+"DOWNLOADING_1_VIDEO"="Yn lawrlwytho 1 fideo.";
 /*Discover in left drawer(used for courses and programs discovery)*/
 "DISCOVER"="Discover";
 /* Alert message shown when user tries to send an email, but email isn't setup */
-"EMAIL_ACCOUNT_NOT_SET_UP_MESSAGE"="It seems your email client is not set up.";
+"EMAIL_ACCOUNT_NOT_SET_UP_MESSAGE"="Mae'n ymddangos nad yw eich cleient e-bost wedi'i osod.";
 /* Alert dialog title shown when user tries to send an email, but email isn't setup */
-"EMAIL_ACCOUNT_NOT_SET_UP_TITLE"="Cannot send Email";
+"EMAIL_ACCOUNT_NOT_SET_UP_TITLE"="Yn methu anfon e-bost";
 /* Placeholder text for email address entry field */
-"EMAIL_ADDRESS_PROMPT"="E-mail address";
+"EMAIL_ADDRESS_PROMPT"="Cyfeiriad e-bost";
 /* Text displayed when no results are found in the search */
-"EMPTY_RESULTSET" = "No results found for \"{query_string}\". Try another search term or select a discussion category to browse.";
+"EMPTY_RESULTSET" = "Ni chafwyd canlyniadau ar gyfer \"{query_string}\". Rhowch derm chwilio arall neu ddewis categori trafodaeth i bori drwyddo.";
 /* Prompt shown to users on the course list encouraging them to find new courses */
-"ENROLLMENT_LIST.FIND_COURSES_PROMPT" = "Looking for a new challenge?";
+"ENROLLMENT_LIST.FIND_COURSES_PROMPT" = "Edrych am her newydd?";
 /* Button title opening course catalog */
-"ENROLLMENT_LIST.FIND_COURSES" = "Find a course";
+"ENROLLMENT_LIST.FIND_COURSES" = "Dod o hyd i gwrs addas i'r ffôn";
 /* Error message when user is not enrolled to any course and course discovery is also disabled.*/
-"ENROLLMENT_LIST.NO_ENROLLMENT" = "It looks like you are not enrolled in any courses yet.";
+"ENROLLMENT_LIST.NO_ENROLLMENT" = "Mae'n ymddangos nad ydych wedi cofrestru ar unrhyw gwrs eto.";
 /* Prompt indicating user needs to enter an email address */
-"ENTER_EMAIL"="Please enter your user name or e-mail address and try again.";
+"ENTER_EMAIL"="Rhowch eich enw defnyddiwr neu gyfeiriad e-bost a rhowch gynnig arall arni.";
 /* Prompt indicating user needs to enter a password */
-"ENTER_PASSWORD"="Please enter your password and try again.";
+"ENTER_PASSWORD"="Rhowch eich cyfrinair a rhowch gynnig arall arni.";
 /* Text used when the post is visible to everyone */
-"EVERYONE"="everyone";
+"EVERYONE"="Rhowch eich cyfrinair a rhowch gynnig arall arni.";
 /* Message when user attempts to register an account using an external service like Facebook or Google, but they already have an account linked to that service */
-"EXTERNAL_REGISTRATION_BECAME_LOGIN" = "You already set up an {platform_name} account with your {service} account. You have been logged in with that account.";
+"EXTERNAL_REGISTRATION_BECAME_LOGIN" = "Rydych eisoes wedi creu cyfrif {platform_name} gyda'ch cyfrif {service}. Rydych wedi mewngofnodi gyda'r cyfrif yna.";
 /* Endorsed text */
-"ENDORSED" = "Endorsed";
+"ENDORSED" = "Cymeradwywyd";
 /* Facebook login method */
 "FACEBOOK"="Facebook";
 /* Overlay message shown when facebook login fails because the user's account isn't linked */
