@@ -9,113 +9,113 @@
 // Please keep in alphabetical order
 
 /* Alert dialog confirmation button when user chooses to download a large video */
-"ACCEPT_LARGE_VIDEO_DOWNLOAD"="Download";
+"ACCEPT_LARGE_VIDEO_DOWNLOAD"="Lawrlwytho";
 /* Label for check box when it's checked. */
-"ACCESSIBILITY_CHECKBOX_CHECKED" = "Checked";
+"ACCESSIBILITY_CHECKBOX_CHECKED" = "Ticiwyd";
 /* Label for check box when it's checked. */
-"ACCESSIBILITY_CHECKBOX_UNCHECKED" = "UnChecked";
+"ACCESSIBILITY_CHECKBOX_UNCHECKED" = "Heb ei dicio";
 /* Label for action hint on check box when it's checked. */
-"ACCESSIBILITY_CHECKBOX_HINT_CHECKED" = "Clear the checkbox";
+"ACCESSIBILITY_CHECKBOX_HINT_CHECKED" = "Clirio'r blwch";
 /* Label for action hint on check box when it's checked. */
-"ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED" = "Tap to select";
+"ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED" = "Tapio i ddewis";
 /* Appending By before course organization and number on My Find Courses*/
-"ACCESSIBILITY_BY" = "By";
+"ACCESSIBILITY_BY" = "Gan";
 /* Accessibility hint for close button*/
 "ACCESSIBILITY.CLOSE_HINT" = "Double tap to close.";
 /* Accessibility label for posted data of discussion responses*/
-"ACCESSIBILITY.DISCUSSION_POSTED_ON" = "Posted on {date}";
+"ACCESSIBILITY.DISCUSSION_POSTED_ON" = "Postiwyd ar {date}";
 /* Accessibility hint for Vote button for discussion responses*/
-"ACCESSIBILITY.DISCUSSION_VOTE_HINT" = "Double tap to vote.";
+"ACCESSIBILITY.DISCUSSION_VOTE_HINT" = "Tapio ddwywaith i bleidleisio.";
 /* Accessibility hint for Unvote button for discussion responses*/
-"ACCESSIBILITY.DISCUSSION_UNVOTE_HINT" = "Double tap to unvote.";
+"ACCESSIBILITY.DISCUSSION_UNVOTE_HINT" = "Tapio ddwywaith i ddadwneud y bleidlais.";
 /* Accessibility hint for Report button for discussion responses*/
-"ACCESSIBILITY.DISCUSSION_REPORT_HINT" = "Double tap to report.";
+"ACCESSIBILITY.DISCUSSION_REPORT_HINT" = "Tapio ddwyaith i adrodd.";
 /* Accessibility hint for Unreport button for discussion responses*/
-"ACCESSIBILITY.DISCUSSION_UNREPORT_HINT" = "Double tap to unreport.";
+"ACCESSIBILITY.DISCUSSION_UNREPORT_HINT" = "Tapio ddwywaith i ddadwneud yr adrodd.";
 /* Accessibility hint for Follow button for discussion responses*/
-"ACCESSIBILITY.DISCUSSION_FOLLOW_HINT" = "Double tap to follow.";
+"ACCESSIBILITY.DISCUSSION_FOLLOW_HINT" = "Tapio ddwyaith i ddilyn.";
 /* Accessibility hint for Unfollow button for discussion responses*/
-"ACCESSIBILITY.DISCUSSION_UNFOLLOW_HINT" = "Double tap to unfollow.";
+"ACCESSIBILITY.DISCUSSION_UNFOLLOW_HINT" = "Tapio ddwywaith i orffen dilyn.";
 /* Acessibility label for the download progress button. {percent_complete} is an already localized numeric percentage like "44%" */
-"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{one}" = "Downloads in progress: {percent_complete}";
+"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{one}" = "Yn lawrlwytho nawr: {percent_complete}";
 /* Acessibility label for the download progress button. {percent_complete} is an already localized numeric percentage like "44%" */
-"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{other}" = "Downloads in progress: {percent_complete}";
+"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{other}" = "Yn lawrlwytho nawr: {percent_complete}";
 /* Acessibility hint for the download progress button. */
-"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON_HINT" = "Double tap to view current downloads";
+"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON_HINT" = "Tapio ddwywaith i weld beth sy'n lawrlwytho nawr";
 /* Accessibility hint for video download list row cells. {video_name} is the name of video being downloaded. {percent_complete} is an already localized numeric percentage like "44%". */
-"ACCESSIBILITY_DOWNLOAD_VIEW_CELL##{one}" = "Downloading {video_name}. {percent_complete} percent complete.";
+"ACCESSIBILITY_DOWNLOAD_VIEW_CELL##{one}" = "Yn lawrlwytho {video_name}. {percent_complete} y cant wedi'i gwblhau.";
 /* Accessibility hint for video download list row cells. {video_name} is the name of video being downloaded. {percent_complete} is an already localized numeric percentage like "44%". */
-"ACCESSIBILITY_DOWNLOAD_VIEW_CELL##{other}" = "Downloading {video_name}. {percent_complete} percent complete.";
+"ACCESSIBILITY_DOWNLOAD_VIEW_CELL##{other}" = "Yn lawrlwytho {video_name}. {percent_complete} y cant wedi'i gwblhau.";
 /* Accessibility hint for number of downloadable videos */
-"ACCESSIBILITY_DOWNLOADABLE_VIDEOS##{one}" = "Downloads {video_count} video.";
+"ACCESSIBILITY_DOWNLOADABLE_VIDEOS##{one}" = "I lawrlwytho fideo {video_count}.";
 /* Accessibility hint for number of downloadable videos */
-"ACCESSIBILITY_DOWNLOADABLE_VIDEOS##{other}" = "Downloads {video_count} videos.";
+"ACCESSIBILITY_DOWNLOADABLE_VIDEOS##{other}" = "I lawrlwytho fideos {video_count}.";
 /* Accessibility label for fullscreen button on video player */
-"ACCESSIBILITY_FULLSCREEN" = "Fullscreen";
+"ACCESSIBILITY_FULLSCREEN" = "Sgrîn lawn";
 /* Accessibility label for fullscreen button on video player when player is in fullscreen mode*/
-"ACCESSIBILITY_EXIT_FULLSCREEN" = "Exit fullscreen";
+"ACCESSIBILITY_EXIT_FULLSCREEN" = "Cau sgrîn lawn";
 /* Accessibility label for HTML Icon in the Courseware screens */
 "ACCESSIBILITY_HTML" = "HTML";
 /* Accessibility label for Pause Button in the Video Player */
-"ACCESSIBILITY_PAUSE" = "Pause";
+"ACCESSIBILITY_PAUSE" = "Oedi";
 /* Accessibility label for Play Button in the Video Player */
-"ACCESSIBILITY_PLAY" = "Play";
+"ACCESSIBILITY_PLAY" = "Chwarae";
 /* Accessibility lable for the avatar image */
-"ACCESSIBILITY_USER_AVATAR" = "Your avatar image";
+"ACCESSIBILITY_USER_AVATAR" = "Eich delwedd rhithffurf";
 /* Accessibility label for Problem Icon in the Courseware screens */
 "ACCESSIBILITY_PROBLEM" = "Problem";
 /* Accessibility label for Rewind Button in the Video Player */
-"ACCESSIBILITY_REWIND" = "Rewind";
+"ACCESSIBILITY_REWIND" = "Am yn ôl";
 /* Call to action for Rewind Button in the Video Player */
-"ACCESSIBILITY_REWIND_HINT" = "Rewinds by 30 seconds.";
+"ACCESSIBILITY_REWIND_HINT" = "Yn ôl 30 eiliad.";
 /* Accessibility label for Seek bar in the Video Player */
-"ACCESSIBILITY_SEEK_BAR" = "Seek Bar";
+"ACCESSIBILITY_SEEK_BAR" = "Bar chwilio";
 /* Accessibility label for Settings Button in the Video Player */
-"ACCESSIBILITY_SETTINGS" = "Settings";
+"ACCESSIBILITY_SETTINGS" = "Gosodiadau";
 /* Call to action for Course content on Home Screen */
-"ACCESSIBILITY_SHOWS_COURSE_CONTENT" = "Double tap to view course content.";
+"ACCESSIBILITY_SHOWS_COURSE_CONTENT" = "Tapio ddwywaith i weld cynnwys y cwrs.";
 /* We don't have a accessility trait for dropdown, so we will be achieving dropdown trait through accessibility label */
 "ACCESSIBILITY_DROPDOWN_TRAIT" = "Dropdown.";
 /* Call to action for Opening Dropdown */
-"ACCESSIBILITY_SHOWS_DROPDOWN_HINT" = "Double tap to open dropdown.";
+"ACCESSIBILITY_SHOWS_DROPDOWN_HINT" = "Tapio ddwywaith i agor cwymplen.";
 /* Call to action for Selecting Option */
-"ACCESSIBILITY_SELECT_VALUE_HINT" = "Double tap to select.";
+"ACCESSIBILITY_SELECT_VALUE_HINT" = "Tapio ddwywaith i ddewis.";
 /* Accessibility label for Unknown Icon in the Courseware screens */
-"ACCESSIBILITY_UNKNOWN" = "Unknown";
+"ACCESSIBILITY_UNKNOWN" = "Anhysbys";
 /* Accessibility label for Video Icon in the Courseware screens */
-"ACCESSIBILITY_VIDEO" = "Video";
+"ACCESSIBILITY_VIDEO" = "Fideo";
 /* Text spoken for Navigation Button on Course List Screen */
-"ACCESSIBILITY_MENU" = "Navigation Menu";
+"ACCESSIBILITY_MENU" = "Dewislen Lywio";
 /* Accessibility label for close button when left drawer is open*/
-"ACCESSIBILITY_CLOSE_MENU" = "Close Navigation Menu";
+"ACCESSIBILITY_CLOSE_MENU" = "Cau'r ddewislen lywio";
 /* Accessibility label for hiding keyboard*/
-"ACCESSIBILITY_HIDE_KEYBOARD" = "Hide Keyboard";
+"ACCESSIBILITY_HIDE_KEYBOARD" = "Cuddio'r bysellfwrdd";
 /* Accessibility Hint to view user profile*/
-"ACCESSIBILITY_SHOW_USER_PROFILE_HINT" = "Double tap to view user profile";
+"ACCESSIBILITY_SHOW_USER_PROFILE_HINT" = "Tapio ddwywaith i weld proffil y defnyddiwr";
 /*Accessibility text for pinned discussion thread(Posts screen)*/
-"ACCESSIBILITY.DISCUSSION_PINNED" = "Pinned";
+"ACCESSIBILITY.DISCUSSION_PINNED" = "Nodwyd";
 /*Accessibility text for closed discussion thread(Posts screen)*/
-"ACCESSIBILITY.DISCUSSION_CLOSED" = "Closed";
+"ACCESSIBILITY.DISCUSSION_CLOSED" = "Wedi'i gau";
 /*Accessibility text for followed discussion thread(Posts screen)*/
-"ACCESSIBILITY.DISCUSSION_FOLLOWED" = "Followed";
+"ACCESSIBILITY.DISCUSSION_FOLLOWED" = "Yn dilyn";
 /* Accessibility text for unread discussion comments count (Posts screen) - {count} is a number of unread comments */
-"ACCESSIBILITY.DISCUSSION_UNREAD_REPLIES"="{count} Unread replies";
+"ACCESSIBILITY.DISCUSSION_UNREAD_REPLIES"="{count} Ymatebion heb eu darllen";
 /*Accessibility text for unread discussion thread (Posts screen)*/
-"ACCESSIBILITY.DISCUSSION_UNREAD_THREAD" = "Unread discussion thread";
+"ACCESSIBILITY.DISCUSSION_UNREAD_THREAD" = "Edefyn trafodaeth heb ei ddarllen";
 /*Accessibility text for read discussion thread (Posts screen)*/
-"ACCESSIBILITY.DISCUSSION_READ_THREAD" = "Read discussion thread";
+"ACCESSIBILITY.DISCUSSION_READ_THREAD" = "Edefyn trafodaeth wedi'i darllen";
 /*Accessibility text for discussion thread last seen date(Posts screen) - {date} last updated thread date*/
-"ACCESSIBILITY.DISCUSSION_LAST_POST_ON" = "Last post on {date}";
+"ACCESSIBILITY.DISCUSSION_LAST_POST_ON" = "Postiwyd ddiwethaf ar {date}";
 /*Accessibility hint for discussion thread(Posts screen)*/
-"ACCESSIBILITY.DISCUSSION_THREAD_HINT" = "Double tap to view thread.";
+"ACCESSIBILITY.DISCUSSION_THREAD_HINT" = "Tapio ddwywaith i weld yr edefyn.";
 /*Accessibility hint for sort button(Posts Screen)*/
-"ACCESSIBILITY.DISCUSSION_SORT_BY" = "Sort by {sort_by}";
+"ACCESSIBILITY.DISCUSSION_SORT_BY" = "Trefnu yn ôl {sort_by}";
 /*Accessibility hint for filter button(Posts Screen)*/
-"ACCESSIBILITY.DISCUSSION_FILTER_BY" = "Filter by {filter_by}";
+"ACCESSIBILITY.DISCUSSION_FILTER_BY" = "Hidlo yn ôl {filter_by}";
 /*Accessibility label for user profile in left drawer*/
-"ACCESSIBILITY.LEFT_DRAWER.PROFILE_LABEL" = "Currently signed in as {user_name}, {user_email}";
+"ACCESSIBILITY.LEFT_DRAWER.PROFILE_LABEL" = "Wedi mewngofnodi ar hyn o bryd fel {user_name}, {user_email}";
 /*Accessibility hint for user profile in left drawer*/
-"ACCESSIBILITY.LEFT_DRAWER.PROFILE_HINT" = "Double tap to open your profile";
+"ACCESSIBILITY.LEFT_DRAWER.PROFILE_HINT" = "Tapio ddwywaith i agor eich proffil";
 /*Accessibility text for close button on whats new screen*/
 "ACCESSIBILITY.WHATSNEW.CLOSE_LABEL"="Close";
 /*Accessibility label for header on new screen*/

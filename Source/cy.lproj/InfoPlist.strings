@@ -6,5 +6,5 @@
   Copyright © 2017 edX. All rights reserved.
 */
 
-NSPhotoLibraryUsageDescription = "so you can select a profile image";
-NSCameraUsageDescription = "so you can take a profile image";
+NSPhotoLibraryUsageDescription = "er mwyn i chi ddewis llun proffil";
+NSCameraUsageDescription = "er mwyn i chi gymryd llun proffil";
