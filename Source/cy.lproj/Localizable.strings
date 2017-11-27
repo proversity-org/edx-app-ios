@@ -251,7 +251,7 @@
 /* Message shown when there is no course video */
 "COURSE_VIDEO_UNAVAILABLE"="This course does not include any videos";
 /* Message shown when attempting to display content not available on the app */
-"COURSE_CONTENT_UNKNOWN" = ""Nid yw'r gydran ryngweithiol hon ar gael ar gyfer ffonau eto.\nArchwilio rhannau eraill o'r cwrs neu weld hwn ar y we."";
+"COURSE_CONTENT_UNKNOWN" = "Nid yw'r gydran ryngweithiol hon ar gael ar gyfer ffonau eto.\nArchwilio rhannau eraill o'r cwrs neu weld hwn ar y we.";
 /* Message shown when there is no course dates */
 "COURSEDATES.COURSE_DATE_UNAVAILABLE"="Course dates are not currently available.";
 /* Title text for the Announcements section within the course dashboard */
@@ -393,31 +393,31 @@
 /* Google login method */
 "GOOGLE"="Google";
 /* Overlay message shown when third party login fails because the user's account isn't linked. {service} is a third party login service like "Facebook". {platform_name} is the name of the service like "edX". {destination_name} is the name of service's web destination like "edx.org" */
-"SERVICE_ACCOUNT_NOT_ASSOCIATED_MESSAGE"="Make sure your {service} account is associated with your {platform_name} account on {destination_name}";
+"SERVICE_ACCOUNT_NOT_ASSOCIATED_MESSAGE"="Sicrhewch bod eich cyfrif {service} wedi'i gysylltu â'ch cyfrif {platform_name} ar {destination_name}";
 /* Title of overlay message shown when login through an external service fails because the user's account isn't linked. For example, "Google account not associated with edX account" */
-"SERVICE_ACCOUNT_NOT_ASSOCIATED_TITLE"="{service} account not associated with {platform_name} account";
+"SERVICE_ACCOUNT_NOT_ASSOCIATED_TITLE"="Nid yw'r cyfrif {service} wedi'i gysylltu â chyfrif {platform_name}";
 /* Indicator for course content that is marked as having a graded component */
-"GRADED" = "Graded";
+"GRADED" = "Adrannau a gaiff eu graddio";
 /* Warning shown to indicate that the user is in a section of graded content. */
-"GRADED_CONTENT_WARNING" = "We recommend that you complete graded sections like this one in your web browser until they are fully supported on mobile.";
+"GRADED_CONTENT_WARNING" = "Argymhellwn eich bod yn cwblhau adrannu a gaiff eu graddio, fel hwn, yn eich porwr gwe hyd nes eu bod yn cael eu cefnogi'n llwyr ar ffonau.";
 /* Message shown when there are no handouts for a course */
-"HANDOUTS_UNAVAILABLE"="There are currently no handouts for this course.";
+"HANDOUTS_UNAVAILABLE"="Nid oes unrhyw daflenni ar gyfer y cwrs hwn ar hyn o bryd.";
 /* Overlay error shown when logging in with an invalid email address */
-"INVALID_EMAIL_MESSAGE"="Please make sure your e-mail address is formatted correctly and try again.";
+"INVALID_EMAIL_MESSAGE"="Gwnewch yn siŵr bod eich cyfeiriad e-bost yn y fformat cywir a rhowch gynnig arall arni.";
 /* Overlay error shown when logging in with an invalid username or password */
-"INVALID_USERNAME_PASSWORD"="Please make sure that your user name or e-mail address and password are correct and try again.";
+"INVALID_USERNAME_PASSWORD"="Gwnewch yn siŵr bod eich enw defnyddiwr neu gyfeiriad e-bost a chyfrinair yn gywir a rhowch gynnig arall arni.";
 /* Alert dialog text asking whether it's okay to download large videos */
-"LARGE_DOWNLOAD_MESSAGE"="The videos you've selected are larger than 1 GB. Do you want to download these videos?";
+"LARGE_DOWNLOAD_MESSAGE"="Mae'r fideos rydych wedi'u dewis yn fwy na 1GB. Ydych chi am lawrlwytho'r fideos hyn?";
 /* Alert dialog title when asking whether it's okay to download large videos */
-"LARGE_DOWNLOAD_TITLE"="Large Download";
+"LARGE_DOWNLOAD_TITLE"="Lawrlwythiad mawr";
 /* Title for Course Item that was last accessed */
-"LAST_ACCESSED" = "Last Accessed";
+"LAST_ACCESSED" = "Agorwyd ddiwethaf";
 /* Prompt leading user to create account screen */
-"LOGIN_SPLASH_SIGN_UP"="Sign up and start learning";
+"LOGIN_SPLASH_SIGN_UP"="Ymuno a dechrau dysgu";
 /* Prompt leading user to sign in screen */
-"LOGIN_SPLASH_SIGN_IN"="Already have an account? Sign in";
+"LOGIN_SPLASH_SIGN_IN"="Gennych gyfrif eisoes? Mewngofnodi";
 /* Button title to log out the current user */
-"LOGOUT"="Logout";
+"LOGOUT"="Allgofnodi";
 /* Option to sort discussion post list by most activity */
 "MOST_ACTIVITY"="Most Activity";
 /* Option to sort discussion post list by most votes */
