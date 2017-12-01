@@ -40,4 +40,4 @@ deployment:
   beta:
     branch: proversity/khd
     commands:
-      - fastlane beta
+      - fastlane screenshots
