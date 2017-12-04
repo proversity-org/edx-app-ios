@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - master
+      - no-branch
       
 machine:
   xcode:
@@ -23,7 +23,7 @@ dependencies:
     - sudo gem install fastlane
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-mobile-config.git --branch proversity/tea ./deployment
+    - git clone git@github.com:proversity-org/edx-mobile-config.git --branch no-branch ./deployment
     - cp -R deployment/iOS/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
     - cp -R deployment/iOS/assets/app_icons/ Source/Resources/Icons
     - cp -R deployment/iOS/assets/logos/ Source/Resources/Images
@@ -43,7 +43,7 @@ test:
 
 deployment:
   beta:
-    branch: master
+    branch: no-branch
     commands:
-      - python setup_certificates.py TEA
-      - echo "Finish setup of certificates for Teach First X"
+      - python config_project.py pro Proversity 0 2.11 devUUID storeUUID
+      - fastlane beta
