@@ -123,6 +123,9 @@ public class CourseOutlineViewController :
                                                 Logger.logError("ANALYTICS", "Unable to load block: \($0)")
         }
         )
+        
+        courseQuerier.needsRefresh = true
+        reload()
     }
     
     override public var shouldAutorotate: Bool {
