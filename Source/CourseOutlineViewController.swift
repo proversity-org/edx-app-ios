@@ -283,9 +283,14 @@ public class CourseOutlineViewController :
     }
     
     //MARK: CourseContentPageViewControllerDelegate
-    public func courseContentPageViewController(controller: CourseContentPageViewController, enteredBlockWithID blockID: CourseBlockID, parentID: CourseBlockID) {
-        self.blockIDStream.backWithStream(courseQuerier.parentOfBlockWithID(blockID: parentID))
+    public func courseContentPageViewController(controller: CourseContentPageViewController, enteredBlockWithID blockID: CourseBlockID, parentID: CourseBlockID, forceRefresh: Bool) {
+        self.blockIDStream.backWithStream(courseQuerier.parentOfBlockWithID(blockID: parentID, forceRefresh: forceRefresh))
+        if (forceRefresh) {
+            controller.forceUpdateNavigationBar(blockID: blockID)
+        }
+        
         self.tableController.highlightedBlockID = blockID
+        
     }
     
     //MARK: LastAccessedControllerDeleagte

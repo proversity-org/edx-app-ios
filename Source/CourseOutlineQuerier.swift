@@ -21,6 +21,11 @@ public class CourseOutlineQuerier : NSObject {
         public let parent : CourseBlockID
         
         init(sourceCursor : ListCursor<CourseBlock>, contextCursor : ListCursor<BlockGroup>) {
+            if (sourceCursor.current.displayName == "Results Screen") {
+                print(sourceCursor.current.displayName)
+                print(sourceCursor.hasPrev)
+                print(sourceCursor.hasNext)
+            }
             block = sourceCursor.current
             nextGroup = sourceCursor.hasNext ? nil : contextCursor.peekNext()?.block
             prevGroup = sourceCursor.hasPrev ? nil : contextCursor.peekPrev()?.block
@@ -96,19 +101,26 @@ public class CourseOutlineQuerier : NSObject {
         self.interface?.addVideos(videos, forCourseWithID: courseID)
     }
     
-    private func loadOutlineIfNecessary() {
-        if (courseOutline.value == nil || needsRefresh) && !courseOutline.active {
-            needsRefresh = false
-            if let enrollment = self.enrollmentManager?.enrolledCourseWithID(courseID: courseID),
-                let access = enrollment.course.courseware_access, !access.has_access
-            {
-                let stream = OEXStream<CourseOutline>(error: OEXCoursewareAccessError(coursewareAccess: access, displayInfo: enrollment.course.start_display_info))
-                courseOutline.backWithStream(stream)
+    private func loadOutlineIfNecessary(forceRefresh: Bool = false) {
+        if (forceRefresh) {
+            let request = CourseOutlineAPI.requestWithCourseID(courseID: courseID, username : session?.currentUser?.username)
+            if let loader = networkManager?.streamForRequest(request, persistResponse: true) {
+                courseOutline.backWithStream(loader)
             }
-            else {
-                let request = CourseOutlineAPI.requestWithCourseID(courseID: courseID, username : session?.currentUser?.username)
-                if let loader = networkManager?.streamForRequest(request, persistResponse: true) {
-                    courseOutline.backWithStream(loader)
+        } else {
+            if (courseOutline.value == nil || needsRefresh) && !courseOutline.active {
+                needsRefresh = false
+                if let enrollment = self.enrollmentManager?.enrolledCourseWithID(courseID: courseID),
+                    let access = enrollment.course.courseware_access, !access.has_access
+                {
+                    let stream = OEXStream<CourseOutline>(error: OEXCoursewareAccessError(coursewareAccess: access, displayInfo: enrollment.course.start_display_info))
+                    courseOutline.backWithStream(stream)
+                }
+                else {
+                    let request = CourseOutlineAPI.requestWithCourseID(courseID: courseID, username : session?.currentUser?.username)
+                    if let loader = networkManager?.streamForRequest(request, persistResponse: true) {
+                        courseOutline.backWithStream(loader)
+                    }
                 }
             }
         }
@@ -119,8 +131,7 @@ public class CourseOutlineQuerier : NSObject {
         return courseOutline.map { return $0.root }
     }
     
-    public func spanningCursorForBlockWithID(blockID: CourseBlockID?, initialChildID: CourseBlockID?, forMode mode: CourseOutlineMode) -> OEXStream<ListCursor<GroupItem>> {
-        loadOutlineIfNecessary()
+    public func spanningCursorForBlockWithID(blockID: CourseBlockID?, initialChildID: CourseBlockID?, forMode mode: CourseOutlineMode, forceUpdate: Bool = false) -> OEXStream<ListCursor<GroupItem>> {
         return courseOutline.flatMap {[weak self] outline in
             if let blockID = blockID,
                 let child = initialChildID ?? self?.blockWithID(id: blockID, inOutline: outline)?.children.first,
@@ -243,6 +254,7 @@ public class CourseOutlineQuerier : NSObject {
             
             return ListCursor(before: Array(before.reversed()), current: current, after: after)
         }
+
         return nil
     }
     
@@ -258,9 +270,8 @@ public class CourseOutlineQuerier : NSObject {
         }
     }
     
-    public func parentOfBlockWithID(blockID: CourseBlockID) -> OEXStream<CourseBlockID?> {
-        loadOutlineIfNecessary()
-        
+    public func parentOfBlockWithID(blockID: CourseBlockID, forceRefresh: Bool = false) -> OEXStream<CourseBlockID?> {
+        loadOutlineIfNecessary(forceRefresh: forceRefresh)
         return courseOutline.flatMap {(outline: CourseOutline) -> Result<CourseBlockID?> in
             if blockID == outline.root {
                 return Success(v: nil)

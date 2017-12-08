@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol CourseContentPageViewControllerDelegate : class {
-    func courseContentPageViewController(controller : CourseContentPageViewController, enteredBlockWithID blockID : CourseBlockID, parentID : CourseBlockID)
+    func courseContentPageViewController(controller : CourseContentPageViewController, enteredBlockWithID blockID : CourseBlockID, parentID : CourseBlockID, forceRefresh : Bool)
 }
 
 extension CourseBlockDisplayType {
@@ -148,10 +148,18 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NOTIFICATION_VIDEO_PLAYER_PREVIOUS), object: nil)
     }
     
-    private func loadIfNecessary() {
-        if !contentLoader.hasBacking {
-            let stream = courseQuerier.spanningCursorForBlockWithID(blockID: blockID, initialChildID: initialChildID, forMode: courseOutlineMode)
+    private func loadIfNecessary(forceUpdate: Bool = false, newChildBlockID: CourseBlockID? = nil) {
+        print("loadIfNecessary")
+        print(initialChildID as Any)
+        print(newChildBlockID as Any)
+        if (forceUpdate) {
+            let stream = courseQuerier.spanningCursorForBlockWithID(blockID: blockID, initialChildID: newChildBlockID ?? initialChildID, forMode: courseOutlineMode)
             contentLoader.backWithStream(stream.firstSuccess())
+        } else {
+            if !contentLoader.hasBacking {
+                let stream = courseQuerier.spanningCursorForBlockWithID(blockID: blockID, initialChildID: initialChildID, forMode: courseOutlineMode)
+                contentLoader.backWithStream(stream.firstSuccess())
+            }
         }
     }
     
@@ -237,6 +245,12 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
     
     // MARK: Paging
     
+    public func forceUpdateNavigationBar(blockID: CourseBlockID) {
+        print("forceUpdateNavigationBar")
+//        loadIfNecessary(forceUpdate: true, newChildBlockID: blockID)
+        self.updateNavigationBars()
+    }
+    
     private func siblingWithDirection(direction : UIPageViewControllerNavigationDirection, fromController viewController: UIViewController) -> UIViewController? {
         let item : CourseOutlineQuerier.GroupItem?
         switch direction {
@@ -250,16 +264,18 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         }
     }
     
-    private func updateNavigationForEnteredController(controller : UIViewController?) {
-        
+    private func updateNavigationForEnteredController(controller : UIViewController?, forceRefresh : Bool = false) {
+        print("updateNavigationForEnteredController")
+        print(controller as Any)
         if let blockController = controller as? CourseBlockViewController,
             let cursor = contentLoader.value
         {
             cursor.updateCurrentToItemMatching {
                 blockController.blockID == $0.block.blockID
             }
+            
             environment.analytics.trackViewedComponentForCourse(withID: courseID, blockID: cursor.current.block.blockID, minifiedBlockID: cursor.current.block.minifiedBlockID ?? "")
-            self.navigationDelegate?.courseContentPageViewController(controller: self, enteredBlockWithID: cursor.current.block.blockID, parentID: cursor.current.parent)
+            self.navigationDelegate?.courseContentPageViewController(controller: self, enteredBlockWithID: cursor.current.block.blockID, parentID: cursor.current.parent, forceRefresh: forceRefresh)
         }
         self.updateNavigationBars()
     }
@@ -269,7 +285,7 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
             let nextController = self.siblingWithDirection(direction: direction, fromController: currentController)
         {
             self.setViewControllers([nextController], direction: direction, animated: true, completion: nil)
-            self.updateNavigationForEnteredController(controller: nextController)
+            self.updateNavigationForEnteredController(controller: nextController, forceRefresh: true)
         }
     }
     
