@@ -63,6 +63,7 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
             CourseCardViewModel.onCourseOutline(course: course).apply(card: courseCard, networkManager: environment.networkManager)
             refreshTableHeaderView(lastAssecss: false)
             tableView.setAndLayoutTableHeaderView(header: headerContainer)
+
         }
         
         refreshController.setupInScrollView(scrollView: tableView)
