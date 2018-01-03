@@ -8,6 +8,7 @@
 
 #import "OEXVideoSummary.h"
 #import "OEXConfig.h"
+#import "OEXNetworkConstants.h"
 
 #import "edX-Swift.h"
 #import "OEXVideoEncoding.h"
@@ -71,7 +72,7 @@
             [encodings setSafeObject:encoding forKey:name];
         }];
         self.encodings = encodings;
-        
+
         self.videoThumbnailURL = [summary objectForKey:@"video_thumbnail_url"];
         self.videoID = [summary objectForKey:@"id"] ;
         
@@ -80,6 +81,9 @@
         
         self.transcripts = [summary objectForKey:@"transcripts"];
         
+        if (_encodings.count <=0)
+            _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
+
         if (_encodings.count <=0) {
             if ([summary objectForKey:@"video_alternatives"]) {
                 NSArray *videoAlternatives = [summary objectForKey:@"video_alternatives"];
@@ -98,10 +102,13 @@
         }
         
         self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
-        if (![[OEXConfig sharedConfig] isUsingVideoPipeline]) {
+        if (![[OEXConfig sharedConfig] isUsingVideoPipeline] ||
+            [self.preferredEncoding.name isEqualToString:OEXVideoEncodingFallback]) {
             [self.supportedEncodings addObject:OEXVideoEncodingFallback];
             [self.supportedEncodings addObject:OEXVideoEncodingHls];
         }
+
+        self.downloadURL = [self getDownloadURL:[summary objectForKey:@"all_sources"]];
     }
     
     return self;
@@ -187,20 +194,54 @@
     return !self.onlyOnWeb && isSupportedEncoding;
 }
 
-- (BOOL) isDownloadableVideo {
-    BOOL canDownload = self.isSupportedVideo;
++ (BOOL) isDownloadableVideoURL:(NSString*) url {
+    BOOL canDownload = url.length && [OEXInterface isURLForVideo:url];
     if(canDownload) {
         for (NSString *extension in ONLINE_ONLY_VIDEO_URL_EXTENSIONS) {
-            if([self.videoURL localizedCaseInsensitiveContainsString:extension]){
-                if (![self.defaultEncoding.URL containsString:@".mp4"]) {
-                    canDownload = NO;
+            if([url localizedCaseInsensitiveContainsString:extension]){
+                canDownload = NO;
+                break;
+            }
+        }
+    }
+    return canDownload;
+}
+
+- (BOOL) isDownloadableVideo {
+    return (BOOL)self.downloadURL;
+}
+
+- (NSString*)getDownloadURL:(NSArray*) allSources {
+    NSString *downloadURL = nil;
+
+    if ([[OEXConfig sharedConfig] isUsingVideoPipeline]) {
+        // Loop through the available encodings to find a downloadable video URL
+        for(NSString* name in [self supportedEncodings]) {
+            OEXVideoEncoding* encoding = self.encodings[name];
+            NSString *url = [encoding URL];
+            if (url && [OEXVideoSummary isDownloadableVideoURL:url]) {
+                downloadURL = url;
+                break;
+            }
+        }
+    }
+    else {
+
+        // If the preferred encoding video URL is downloadable, then allow it to be downloaded.
+        if ([OEXVideoSummary isDownloadableVideoURL:self.videoURL]) {
+            downloadURL = self.videoURL;
+        } else {
+            // Loop through the video sources to find a downloadable video URL
+            for (NSString *url in allSources) {
+                if ([OEXVideoSummary isDownloadableVideoURL:url]) {
+                    downloadURL = url;
                     break;
                 }
             }
         }
     }
 
-    return canDownload;
+    return downloadURL;
 }
 
 - (NSString*)videoURL {
