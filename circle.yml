@@ -1,9 +1,11 @@
 machine:
   xcode:
-    version: 8.2.1
+    version: 8.3.3
   environment:
     XCODE_WORKSPACE: edX.xcworkspace
     XCODE_SCHEME: edX
+    LC_ALL: en_US.UTF-8
+    LANG: en_US.UTF-8
 
 dependencies:
   override:
