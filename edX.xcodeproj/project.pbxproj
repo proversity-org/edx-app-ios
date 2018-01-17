@@ -731,10 +731,8 @@
 		E793E2C41EDC5B2D00DCDAA7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E793E2C31EDC5B2D00DCDAA7 /* SnapshotHelper.swift */; };
 		E7BB36AB1F0A5A7400622C98 /* logoBlack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB36A71F0A5A7400622C98 /* logoBlack@2x.png */; };
 		E7BB36AC1F0A5A7400622C98 /* logoBlack@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB36A81F0A5A7400622C98 /* logoBlack@3x.png */; };
-		E7BB36AD1F0A5A7400622C98 /* logoWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB36A91F0A5A7400622C98 /* logoWhite@2x.png */; };
 		E7BB36AE1F0A5A7400622C98 /* logoWhite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB36AA1F0A5A7400622C98 /* logoWhite@3x.png */; };
 		E7BB36B11F0A5AA900622C98 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = E7BB36AF1F0A5AA900622C98 /* iTunesArtwork */; };
-		E7BB36B21F0A5AA900622C98 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = E7BB36B01F0A5AA900622C98 /* iTunesArtwork@2x */; };
 		E7C40C2C1E83AEEA00300C68 /* KPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C40C2B1E83AEEA00300C68 /* KPNService.m */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
 		F22A0ABD1CE660B300D50DFF /* LoginApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABC1CE660B300D50DFF /* LoginApi.swift */; };
