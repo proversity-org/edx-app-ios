@@ -13,7 +13,6 @@
 #import "NSString+OEXFormatting.h"
 #import "OEXAppDelegate.h"
 #import "OEXCustomLabel.h"
-#import "OEXDateFormatting.h"
 #import "OEXDownloadTableCell.h"
 #import "OEXOpenInBrowserViewController.h"
 #import "OEXHelperVideoDownload.h"
@@ -38,10 +37,6 @@
 @end
 
 @implementation OEXDownloadViewController
-
-- (IBAction)navigateToDownloadedVideos {
-    [[OEXRouter sharedRouter] showMyVideos];
-}
 
 #pragma mark - REACHABILITY
 
@@ -111,7 +106,7 @@
             if(video.downloadProgress < OEXMaxDownloadProgress) {
                 [self.arr_downloadingVideo addObject:video];
                 if (video != nil && video.summary != nil) {
-                    NSString* key = video.summary.videoURL;
+                    NSString* key = video.summary.downloadURL;
                     if (key) {
                         duplicationAvoidingDict[key] = @"object";
                     }
@@ -159,31 +154,28 @@
 - (void)configureCell:(OEXDownloadTableCell*)cell forIndexPath:(NSIndexPath*)indexPath {
     if([self.arr_downloadingVideo count] > indexPath.row) {
         OEXHelperVideoDownload* downloadingVideo = [self.arr_downloadingVideo objectAtIndex:indexPath.row];
-
-        
         NSString* videoName = downloadingVideo.summary.name;
         if([videoName length] == 0) {
-            videoName = @"(Untitled)";
+            videoName = [Strings parenthesisWithText:[Strings untitled]];
         }
         cell.lbl_title.text = videoName;
 
-        if(!downloadingVideo.summary.duration) {
-            cell.lbl_time.text = @"NA";
+        if (downloadingVideo.summary.hasVideoDuration && downloadingVideo.summary.hasVideoSize) {
+            cell.lbl_time.text = [DateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
+            cell.lbl_totalSize.text = [downloadingVideo.summary videoSize];
         }
-        else {
-            cell.lbl_time.text = [OEXDateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
+        else if (downloadingVideo.summary.hasVideoDuration) {
+            cell.lbl_time.text = [DateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
         }
-
-        float result = (([downloadingVideo.summary.size doubleValue] / 1024) / 1024);
-        cell.lbl_totalSize.text = [NSString stringWithFormat:@"%.2fMB", result];
+        else if (downloadingVideo.summary.hasVideoSize) {
+            cell.lbl_time.text = [downloadingVideo.summary videoSize];
+        }
+        
         float progress = (float)downloadingVideo.downloadProgress;
         [cell.progressView setProgress:progress];
-        //
         cell.btn_cancel.tag = indexPath.row;
         cell.btn_cancel.accessibilityLabel = [Strings cancel];
-
         [cell.btn_cancel addTarget:self action:@selector(btnCancelPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
         cell.accessibilityLabel = [self downloadStatusAccessibilityLabelForVideoName:videoName percentComplete:(progress / OEXMaxDownloadProgress)];
     }
 }
@@ -195,6 +187,7 @@
 }
 
 - (void)downloadProgressNotification:(NSNotification*)notification {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^(void){
         @autoreleasepool {
             NSDictionary* progress = (NSDictionary*)notification.userInfo;
@@ -202,8 +195,8 @@
             NSString* url = [task.originalRequest.URL absoluteString];
             
             for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
-                if([video.summary.videoURL isEqualToString:url]) {
-                    [self updateProgressForVisibleRows];
+                if([video.summary.downloadURL isEqualToString:url]) {
+                    [weakSelf updateProgressForVisibleRows];
                     break;
                 }
             }
@@ -212,8 +205,9 @@
 }
 
 - (void)downloadCompleteNotification:(NSNotification*)notification {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateProgressForVisibleRows];
+        [weakSelf updateProgressForVisibleRows];
     });
 }
 

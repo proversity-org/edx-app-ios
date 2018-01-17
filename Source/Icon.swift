@@ -106,7 +106,7 @@ public enum Icon {
     case CourseEnd
     case CourseHTMLContent
     case CourseModeFull
-    case CourseModeVideo
+    case CourseVideos
     case CourseProblemContent
     case CourseUnknownContent
     case CourseVideoContent
@@ -134,6 +134,7 @@ public enum Icon {
     case Spinner
     case StarEmpty
     case StarFilled
+    case Discovery
     case Transcript
     case UnknownError
     case UpVote
@@ -144,6 +145,10 @@ public enum Icon {
     case VideoRewind
     case VideoShrink
     case Warning
+    case DeleteIcon
+    case MoreOptionsIcon
+    case Account
+    case ArrowLeft
     
     private var renderer : IconRenderer {
         switch self {
@@ -155,6 +160,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .LongArrowUp)
         case .ArrowDown:
             return FontAwesomeRenderer(icon: .LongArrowDown)
+        case .Account:
+            return FontAwesomeRenderer(icon: .EllipsisV)
         case .Camera:
             return FontAwesomeRenderer(icon: .Camera)
         case .Close:
@@ -179,6 +186,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .ThumbTack)
         case .Transcript:
             return FontAwesomeRenderer(icon: .FileTextO)
+        case .DeleteIcon:
+            return FontAwesomeRenderer(icon: .Trash)
         case .Announcements:
             return FontAwesomeRenderer(icon: .Bullhorn)
         case .CircleO:
@@ -186,7 +195,7 @@ public enum Icon {
         case .CheckCircleO:
             return FontAwesomeRenderer(icon: .CheckCircleO)
         case .ContentCanDownload:
-            return FontAwesomeRenderer(icon: .ArrowDown)
+            return FontAwesomeRenderer(icon: .Download)
         case .ContentDidDownload:
             return FontAwesomeRenderer(icon: .Check)
         case .CourseEffort:
@@ -203,7 +212,7 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .ArrowsV)
         case .Country:
             return FontAwesomeRenderer(icon: .MapMarker)
-        case .CourseModeVideo:
+        case .CourseVideos:
             return FontAwesomeRenderer(icon: .Film)
         case .CourseProblemContent:
             return FontAwesomeRenderer(icon: .ThList)
@@ -241,6 +250,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .StarO)
         case .StarFilled:
             return FontAwesomeRenderer(icon: .Star)
+        case .Discovery:
+            return FontAwesomeRenderer(icon: .Search)
         case .UnknownError:
             return FontAwesomeRenderer(icon: .ExclamationCircle)
         case .NoTopics:
@@ -261,6 +272,10 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .Lock)
         case .Warning:
             return FontAwesomeRenderer(icon: .Exclamation)
+        case .MoreOptionsIcon:
+            return FontAwesomeRenderer(icon: .EllipsisH)
+        case .ArrowLeft:
+            return FontAwesomeRenderer(icon: .AngleLeft)
         }
     }
     

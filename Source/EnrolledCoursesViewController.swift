@@ -9,9 +9,8 @@
 import Foundation
 
 var isActionTakenOnUpgradeSnackBar: Bool = false
-fileprivate var isFirstLoad: Bool = true
 
-class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTableViewControllerDelegate, PullRefreshControllerDelegate, LoadStateViewReloadSupport {
+class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTableViewControllerDelegate, PullRefreshControllerDelegate, LoadStateViewReloadSupport,InterfaceOrientationOverriding {
     
     typealias Environment = OEXAnalyticsProvider & OEXConfigProvider & DataManagerProvider & NetworkManagerProvider & ReachabilityProvider & OEXRouterProvider
     
@@ -30,7 +29,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         self.environment = environment
         
         super.init(env: environment)
-        self.navigationItem.title = Strings.myCourses
+        self.navigationItem.title = Strings.courses
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
 
@@ -74,6 +73,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         setupListener()
         setupFooter()
         setupObservers()
+        addFindCoursesButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +88,27 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
     override func reloadViewData() {
         refreshIfNecessary()
     }
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
 
+    private func addFindCoursesButton() {
+        if environment.config.courseEnrollmentConfig.isCourseDiscoveryEnabled() {
+            let findcoursesButton = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+            findcoursesButton.accessibilityLabel = Strings.findCourses
+            navigationItem.rightBarButtonItem = findcoursesButton
+            
+            findcoursesButton.oex_setAction { [weak self] in
+                self?.environment.router?.showCourseCatalog(fromController: self, bottomBar: nil)
+            }
+        }
+    }
+    
     private func setupListener() {
         enrollmentFeed.output.listen(self) {[weak self] result in
             if !(self?.enrollmentFeed.output.active ?? false) {
@@ -138,17 +158,16 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             case let Result.failure(error):
                 //App is showing occasionally error on app launch, so skipping first error on app launch
                 //TODO: Find exact root cause of error and remove this patch
-                if isFirstLoad {
-                    isFirstLoad = false
-                    self?.enrollmentFeed.refresh()
+                // error code -100 is for unknown error
+                if error.code == -100 {
                     return
                 }
+                
                 self?.loadController.state = LoadState.failed(error: error)
                 if error.errorIsThisType(NSError.oex_outdatedVersionError()) {
                     self?.hideSnackBar()
                 }
             }
-            isFirstLoad = false
         }
     }
     
@@ -156,7 +175,7 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         if environment.config.courseEnrollmentConfig.isCourseDiscoveryEnabled() {
             let footer = EnrolledCoursesFooterView()
             footer.findCoursesAction = {[weak self] in
-                self?.environment.router?.showCourseCatalog(bottomBar: nil)
+                self?.environment.router?.showCourseCatalog(fromController: self, bottomBar: nil)
             }
             
             footer.sizeToFit()

@@ -18,7 +18,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate {
         let icon : Icon
     }
     
-    typealias Environment = NetworkManagerProvider & OEXStylesProvider
+    typealias Environment = NetworkManagerProvider & OEXStylesProvider & OEXAnalyticsProvider
     
     fileprivate let environment : Environment
     
@@ -86,7 +86,9 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate {
         
         actionButton.oex_addAction({[weak self] _ in
             self?.actionButton.showProgress = true
-            self?.action?( { self?.actionButton.showProgress = false } )
+            self?.action?( {[weak self] _ in
+                            self?.actionButton.showProgress = false
+            } )
             }, for: .touchUpInside)
         
         descriptionView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
@@ -222,8 +224,8 @@ extension CourseCatalogDetailView {
             result.append(Field(name: Strings.CourseDetail.effort, value: effort, icon: .CourseEffort))
         }
         if let endDate = course.end, !course.isStartDateOld {
-            let date = OEXDateFormatting.format(asMonthDayYearString: endDate)
-            result.append(Field(name: Strings.CourseDetail.endDate, value: date, icon: .CourseEnd))
+            let date = DateFormatting.format(asMonthDayYearString: endDate as NSDate)
+            result.append(Field(name: Strings.CourseDetail.endDate, value: date ?? "", icon: .CourseEnd))
         }
         return result
     }

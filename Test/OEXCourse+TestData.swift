@@ -32,7 +32,8 @@ public extension OEXCourse {
             "name" : "A Great Course",
             "course_image" : imagePath!.absoluteString ,
             "org" : "edX",
-            "courseware_access" : ["has_access" : accessible]
+            "courseware_access" : ["has_access" : accessible],
+            "video_outline": "https://www.example.com/video_outlines/testcourse"
         ]
         if let overview = overview {
             courseDictionary["overview"] = overview as AnyObject
@@ -58,7 +59,7 @@ public extension OEXCourse {
             courseDictionary["effort"] = effort
         }
         if let end = end {
-            courseDictionary["end"] = OEXDateFormatting.serverString(with: end as Date)
+            courseDictionary["end"] = DateFormatting.serverString(withDate: end)
         }
         if let startInfo = startInfo {
             courseDictionary = courseDictionary.concat(dictionary: startInfo.jsonFields)
@@ -79,7 +80,8 @@ public extension OEXCourse {
         effort: String? = nil,
         mediaInfo: [String:CourseMediaInfo] = [:],
         startInfo: OEXCourseStartDisplayInfo? = nil,
-        end : NSDate? = nil
+        end : NSDate? = nil,
+        aboutUrl: String? = nil
         ) -> OEXCourse
     {
         let courseData = OEXCourse.testData(
@@ -91,7 +93,8 @@ public extension OEXCourse {
             effort:effort,
             mediaInfo: mediaInfo,
             startInfo: startInfo,
-            end: end)
+            end: end,
+            aboutUrl: aboutUrl)
         return OEXCourse(dictionary: courseData)
     }
     

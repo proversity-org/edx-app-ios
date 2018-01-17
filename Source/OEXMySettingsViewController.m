@@ -36,9 +36,11 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
     [self.wifiOnlySwitch setOn:[OEXInterface shouldDownloadOnlyOnWifi]];
     
     [self.subtitleLabel setTextAlignment:NSTextAlignmentNatural];
+    [self.titleLabel setText:[Strings wifiOnlyTitle]];
+    [self.subtitleLabel setText:[Strings wifiOnlyDetailMessage]];
     
     self.wifiOnlyCell.accessibilityLabel = [NSString stringWithFormat:@"%@ , %@", self.titleLabel.text, self.subtitleLabel.text];
-    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.title = [Strings settings];
 }
 

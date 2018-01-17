@@ -268,7 +268,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
                 UIApplication.shared.openURL(url as URL)
             }
         }
-        loadController.state = LoadState.empty(icon: .CourseModeVideo, message: Strings.Video.onlyOnYoutube, attributedMessage: nil, accessibilityMessage: nil, buttonInfo: buttonInfo)
+        loadController.state = LoadState.empty(icon: .CourseVideos, message: Strings.Video.onlyOnYoutube, attributedMessage: nil, accessibilityMessage: nil, buttonInfo: buttonInfo)
     }
     
     private func showLoadedBlock(block : CourseBlock, forVideo video: OEXHelperVideoDownload) {
@@ -311,6 +311,20 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, OE
             videoPlayer.setFullscreen(true, with: self.currentOrientation())
         }
 
+    }
+    
+    // willTransition only called in case of iPhone because iPhone has regular and compact vertical classes.
+    // This method is specially for iPad
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        guard let videoPlayer = videoController.moviePlayerController, UIDevice.current.userInterfaceIdiom == .pad else { return }
+        
+        if videoPlayer.isFullscreen {
+            videoPlayer.setFullscreen(!UIDevice.current.orientation.isPortrait, with: currentOrientation())
+        }
+        else if videoController.shouldRotate && UIDevice.current.orientation.isLandscape {
+            videoPlayer.setFullscreen(true, with: currentOrientation())
+        }
+        
     }
     
     func validateSubtitleTimer() {

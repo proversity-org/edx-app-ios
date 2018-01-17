@@ -41,13 +41,13 @@ extern NSString* const OEXDownloadEndedNotification;
 @property (nonatomic, assign) NSInteger selectedCCIndex;
 @property (nonatomic, assign) NSInteger selectedVideoSpeedIndex;
 
-@property (nonatomic, strong, nullable) NSArray<UserCourseEnrollment*>* courses;
+@property (nonatomic, strong, nullable, readonly) NSArray<UserCourseEnrollment*>* courses;
 
 @property (nonatomic, weak, nullable) id <OEXStorageInterface>  storage;
 
 // [String(Course.video_outline) : OEXHelperVideoDownload]
 // TODO: Make this indexed by courseID instead of course.video_outline
-@property (nullable, nonatomic, strong) NSMutableDictionary* courseVideos;
+@property (nullable, nonatomic, strong, readonly) NSMutableDictionary* courseVideos;
 
 //Reachability
 @property (nonatomic, assign) BOOL reachable;
@@ -57,10 +57,14 @@ extern NSString* const OEXDownloadEndedNotification;
 @property (nonatomic, strong) NSMutableSet<UIView*>* progressViews;
 @property (nonatomic, assign) int numberOfRecentDownloads;
 
+// These two method are used to set the course enrolments and courseVideos for unit test cases
+- (void)t_setCourseEnrollments:(NSArray *)courses;
+- (void)t_setCourseVideos:(NSDictionary *)courseVideos;
+
+
 #pragma Common Methods
 + (BOOL)isURLForVideo:(NSString*)URLString;
 + (BOOL)isURLForImage:(NSString*)URLString;
-+ (BOOL)isURLForedXDomain:(NSString*)URLString;
 
 #pragma mark Resource downloading
 - (BOOL)downloadWithRequestString:(nullable NSString*)URLString forceUpdate:(BOOL)update;
@@ -82,13 +86,7 @@ extern NSString* const OEXDownloadEndedNotification;
 #pragma mark Video Management
 /// videos is an array of OEXVideoSummary
 - (void)addVideos:(NSArray*)videos forCourseWithID:(NSString*)courseID;
-/// videos is an array of OEXHelperVideoDownload
-/// This should really take a courseID not the outline URL, but that will require more serious refactoring
-- (void)setVideos:(NSArray*)videos forURL:(NSString*)URLString;
 - (NSString* _Nullable)URLStringForType:(NSString*)type;
-- (NSMutableArray*)videosForChapterID:(NSString*)chapter
-                            sectionID:(nullable NSString*)section
-                                  URL:(NSString*)URLString;
 
 - (NSArray*)coursesAndVideosForDownloadState:(OEXDownloadState)state;
 - (NSArray<OEXHelperVideoDownload*>*)allVideosForState:(OEXDownloadState)state;
@@ -97,10 +95,7 @@ extern NSString* const OEXDownloadEndedNotification;
 + (BOOL)shouldDownloadOnlyOnWifi;
 + (void)setDownloadOnlyOnWifiPref:(BOOL)should;
 @property (readonly, nonatomic) BOOL shouldDownloadOnlyOnWifi;
-//+ (void)clearSession;
 
-#pragma mark - Bulk Download
-- (float)showBulkProgressViewForCourse:(OEXCourse*)course chapterID:(NSString*)chapterID sectionID:(NSString*)sectionID;
 /*
  New methods for refactoring
  */
@@ -120,7 +115,8 @@ extern NSString* const OEXDownloadEndedNotification;
 
 - (NSArray<OEXHelperVideoDownload*>*)statesForVideosWithIDs:(NSArray<NSString*>*)videoIDs courseID:(NSString*)courseID;
 
-- (void)deleteDownloadedVideoForVideoId:(NSString*)videoId completionHandler:(void (^)(BOOL success))completionHandler;
+- (void)deleteDownloadedVideo:(OEXHelperVideoDownload *)video completionHandler:(void (^)(BOOL success))completionHandler;
+- (void)deleteDownloadedVideos:(NSArray *)videos completionHandler:(void (^)(BOOL success))completionHandler;
 
 - (VideoData*)insertVideoData:(OEXHelperVideoDownload*)helperVideo;
 
@@ -137,16 +133,6 @@ extern NSString* const OEXDownloadEndedNotification;
 - (float)lastPlayedIntervalForVideo:(OEXHelperVideoDownload*)video;
 - (void)markVideoState:(OEXPlayedState)state forVideo:(OEXHelperVideoDownload*)video;
 - (void)markLastPlayedInterval:(float)playedInterval forVideo:(OEXHelperVideoDownload*)video;
-- (nullable NSArray*)videosOfCourseWithURLString:(nullable NSString*)URL;
-- (nullable NSString*)openInBrowserLinkForCourse:(nullable OEXCourse*)course;
-
-- (nullable NSDictionary*)processVideoSummaryList:(nullable NSData*)data URLString:(nullable NSString*)URLString;
-
-/// @return Array of OEXVideoPathEntry
-- (nullable NSArray*)chaptersForURLString:(nullable NSString*)URL;
-
-/// @return Array of OEXVideoPathEntry
-- (nullable NSArray*)sectionsForChapterID:(nullable NSString*)chapterID URLString:(nullable NSString*)URL;
 
 #pragma mark - Closed Captioning
 - (void)downloadAllTranscriptsForVideo:(nullable OEXHelperVideoDownload*)obj;

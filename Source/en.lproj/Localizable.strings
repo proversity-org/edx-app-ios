@@ -54,6 +54,8 @@
 "ACCESSIBILITY_FULLSCREEN" = "Fullscreen";
 /* Accessibility label for fullscreen button on video player when player is in fullscreen mode*/
 "ACCESSIBILITY_EXIT_FULLSCREEN" = "Exit fullscreen";
+/* Accessibility hint for error*/
+"ACCESSIBILITY.ERROR_TEXT" = "Error";
 /* Accessibility label for HTML Icon in the Courseware screens */
 "ACCESSIBILITY_HTML" = "HTML";
 /* Accessibility label for Pause Button in the Video Player */
@@ -64,20 +66,22 @@
 "ACCESSIBILITY_USER_AVATAR" = "Your avatar image";
 /* Accessibility label for Problem Icon in the Courseware screens */
 "ACCESSIBILITY_PROBLEM" = "Problem";
+/* Required text needs to be added for accesibility*/
+"ACCESSIBILITY.REQUIRED_INPUT"="Required";
+/* Optional text needs to be added for accesibility*/
+"ACCESSIBILITY.OPTIONAL_INPUT"="Optional";
 /* Accessibility label for Rewind Button in the Video Player */
 "ACCESSIBILITY_REWIND" = "Rewind";
 /* Call to action for Rewind Button in the Video Player */
 "ACCESSIBILITY_REWIND_HINT" = "Rewinds by 30 seconds.";
 /* Accessibility label for Seek bar in the Video Player */
 "ACCESSIBILITY_SEEK_BAR" = "Seek Bar";
-/* Accessibility label for Select Button on My Videos List Screen */
-"ACCESSIBILITY_SELECT" = "Select";
-/* Accessibility label for Select All Button on My Videos List Screen */
-"ACCESSIBILITY_SELECT_ALL" = "Select All";
 /* Accessibility label for Settings Button in the Video Player */
 "ACCESSIBILITY_SETTINGS" = "Settings";
 /* Call to action for Course content on Home Screen */
 "ACCESSIBILITY_SHOWS_COURSE_CONTENT" = "Double tap to view course content.";
+/* We don't have a accessility trait for dropdown, so we will be achieving dropdown trait through accessibility label */
+"ACCESSIBILITY_DROPDOWN_TRAIT" = "Dropdown.";
 /* Call to action for Opening Dropdown */
 "ACCESSIBILITY_SHOWS_DROPDOWN_HINT" = "Double tap to open dropdown.";
 /* Call to action for Selecting Option */
@@ -124,6 +128,10 @@
 "ACCESSIBILITY.WHATSNEW.HEADER_LABEL"="Version {app_version}, New Features";
 /*Accessibility text for course share button on course dashboard*/
 "ACCESSIBILITY.SHARE_A_COURSE"="Share a course";
+/*Accessibility text for close button*/
+"ACCESSIBILITY.CLOSE_LABEL"="Close";
+/*Accessibility text for profile button*/
+"ACCESSIBILITY.PROFILE_LABEL"="Pofile";
 /* Title of user profile section for user accomplishments (like badges) */
 "ACCOMPLISHMENTS.TITLE" = "Accomplishments";
 /* Default text template when user shares an accomplishment */
@@ -161,7 +169,7 @@
 /* Positive review message */
 "APP_REVIEW.POSITIVE_REVIEW_MESSAGE" = "Tell others what you think of the app by writing a quick review in the app store";
 /* Send feedback message for negative app review */
-"APP_REVIEW.SEND_FEEDBACK" = "Send Feedback?";
+"APP_REVIEW.SEND_FEEDBACK_TITLE" = "Send Feedback?";
 /* Help us improve message for negative app review */
 "APP_REVIEW.HELP_US_IMPROVE" = "Help us improve!";
 /* Maybe later message for positive/negative app review */
@@ -194,8 +202,10 @@
 "COURSE_ANNOUNCEMENTS"="Announcements";
 /* Title of course handouts section */
 "COURSE_HANDOUTS"="Handouts";
+/* Title of resources tab in course dashboardTabBar view */
+"RESOURSES"="Resources";
 /* Title of course important dates screen */
-"COURSEDATES.COURSE_IMPORTANT_DATES_TITLE"="Course Dates and Deadlines";
+"COURSEDATES.COURSE_IMPORTANT_DATES_TITLE"="Important Dates";
 /* Button text for cancelling any action */
 "CANCEL"="Cancel";
 /* Alert explaining charges will apply since the "Wi-fi only" switch was turned off */
@@ -248,6 +258,8 @@
 "COURSE_DETAIL.INVITATION_ONLY" = "Invitation only";
 /* Message shown when there is no course content */
 "COURSEWARE_UNAVAILABLE"="No course content is currently available.";
+/* Message shown when there is no course video */
+"COURSE_VIDEO_UNAVAILABLE"="This course does not include any videos";
 /* Message shown when attempting to display content not available on the app */
 "COURSE_CONTENT_UNKNOWN" = "This interactive component isn't yet available on mobile. \n\n Explore other parts of this course or view this on the web.";
 /* Message shown when there is no course dates */
@@ -259,7 +271,11 @@
 /* Title text for the Courseware section of the course dashboard */
 "DASHBOARD.COURSE_COURSEWARE"="Course";
 /* Text describing the Courseware section within the course dashboard */
-"DASHBOARD.COURSE_COURSE_DETAIL"="Access videos and assignments";
+"DASHBOARD.COURSE_COURSE_DETAIL"="Access course content and assignments";
+/* Title text for the videos section of the course dashboard */
+"DASHBOARD.COURSE_Videos"="Videos";
+/* Text describing the Videos section within the course dashboard */
+"DASHBOARD.COURSE_Videos_DETAIL"="Watch course videos";
 /* Title text for the Discussions section of the course dashboard */
 "DASHBOARD.COURSE_DISCUSSION"="Discussion";
 /* Text describing the Discussions section within the course dashboard */
@@ -269,14 +285,17 @@
 /* Text describing the Handouts section within the course dashboard */
 "DASHBOARD.COURSE_HANDOUTS_DETAIL"="Find important course information";
 /* Title text for the Important dates section of the course dashboard  */
-"DASHBOARD.COURSE_IMPORTANT_DATES"="Important Dates";
+"DASHBOARD.COURSE_IMPORTANT_DATES"="Dates";
 /* Text describing the Important dates section of the course dashboard  */
 "DASHBOARD.COURSE_IMPORTANT_DATES_DETAIL"="Keep track of deadlines and stay on track";
-
+/* Text describing the course due date for same day*/
+"COURSE_DUE_DATE_SAME_DAY"="due today at {due_date} {time_zone}";
+/* Text describing the course due date*/
+"COURSE_DUE_DATE"="due {due_date}";
 /* Label indicated that a course has ended */
-"COURSE_ENDED"="Ended - {end_date}";
+"COURSE_ENDED"="Ended {end_date}";
 /* Label indicating that a course will end */
-"COURSE_ENDING"="Ending - {end_date}";
+"COURSE_ENDING"="Ending {end_date}";
 /* Option to show all different types of course content. Constrasts with 'Show Videos Only'. */
 "COURSE_MODE_FULL"="Show Full Course";
 /* Option to show only video course content. Constrasts with 'Show All Course Content'. */
@@ -333,8 +352,12 @@
 "DOWNLOADS"="Downloads";
 /* Overlay message after user chooses to download a video */
 "DOWNLOADING_1_VIDEO"="Downloading 1 video.";
-/* Title for Edit button on My Videos Screen */
-"EDIT" = "Edit";
+/*Discover in left drawer(used for courses and programs discovery)*/
+"DISCOVER"="Discovery";
+/*Debug option title in tabbar */
+"DEBUG"="Debug";
+/* Error message shown when email address is not properly formatted */
+"ERROR_MESSAGE.INVALID_EMAIL_FORMAT"="Please make sure your e-mail address is formatted correctly and try again.";
 /* Alert message shown when user tries to send an email, but email isn't setup */
 "EMAIL_ACCOUNT_NOT_SET_UP_MESSAGE"="It seems your email client is not set up.";
 /* Alert dialog title shown when user tries to send an email, but email isn't setup */
@@ -414,11 +437,11 @@
 /* Option to sort discussion post list by most votes */
 "MOST_VOTES"="Most Votes";
 /* Screen title showing a user's courses */
-"MY_COURSES"="My Courses";
+"COURSES"="Courses";
 /* Screen title showing a user's settings */
 "MY_SETTINGS"="My Settings";
-/* Screen title showing a user's downloaded videos */
-"MY_VIDEOS" = "My Videos";
+/* Time Label in My Videos section*/
+"MY_VIDEOS_TIME_LABEL" = "NA";
 /* Marked as answer for endorsed responses */
 "MARKED_ANSWER" = "Marked as answer";
 /* Overlay error shown when attempting an action without an internet connection */
@@ -513,8 +536,6 @@
 "PROFILE.LEARNER_HAS_LIMITED_PROFILE" = "This {platform_name} learner is currently sharing a limited profile.";
 /* User has not filled in an "about me" on their profile */
 "PROFILE.NO_BIO" = "No \"About me\" info provided.";
-/* Option to allow for nil setting of a particular field */
-"PROFILE.NO_FIELD" = "No {field_name}";
 /* Text in the picture taker alert to delete the existing image */
 "PROFILE.REMOVE_IMAGE" = "Remove";
 /* Profile screen text indicating that the user is currently only displaying a limited profile */
@@ -573,6 +594,11 @@
 "REGISTRATION_REGISTER_PROMPT"="Register with";
 /* Heading on registration screen allowing users to sign up using external services like Facebook and Google. Will be preceded by text "Sign up with" */
 "REGISTRATION_REGISTER_ALTERNATE_PROMPT"="or register with email";
+/*Title of registration error alert*/
+"REGISTRATION_ERROR_ALERT_TITLE"="Registration Error";
+/* Detailed info message for registration error alert*/
+"REGISTRATION_ERROR_ALERT_MESSAGE"="Update the highlighted fields and try again";
+
 /* Alert dialog title prompting user to enter an email address to reset their password */
 "RESET_PASSWORD_TITLE"="Reset Password";
 /* Alert dialog content prompting user to enter an email address to reset their password */
@@ -616,7 +642,7 @@
 /* Label for posts pinned by Staff */
 "STAFF"="STAFF";
 /* Label for date when course starts */
-"STARTING"="Starting - {start_date}";
+"STARTING"="Starting {start_date}";
 /* Discover Courses button text on the first screen */
 "STARTUP.DISCOVER_COURSES"="Discover Courses";
 /* Explore Subjects button text on the first screen */
@@ -667,6 +693,10 @@
 "USERNAME_PLACEHOLDER" = "User name or e-mail address";
 /*Error message when operation failed with unknow error*/
 "UNKNOWN_ERROR" = "Your action could not be completed.";
+/* Screen title showing a user's account */
+"USER_ACCOUNT"="Account";
+/* Button title for profile view in account*/
+"USER_ACCOUNT.PROFILE"= "Profile";
 /* Text shown to display the current version number. Environment is a server name like "prod", "dev", stage" and may be empty. For example "Version 1.2.3 Prod" */
 "VERSION_DISPLAY" = "Version {number} {environment}";
 /* Error shown when video download fails */
@@ -715,11 +745,17 @@
 "VERSION_UPGRADE_OUT_DATED_LOGIN_MESSAGE" = "Your version of the app is no longer supported. Update to the latest version to login.";
 /*New version available without deadline message*/
 "VERSION_UPGRADE.NEW_VERSION_AVAILABLE" = "A new version of the app is available.";
+/*Video player remaining time default value*/
+"VIDEO_PLAYER_DEFAULT_REMAINING_TIME" = "0:00/0:00";
 /* Overlay shown after a network request has started, telling the user to wait for the response */
 "WAITING_FOR_RESPONSE"="Please wait...";
 /* Header of 'whats new screen'*/
 "WHATS_NEW.HEADER_TEXT"="Version {app_version} New Features";
 /*Whats new screen done button title*/
 "WHATS_NEW.DONE"="Done";
+/*Title for wifi only switch at Settings screen*/
+"WIFI_ONLY_TITLE" = "Wi-fi only download";
+/*Detail message for wifi only switch at Settings screen*/
+"WIFI_ONLY_DETAIL_MESSAGE" = "Only download content when Wi-Fi is turned on";
 /* Alert dialog button title to confirm an action */
 "YES"="Yes";

@@ -43,7 +43,7 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
             self.dataModel = dataModel
         }
         else {
-            self.dataModel = WhatsNewDataModel(environment: environment as? RouterEnvironment)
+            self.dataModel = WhatsNewDataModel(environment: environment as? RouterEnvironment, version: Bundle.main.oex_buildVersionString())
         }
         titleString = title ?? Strings.WhatsNew.headerText(appVersion: Bundle.main.oex_buildVersionString())
         pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -56,10 +56,10 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
     }
     
     static func canShowWhatsNew(environment: RouterEnvironment?) -> Bool {
-        let appVersion = Bundle.main.oex_shortVersionString()
-        let savedAppVersion = environment?.interface?.getSavedAppVersionForWhatsNew()
-        let versionDiff = (Float(appVersion) ?? 0.0) - (Float(savedAppVersion ?? "") ?? 0.0)
-        return (versionDiff > 0 && environment?.config.isWhatsNewEnabled ?? false)
+        let appVersion = Version(version: Bundle.main.oex_buildVersionString())
+        let savedAppVersion = Version(version: environment?.interface?.getSavedAppVersionForWhatsNew() ?? "")
+        let validDiff = appVersion.isNMinorVersionsDiff(otherVersion: savedAppVersion, minorVersionDiff: 1)
+        return (validDiff && environment?.config.isWhatsNewEnabled ?? false)
     }
     
     override func viewDidLoad() {
@@ -87,7 +87,6 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
     private func configureViews() {
         view.backgroundColor = environment.styles.primaryBaseColor()
         doneButton.setAttributedTitle(doneButtonStyle.attributedString(withText: Strings.WhatsNew.done), for: .normal)
-        doneButton.isHidden = true
         headerLabel.accessibilityLabel = Strings.Accessibility.Whatsnew.headerLabel(appVersion: Bundle.main.oex_buildVersionString())
         closeButton.accessibilityLabel = Strings.Accessibility.Whatsnew.closeLabel
         closeButton.accessibilityHint = Strings.Accessibility.closeHint
@@ -96,6 +95,7 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
         containerView.addSubview(headerLabel)
         containerView.addSubview(closeButton)
         containerView.addSubview(doneButton)
+        showDoneButtonAtLastScreen()
         
         headerLabel.attributedText = headerStyle.attributedString(withText: titleString)
         
@@ -169,6 +169,11 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
         return contentController(withItem: dataModel.fields?.first, direction: .forward)
     }
     
+    private func showDoneButtonAtLastScreen() {
+        let totalScreens = dataModel.fields?.count ?? 0
+        doneButton.isHidden = currentPageIndex != totalScreens - 1
+    }
+    
     //MARK:- Analytics 
     
     private func logScreenEvent() {
@@ -203,7 +208,6 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
                 return contentController(withItem: item, direction: .reverse)
             }
         }
-        
         return nil
     }
     
@@ -213,8 +217,6 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
                 return contentController(withItem: item, direction: .forward)
             }
         }
-        
-        doneButton.isHidden = false
         return nil
     }
     
@@ -223,7 +225,7 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
         if let controller = pageViewController.viewControllers?.last as? WhatsNewContentController, finished == true {
             currentPageIndex = dataModel.itemIndex(item: controller.whatsNew)
         }
-        
+        showDoneButtonAtLastScreen()
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {

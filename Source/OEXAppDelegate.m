@@ -12,7 +12,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import <NewRelicAgent/NewRelic.h>
-#import <SEGAnalytics.h>
+#import <Analytics/SEGAnalytics.h>
+#import <Branch/Branch.h>
 
 #import "OEXAppDelegate.h"
 #import "KPNService.h"
@@ -80,7 +81,7 @@
     [self.environment.session performMigrations];
 
     [self.environment.router openInWindow:self.window];
-    
+
     if (self.environment.config.pushNotificationsEnabled) {
 #ifdef __IPHONE_10_0
         // [UNUserNotificationCenter currentNotificationCenter].delegate = self;
@@ -98,6 +99,8 @@
 #endif
     }
 
+    [self configureFabricKits:launchOptions];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -125,6 +128,42 @@
     }
    
     return handled;
+}
+
+// Respond to URI scheme links
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    // pass the url to the handle deep link call
+    BOOL handled = false;
+    if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
+        handled = [[Branch getInstance] application:app openURL:url options:options];
+        if (handled) {
+            return handled;
+        }
+    }
+    
+    if (self.environment.config.facebookConfig.enabled) {
+        handled = [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options];
+        if (handled) {
+            return handled;
+        }
+    }
+    
+    if (self.environment.config.googleConfig.enabled){
+        handled = [[GIDSignIn sharedInstance] handleURL:url
+                                   sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                          annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+    }
+    
+    return handled;
+}
+
+// Respond to Universal Links
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+    
+    if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
+        return [[Branch getInstance] continueUserActivity:userActivity];
+    }
+    return NO;
 }
 
 #pragma mark Push Notifications
@@ -180,7 +219,7 @@
     [self addCompletionHandler:completionHandler forSession:identifier];
 }
 
-- (void)addCompletionHandler:(void (^)())handler forSession:(NSString*)identifier {
+- (void)addCompletionHandler:(void (^)(void))handler forSession:(NSString*)identifier {
     if(!_dictCompletionHandler) {
         _dictCompletionHandler = [[NSMutableDictionary alloc] init];
     }
@@ -242,6 +281,18 @@
         [Fabric with:@[CrashlyticsKit]];
     }
     
+}
+
+- (void) configureFabricKits:(NSDictionary*) launchOptions {
+    if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
+        [Branch setBranchKey:self.environment.config.fabricConfig.kits.branchConfig.branchKey];
+        if ([Branch branchKey]){
+            [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+                // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
+                // params will be empty if no data found
+            }];
+        }
+    }
 }
 
 @end

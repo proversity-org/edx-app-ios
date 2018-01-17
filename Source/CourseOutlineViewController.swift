@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+
+public enum CourseOutlineMode {
+    case Full
+    case Video
+}
+
 public class CourseOutlineViewController :
     OfflineSupportViewController,
     CourseBlockViewController,
@@ -16,10 +22,11 @@ public class CourseOutlineViewController :
     CourseContentPageViewControllerDelegate,
     CourseLastAccessedControllerDelegate,
     PullRefreshControllerDelegate,
-    LoadStateViewReloadSupport
+    LoadStateViewReloadSupport,
+    InterfaceOrientationOverriding
 {
-    public typealias Environment = OEXAnalyticsProvider & DataManagerProvider & OEXInterfaceProvider & NetworkManagerProvider & ReachabilityProvider & OEXRouterProvider
-
+    public typealias Environment = OEXAnalyticsProvider & DataManagerProvider & OEXInterfaceProvider & NetworkManagerProvider & ReachabilityProvider & OEXRouterProvider & OEXConfigProvider
+    
     
     private var rootID : CourseBlockID?
     private var environment : Environment
@@ -34,7 +41,7 @@ public class CourseOutlineViewController :
     private let loadController : LoadStateViewController
     private let insetsController : ContentInsetsController
     private var lastAccessedController : CourseLastAccessedController
-    
+    private var courseOutlineMode: CourseOutlineMode
     
     /// Strictly a test variable used as a trigger flag. Not to be used out of the test scope
     fileprivate var t_hasTriggeredSetLastAccessed = false
@@ -47,29 +54,27 @@ public class CourseOutlineViewController :
         return courseQuerier.courseID
     }
     
-    public init(environment: Environment, courseID : String, rootID : CourseBlockID?) {
+    public init(environment: Environment, courseID : String, rootID : CourseBlockID?, forMode mode: CourseOutlineMode?) {
         self.rootID = rootID
         self.environment = environment
         courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID: courseID)
         
         loadController = LoadStateViewController()
         insetsController = ContentInsetsController()
+        courseOutlineMode = mode ?? .Full
+        tableController = CourseOutlineTableController(environment: self.environment, courseID: courseID, forMode: courseOutlineMode)
+        lastAccessedController = CourseLastAccessedController(blockID: rootID , dataManager: environment.dataManager, networkManager: environment.networkManager, courseQuerier: courseQuerier, forMode: courseOutlineMode)
         
-        tableController = CourseOutlineTableController(environment : self.environment, courseID: courseID)
-        
-        lastAccessedController = CourseLastAccessedController(blockID: rootID , dataManager: environment.dataManager, networkManager: environment.networkManager, courseQuerier: courseQuerier)
-        
-        super.init(env: environment)
+        super.init(env: environment, shouldShowOfflineSnackBar: false)
         
         lastAccessedController.delegate = self
         
         addChildViewController(tableController)
         tableController.didMove(toParentViewController: self)
         tableController.delegate = self
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
-
+    
+    
     public required init?(coder aDecoder: NSCoder) {
         // required by the compiler because UIViewController implements NSCoding,
         // but we don't actually want to serialize these things
@@ -79,6 +84,7 @@ public class CourseOutlineViewController :
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         view.backgroundColor = OEXStyles.shared().standardBackgroundColor()
         view.addSubview(tableController.view)
         
@@ -94,22 +100,9 @@ public class CourseOutlineViewController :
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        lastAccessedController.loadLastAccessed()
+        lastAccessedController.loadLastAccessed(forMode: courseOutlineMode)
         lastAccessedController.saveLastAccessed()
-        let stream = joinStreams(courseQuerier.rootID, courseQuerier.blockWithID(id: blockID))
-        stream.extendLifetimeUntilFirstResult (success :
-            { (rootID, block) in
-                if self.blockID == rootID || self.blockID == nil {
-                    self.environment.analytics.trackScreen(withName: OEXAnalyticsScreenCourseOutline, courseID: self.courseID, value: nil)
-                }
-                else {
-                    self.environment.analytics.trackScreen(withName: OEXAnalyticsScreenSectionOutline, courseID: self.courseID, value: block.internalName)
-                }
-            },
-            failure: {
-                Logger.logError("ANALYTICS", "Unable to load block: \($0)")
-            }
-        )
+        loadStreams()
     }
     
     override public var shouldAutorotate: Bool {
@@ -117,7 +110,7 @@ public class CourseOutlineViewController :
     }
     
     override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
+        return .allButUpsideDown
     }
     
     override public func updateViewConstraints() {
@@ -139,7 +132,32 @@ public class CourseOutlineViewController :
     }
     
     private func setupNavigationItem(block : CourseBlock) {
-        self.navigationItem.title = block.displayName
+        navigationItem.title = (courseOutlineMode == .Video && rootID == nil) ? Strings.Dashboard.courseVideos : block.displayName
+    }
+    
+    private func loadStreams() {
+        loadController.state = .Initial
+        let stream = joinStreams(courseQuerier.rootID, courseQuerier.blockWithID(id: blockID))
+        stream.extendLifetimeUntilFirstResult (success :
+            { [weak self] (rootID, block) in
+                if self?.blockID == rootID || self?.blockID == nil {
+                    if self?.courseOutlineMode == .Full {
+                        self?.environment.analytics.trackScreen(withName: OEXAnalyticsScreenCourseOutline, courseID: self?.courseID, value: nil)
+                    }
+                    else {
+                        self?.environment.analytics.trackScreen(withName: AnalyticsScreenName.CourseVideos.rawValue, courseID: self?.courseID, value: nil)
+                    }
+                }
+                else {
+                    self?.environment.analytics.trackScreen(withName: OEXAnalyticsScreenSectionOutline, courseID: self?.courseID, value: block.internalName)
+                    self?.tableController.hideTableHeaderView()
+                }
+            },
+                                               failure: {
+                                                Logger.logError("ANALYTICS", "Unable to load block: \($0)")
+        }
+        )
+        reload()
     }
     
     private func reload() {
@@ -147,7 +165,7 @@ public class CourseOutlineViewController :
     }
     
     private func emptyState() -> LoadState {
-        return LoadState.empty(icon: .UnknownError, message : Strings.coursewareUnavailable)
+        return LoadState.empty(icon: .UnknownError, message : (courseOutlineMode == .Video) ? Strings.courseVideoUnavailable : Strings.coursewareUnavailable)
     }
     
     private func showErrorIfNecessary(error : NSError) {
@@ -159,7 +177,7 @@ public class CourseOutlineViewController :
     private func addListeners() {
         headersLoader.backWithStream(blockIDStream.transform {[weak self] blockID in
             if let owner = self {
-                return owner.courseQuerier.childrenOfBlockWithID(blockID: blockID)
+                return owner.courseQuerier.childrenOfBlockWithID(blockID: blockID, forMode: owner.courseOutlineMode)
             }
             else {
                 return OEXStream<CourseOutlineQuerier.BlockGroup>(error: NSError.oex_courseContentLoadError())
@@ -168,7 +186,7 @@ public class CourseOutlineViewController :
         rowsLoader.backWithStream(headersLoader.transform {[weak self] headers in
             if let owner = self {
                 let children = headers.children.map {header in
-                    return owner.courseQuerier.childrenOfBlockWithID(blockID: header.blockID)
+                    return owner.courseQuerier.childrenOfBlockWithID(blockID: header.blockID, forMode: owner.courseOutlineMode)
                 }
                 return joinStreams(children)
             }
@@ -180,33 +198,33 @@ public class CourseOutlineViewController :
         self.blockIDStream.backWithStream(OEXStream(value: rootID))
         
         headersLoader.listen(self,
-            success: {[weak self] headers in
-                self?.setupNavigationItem(block: headers.block)
+                             success: {[weak self] headers in
+                                self?.setupNavigationItem(block: headers.block)
             },
-            failure: {[weak self] error in
-                self?.showErrorIfNecessary(error: error)
+                             failure: {[weak self] error in
+                                self?.showErrorIfNecessary(error: error)
             }
         )
         
         rowsLoader.listen(self,
-            success : {[weak self] groups in
-                if let owner = self {
-                    owner.tableController.groups = groups
-                    owner.tableController.tableView.reloadData()
-                    owner.loadController.state = groups.count == 0 ? owner.emptyState() : .Loaded
-                }
+                          success : {[weak self] groups in
+                            if let owner = self {
+                                owner.tableController.groups = groups
+                                owner.tableController.tableView.reloadData()
+                                owner.loadController.state = groups.count == 0 ? owner.emptyState() : .Loaded
+                            }
             },
-            failure : {[weak self] error in
-                self?.showErrorIfNecessary(error: error)
+                          failure : {[weak self] error in
+                            self?.showErrorIfNecessary(error: error)
             },
-            finally: {[weak self] in
-                if let active = self?.rowsLoader.active, !active {
-                    self?.tableController.refreshController.endRefreshing()
-                }
+                          finally: {[weak self] in
+                            if let active = self?.rowsLoader.active, !active {
+                                self?.tableController.refreshController.endRefreshing()
+                            }
             }
         )
     }
-
+    
     // MARK: Outline Table Delegate
     
     func outlineTableControllerChoseShowDownloads(controller: CourseOutlineTableController) {
@@ -214,7 +232,7 @@ public class CourseOutlineViewController :
     }
     
     private func canDownloadVideo() -> Bool {
-        let hasWifi = environment.reachability.isReachableViaWiFi() 
+        let hasWifi = environment.reachability.isReachableViaWiFi()
         let onlyOnWifi = environment.dataManager.interface?.shouldDownloadOnlyOnWifi ?? false
         return !onlyOnWifi || hasWifi
     }
@@ -233,10 +251,10 @@ public class CourseOutlineViewController :
         courseQuerier.parentOfBlockWithID(blockID: block.blockID).listenOnce(self, success:
             { parentID in
                 analytics.trackSubSectionBulkVideoDownload(parentID, subsection: block.blockID, courseID: courseID, videoCount: videos.count)
-            },
-            failure: {error in
-                Logger.logError("ANALYTICS", "Unable to find parent of block: \(block). Error: \(error.localizedDescription)")
-            }
+        },
+                                                                             failure: {error in
+                                                                                Logger.logError("ANALYTICS", "Unable to find parent of block: \(block). Error: \(error.localizedDescription)")
+        }
         )
     }
     
@@ -252,7 +270,12 @@ public class CourseOutlineViewController :
     }
     
     func outlineTableController(controller: CourseOutlineTableController, choseBlock block: CourseBlock, withParentID parent : CourseBlockID) {
-        self.environment.router?.showContainerForBlockWithID(blockID: block.blockID, type:block.displayType, parentID: parent, courseID: courseQuerier.courseID, fromController:self)
+        self.environment.router?.showContainerForBlockWithID(blockID: block.blockID, type:block.displayType, parentID: parent, courseID: courseQuerier.courseID, fromController:self, forMode: courseOutlineMode)
+    }
+    
+    func outlineTableControllerReload(controller: CourseOutlineTableController) {
+        courseQuerier.needsRefresh = true
+        reload()
     }
     
     //MARK: PullRefreshControllerDelegate
@@ -298,11 +321,15 @@ extension CourseOutlineViewController {
     public func t_populateLastAccessedItem(item : CourseLastAccessed) -> Bool {
         self.tableController.showLastAccessedWithItem(item: item)
         return self.tableController.tableView.tableHeaderView != nil
-
+        
     }
     
     public func t_didTriggerSetLastAccessed() -> Bool {
         return t_hasTriggeredSetLastAccessed
+    }
+    
+    public func t_tableView() -> UITableView {
+        return self.tableController.tableView
     }
     
 }

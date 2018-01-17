@@ -47,10 +47,7 @@ extension OEXConfig {
     
     var isRegistrationEnabled: Bool {
         // By default registration is enabled
-        if let _ = properties["REGISTRATION_ENABLED"] {
-            return bool(forKey: "REGISTRATION_ENABLED")
-        }
-        return true
+        return bool(forKey: "REGISTRATION_ENABLED", defaultValue: true)
     }
     
     var isFirebaseEnabled: Bool {
@@ -61,7 +58,7 @@ extension OEXConfig {
         
         return false
     }
-    
+        
     var isVideoTranscriptEnabled : Bool {
         return bool(forKey: "VIDEO_TRANSCRIPT_ENABLED")
     }
@@ -74,11 +71,20 @@ extension OEXConfig {
         return bool(forKey: "WHATS_NEW_ENABLED")
     }
     
-    var isMyVideosEnabled: Bool {
-        return bool(forKey: "MY_VIDEOS_ENABLED")
+    var isCourseVideosEnabled: Bool {
+        // By default course videos are enabled
+        return bool(forKey: "COURSE_VIDEOS_ENABLED", defaultValue: true)
     }
     
-    var isCourseVideosEnabled: Bool {
-        return bool(forKey: "COURSE_VIDEOS_ENABLED")
+    var isUsingVideoPipeline: Bool {
+        return bool(forKey: "USING_VIDEO_PIPELINE")
+    }
+  
+    var isAnnouncementsEnabled: Bool {
+        return bool(forKey: "ANNOUNCEMENTS_ENABLED")
+    }
+    
+    var isTabLayoutEnabled: Bool {
+        return bool(forKey: "TAB_LAYOUTS_ENABLED")
     }
 }

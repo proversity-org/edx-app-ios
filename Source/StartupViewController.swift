@@ -128,7 +128,7 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
     //MARK: - Actions
     func showCourses() {
         let bottomBar = BottomBarView(environment: environment)
-        environment.router?.showCourseCatalog(bottomBar: bottomBar)
+        environment.router?.showCourseCatalog(fromController: nil, bottomBar: bottomBar)
     }
     
     func exploreSubjects() {
@@ -174,7 +174,7 @@ private class BottomBarView: UIView, NSCopying {
             }, for: .touchUpInside, analyticsEvent: signInEvent)
         
         registerButton.setTitle(Strings.registerText, for: .normal)
-        let signUpEvent = OEXAnalytics.registerEvent()
+        let signUpEvent = OEXAnalytics.registerEvent(name: AnalyticsEventName.UserRegistrationClick.rawValue, displayName: AnalyticsDisplayName.CreateAccount.rawValue)
         registerButton.oex_addAction({ [weak self] _ in
             self?.showRegistration()
             }, for: .touchUpInside, analyticsEvent: signUpEvent)
