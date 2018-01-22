@@ -31,6 +31,7 @@ class edXUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCUIApplication().navigationBars["Courses"].buttons["Account"].tap()
         
         let app = XCUIApplication()
         snapshot("splash")
@@ -48,22 +49,24 @@ class edXUITests: XCTestCase {
         expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
         if (app.navigationBars["Courses"].exists) {
-            let accountButton = app.navigationBars["Courses"].buttons["Account"]
-            accountButton.tap()
-            let closeButton = app.navigationBars["Account"].buttons["Close"]
-            closeButton.tap()
-            accountButton.tap()
-            closeButton.tap()
-            accountButton.tap()
-            closeButton.tap()
-            snapshot("courses")
-            accountButton.tap()
-            snapshot("profile")
-            expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
-            waitForExpectations(timeout: 5, handler: nil)
-            app.tables.staticTexts["Logout"].tap()
-            userFieldTextField.tap()
-            userFieldTextField.typeText("")
+            if (app.navigationBars["Courses"].buttons["Account"].exists) {
+                let accountButton = app.navigationBars["Courses"].buttons["Account"]
+                accountButton.tap()
+                let closeButton = app.navigationBars["Account"].buttons["Close"]
+                closeButton.tap()
+                accountButton.tap()
+                closeButton.tap()
+                accountButton.tap()
+                closeButton.tap()
+                snapshot("courses")
+                accountButton.tap()
+                snapshot("profile")
+                expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
+                waitForExpectations(timeout: 5, handler: nil)
+                app.tables.staticTexts["Logout"].tap()
+                userFieldTextField.tap()
+                userFieldTextField.typeText("")
+            }
         }
     }
 }
