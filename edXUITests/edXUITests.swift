@@ -32,10 +32,13 @@ class edXUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
+        XCUIApplication().buttons["login"].tap()
+        
         let app = XCUIApplication()
         snapshot("splash")
         app.buttons["Already have an account? Sign in"].tap()
         snapshot("login")
+        
         let userFieldTextField = app.textFields["User name or e-mail address"]
         userFieldTextField.tap()
         userFieldTextField.typeText("jagonzalr")
@@ -43,21 +46,21 @@ class edXUITests: XCTestCase {
         passwordFieldSecureTextField.tap()
         passwordFieldSecureTextField.typeText("Fender182")
         app.buttons["Sign In"].tap()
-        expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["My Courses"], handler: nil)
+        
+        expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
-        if (app.navigationBars["My Courses"].exists) {
-            app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
-            app.cells.buttons["MY COURSES"].tap()
-            app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
-            app.cells.buttons["MY COURSES"].tap()
-            app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
-            app.cells.buttons["MY COURSES"].tap()
-            app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
-            app.cells.buttons["MY COURSES"].tap()
+        if (app.navigationBars["Courses"].exists) {
+            let accountButton = app.navigationBars["Courses"].buttons["Account"]
+            accountButton.tap()
+            let closeButton = app.navigationBars["Account"].buttons["Close"]
+            closeButton.tap()
+            accountButton.tap()
+            closeButton.tap()
+            accountButton.tap()
+            closeButton.tap()
             snapshot("courses")
-            app.navigationBars["My Courses"].buttons["Navigation Menu"].tap()
+            accountButton.tap()
             snapshot("profile")
-            app.buttons["ACCOUNT"].tap()
             expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
             waitForExpectations(timeout: 5, handler: nil)
             app.tables.staticTexts["Logout"].tap()
