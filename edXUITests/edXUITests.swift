@@ -32,11 +32,10 @@ class edXUITests: XCTestCase {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        XCUIApplication().buttons["login"].tap()
         
         let app = XCUIApplication()
         snapshot("splash")
-        app.buttons["Already have an account? Sign in"].tap()
+        app.buttons["login"].tap()
         snapshot("login")
         
         let userFieldTextField = app.textFields["User name or e-mail address"]
