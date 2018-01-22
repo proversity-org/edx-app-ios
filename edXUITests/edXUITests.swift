@@ -31,7 +31,6 @@ class edXUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        XCUIApplication().navigationBars["Courses"].buttons["Account"].tap()
         
         let app = XCUIApplication()
         snapshot("splash")
