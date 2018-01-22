@@ -46,4 +46,4 @@ deployment:
     branch: master
     commands:
       - python config_project.py "sys,Systematic - CMMI5 certified,4.1,2.12,b598b7ca-75b8-475d-abb0-9ef4b0f3a1ca,9449a15f-c49a-4db7-9d2e-4f5e116f81b0"
-      - fastlane screenshots
+      - fastlane beta
