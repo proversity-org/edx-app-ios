@@ -116,7 +116,7 @@ extension OEXRouter {
     }
     
     @objc(showMyCoursesAnimated:pushingCourseWithID:) func showMyCourses(animated: Bool = true, pushingCourseWithID courseID: String? = nil) {
-        let controller = EnrolledCoursesViewController(environment: self.environment)
+        let controller = EnrolledTabBarViewController(environment: self.environment)
         showContentStack(withRootController: controller, animated: animated)
         if let courseID = courseID {
             self.showCourseWithID(courseID: courseID, fromController: controller, animated: false)
@@ -271,7 +271,8 @@ extension OEXRouter {
             else {
                 showContentStack(withRootController: controller, animated: true)
             }
-            
+        } else if self.environment.config.isTabLayoutEnabled {
+            fromController?.tabBarController?.selectedIndex = 1
         } else {
             showControllerFromStartupScreen(controller: controller)
         }
