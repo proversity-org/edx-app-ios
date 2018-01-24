@@ -45,5 +45,5 @@ deployment:
   beta:
     branch: no-branch
     commands:
-      - python config_project.py "pro,Proversity,0,2.12,devUUID,storeUUID"
+      - python setup_certificates.py pro
       - fastlane beta
