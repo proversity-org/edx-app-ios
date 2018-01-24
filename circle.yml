@@ -45,5 +45,5 @@ deployment:
   beta:
     branch: no-branch
     commands:
-      - python setup_certificates.py pro
+      - python setup_certificates.py edx
       - fastlane beta
