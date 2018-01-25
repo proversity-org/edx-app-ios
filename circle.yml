@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - no-branch
+      - master
       
 machine:
   xcode:
@@ -43,7 +43,7 @@ test:
 
 deployment:
   beta:
-    branch: no-branch
+    branch: master
     commands:
       - python config_project.py "you,Young Enterprise,0,2.12,,"
       - python setup_certificates.py you
