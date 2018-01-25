@@ -87,6 +87,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.otf</string>
+		<string>DubaiBold.ttf</string>
+		<string>DubaiLight.ttf</string>
+		<string>DubaiMedium.ttf</string>
+		<string>DubaiRegular.ttf</string>
 		<string>OpenSans-Italic.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-Semibold.ttf</string>
