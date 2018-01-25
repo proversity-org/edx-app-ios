@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - no-branch
+      - master
       
 machine:
   xcode:
@@ -23,7 +23,7 @@ dependencies:
     - sudo gem install fastlane
     - ./gradlew dependencies --stacktrace --info
   post:
-    - git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch ./deployment
+    - git clone git@github.com:proversity-org/edx-app-ios-config.git --branch proversity/alj --single-branch ./deployment
     - cp -R deployment/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
     - cp -R deployment/assets/app_icons/ Source/Resources/Icons
     - cp -R deployment/assets/logos/ Source/Resources/Images
@@ -43,7 +43,7 @@ test:
 
 deployment:
   beta:
-    branch: no-branch
+    branch: master
     commands:
-      - python config_project.py "pro,Proversity,0,2.12,devUUID,storeUUID"
+      - python config_project.py "alj,Africa Legal Jobs,6.2,2.12,42f23ba2-affc-416c-9caa-3a0285f2e4de,41851413-2f1e-4fa4-aflj_appstore6c-cc556a707118"
       - fastlane beta
