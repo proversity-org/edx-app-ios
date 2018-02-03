@@ -134,11 +134,9 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             case .Logout:
                 OEXFileUtility.nukeUserPIIData()
                 if (environment.config.isTabLayoutEnabled) {
-                    self.dismiss(animated: true, completion: {
-                        self.environment.router?.logout()
-                    })
+                    dismiss(animated: true, completion: { [weak self] in self?.environment.router?.logout() })
                 } else {
-                    self.environment.router?.logout()
+                    environment.router?.logout()
                 }
             }
         }
