@@ -65,7 +65,7 @@ extension OEXRouter {
     func showContainerForBlockWithID(blockID : CourseBlockID?, type : CourseBlockDisplayType, parentID : CourseBlockID?, courseID : CourseBlockID, fromController controller: UIViewController, forMode mode: CourseOutlineMode? = .full) {
         switch type {
         case .Outline:
-            let outlineController = controllerForBlockWithID(blockID: blockID, type: type, courseID: courseID, forMode: mode, jumpToLastAccessedModule: environment.config.isJumpToLastAccessedModuleEnabled)
+            let outlineController = controllerForBlockWithID(blockID: blockID, type: type, courseID: courseID, forMode: mode)
             controller.navigationController?.pushViewController(outlineController, animated: true)
         case .Unit:
             let outlineController = controllerForBlockWithID(blockID: blockID, type: type, courseID: courseID, forMode: mode)
@@ -92,7 +92,7 @@ extension OEXRouter {
     private func controllerForBlockWithID(blockID : CourseBlockID?, type : CourseBlockDisplayType, courseID : String, forMode mode: CourseOutlineMode? = .full) -> UIViewController {
         switch type {
             case .Outline:
-                let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID, forMode: mode, jumpToLastAccessedModule: jumpToLastAccessedModule)
+                let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID, forMode: mode)
                 return outlineController
         case .Unit:
             return unitControllerForCourseID(courseID: courseID, blockID: blockID, initialChildID: nil, forMode: mode)
