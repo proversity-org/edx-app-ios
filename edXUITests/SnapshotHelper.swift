@@ -5,14 +5,12 @@
 //  Created by Felix Krause on 10/8/15.
 //  Copyright © 2015 Felix Krause. All rights reserved.
 //
-
 // -----------------------------------------------------
 // IMPORTANT: When modifying this file, make sure to
 //            increment the version number at the very
 //            bottom of the file to notify users about
 //            the new SnapshotHelper.swift
 // -----------------------------------------------------
-
 import Foundation
 import XCTest
 
@@ -58,6 +56,7 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
     }
 }
 
+@objcMembers
 open class Snapshot: NSObject {
     static var app: XCUIApplication!
     static var cacheDirectory: URL!
@@ -127,10 +126,8 @@ open class Snapshot: NSObject {
             waitForLoadingIndicatorToDisappear(within: timeout)
         }
 
-        print("snapshot: \(name)") // more information about this, check out https://github.com/fastlane/fastlane/tree/master/snapshot#how-does-it-work
-
+        print("snapshot: \(name)") // more information about this, check out https://docs.fastlane.tools/actions/snapshot/#how-does-it-work
         sleep(1) // Waiting for the animation to be finished (kind of)
-
         #if os(OSX)
             XCUIApplication().typeKey(XCUIKeyboardKeySecondaryFn, modifierFlags: [])
         #else
@@ -165,7 +162,7 @@ open class Snapshot: NSObject {
                 throw SnapshotError.cannotDetectUser
             }
 
-            guard let usersDir =  FileManager.default.urls(for: .userDirectory, in: .localDomainMask).first else {
+            guard let usersDir = FileManager.default.urls(for: .userDirectory, in: .localDomainMask).first else {
                 throw SnapshotError.cannotFindHomeDirectory
             }
 
@@ -242,4 +239,4 @@ private extension CGFloat {
 
 // Please don't remove the lines below
 // They are used to detect outdated configuration files
-// SnapshotHelperVersion [1.7]
+// SnapshotHelperVersion [1.8]
