@@ -5,7 +5,7 @@ general:
       
 machine:
   xcode:
-    version: 9.2.0
+    version: 8.3.2
   environment:
     XCODE_WORKSPACE: edX.xcworkspace
     XCODE_SCHEME: edX
