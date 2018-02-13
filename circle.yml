@@ -29,6 +29,7 @@ dependencies:
     - cp -R deployment/assets/logos/ Source/Resources/Images
     - cp -R deployment/assets/splash_screens/ Source/Resources/Splash
     - cp -R deployment/assets/images/ Source/Resources/Images
+    - cp -R deployment/assets/iTunesArtwork@2x.png Source/Resources/Images
     - cp -R deployment/custom_config custom_config
     - cp -R deployment/default_config/ default_config
     - cp -R deployment/fastlane fastlane
