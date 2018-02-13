@@ -135,6 +135,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>CFBundleIconName</key>
-	<string>iTunesArtwork</string>
+	<string>iTunesArtwork.png</string>
 </dict>
 </plist>
