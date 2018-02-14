@@ -39,6 +39,7 @@ dependencies:
     - cp -R deployment/setup_certificates.py setup_certificates.py
     - cp -R deployment/assets/iTunesArtwork@2x.png edX/AppIcon.appiconset
     - cp -R deployment/assets/app_icons/ edX/AppIcon.appiconset
+    - find . -name "edX/AppIcon.appiconset/iTunesArtwork@2x.png" -exec convert "{}" -alpha off "{}"
 
 test:
   override:
