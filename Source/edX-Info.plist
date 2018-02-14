@@ -134,7 +134,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>CFBundleIconName</key>
-	<string>iTunesArtwork.png</string>
 </dict>
 </plist>
