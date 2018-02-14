@@ -37,6 +37,8 @@ dependencies:
     - cp -R deployment/config_project.py config_project.py
     - cp -R deployment/fonts.json Source/Resources/Fonts
     - cp -R deployment/setup_certificates.py setup_certificates.py
+    - cp -R deployment/assets/iTunesArtwork@2x.png edX/AppIcon.appiconset
+    - cp -R deployment/assets/app_icons/ edX/AppIcon.appiconset
 
 test:
   override:
