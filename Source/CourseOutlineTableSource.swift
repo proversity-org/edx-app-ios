@@ -305,7 +305,6 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
             courseCard.snp_remakeConstraints { (make) in
                 let screenWidth = UIScreen.main.bounds.size.width
                 var height: CGFloat = 0
-
                 if environment.config.isTabLayoutEnabled {
                     let screenHeight = UIScreen.main.bounds.size.height
                     let halfScreenHeight = screenHeight / 2.0
