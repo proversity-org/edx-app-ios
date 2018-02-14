@@ -5,12 +5,14 @@
 //  Created by Felix Krause on 10/8/15.
 //  Copyright © 2015 Felix Krause. All rights reserved.
 //
+
 // -----------------------------------------------------
 // IMPORTANT: When modifying this file, make sure to
 //            increment the version number at the very
 //            bottom of the file to notify users about
 //            the new SnapshotHelper.swift
 // -----------------------------------------------------
+
 import Foundation
 import XCTest
 
@@ -127,7 +129,9 @@ open class Snapshot: NSObject {
         }
 
         print("snapshot: \(name)") // more information about this, check out https://docs.fastlane.tools/actions/snapshot/#how-does-it-work
+
         sleep(1) // Waiting for the animation to be finished (kind of)
+
         #if os(OSX)
             XCUIApplication().typeKey(XCUIKeyboardKeySecondaryFn, modifierFlags: [])
         #else
