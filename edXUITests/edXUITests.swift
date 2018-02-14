@@ -56,8 +56,6 @@ class edXUITests: XCTestCase {
                 snapshot("courses")
                 app.navigationBars["Account"].buttons["Close"].tap()
                 snapshot("profile")
-                expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
-                waitForExpectations(timeout: 5, handler: nil)
                 app.tables.staticTexts["Logout"].tap()
                 app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.tap()
                 app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.typeText("")
