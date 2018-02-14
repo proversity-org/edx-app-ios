@@ -34,13 +34,13 @@ class edXUITests: XCTestCase {
         
         let app = XCUIApplication()
         snapshot("splash")
-        app/*@START_MENU_TOKEN@*/.buttons["login"]/*[[".otherElements[\"splash-screen\"]",".buttons[\"Already have an account? Sign in\"]",".buttons[\"login\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.otherElements["splash-screen"].buttons["Already have an account? Sign in"]/*[[".otherElements[\"splash-screen\"]",".buttons[\"Already have an account? Sign in\"]",".buttons[\"login\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[2,1]]@END_MENU_TOKEN@*/.tap()
         snapshot("login")
-        app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.typeText("jagonzalr")
-        app/*@START_MENU_TOKEN@*/.secureTextFields["password-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.secureTextFields["password-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.typeText("Fender182")
-        app/*@START_MENU_TOKEN@*/.buttons["Sign In"]/*[[".otherElements[\"login-screen\"]",".scrollViews.buttons[\"Sign In\"]",".buttons[\"Sign In\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[3,2,1]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[3,2,1]]@END_MENU_TOKEN@*/.typeText("jagonzalr")
+        app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.secureTextFields["Password"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[3,2,1]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.secureTextFields["Password"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[3,2,1]]@END_MENU_TOKEN@*/.typeText("Fender182")
+        app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.buttons["Sign In"]/*[[".otherElements[\"login-screen\"]",".scrollViews.buttons[\"Sign In\"]",".buttons[\"Sign In\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[2,1]]@END_MENU_TOKEN@*/.tap()
         
         expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
@@ -58,8 +58,8 @@ class edXUITests: XCTestCase {
                 app.navigationBars["Courses"].buttons["Account"].tap()
                 snapshot("profile")
                 app.tables.staticTexts["Logout"].tap()
-                app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.tap()
-                app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.typeText("")
+                app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[3,2,1]]@END_MENU_TOKEN@*/.tap()
+                app/*@START_MENU_TOKEN@*/.otherElements["login-screen"].scrollViews.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[3,2,1]]@END_MENU_TOKEN@*/.typeText("")
             }
         }
     }
