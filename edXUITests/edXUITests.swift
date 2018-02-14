@@ -36,36 +36,31 @@ class edXUITests: XCTestCase {
         snapshot("splash")
         app/*@START_MENU_TOKEN@*/.buttons["login"]/*[[".otherElements[\"splash-screen\"]",".buttons[\"Already have an account? Sign in\"]",".buttons[\"login\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
         snapshot("login")
-        let userFieldTextField = app/*@START_MENU_TOKEN@*/.textFields["user-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/
-        userFieldTextField.tap()
-        userFieldTextField.typeText("jagonzalr")
-        let passwordFieldSecureTextField = app/*@START_MENU_TOKEN@*/.secureTextFields["password-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/
-        passwordFieldSecureTextField.tap()
-        passwordFieldSecureTextField.typeText("Fender182")
+        app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.typeText("jagonzalr")
+        app/*@START_MENU_TOKEN@*/.secureTextFields["password-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.secureTextFields["password-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".secureTextFields[\"Password\"]",".secureTextFields[\"password-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.typeText("Fender182")
         app/*@START_MENU_TOKEN@*/.buttons["Sign In"]/*[[".otherElements[\"login-screen\"]",".scrollViews.buttons[\"Sign In\"]",".buttons[\"Sign In\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
         
         expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
         waitForExpectations(timeout: 20, handler: nil)
         if (app.navigationBars["Courses"].exists) {
             if (app.navigationBars["Courses"].buttons["Account"].exists) {
-                let accountButton = app.navigationBars["Courses"].buttons["Account"]
-                accountButton.tap()
-                let closeButton = app.navigationBars["Account"].buttons["Close"]
-                closeButton.tap()
-                accountButton.tap()
-                closeButton.tap()
-                accountButton.tap()
-                closeButton.tap()
-                accountButton.tap()
-                closeButton.tap()
+                app.navigationBars["Courses"].buttons["Account"].tap()
+                app.navigationBars["Account"].buttons["Close"].tap()
+                app.navigationBars["Courses"].buttons["Account"].tap()
+                app.navigationBars["Account"].buttons["Close"].tap()
+                app.navigationBars["Courses"].buttons["Account"].tap()
+                app.navigationBars["Account"].buttons["Close"].tap()
+                app.navigationBars["Courses"].buttons["Account"].tap()
                 snapshot("courses")
-                accountButton.tap()
+                app.navigationBars["Account"].buttons["Close"].tap()
                 snapshot("profile")
                 expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Account"], handler: nil)
                 waitForExpectations(timeout: 5, handler: nil)
                 app.tables.staticTexts["Logout"].tap()
-                userFieldTextField.tap()
-                userFieldTextField.typeText("")
+                app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.tap()
+                app/*@START_MENU_TOKEN@*/.textFields["User name or e-mail address"]/*[[".otherElements[\"login-screen\"]",".scrollViews",".textFields[\"User name or e-mail address\"]",".textFields[\"user-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[1]]@END_MENU_TOKEN@*/.typeText("")
             }
         }
     }
