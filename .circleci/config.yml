@@ -1,19 +1,19 @@
 version: 2
 jobs:
   build:
-    filters:
-      branches:
-        only: no-branch
-    macos:
-      xcode: "9.2.0"
-
-    working_directory: ~/dietou-node
-
     environment:
       XCODE_WORKSPACE: edX.xcworkspace
       XCODE_SCHEME: edX
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
+
+    macos:
+      xcode: "9.2.0"
+
+    branches:
+      only: no-branch
+
+    working_directory: ~/edx-app-ios
 
     steps:
       - checkout
