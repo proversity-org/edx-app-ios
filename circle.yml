@@ -1,7 +1,7 @@
 general:
   branches:
     only:
-      - master
+      - no-branch
       
 machine:
   xcode:
@@ -46,7 +46,7 @@ test:
 
 deployment:
   beta:
-    branch: master
+    branch: no-branch
     commands:
       - python config_project.py "pro,Proversity,0,2.12,devUUID,storeUUID"
       - fastlane beta
