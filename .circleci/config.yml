@@ -6,6 +6,7 @@ jobs:
       XCODE_SCHEME: edX
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
+      TERM: dumb
 
     macos:
       xcode: "9.2.0"
