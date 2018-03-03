@@ -281,10 +281,12 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         if let httpResponse = navigationResponse.response as? HTTPURLResponse, let statusCode = OEXHTTPStatusCode(rawValue: httpResponse.statusCode), let errorGroup = statusCode.errorGroup, state == .LoadingContent {
             switch errorGroup {
             case HttpErrorGroup.http4xx:
-                self.state = .NeedingSession
+                state = .NeedingSession
+                break
             case HttpErrorGroup.http5xx:
-                self.loadController.state = LoadState.failed()
+                loadController.state = LoadState.failed()
                 decisionHandler(.cancel)
+                return
             }
         }
         decisionHandler(.allow)
