@@ -39,7 +39,6 @@ dependencies:
     - cp -R deployment/setup_certificates.py setup_certificates.py
     - cp -R deployment/assets/iTunesArtwork@2x.png edX/Images.xcassets/AppIcon.appiconset
     - cp -R deployment/assets/app_icons/ edX/Images.xcassets/AppIcon.appiconset
-    - cp -R deployment/assets/iTunesArtwork@2x.png Source/Resources/Images.xcassets/AppIcon.appiconset
     - cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
 
 test:
