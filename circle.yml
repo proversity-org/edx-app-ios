@@ -48,5 +48,5 @@ deployment:
   beta:
     branch: no-branch
     commands:
-      - python config_project.py "pro,Proversity,0,2.13.2,devUUID,storeUUID"
+      - python config_project.py "pro,Proversity,0,2.13,devUUID,storeUUID"
       - fastlane beta
