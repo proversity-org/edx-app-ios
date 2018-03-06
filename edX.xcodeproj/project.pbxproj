@@ -652,7 +652,6 @@
 		BDA0965C1FBB73E900E24CB1 /* PxGroteskLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDA096511FBB73E900E24CB1 /* PxGroteskLightItalic.ttf */; };
 		BDA0965D1FBB73E900E24CB1 /* PxGroteskRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDA096521FBB73E900E24CB1 /* PxGroteskRegular.ttf */; };
 		BDA0965E1FBB73E900E24CB1 /* PxGroteskRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDA096531FBB73E900E24CB1 /* PxGroteskRegularItalic.ttf */; };
-		BDB1301420342C61001A04C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDB1301320342C61001A04C7 /* Images.xcassets */; };
 		BDDA3B46201A43110099B222 /* DubaiRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDDA3B42201A43100099B222 /* DubaiRegular.ttf */; };
 		BDDA3B47201A43110099B222 /* DubaiMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDDA3B43201A43100099B222 /* DubaiMedium.ttf */; };
 		BDDA3B48201A43110099B222 /* DubaiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDDA3B44201A43110099B222 /* DubaiBold.ttf */; };
@@ -1581,7 +1580,6 @@
 		BDA33E3C1FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/countries.json; sourceTree = "<group>"; };
 		BDA33E3D1FCC880000EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/languages.json; sourceTree = "<group>"; };
 		BDA33E3E1FCC880100EC2FFC /* cy */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = cy; path = cy.lproj/whats_new.json; sourceTree = "<group>"; };
-		BDB1301320342C61001A04C7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = edX/Images.xcassets; sourceTree = "<group>"; };
 		BDDA3B42201A43100099B222 /* DubaiRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DubaiRegular.ttf; sourceTree = "<group>"; };
 		BDDA3B43201A43100099B222 /* DubaiMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DubaiMedium.ttf; sourceTree = "<group>"; };
 		BDDA3B44201A43110099B222 /* DubaiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DubaiBold.ttf; sourceTree = "<group>"; };
@@ -3193,7 +3191,6 @@
 		BECB7B021924C0C3009C77F1 = {
 			isa = PBXGroup;
 			children = (
-				BDB1301320342C61001A04C7 /* Images.xcassets */,
 				E052F5A81D9953BB009F6B6F /* edX.entitlements */,
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
@@ -3908,7 +3905,6 @@
 				69ECC63D1D50D1170030CF87 /* icon_facebook_white@2x.png in Resources */,
 				69ECC6361D50D1170030CF87 /* ic_partiallywatched@2x.png in Resources */,
 				69ECC6081D50D1170030CF87 /* Icon-29.png in Resources */,
-				BDB1301420342C61001A04C7 /* Images.xcassets in Resources */,
 				69ECC6041D50D1170030CF87 /* OpenSans-LightItalic.ttf in Resources */,
 				BDA0965B1FBB73E900E24CB1 /* PxGroteskLight.ttf in Resources */,
 				E0EEC6E71F1CD279006C8D62 /* whats_new.json in Resources */,
