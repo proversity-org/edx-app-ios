@@ -92,7 +92,17 @@ class CoursesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.courses.count
+        let count = self.courses.count
+        if count == 0 {
+            switch context {
+            case .CourseCatalog:
+                setupNoCoursesAvailableLabel()
+                break
+            case .EnrollmentList:
+                break
+            }
+        }
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,6 +132,14 @@ class CoursesTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.insetsController.updateInsets()
+    }
+    
+    func setupNoCoursesAvailableLabel() {
+        let noCoursesLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+        noCoursesLabel.text = "No courses available"
+        noCoursesLabel.textAlignment = NSTextAlignment.center
+        tableView.backgroundView  = noCoursesLabel
+        tableView.separatorStyle  = .none
     }
 }
 
