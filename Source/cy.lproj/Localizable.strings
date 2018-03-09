@@ -382,6 +382,8 @@
 "FIND_COURSES_ENROLLMENT_ERROR_TITLE"="Gwall wrth gofrestru";
 /* Title of overlay message shown when enrolling in a course succeeds */
 "FIND_COURSES_ENROLLMENT_SUCCESSFUL_MESSAGE"="Rydych nawr wedi'ch cofrestru ar y cwrs hwn";
+/* No available courses on find courses section */
+"FIND_COURSES_NO_AVAILABLE_COURSES"="Dim cyrsiau sydd ar gael";
 /* Title of overlay message shown when enrolling in a course succeeds */
 "FIND_COURSES_OFFLINE_MESSAGE"="Rydych all-lein.\nI ddod o hyd i gyrsiau, cysylltwch â'r rhyngrwyd";
 /* Title of overlay message shown when sign in fails */
