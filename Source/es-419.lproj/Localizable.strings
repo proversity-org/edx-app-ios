@@ -416,6 +416,8 @@
 "FIND_COURSES_ENROLLMENT_ERROR_TITLE"="Error en la inscripción";
 /* Title of overlay message shown when enrolling in a course succeeds */
 "FIND_COURSES_ENROLLMENT_SUCCESSFUL_MESSAGE"="Ya está inscrito en este curso.";
+/* No available courses on find courses section */
+"FIND_COURSES_NO_AVAILABLE_COURSES"="No hay cursos disponibles";
 /* Title of overlay message shown when enrolling in a course succeeds */
 "FIND_COURSES_OFFLINE_MESSAGE"="Usted está en modo offline.\nPara encontrar cursos, debe estar conectado a Internet";
 /* Title of overlay message shown when sign in fails */
