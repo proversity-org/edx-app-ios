@@ -136,8 +136,9 @@ class CoursesTableViewController: UITableViewController {
     
     func setupNoCoursesAvailableLabel() {
         let noCoursesLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-        noCoursesLabel.text = "No courses available"
-        noCoursesLabel.textAlignment = NSTextAlignment.center
+        let textStyle = OEXMutableTextStyle(weight: .semiBold, size: .large, color : OEXStyles.shared().neutralBlack())
+        textStyle.alignment = NSTextAlignment.center
+        noCoursesLabel.attributedText = textStyle.attributedString(withText: Strings.findCoursesNoAvailableCourses)
         tableView.backgroundView  = noCoursesLabel
         tableView.separatorStyle  = .none
     }
