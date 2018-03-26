@@ -190,7 +190,7 @@ class CourseDashboardViewController: UITabBarController, UITabBarControllerDeleg
                         analytics.trackCourseShared(courseID, url: urlString, socialTarget: analyticsType)
                     })
                     controller.configurePresentationController(withSourceView: shareButton)
-                    self.present(controller, animated: true, completion: nil)
+                    present(controller, animated: true, completion: nil)
                 }
             }
         }
