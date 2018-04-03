@@ -89,9 +89,6 @@ private class CourseShareURL: NSObject, UIActivityItemSource {
         else if activityType == UIActivityType.postToTwitter, let utmParams = courseShareUtmParams.twitter{
             shareURL = String(format:"%@?%@",courseShareURL, utmParams)
         }
-        else{
-            courseShareURLStringWithUtmParams = String(format:"%@",courseShareURL)
-        }
         
         return NSURL(string: shareURL)
     }
