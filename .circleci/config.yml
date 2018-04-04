@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch ./deployment
+            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch proversity/als --single-branch ./deployment
             cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
             cp -R deployment/assets/app_icons/ Source/Resources/Icons
             cp -R deployment/assets/logos/ Source/Resources/Images
@@ -49,8 +49,8 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "pro,Proversity,0,2.13,devUUID,storeUUID"
-            fastlane beta
+            python config_project.py "als,Africa Legal,2.13.4,2.13,eeaf2b42-b59e-4917-92fe-a8d992533483,7adbe4ec-ac4b-4c05-a257-7067b08fcb66"
+            python setup_certificates.py als
 
 workflows:
   version: 2
@@ -59,4 +59,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: no-branch
+              only: master
