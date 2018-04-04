@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch ./deployment
+            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch proversity/udi --single-branch ./deployment
             cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
             cp -R deployment/assets/app_icons/ Source/Resources/Icons
             cp -R deployment/assets/logos/ Source/Resources/Images
@@ -49,8 +49,8 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "pro,Proversity,0,2.13,devUUID,storeUUID"
-            fastlane beta
+            python config_project.py "udi,Udify Originals,26.2,2.13,9dfe8a45-1cca-4a70-a4c3-a547a83bebdb,308cdbf9-ea36-40c6-9f35-d238ecbb5dd2"
+            python setup_certificates.py udi
 
 workflows:
   version: 2
@@ -59,4 +59,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: no-branch
+              only: master
