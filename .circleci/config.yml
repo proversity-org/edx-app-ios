@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch ./deployment
+            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch proversity/pfn --single-branch ./deployment
             cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
             cp -R deployment/assets/app_icons/ Source/Resources/Icons
             cp -R deployment/assets/logos/ Source/Resources/Images
@@ -49,8 +49,8 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "pro,Proversity,0,2.13,devUUID,storeUUID"
-            fastlane beta
+            python config_project.py "pfn,Pearson Fintech Navigator,6.2.1,2.13,a2cce2fd-dac9-44ca-9b8a-d9518124f214,06dffadc-cd42-4e18-b7d5-769202c921f8"
+            python setup_certificates.py pfn
 
 workflows:
   version: 2
@@ -59,4 +59,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: no-branch
+              only: master
