@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/houston-ios-config.git --branch c54fc9a2-3cda-11e8-b467-0ed5f89f718b --single-branch ./deployment
+            git clone git@github.com:proversity-org/houston-ios-config.git --branch no-branch --single-branch ./deployment
             cp -R deployment/custom_config custom_config
             cp -R deployment/default_config/ default_config
             cp -R deployment/fastlane fastlane
@@ -42,4 +42,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: c54fc9a2-3cda-11e8-b467-0ed5f89f718b/rc/2.13.3
+              only: no-branch
