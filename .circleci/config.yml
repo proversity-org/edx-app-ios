@@ -31,7 +31,7 @@ jobs:
             cp -R deployment/custom_config custom_config
             cp -R deployment/default_config/ default_config
             cp -R deployment/fastlane fastlane
-            cp -R deployment/setup.py setup.py
+            cp -R deployment/setup_and_build.py setup_and_build.py
             cp -R deployment/GoogleService-Info.plist GoogleService-Info.plist
       - run:
           name: Deploy to Testflight
