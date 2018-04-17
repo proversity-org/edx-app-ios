@@ -35,9 +35,7 @@ jobs:
             cp -R deployment/GoogleService-Info.plist GoogleService-Info.plist
       - run:
           name: Deploy to Testflight
-          command: |
-            python setup.py
-            fastlane beta
+          command: python setup_and_build.py
 workflows:
   version: 2
   build_and_deploy:
