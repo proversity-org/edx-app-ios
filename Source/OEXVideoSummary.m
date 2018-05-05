@@ -102,7 +102,7 @@
         if (![[OEXConfig sharedConfig] isUsingVideoPipeline] ||
             [self.preferredEncoding.name isEqualToString:OEXVideoEncodingFallback]) {
             [self.supportedEncodings addObject:OEXVideoEncodingFallback];
-            [self.supportedEncodings addObject:OEXVideoEncodingHls];
+            [self.supportedEncodings addObject:OEXVideoEncodingHLS];
         }
 
         self.downloadURL = [self getDownloadURL:[summary objectForKey:@"all_sources"]];
