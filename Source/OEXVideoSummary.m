@@ -80,9 +80,6 @@
         self.onlyOnWeb = [[summary objectForKey:@"only_on_web"] boolValue];
         
         self.transcripts = [summary objectForKey:@"transcripts"];
-        
-        if (_encodings.count <=0)
-            _defaultEncoding = [[OEXVideoEncoding alloc] initWithName:OEXVideoEncodingFallback URL:[summary objectForKey:@"video_url"] size:[summary objectForKey:@"size"]];
 
         if (_encodings.count <=0) {
             if ([summary objectForKey:@"video_alternatives"]) {
@@ -101,7 +98,7 @@
             }
         }
         
-        self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
+        self.supportedEncodings = [[NSMutableArray alloc] initWithArray:@[OEXVideoEncodingHLS, OEXVideoEncodingMobileHigh, OEXVideoEncodingMobileLow]];
         if (![[OEXConfig sharedConfig] isUsingVideoPipeline] ||
             [self.preferredEncoding.name isEqualToString:OEXVideoEncodingFallback]) {
             [self.supportedEncodings addObject:OEXVideoEncodingFallback];
@@ -259,6 +256,13 @@
 }
 
 - (NSNumber*)size {
+    for(NSString* name in [OEXVideoEncoding knownEncodingNames]) {
+        OEXVideoEncoding* encoding = self.encodings[name];
+        if (encoding.name && ![encoding.name isEqualToString:OEXVideoEncodingHLS]) {
+            return encoding.size;
+        }
+    }
+
     return self.preferredEncoding.size;
 }
 
