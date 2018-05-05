@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch proversity/cau --single-branch ./deployment
+            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch ./deployment
             cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
             cp -R deployment/assets/app_icons/ Source/Resources/Icons
             cp -R deployment/assets/logos/ Source/Resources/Images
@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "cau,Cause4 Advance,2.13.1,2.13,bbab1c38-6a4f-4025-992d-f95ea5b0ae23,055a6817-5f3d-431e-9c97-c17d65b36a47"
+            python config_project.py "pro,Proversity,0,2.13,devUUID,storeUUID"
             fastlane beta
 
 workflows:
@@ -59,4 +59,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: master
+              only: no-branch
