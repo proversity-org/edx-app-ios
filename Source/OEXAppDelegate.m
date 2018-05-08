@@ -14,6 +14,8 @@
 #import <NewRelicAgent/NewRelic.h>
 #import <Analytics/SEGAnalytics.h>
 #import <Branch/Branch.h>
+#import <FirebaseCore/FirebaseCore.h>
+#import <FirebaseMessaging/FirebaseMessaging.h>
 
 #import "OEXAppDelegate.h"
 
@@ -36,8 +38,9 @@
 #import "OEXRouter.h"
 #import "OEXSession.h"
 #import "OEXSegmentConfig.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface OEXAppDelegate () <UIApplicationDelegate>
+@interface OEXAppDelegate () <UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary* dictCompletionHandler;
 @property (nonatomic, strong) OEXEnvironment* environment;
@@ -82,6 +85,24 @@
     
     [self configureFabricKits:launchOptions];
     
+    if (self.environment.config.pushNotificationsEnabled) {
+        [FIRApp configure];
+#ifdef __IPHONE_10_0
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        [FIRMessaging messaging].remoteMessageDelegate = self;
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                            completionHandler:^(BOOL granted, NSError * _Nullable error)
+         {
+             if (granted) {
+                 [application registerForRemoteNotifications];
+             }
+         }];
+#else
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+#endif
+    }
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -248,6 +269,20 @@
             }];
         }
     }
+}
+
+#pragma mark Firebase
+- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    NSLog(@"FCM registration token: %@", fcmToken);
+    [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
+    NSLog(@"Subscribed to topic");
+    
+    // TODO: If necessary send token to application server.
+    // Note: This callback is fired at each app startup and whenever a new token is generated.
+}
+
+- (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
+    NSLog(@"%@", remoteMessage);
 }
 
 @end
