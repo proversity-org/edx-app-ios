@@ -1,6 +1,10 @@
 version: 2
+
+# Define the jobs for the current project.
 jobs:
   build:
+
+    # Specify the Xcode version to use.
     macos:
       xcode: "9.2.0"
     working_directory: ~/edx-app-ios
@@ -27,24 +31,26 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/houston-ios-config.git --branch no-branch --single-branch ./deployment
+            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch ./deployment
+            cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
+            cp -R deployment/assets/app_icons/ Source/Resources/Icons
+            cp -R deployment/assets/logos/ Source/Resources/Images
+            cp -R deployment/assets/splash_screens/ Source/Resources/Splash
+            cp -R deployment/assets/images/ Source/Resources/Images
+            cp -R deployment/assets/iTunesArtwork@2x.png iTunesArtwork@2x.png
+            cp -R deployment/assets/iTunesArtwork@2x.png Source/Resources/Images
+            cp -R deployment/colors.json Source/Resources/Colors
+            cp -R deployment/config_project.py config_project.py
             cp -R deployment/custom_config custom_config
             cp -R deployment/default_config/ default_config
             cp -R deployment/fastlane fastlane
-            cp -R deployment/setup_and_build.py setup_and_build.py
-            cp -R deployment/GoogleService-Info.plist GoogleService-Info.plist
-            cp -R deployment/assets/icon/ Source/Resources/Images.xcassets/AppIcon.appiconset
-            cp -R deployment/assets/icon/ Source/Resources/Icons
-            cp -R deployment/assets/logo/ Source/Resources/Images
-            cp -R deployment/assets/splash/ Source/Resources/Splash
-            cp -R deployment/assets/image/ Source/Resources/Images
-            cp -R deployment/assets/login/ Source/Resources/Images
-            cp -R deployment/assets/artwork/iTunesArtwork@2x.png iTunesArtwork@2x.png
-            cp -R deployment/assets/artwork/iTunesArtwork Source/Resources/Images
-            cp -R deployment/assets/artwork/iTunesArtwork@2x Source/Resources/Images
+            cp -R deployment/fonts.json Source/Resources/Fonts
+            cp -R deployment/setup_certificates.py setup_certificates.py
       - run:
           name: Deploy to Testflight
-          command: python setup_and_build.py
+          command: |
+            python config_project.py "pro,Proversity,0,2.13,devUUID,storeUUID"
+            fastlane beta
 workflows:
   version: 2
   build_and_deploy:
