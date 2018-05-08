@@ -35,6 +35,7 @@ jobs:
             cp -R deployment/fastlane fastlane
             cp -R deployment/setup_and_build.py setup_and_build.py
             cp -R deployment/GoogleService-Info.plist GoogleService-Info.plist
+            cp -R deployment/colors.json Source/Resources/Colors
             cp -R deployment/assets/icon/ Source/Resources/Images.xcassets/AppIcon.appiconset
             cp -R deployment/assets/icon/ Source/Resources/Icons
             cp -R deployment/assets/logo/ Source/Resources/Images
