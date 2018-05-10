@@ -192,6 +192,8 @@
     [FIRMessaging messaging].APNSToken = deviceToken;
     [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    
+    [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -205,7 +207,7 @@
     [self addCompletionHandler:completionHandler forSession:identifier];
 }
 
-- (void)addCompletionHandler:(void (^)(void))handler forSession:(NSString*)identifier {
+- (void)addCompletionHandler:(void (^)())handler forSession:(NSString*)identifier {
     if(!_dictCompletionHandler) {
         _dictCompletionHandler = [[NSMutableDictionary alloc] init];
     }

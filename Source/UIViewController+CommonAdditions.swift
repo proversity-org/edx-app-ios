@@ -31,13 +31,8 @@ extension UIViewController {
     }
     
     func isModal() -> Bool {
-        return (navigationController?.viewControllers.index(of: self) == 0) &&
-            (presentingViewController?.presentedViewController == self
-            || isRootModal()
-            || tabBarController?.presentingViewController is UITabBarController)
-    }
-    
-    func isRootModal() -> Bool {
-        return (navigationController != nil && navigationController?.presentingViewController?.presentedViewController == navigationController)
+        return self.presentingViewController?.presentedViewController == self
+            || (self.navigationController != nil && self.navigationController?.presentingViewController?.presentedViewController == self.navigationController)
+            || self.tabBarController?.presentingViewController is UITabBarController
     }
 }

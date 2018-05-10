@@ -31,7 +31,7 @@ class CourseVideoTableViewCell: SwipeableCell, CourseBlockContainerCell {
         didSet {
             content.setTitleText(title: block?.displayName)
             if let video = block?.type.asVideo {
-                video.isDownloadableVideo ? (downloadView.isHidden = false) : (downloadView.isHidden = true)
+                video.isSupportedVideo ? (downloadView.isHidden = false) : (downloadView.isHidden = true)
             }
         }
     }
@@ -126,7 +126,7 @@ class CourseVideoTableViewCell: SwipeableCell, CourseBlockContainerCell {
     
    fileprivate func deleteVideo()  {
         if let video = localState {
-            OEXInterface.shared().deleteDownloadedVideo(video, shouldNotify: true) { _ in }
+            OEXInterface.shared().deleteDownloadedVideo(video) { _ in }
             OEXAnalytics.shared().trackUnitDeleteVideo(courseID: courseID ?? "", unitID: block?.blockID ?? "")
         }
     }

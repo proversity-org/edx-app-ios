@@ -42,9 +42,7 @@ OEXRegistrationViewControllerDelegate
 @property (strong, nonatomic) SingleChildContainingViewController* containerViewController;
 @property (strong, nonatomic) UIViewController* currentContentController;
 
-// The class RevealController has been deprecated in v2.13 and will be obsolete in v2.14
 @property (strong, nonatomic) RevealViewController* revealController;
-
 @property (strong, nonatomic) void(^registrationCompletion)(void);
 
 @end
@@ -109,21 +107,14 @@ OEXRegistrationViewControllerDelegate
     
     OEXUserDetails* currentUser = self.environment.session.currentUser;
     [self.environment.analytics identifyUser:currentUser];
-
-    if (self.environment.config.isTabLayoutEnabled) {
-        [self showEnrolledTabBarView];
-    }
-    else {
-        // The class RevealController has been deprecated in v2.13 and will be obsolete in v2.14
-        // use showEnrolledTabBarView instead.
-        
-        self.revealController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"SideNavigationContainer"];
-        self.revealController.delegate = self.revealController;
-        [self showMyCoursesAnimated:NO pushingCourseWithID:nil];
-        UIViewController* rearController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"RearViewController"];
-        [self.revealController setDrawerViewControllerWithController:rearController animated:NO];
-        [self makeContentControllerCurrent:self.revealController];
-    }
+    
+    self.revealController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"SideNavigationContainer"];
+    self.revealController.delegate = self.revealController;
+    [self showMyCoursesAnimated:NO pushingCourseWithID:nil];
+    
+    UIViewController* rearController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"RearViewController"];
+    [self.revealController setDrawerViewControllerWithController:rearController animated:NO];
+    [self makeContentControllerCurrent:self.revealController];
 }
 
 - (void)showLoginScreenFromController:(UIViewController*)controller completion:(void(^)(void))completion {
@@ -134,7 +125,7 @@ OEXRegistrationViewControllerDelegate
     OEXLoginViewController* loginController = [[UIStoryboard storyboardWithName:@"OEXLoginViewController" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginView"];
     loginController.delegate = self;
     loginController.environment = self.environment;
-    ForwardingNavigationController *navController = [[ForwardingNavigationController alloc] initWithRootViewController:loginController];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
     
     return navController;
 }
@@ -142,7 +133,7 @@ OEXRegistrationViewControllerDelegate
 - (void)showSignUpScreenFromController:(UIViewController*)controller completion:(void(^)(void))completion {
     self.registrationCompletion = completion;
     OEXRegistrationViewController* registrationController = [[OEXRegistrationViewController alloc] initWithEnvironment:self.environment];
-    ForwardingNavigationController *navController = [[ForwardingNavigationController alloc] initWithRootViewController:registrationController];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:registrationController];
     registrationController.delegate = self;
     
     [self presentViewController:navController fromController:[controller topMostController] completion:nil];
@@ -187,24 +178,14 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (void)showContentStackWithRootController:(UIViewController*)controller animated:(BOOL)animated {
+    controller.navigationItem.leftBarButtonItem = [self showNavigationBarItem];
+    NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
     
+    [controller.view addGestureRecognizer:self.revealController.panGestureRecognizer];
     UINavigationController* navigationController = [[ForwardingNavigationController alloc] initWithRootViewController:controller];
-    if (self.environment.config.isTabLayoutEnabled) {
-        [self makeContentControllerCurrent:navigationController];
-    }
-    else {
-        controller.navigationItem.leftBarButtonItem = [self showNavigationBarItem];
-        NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
-        
-        [controller.view addGestureRecognizer:self.revealController.panGestureRecognizer];
-        
-        // The class RevealController has been deprecated in v2.13 and will be obsolete in v2.14
-        // makeContentControllerCurrent method will be use instead
-        
-        [self.revealController pushFrontViewController:navigationController animated:animated];
-    }
+    [self.revealController pushFrontViewController:navigationController animated:animated];
 }
-    
+
 - (void)showDownloadsFromViewController:(UIViewController*)controller {
     OEXDownloadViewController* vc = [[UIStoryboard storyboardWithName:@"OEXDownloadViewController" bundle:nil] instantiateViewControllerWithIdentifier:@"OEXDownloadViewController"];
     [controller.navigationController pushViewController:vc animated:YES];

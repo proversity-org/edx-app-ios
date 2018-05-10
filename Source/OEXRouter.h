@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class DataManager;
+
 @class RouterEnvironment;
 
 @class OEXHelperVideoDownload;
@@ -57,7 +58,6 @@ extern NSString* OEXSideNavigationChangedStateKey;
 - (void)showSignUpScreenFromController:(nullable UIViewController*)controller completion:(nullable void(^)(void))completion;
 
 #pragma mark Top Level
-- (void)showSidebar:(id)sender;
 - (void)showContentStackWithRootController:(UIViewController*)controller animated:(BOOL)animated;
 - (void)showMySettings;
 

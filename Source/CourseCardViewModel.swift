@@ -9,14 +9,15 @@
 import Foundation
 
 class CourseCardViewModel : NSObject {
-    
-    private let dateText: String
+    private let detailText: String
+    private let bottomTrailingText: String?
     private let persistImage: Bool
     private let wrapTitle: Bool
     private let course: OEXCourse
     
-    private init(course: OEXCourse, dateText: String, persistImage: Bool, wrapTitle: Bool = false) {
-        self.dateText = dateText
+    private init(course: OEXCourse, detailText: String, bottomTrailingText: String?, persistImage: Bool, wrapTitle: Bool = false) {
+        self.detailText = detailText
+        self.bottomTrailingText = bottomTrailingText
         self.persistImage = persistImage
         self.course = course
         self.wrapTitle = wrapTitle
@@ -31,25 +32,26 @@ class CourseCardViewModel : NSObject {
     }
     
     static func onHome(course: OEXCourse) -> CourseCardViewModel {
-        return CourseCardViewModel(course: course, dateText: course.nextRelevantDate ?? "", persistImage: true, wrapTitle: true)
+        return CourseCardViewModel(course: course, detailText: course.courseRun, bottomTrailingText: course.nextRelevantDateUpperCaseString, persistImage: true)
     }
     
     static func onDashboard(course: OEXCourse) -> CourseCardViewModel {
-        return CourseCardViewModel(course: course, dateText: course.nextRelevantDate ?? "", persistImage: true, wrapTitle: true)
+        return CourseCardViewModel(course: course, detailText: course.courseRunIncludingNextDate, bottomTrailingText: nil, persistImage: true, wrapTitle: true)
     }
     
     static func onCourseCatalog(course: OEXCourse, wrapTitle: Bool = false) -> CourseCardViewModel {
-        return CourseCardViewModel(course: course, dateText: course.nextRelevantDate ?? "", persistImage: false, wrapTitle: wrapTitle)
+        return CourseCardViewModel(course: course, detailText: course.courseRun, bottomTrailingText: course.nextRelevantDateUpperCaseString, persistImage: false, wrapTitle: wrapTitle)
     }
     
     static func onCourseOutline(course: OEXCourse) -> CourseCardViewModel {
-        return CourseCardViewModel(course: course, dateText: course.nextRelevantDate ?? "", persistImage: true, wrapTitle: true)
+        return CourseCardViewModel(course: course, detailText: course.courseRunIncludingNextDate, bottomTrailingText: nil, persistImage: true, wrapTitle: true)
     }
     
     func apply(card : CourseCardView, networkManager: NetworkManager) {
         card.titleText = title
-        card.dateText = dateText
-        card.course = course
+        card.detailText = detailText
+        card.bottomTrailingText = bottomTrailingText
+        card.course = self.course
         
         if wrapTitle {
             card.wrapTitleLabel()
@@ -69,7 +71,7 @@ class CourseCardViewModel : NSObject {
         else {
             remoteImage = RemoteImageJustImage(image: placeholder)
         }
-        
+
         card.coverImage = remoteImage
     }
     
@@ -77,17 +79,25 @@ class CourseCardViewModel : NSObject {
 
 extension OEXCourse {
     
+    var courseRun : String {
+        return String.joinInNaturalLayout(nullableStrings: [self.org, self.number], separator : " | ")
+    }
+    
+    var courseRunIncludingNextDate : String {
+        return String.joinInNaturalLayout(nullableStrings: [self.org, self.number, self.nextRelevantDateUpperCaseString], separator : " | ")
+    }
+    
     var nextRelevantDate : String?  {
         // If start date is older than current date
-        if isStartDateOld {
-            guard let end = end else {
+        if self.isStartDateOld {
+            guard let end = self.end else {
                 return nil
             }
             
             let formattedEndDate = (DateFormatting.format(asMonthDayString: end as NSDate)) ?? ""
             
             // If Old date is older than current date
-            if isEndDateOld {
+            if self.isEndDateOld {
                 return Strings.courseEnded(endDate: formattedEndDate)
             }
             else{
@@ -95,11 +105,11 @@ extension OEXCourse {
             }
         }
         else {  // Start date is newer than current date
-            switch start_display_info.type {
-            case .string where start_display_info.displayDate != nil:
-                return Strings.starting(startDate: start_display_info.displayDate!)
-            case .timestamp where start_display_info.date != nil:
-                let formattedStartDate = DateFormatting.format(asMonthDayString: start_display_info.date! as NSDate)
+            switch self.start_display_info.type {
+            case .string where self.start_display_info.displayDate != nil:
+                return Strings.starting(startDate: self.start_display_info.displayDate!)
+            case .timestamp where self.start_display_info.date != nil:
+                let formattedStartDate = DateFormatting.format(asMonthDayString: self.start_display_info.date! as NSDate)
                 return Strings.starting(startDate: formattedStartDate ?? "")
             case .none, .timestamp, .string:
                 return Strings.starting(startDate: Strings.soon)
@@ -107,4 +117,7 @@ extension OEXCourse {
         }
     }
     
+    fileprivate var nextRelevantDateUpperCaseString : String? {
+        return nextRelevantDate?.oex_uppercaseStringInCurrentLocale()
+    }
 }

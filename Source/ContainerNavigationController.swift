@@ -23,7 +23,7 @@ protocol StatusBarOverriding {
 
 /// A simple UINavigationController subclass that can forward status bar
 /// queries to its children should they opt into that by implementing the ContainedNavigationController protocol
-class ForwardingNavigationController: UINavigationController, StatusBarOverriding {
+class ForwardingNavigationController: UINavigationController {
     override var childViewControllerForStatusBarStyle: UIViewController? {
         if let controller = viewControllers.last as? StatusBarOverriding as? UIViewController {
             return controller
@@ -68,9 +68,5 @@ class ForwardingNavigationController: UINavigationController, StatusBarOverridin
         else {
             return .portrait
         }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle(barStyle: .default)
     }
 }

@@ -18,17 +18,18 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     private let coverImageView = UIImageView()
     private let container = UIView()
     private let titleLabel = UILabel()
-    private let dateLabel = UILabel()
+    private let detailLabel = UILabel()
     private let bottomLine = UIView()
+    private let bottomTrailingLabel = UILabel()
     private let overlayContainer = UIView()
     
     var tapAction : ((CourseCardView) -> ())?
     
     private var titleTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight : .semiBold, size: .xLarge, color: OEXStyles.shared().neutralXDark())
+        return OEXTextStyle(weight : .normal, size: .large, color: OEXStyles.shared().neutralBlack())
     }
-    private var dateTextStyle : OEXTextStyle {
-        return OEXTextStyle(weight : .normal, size: .small, color: OEXStyles.shared().neutralDark())
+    private var detailTextStyle : OEXTextStyle {
+        return OEXTextStyle(weight : .normal, size: .xxxSmall, color: OEXStyles.shared().neutralXDark())
     }
     
     private func setup() {
@@ -53,62 +54,69 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
         super.prepareForInterfaceBuilder()
         
         let bundle = Bundle(for: type(of: self))
-        coverImageView.image = UIImage(named:"placeholderCourseCardImage", in: bundle, compatibleWith: traitCollection)
+        coverImageView.image = UIImage(named:"placeholderCourseCardImage", in: bundle, compatibleWith: self.traitCollection)
         titleLabel.attributedText = titleTextStyle.attributedString(withText: "Demo Course")
-        dateLabel.attributedText = dateTextStyle.attributedString(withText: "edx | DemoX")
+        detailLabel.attributedText = detailTextStyle.attributedString(withText: "edx | DemoX")
+        bottomTrailingLabel.attributedText = detailTextStyle.attributedString(withText: "X Videos, 1.23 MB")
     }
     
     func configureViews() {
-        backgroundColor = OEXStyles.shared().neutralXLight()
-        clipsToBounds = true
-        bottomLine.backgroundColor = OEXStyles.shared().neutralXLight()
+        self.backgroundColor = OEXStyles.shared().neutralXLight()
+        self.clipsToBounds = true
+        self.bottomLine.backgroundColor = OEXStyles.shared().neutralXLight()
         
-        container.backgroundColor = OEXStyles.shared().neutralWhite().withAlphaComponent(0.85)
-        coverImageView.backgroundColor = OEXStyles.shared().neutralWhiteT()
-        coverImageView.contentMode = UIViewContentMode.scaleAspectFill
-        coverImageView.clipsToBounds = true
-        coverImageView.hidesLoadingSpinner = true
+        self.container.backgroundColor = OEXStyles.shared().neutralWhite().withAlphaComponent(0.85)
+        self.coverImageView.backgroundColor = OEXStyles.shared().neutralWhiteT()
+        self.coverImageView.contentMode = UIViewContentMode.scaleAspectFill
+        self.coverImageView.clipsToBounds = true
+        self.coverImageView.hidesLoadingSpinner = true
         
-        container.accessibilityIdentifier = "Title Bar"
-        container.addSubview(titleLabel)
-        container.addSubview(dateLabel)
+        self.container.accessibilityIdentifier = "Title Bar"
+        self.container.addSubview(titleLabel)
+        self.container.addSubview(detailLabel)
+        self.container.addSubview(bottomTrailingLabel)
         
-        addSubview(coverImageView)
-        addSubview(container)
-        insertSubview(bottomLine, aboveSubview: coverImageView)
-        addSubview(overlayContainer)
+        self.addSubview(coverImageView)
+        self.addSubview(container)
+        self.insertSubview(bottomLine, aboveSubview: coverImageView)
+        self.addSubview(overlayContainer)
         
         coverImageView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         coverImageView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .vertical)
-        dateLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: UILayoutConstraintAxis.horizontal)
-        dateLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: UILayoutConstraintAxis.horizontal)
+        detailLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: UILayoutConstraintAxis.horizontal)
+        detailLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: UILayoutConstraintAxis.horizontal)
         
-        container.snp_makeConstraints { make -> Void in
+        self.container.snp_makeConstraints { make -> Void in
             make.leading.equalTo(self)
             make.trailing.equalTo(self).priorityRequired()
             make.bottom.equalTo(self).offset(-OEXStyles.dividerSize())
         }
-        coverImageView.snp_makeConstraints { (make) -> Void in
+        self.coverImageView.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
-            make.height.equalTo(coverImageView.snp_width).multipliedBy(0.533).priorityLow()
+            make.height.equalTo(self.coverImageView.snp_width).multipliedBy(0.533).priorityLow()
             make.bottom.equalTo(self)
         }
-        dateLabel.snp_makeConstraints { (make) -> Void in
-            make.leading.equalTo(container).offset(StandardHorizontalMargin)
-            make.top.equalTo(titleLabel.snp_bottom).offset(StandardVerticalMargin)
-            make.bottom.equalTo(container).offset(-verticalMargin)
-            make.trailing.equalTo(titleLabel)
+        self.detailLabel.snp_makeConstraints { (make) -> Void in
+            make.leading.equalTo(self.container).offset(StandardHorizontalMargin)
+            make.top.equalTo(self.titleLabel.snp_bottom)
+            make.bottom.equalTo(self.container).offset(-verticalMargin)
+            make.trailing.equalTo(self.titleLabel)
         }
-        bottomLine.snp_makeConstraints { (make) -> Void in
+        self.bottomLine.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.bottom.equalTo(self)
-            make.top.equalTo(container.snp_bottom)
+            make.top.equalTo(self.container.snp_bottom)
         }
         
-        overlayContainer.snp_makeConstraints {make in
+        self.bottomTrailingLabel.snp_makeConstraints { (make) -> Void in
+            make.centerY.equalTo(detailLabel)
+            make.trailing.equalTo(self.container).offset(-StandardHorizontalMargin)
+        }
+
+        self.overlayContainer.snp_makeConstraints {make in
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.top.equalTo(self)
@@ -117,9 +125,9 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
         
         let tapGesture = UITapGestureRecognizer {[weak self] _ in self?.cardTapped() }
         tapGesture.delegate = self
-        addGestureRecognizer(tapGesture)
+        self.addGestureRecognizer(tapGesture)
     }
-    
+
     override func updateConstraints() {
         if let accessory = titleAccessoryView {
             accessory.snp_remakeConstraints { make in
@@ -127,8 +135,8 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
                 make.centerY.equalTo(container)
             }
         }
-        
-        titleLabel.snp_remakeConstraints { (make) -> Void in
+
+        self.titleLabel.snp_remakeConstraints { (make) -> Void in
             make.leading.equalTo(container).offset(StandardHorizontalMargin)
             if let accessory = titleAccessoryView {
                 make.trailing.lessThanOrEqualTo(accessory).offset(-StandardHorizontalMargin)
@@ -138,10 +146,10 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
             }
             make.top.equalTo(container).offset(verticalMargin)
         }
-        
+
         super.updateConstraints()
     }
-    
+
     var titleAccessoryView : UIView? = nil {
         willSet {
             titleAccessoryView?.removeFromSuperview()
@@ -160,43 +168,55 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     
     var titleText : String? {
         get {
-            return titleLabel.text
+            return self.titleLabel.text
         }
         set {
-            titleLabel.attributedText = titleTextStyle.attributedString(withText: newValue)
+            self.titleLabel.attributedText = titleTextStyle.attributedString(withText: newValue)
             updateAcessibilityLabel()
         }
     }
     
-    var dateText : String? {
+    var detailText : String? {
         get {
-            return dateLabel.text
+            return self.detailLabel.text
         }
         set {
-            dateLabel.attributedText = dateTextStyle.attributedString(withText: newValue)
+            self.detailLabel.attributedText = detailTextStyle.attributedString(withText: newValue)
+            updateAcessibilityLabel()
+        }
+    }
+    
+    var bottomTrailingText : String? {
+        get {
+            return self.bottomTrailingLabel.text
+        }
+        
+        set {
+            self.bottomTrailingLabel.attributedText = detailTextStyle.attributedString(withText: newValue)
+            self.bottomTrailingLabel.isHidden = !(newValue != nil && !newValue!.isEmpty)
             updateAcessibilityLabel()
         }
     }
     
     var coverImage : RemoteImage? {
         get {
-            return coverImageView.remoteImage
+            return self.coverImageView.remoteImage
         }
         set {
-            coverImageView.remoteImage = newValue
+            self.coverImageView.remoteImage = newValue
         }
     }
     
     private func cardTapped() {
-        tapAction?(self)
+        self.tapAction?(self)
     }
     
     func wrapTitleLabel() {
-        titleLabel.numberOfLines = 3
-        titleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        titleLabel.minimumScaleFactor = 0.5
-        titleLabel.adjustsFontSizeToFitWidth = true
-        layoutIfNeeded()
+        self.titleLabel.numberOfLines = 3
+        self.titleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        self.titleLabel.minimumScaleFactor = 0.5
+        self.titleLabel.adjustsFontSizeToFitWidth = true
+        self.layoutIfNeeded()
     }
     
     @discardableResult func updateAcessibilityLabel()-> String {
@@ -206,9 +226,13 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
             accessibilityString = title
         }
         
-        if let text = dateText {
-            let formateddateText = text.replacingOccurrences(of: "|", with: "")
-            accessibilityString = "\(accessibilityString),\(Strings.accessibilityBy) \(formateddateText)"
+        if let text = detailText {
+         let formatedDetailText = text.replacingOccurrences(of: "|", with: "")
+            accessibilityString = "\(accessibilityString),\(Strings.accessibilityBy) \(formatedDetailText)"
+        }
+        
+        if let bottomText = bottomTrailingText {
+            accessibilityString = "\(accessibilityString), \(bottomText)"
         }
         
         accessibilityLabel = accessibilityString
@@ -222,4 +246,3 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
         }
     }
 }
-

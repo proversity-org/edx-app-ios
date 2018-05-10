@@ -27,7 +27,7 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
     
     @discardableResult func loadAndVerifyControllerWithInitialChild(_ initialChildID : CourseBlockID?, parentID : CourseBlockID, verifier : ((CourseBlockID?, CourseContentPageViewController) -> ((XCTestExpectation) -> Void)?)? = nil) -> CourseContentPageViewController {
         
-        let controller = CourseContentPageViewController(environment: environment, courseID: outline.root, rootID: parentID, initialChildID: initialChildID, forMode: .full)
+        let controller = CourseContentPageViewController(environment: environment, courseID: outline.root, rootID: parentID, initialChildID: initialChildID, forMode: .Full)
         
         inScreenNavigationContext(controller) {
             let expectation = self.expectation(description: "course loaded")
@@ -99,11 +99,9 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
             controller.t_goForward()
             
             let testExpectation = expectation(description: "controller went forward")
-            DispatchQueue.main.async() {
-                controller.t_blockIDForCurrentViewController().listen(controller) {
-                    testExpectation.fulfill()
-                    XCTAssertEqual($0.value!, childID)
-                }
+            controller.t_blockIDForCurrentViewController().listen(controller) {
+                testExpectation.fulfill()
+                XCTAssertEqual($0.value!, childID)
             }
             self.waitForExpectations()
             XCTAssertTrue(controller.t_prevButtonEnabled)
@@ -176,10 +174,8 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
             controller.t_goForward()
             
             let testExpectation = expectation(description: "controller went backward")
-            DispatchQueue.main.async() {
-                controller.t_blockIDForCurrentViewController().listen(controller) {blockID in
-                    testExpectation.fulfill()
-                }
+            controller.t_blockIDForCurrentViewController().listen(controller) {blockID in
+                testExpectation.fulfill()
             }
             self.waitForExpectations()
         }

@@ -22,7 +22,7 @@ extension CourseBlockDisplayType {
 }
 
 // Container for scrolling horizontally between different screens of course content
-public class CourseContentPageViewController : UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, CourseBlockViewController, InterfaceOrientationOverriding {
+public class CourseContentPageViewController : UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, CourseBlockViewController, StatusBarOverriding, InterfaceOrientationOverriding {
     
     public typealias Environment = OEXAnalyticsProvider & DataManagerProvider & OEXRouterProvider
     
@@ -61,6 +61,7 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         courseOutlineMode = mode
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         self.setViewControllers([initialLoadController], direction: .forward, animated: false, completion: nil)
+        
         self.dataSource = self
         self.delegate = self
         
@@ -116,7 +117,8 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
             success : {[weak self] cursor -> Void in
                 if let owner = self, let controller = owner.controllerForBlock(block: cursor.current.block)
                 {
-                    owner.setPageControllers(with: [controller], direction: .forward, animated: false)
+                    owner.setViewControllers([controller], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
+                    self?.updateNavigationForEnteredController(controller: controller)
                 }
                 else {
                     self?.initialLoadController.state = LoadState.failed(error: NSError.oex_courseContentLoadError())
@@ -266,14 +268,8 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         if let currentController = viewControllers?.first,
             let nextController = self.siblingWithDirection(direction: direction, fromController: currentController)
         {
-            setPageControllers(with: [nextController], direction: direction, animated: true)
-        }
-    }
-    
-    private func setPageControllers(with controllers: [UIViewController], direction:UIPageViewControllerNavigationDirection, animated:Bool, competion: ((Bool) -> Swift.Void)? = nil) {
-        DispatchQueue.main.async { [weak self] in
-            self?.setViewControllers(controllers, direction: direction, animated: animated, completion: competion)
-            self?.updateNavigationForEnteredController(controller: controllers.first)
+            self.setViewControllers([nextController], direction: direction, animated: true, completion: nil)
+            self.updateNavigationForEnteredController(controller: nextController)
         }
     }
     
@@ -322,8 +318,28 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         
     }
     
+
     override public var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle(barStyle : self.navigationController?.navigationBar.barStyle)
+    }
+    
+    override public var childViewControllerForStatusBarStyle: UIViewController? {
+        if let controller = viewControllers?.last as? StatusBarOverriding as? UIViewController {
+            return controller
+        }
+        else {
+            return super.childViewControllerForStatusBarStyle
+        }
+    }
+    
+    override public var childViewControllerForStatusBarHidden: UIViewController? {
+        if let controller = viewControllers?.last as? StatusBarOverriding as? UIViewController {
+            return controller
+        }
+        else {
+            return super.childViewControllerForStatusBarHidden
+        }
+        
     }
     
     override public var shouldAutorotate: Bool {

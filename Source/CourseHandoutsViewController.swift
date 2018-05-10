@@ -7,7 +7,7 @@
 //
 
 import UIKit
-public class CourseHandoutsViewController: OfflineSupportViewController, UIWebViewDelegate, LoadStateViewReloadSupport, InterfaceOrientationOverriding {
+public class CourseHandoutsViewController: OfflineSupportViewController, UIWebViewDelegate, LoadStateViewReloadSupport {
     
     public typealias Environment = DataManagerProvider & NetworkManagerProvider & ReachabilityProvider & OEXAnalyticsProvider
 
@@ -50,14 +50,6 @@ public class CourseHandoutsViewController: OfflineSupportViewController, UIWebVi
     
     override func reloadViewData() {
         loadHandouts()
-    }
-    
-    override public var shouldAutorotate: Bool {
-        return true
-    }
-    
-    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
     }
     
     private func addSubviews() {

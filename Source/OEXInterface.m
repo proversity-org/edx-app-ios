@@ -42,18 +42,13 @@ NSString* const OEXCourseListKey = @"OEXCourseListKey";
 NSString* const OEXVideoStateChangedNotification = @"OEXVideoStateChangedNotification";
 NSString* const OEXDownloadProgressChangedNotification = @"OEXDownloadProgressChangedNotification";
 NSString* const OEXDownloadEndedNotification = @"OEXDownloadEndedNotification";
-NSString* const OEXDownloadStartedNotification = @"OEXDownloadStartedNotification";
-NSString* const OEXDownloadDeletedNotification = @"OEXDownloadDeletedNotification";
 NSString* const OEXSavedAppVersionKey = @"OEXSavedAppVersionKey";
 
-@interface OEXInterface () <OEXDownloadManagerProtocol> {
-    BOOL userAllowedLargeDownload;
-    DownloadVideosCompletionHandler downloadVideosCompletionHandler;
-}
+@interface OEXInterface () <OEXDownloadManagerProtocol>
 
 @property (nonatomic, strong) OEXNetworkInterface* network;
 @property (nonatomic, strong) OEXDataParser* parser;
-@property (nonatomic, strong) OEXDownloadManager* downloadManger;
+@property(nonatomic, weak) OEXDownloadManager* downloadManger;
 
 //Cached Data
 @property (nonatomic, assign) int commonDownloadProgress;
@@ -177,11 +172,12 @@ static OEXInterface* _sharedInterface = nil;
 }
 
 + (BOOL)isURLForVideo:(NSString*)URLString {
-    for (NSString *extension_option in VIDEO_URL_EXTENSION_OPTIONS) {
-        // Check each string in VIDEO_URL_EXTENSION_OPTIONS to see if the URL has a valid file extension for a video
-        if([URLString localizedCaseInsensitiveContainsString:extension_option]) {
-            return YES;
-        }
+    //    https://d2f1egay8yehza.cloudfront.net/mit-6002x/MIT6002XT214-V043800_MB2.mp4
+    if([URLString rangeOfString:URL_SUBSTRING_VIDEOS].location != NSNotFound) {
+        return YES;
+    }
+    else if([URLString rangeOfString:URL_EXTENSION_VIDEOS].location != NSNotFound) {
+        return YES;
     }
     return NO;
 }
@@ -339,37 +335,34 @@ static OEXInterface* _sharedInterface = nil;
     return YES;
 }
 
-- (BOOL) isDownloadSettingsValid {
-    OEXAppDelegate* appDelegate = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
-    BOOL hasWifi = [appDelegate.reachability isReachableViaWiFi];
-    BOOL onlyOnWifi = [OEXInterface shouldDownloadOnlyOnWifi];
-    return !onlyOnWifi || hasWifi;
-}
-
 - (BOOL)canDownloadVideos:(NSArray*)videos {
     double totalSpaceRequired = 0;
     //Total space
     for(OEXHelperVideoDownload* video in videos) {
-        if (video.downloadState == OEXDownloadStateNew) {
-            totalSpaceRequired += [video.summary.size doubleValue];
-        }
+        totalSpaceRequired += [video.summary.size doubleValue];
     }
     totalSpaceRequired = totalSpaceRequired / 1024 / 1024 / 1024;
-    if(!userAllowedLargeDownload && totalSpaceRequired > 1) {
+    OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if([OEXInterface shouldDownloadOnlyOnWifi]) {
+        if(![appD.reachability isReachableViaWiFi]) {
+            return NO;
+        }
+    }
+    
+    if(totalSpaceRequired > 1) {
         self.multipleDownloadArray = videos;
         
         // As suggested by Lou
         UIAlertView* alertView =
-        [[UIAlertView alloc] initWithTitle:[Strings largeDownloadTitle]
-                                   message:[Strings largeDownloadMessage]
-                                  delegate:self
-                         cancelButtonTitle:[Strings cancel]
-                         otherButtonTitles:[Strings acceptLargeVideoDownload], nil];
+            [[UIAlertView alloc] initWithTitle:[Strings largeDownloadTitle]
+                                       message:[Strings largeDownloadMessage]
+                                      delegate:self
+                             cancelButtonTitle:[Strings cancel]
+                             otherButtonTitles:[Strings acceptLargeVideoDownload], nil];
         
         [alertView show];
         return NO;
     }
-    userAllowedLargeDownload = false;
     return YES;
 }
 
@@ -381,32 +374,14 @@ static OEXInterface* _sharedInterface = nil;
     }
     
     NSInteger count = 0;
-    __block NSInteger downloadStartedCount = 0;
     for(OEXHelperVideoDownload* video in array) {
-        if(video.summary.downloadURL.length > 0 && video.downloadState == OEXDownloadStateNew) {
+        if(video.summary.videoURL.length > 0 && video.downloadState == OEXDownloadStateNew) {
             [self downloadAllTranscriptsForVideo:video];
-            [self addVideoForDownload:video completionHandler:^(BOOL success){
-                downloadStartedCount++;
-                if (array.count == downloadStartedCount) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:OEXDownloadStartedNotification object:nil];
-                }
-            }];
+            [self addVideoForDownload:video completionHandler:^(BOOL success){}];
             count++;
         }
-        else {
-            downloadStartedCount++;
-        }
-    }
-    if (downloadVideosCompletionHandler) {
-        downloadVideosCompletionHandler(false);
-        downloadVideosCompletionHandler = nil;
     }
     return count;
-}
-
-- (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)array completionHandler: (DownloadVideosCompletionHandler) completionHandler  {
-    downloadVideosCompletionHandler = completionHandler;
-    return [self downloadVideos:array];
 }
 
 - (NSArray<OEXHelperVideoDownload*>*)statesForVideosWithIDs:(NSArray<NSString*>*)videoIDs courseID:(NSString*)courseID {
@@ -450,23 +425,19 @@ static OEXInterface* _sharedInterface = nil;
     [_storage markLastPlayedInterval:playedInterval forVideoID:videoId];
 }
 
-- (void)deleteDownloadedVideo:(OEXHelperVideoDownload *)video shouldNotify:(BOOL) shouldNotify completionHandler:(void (^)(BOOL success))completionHandler {
+- (void)deleteDownloadedVideo:(OEXHelperVideoDownload *)video completionHandler:(void (^)(BOOL success))completionHandler {
     [_storage deleteDataForVideoID:video.summary.videoID];
     video.downloadState = OEXDownloadStateNew;
     video.downloadProgress = 0.0;
     video.isVideoDownloading = false;
     completionHandler(YES);
-    if (shouldNotify) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:OEXDownloadDeletedNotification object:nil];
-    }
 }
 
 - (void)deleteDownloadedVideos:(NSArray *)videos completionHandler:(void (^)(BOOL success))completionHandler {
     for (OEXHelperVideoDownload *video in videos) {
-        [self deleteDownloadedVideo:video shouldNotify:false completionHandler:^(BOOL success) {}];
+        [self deleteDownloadedVideo:video completionHandler:^(BOOL success) {}];
     }
     completionHandler(YES);
-    [[NSNotificationCenter defaultCenter] postNotificationName:OEXDownloadDeletedNotification object:nil];
 }
 
 - (void)setAllEntriesUnregister {
@@ -505,7 +476,7 @@ static OEXInterface* _sharedInterface = nil;
                                 Size: [NSString stringWithFormat:@"%.2f", [helperVideo.summary.size doubleValue]]
                             Duration: [NSString stringWithFormat:@"%.2f", helperVideo.summary.duration]
                        DownloadState: helperVideo.downloadState
-                            VideoURL: helperVideo.summary.downloadURL
+                            VideoURL: helperVideo.summary.videoURL
                              VideoID: helperVideo.summary.videoID
                              UnitURL: helperVideo.summary.unitURL
                             CourseID: helperVideo.course_id
@@ -678,7 +649,7 @@ static OEXInterface* _sharedInterface = nil;
 - (void)markDownloadProgress:(float)progress forURL:(NSString*)URLString andVideoId:(NSString*)videoId {
     @autoreleasepool {
         for(OEXHelperVideoDownload* video in [self allVideos]) {
-            if(([video.summary.downloadURL isEqualToString:URLString] && video.downloadState == OEXDownloadStatePartial)
+            if(([video.summary.videoURL isEqualToString:URLString] && video.downloadState == OEXDownloadStatePartial)
                || [video.summary.videoID isEqualToString:videoId]) {
                 video.downloadProgress = progress;
                 video.isVideoDownloading = YES;
@@ -837,7 +808,7 @@ static OEXInterface* _sharedInterface = nil;
         if(![knownVideoIDs containsObject:summary.videoID]) {
             OEXHelperVideoDownload* helper = [[OEXHelperVideoDownload alloc] init];
             helper.summary = summary;
-            helper.filePath = [OEXFileUtility filePathForRequestKey:summary.downloadURL];
+            helper.filePath = [OEXFileUtility filePathForRequestKey:summary.videoURL];
             [videoDatas addObject:helper];
             return helper;
         }
@@ -948,7 +919,6 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1) {
-        userAllowedLargeDownload = true;
         NSInteger count = [self downloadVideos:_multipleDownloadArray];
         if(count > 0) {
             [[NSNotificationCenter defaultCenter] postNotificationName:FL_MESSAGE
@@ -958,11 +928,6 @@ static OEXInterface* _sharedInterface = nil;
     }
     else {
         self.multipleDownloadArray = nil;
-        userAllowedLargeDownload = false;
-        if (downloadVideosCompletionHandler) {
-            downloadVideosCompletionHandler(true);
-            downloadVideosCompletionHandler = nil;
-        }
     }
 }
 
@@ -982,7 +947,7 @@ static OEXInterface* _sharedInterface = nil;
 
 - (void)startDownloadForVideo:(OEXHelperVideoDownload*)video completionHandler:(void (^)(BOOL sucess))completionHandler {
     OEXAppDelegate* appD = (OEXAppDelegate *)[[UIApplication sharedApplication] delegate];
-    if([OEXInterface isURLForVideo:video.summary.downloadURL]) {
+    if([OEXInterface isURLForVideo:video.summary.videoURL]) {
         if([OEXInterface shouldDownloadOnlyOnWifi]) {
             if(![appD.reachability isReachableViaWiFi]) {
                 completionHandler(NO);
@@ -999,7 +964,7 @@ static OEXInterface* _sharedInterface = nil;
         data = [self insertVideoData:video];
     }
 
-    NSArray* array = [_storage getVideosForDownloadUrl:video.summary.downloadURL];
+    NSArray* array = [_storage getVideosForDownloadUrl:video.summary.videoURL];
     if([array count] > 1) {
         for(VideoData* videoObj in array) {
             if([videoObj.download_state intValue] == OEXDownloadStateComplete) {

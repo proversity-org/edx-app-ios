@@ -44,10 +44,6 @@
     return UIApplicationStateActive;
 }
 
-- (UIUserInterfaceLayoutDirection) userInterfaceLayoutDirection {
-    return UIUserInterfaceLayoutDirectionLeftToRight;
-}
-
 @end
 
 @interface OEXPushNotificationManagerTests : XCTestCase
@@ -136,11 +132,11 @@
 
 - (void)testProviderSessionEnds {
     [self.manager addProvider:self.provider withSession:self.session];
-
+    
     [[self.provider expect] sessionEnded];
-
+    
     [self.session closeAndClearSession];
-
+    
     OCMVerifyAll(self.provider);
 }
 

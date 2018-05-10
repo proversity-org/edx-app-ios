@@ -8,19 +8,26 @@
 
 import UIKit
 
-class CourseDashboardTabBarViewController: UITabBarController, UITabBarControllerDelegate, InterfaceOrientationOverriding {
+// CourseDashboardTabBarItem represent each tab in tabBarViewController
+struct CourseDashboardTabBarItem {
+    let title: String
+    let viewController: UIViewController
+    let icon: Icon
+    let detailText: String
+}
+
+class CourseDashboardTabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
      typealias Environment = OEXAnalyticsProvider & OEXConfigProvider & DataManagerProvider & NetworkManagerProvider & OEXRouterProvider & OEXInterfaceProvider & ReachabilityProvider & OEXSessionProvider & OEXStylesProvider
     
     private let courseID: String
-    fileprivate var course: OEXCourse?
     private let environment: Environment
-    fileprivate var tabBarItems : [TabBarItem] = []
+    fileprivate var tabBarItems : [CourseDashboardTabBarItem] = []
     fileprivate let loadStateController: CourseTabBarLoadStateViewController
     private lazy var progressController : ProgressController = {
         ProgressController(owner: self, router: self.environment.router, dataInterface: self.environment.interface)
     }()
-    private let shareButton = UIButton(frame: CGRect(x: 0, y: 0, width: 26, height: 26))
+    private let shareButton = UIButton(type: .system)
     
     fileprivate let courseStream = BackedStream<UserCourseEnrollment>()
     
@@ -53,71 +60,67 @@ class CourseDashboardTabBarViewController: UITabBarController, UITabBarControlle
         // Dispose of any resources that can be recreated.
     }
     
-    override var shouldAutorotate: Bool {
-        return true
+    private func addShareButton(withCourse course: OEXCourse) {
+        shareButton.setImage(UIImage(named: "shareCourse.png"), for: .normal)
+        shareButton.accessibilityLabel = Strings.Accessibility.shareACourse
+        
+        shareButton.snp_makeConstraints(closure: { (make) -> Void in
+            make.height.equalTo(26)
+            make.width.equalTo(26)
+        })
+        
+        shareButton.oex_removeAllActions()
+        shareButton.oex_addAction({[weak self] _ in
+            self?.shareCourse(course: course)
+            }, for: .touchUpInside)
+        
+        let shareItem = UIBarButtonItem(customView: shareButton)
+        navigationItem.rightBarButtonItems = [shareItem]
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
-    }
-    
-    fileprivate func addNavigationItems(withCourse course: OEXCourse) {
-        var navigationItems: [UIBarButtonItem] = []
+    private func addNavigationItems(withCourse course: OEXCourse) {
         if course.course_about != nil && environment.config.courseSharingEnabled {
-            let shareImage = UIImage(named: "shareCourse.png")?.withRenderingMode(.alwaysTemplate)
-            shareButton.setImage(shareImage, for: .normal)
-            shareButton.tintColor = environment.styles.primaryBaseColor()
-            shareButton.accessibilityLabel = Strings.Accessibility.shareACourse
-            shareButton.oex_removeAllActions()
-            shareButton.oex_addAction({[weak self] _ in
-                self?.shareCourse(course: course)
-                }, for: .touchUpInside)
-            
-            let shareItem = UIBarButtonItem(customView: shareButton)
-            navigationItems.append(shareItem)
+            addShareButton(withCourse: course)
         }
-        if let controller = selectedViewController as? CourseOutlineViewController, controller.courseOutlineMode == .full {
-            navigationItems.append(progressController.navigationItem())
-        }
-        navigationItem.rightBarButtonItems = navigationItems
+        navigationItem.rightBarButtonItems?.append(progressController.navigationItem())
     }
     
     private func prepareTabViewData(withCourse course: OEXCourse) {
         
         tabBarItems = []
         
-        var item = TabBarItem(title: Strings.Dashboard.courseCourseware, viewController: CourseOutlineViewController(environment: environment, courseID: courseID, rootID: nil, forMode: .full), icon: Icon.Courseware, detailText: Strings.Dashboard.courseCourseDetail)
+        var item = CourseDashboardTabBarItem(title: Strings.Dashboard.courseCourseware, viewController: CourseOutlineViewController(environment: environment, courseID: courseID, rootID: nil, forMode: CourseOutlineMode.Full), icon: Icon.Courseware, detailText: Strings.Dashboard.courseCourseDetail)
         tabBarItems.append(item)
         
         if environment.config.isCourseVideosEnabled {
-           item = TabBarItem(title: Strings.Dashboard.courseVideos, viewController: CourseOutlineViewController(environment: environment, courseID: courseID, rootID: nil, forMode: .video), icon: Icon.CourseVideos, detailText: Strings.Dashboard.courseVideosDetail)
+           item = CourseDashboardTabBarItem(title: Strings.Dashboard.courseVideos, viewController: CourseOutlineViewController(environment: environment, courseID: courseID, rootID: nil, forMode: CourseOutlineMode.Video), icon: Icon.CourseVideos, detailText: Strings.Dashboard.courseVideosDetail)
             tabBarItems.append(item)
         }
         
         if shouldShowDiscussions(course: course) {
-            item = TabBarItem(title: Strings.Dashboard.courseDiscussion, viewController: DiscussionTopicsViewController(environment: environment, courseID: courseID), icon: Icon.Discussions, detailText: Strings.Dashboard.courseDiscussionDetail)
+            item = CourseDashboardTabBarItem(title: Strings.Dashboard.courseDiscussion, viewController: DiscussionTopicsViewController(environment: environment, courseID: courseID), icon: Icon.Discussions, detailText: Strings.Dashboard.courseDiscussionDetail)
             tabBarItems.append(item)
         }
         
         if environment.config.courseDatesEnabled {
-            item = TabBarItem(title: Strings.Dashboard.courseImportantDates, viewController: CourseDatesViewController(environment: environment , courseID: courseID), icon: Icon.Calendar, detailText: Strings.Dashboard.courseImportantDatesDetail)
+            item = CourseDashboardTabBarItem(title: Strings.Dashboard.courseImportantDates, viewController: CourseDatesViewController(environment: environment , courseID: courseID), icon: Icon.Calendar, detailText: Strings.Dashboard.courseImportantDatesDetail)
             tabBarItems.append(item)
         }
 
         if shouldShowHandouts(course: course) {
-            item = TabBarItem(title: Strings.Dashboard.courseHandouts, viewController: CourseHandoutsViewController(environment: environment, courseID: courseID), icon: Icon.Handouts, detailText: Strings.Dashboard.courseHandoutsDetail)
+            item = CourseDashboardTabBarItem(title: Strings.Dashboard.courseHandouts, viewController: CourseHandoutsViewController(environment: environment, courseID: courseID), icon: Icon.Handouts, detailText: Strings.Dashboard.courseHandoutsDetail)
             tabBarItems.append(item)
         }
         
         if environment.config.isAnnouncementsEnabled {
-            item = TabBarItem(title: Strings.Dashboard.courseAnnouncements, viewController: CourseAnnouncementsViewController(environment: environment, courseID: courseID), icon:Icon.Announcements, detailText: Strings.Dashboard.courseAnnouncementsDetail)
+            item = CourseDashboardTabBarItem(title: Strings.Dashboard.courseAnnouncements, viewController: CourseAnnouncementsViewController(environment: environment, courseID: courseID), icon:Icon.Announcements, detailText: Strings.Dashboard.courseAnnouncementsDetail)
             tabBarItems.append(item)
         }
         
         if tabBarItems.count > 4 {
             var items = Array(tabBarItems[0..<4])
             let additionalItems = Array(tabBarItems[4..<tabBarItems.count])
-            item = TabBarItem(title:Strings.resourses, viewController: AdditionalTabBarViewController(environment: environment, cellItems: additionalItems), icon: Icon.MoreOptionsIcon, detailText: "")
+            item = CourseDashboardTabBarItem(title:Strings.resourses, viewController: CourseDashboardAdditionalViewController(environment: environment, cellItems: additionalItems), icon: Icon.MoreOptionsIcon, detailText: "")
             
             items.append(item)
             loadTabBarViewControllers(tabBarItems: items)
@@ -127,7 +130,7 @@ class CourseDashboardTabBarViewController: UITabBarController, UITabBarControlle
         }
     }
     
-    private func loadTabBarViewControllers(tabBarItems: [TabBarItem]) {
+    private func loadTabBarViewControllers(tabBarItems: [CourseDashboardTabBarItem]) {
         var controllers :[UIViewController] = []
         for tabBarItem in tabBarItems {
             let controller = tabBarItem.viewController
@@ -145,7 +148,6 @@ class CourseDashboardTabBarViewController: UITabBarController, UITabBarControlle
     private func resultLoaded(result : Result<UserCourseEnrollment>) {
         switch result {
         case let Result.success(enrollment):
-            course = enrollment.course
             loadedCourse(withCourse: enrollment.course)
         case let Result.failure(error):
             if !courseStream.active {
@@ -223,9 +225,6 @@ extension CourseDashboardTabBarViewController {
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController){
         navigationItem.title = viewController.navigationItem.title
-        if let course = course {
-            addNavigationItems(withCourse: course)
-        }
     }
 }
 
@@ -233,15 +232,15 @@ extension CourseDashboardTabBarViewController {
 extension CourseDashboardTabBarViewController {
 
     func t_canVisitDiscussions() -> Bool {
-        return tabBarItems.firstIndexMatching({ (item: TabBarItem) in return item.icon == .Discussions }) != nil
+        return tabBarItems.firstIndexMatching({ (item: CourseDashboardTabBarItem) in return item.icon == .Discussions }) != nil
     }
 
     func t_canVisitHandouts() -> Bool {
-        return tabBarItems.firstIndexMatching({ (item: TabBarItem) in return item.icon == .Handouts }) != nil
+        return tabBarItems.firstIndexMatching({ (item: CourseDashboardTabBarItem) in return item.icon == .Handouts }) != nil
     }
 
     func t_canVisitAnnouncements() -> Bool {
-        return tabBarItems.firstIndexMatching({ (item: TabBarItem) in return item.icon == .Announcements }) != nil
+        return tabBarItems.firstIndexMatching({ (item: CourseDashboardTabBarItem) in return item.icon == .Announcements }) != nil
     }
     
     var t_state : LoadState {
@@ -252,7 +251,7 @@ extension CourseDashboardTabBarViewController {
         return courseStream.map {_ in () }
     }
     
-    func t_items() -> [TabBarItem] {
+    func t_items() -> [CourseDashboardTabBarItem] {
         return tabBarItems
     }
 }

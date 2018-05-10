@@ -69,7 +69,7 @@ class CourseCardViewModelTests: XCTestCase {
             let formatter = DateFormatter()
             formatter.timeZone = argentinaTimeZone
             formatter.dateFormat = "MMMM dd"
-            return formatter.string(from: date)
+            return formatter.string(from: date).uppercased()
         }
         
         let startOfDate = setUpDate()

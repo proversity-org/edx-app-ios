@@ -52,7 +52,7 @@ open class DateFormatting: NSObject {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM dd"
-        return formatter.string(from: date as Date)
+        return formatter.string(from: date as Date).uppercased()
     }
     
     /// Format like April 11, 2013

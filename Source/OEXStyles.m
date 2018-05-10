@@ -49,11 +49,11 @@ static OEXStyles* sSharedStyles;
 #pragma mark Computed Style
 
 - (UIColor*)navigationBarColor {
-    return [self neutralWhite];
+    return [self primaryBaseColor];
 }
 
 - (UIColor*)navigationItemTintColor {
-    return [self primaryBaseColor];
+    return [self standardBackgroundColor];
 }
 
 - (void) applyMockBackButtonStyleToButton : (UIButton*) button {

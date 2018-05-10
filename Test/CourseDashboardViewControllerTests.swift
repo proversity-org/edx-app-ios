@@ -13,13 +13,12 @@ import edXCore
 
 private extension OEXConfig {
 
-    convenience init(discussionsEnabled : Bool, courseSharingEnabled: Bool = false, courseVideosEnabled: Bool = false, isAnnouncementsEnabled: Bool = true, certificatesEnabled: Bool = false) {
+    convenience init(discussionsEnabled : Bool, courseSharingEnabled: Bool = false, courseVideosEnabled: Bool = false, isAnnouncementsEnabled: Bool = true) {
         self.init(dictionary: [
             "DISCUSSIONS_ENABLED": discussionsEnabled,
             "COURSE_SHARING_ENABLED": courseSharingEnabled,
             "COURSE_VIDEOS_ENABLED": courseVideosEnabled,
-            "ANNOUNCEMENTS_ENABLED": isAnnouncementsEnabled,
-            "CERTIFICATES_ENABLED": certificatesEnabled
+            "ANNOUNCEMENTS_ENABLED": isAnnouncementsEnabled
             ]
         )
     }
@@ -146,7 +145,7 @@ class CourseDashboardViewControllerTests: SnapshotTestCase {
     func testCertificate() {
         let courseData = OEXCourse.testData()
         let enrollment = UserCourseEnrollment(dictionary: ["certificate":["url":"test"], "course" : courseData])!
-        let config = OEXConfig(discussionsEnabled: true,certificatesEnabled: true)
+        let config = OEXConfig(discussionsEnabled: true)
         let environment = TestRouterEnvironment(config: config).logInTestUser()
         environment.mockEnrollmentManager.enrollments = [enrollment]
         

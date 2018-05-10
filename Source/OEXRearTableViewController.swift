@@ -16,7 +16,6 @@ private enum OEXRearViewOptions: Int {
 
 private let versionButtonStyle = OEXTextStyle(weight:.normal, size:.xxSmall, color: OEXStyles.shared().neutralWhite())
 
-@available(*, deprecated, message: "This class has been deprecated in v2.13 and will be obsolete in v2.14, hamburger menu is removed in the favor of new tab bar based design.")
 class OEXRearTableViewController : UITableViewController {
 
     // TODO replace this with a proper injection when we nuke the storyboard
@@ -46,8 +45,8 @@ class OEXRearTableViewController : UITableViewController {
         
         //Listen to notification
         NotificationCenter.default.addObserver(self, selector: #selector(OEXRearTableViewController.dataAvailable(notification:)), name: NSNotification.Name(rawValue: NOTIFICATION_URL_RESPONSE), object: nil)
-
-        coursesLabel.text = Strings.courses.oex_uppercaseStringInCurrentLocale()
+        
+        coursesLabel.text = Strings.myCourses.oex_uppercaseStringInCurrentLocale()
         accountLabel.text = Strings.userAccount.oex_uppercaseStringInCurrentLocale()
         courseCatalogLabel.text = courseCatalogTitle().oex_uppercaseStringInCurrentLocale()
         setNaturalTextAlignment()
