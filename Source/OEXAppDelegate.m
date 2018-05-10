@@ -190,6 +190,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [FIRMessaging messaging].APNSToken = deviceToken;
+    [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
@@ -279,7 +280,7 @@
         }
     }
 }
-    
+
 #pragma mark Firebase
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -289,8 +290,9 @@
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
 }
-    
+
 - (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"%@", remoteMessage);
 }
 

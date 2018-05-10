@@ -170,7 +170,11 @@ extension RatingViewController : MFMailComposeViewControllerDelegate {
     
     func launchEmailComposer() {
         if !MFMailComposeViewController.canSendMail() {
-            UIAlertController().showAlert(withTitle: Strings.emailAccountNotSetUpTitle, message: Strings.emailAccountNotSetUpMessage, onViewController: self)
+            let alert = UIAlertView(title: Strings.emailAccountNotSetUpTitle,
+                                    message: Strings.emailAccountNotSetUpMessage,
+                                    delegate: nil,
+                                    cancelButtonTitle: Strings.ok)
+            alert.show()
             dismissViewController()
         } else {
             let mail = MFMailComposeViewController()
