@@ -190,6 +190,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [FIRMessaging messaging].APNSToken = deviceToken;
+    [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
