@@ -192,6 +192,7 @@
     [FIRMessaging messaging].APNSToken = deviceToken;
     [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
