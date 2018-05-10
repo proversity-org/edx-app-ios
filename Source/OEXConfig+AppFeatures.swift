@@ -77,11 +77,14 @@ extension OEXConfig {
     }
     
     var isUsingVideoPipeline: Bool {
-        // By default using video pipeline is enabled
-        return bool(forKey: "USING_VIDEO_PIPELINE", defaultValue: true)
+        return bool(forKey: "USING_VIDEO_PIPELINE")
     }
   
     var isAnnouncementsEnabled: Bool {
         return bool(forKey: "ANNOUNCEMENTS_ENABLED")
+    }
+    
+    var isTabLayoutEnabled: Bool {
+        return bool(forKey: "TAB_LAYOUTS_ENABLED")
     }
 }

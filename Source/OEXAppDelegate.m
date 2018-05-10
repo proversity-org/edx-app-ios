@@ -87,21 +87,28 @@
     
     if (self.environment.config.pushNotificationsEnabled) {
         [FIRApp configure];
-#ifdef __IPHONE_10_0
-        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-        [FIRMessaging messaging].remoteMessageDelegate = self;
-        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
-                                                                            completionHandler:^(BOOL granted, NSError * _Nullable error)
-         {
-             if (granted) {
-                 [application registerForRemoteNotifications];
-             }
-         }];
-#else
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [application registerForRemoteNotifications];
+        [FIRMessaging messaging].delegate = self;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
+            UIUserNotificationType allNotificationTypes =
+            (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+            UIUserNotificationSettings *settings =
+            [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+            [application registerUserNotificationSettings:settings];
+        } else {
+            // iOS 10 or later
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+            // For iOS 10 display notification (sent via APNS)
+            [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+            UNAuthorizationOptions authOptions =
+            UNAuthorizationOptionAlert
+            | UNAuthorizationOptionSound
+            | UNAuthorizationOptionBadge;
+            [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            }];
 #endif
+        }
+        
+        [application registerForRemoteNotifications];
     }
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -181,6 +188,9 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [FIRMessaging messaging].APNSToken = deviceToken;
+    [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
@@ -270,17 +280,17 @@
         }
     }
 }
-    
+
 #pragma mark Firebase
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"FCM registration token: %@", fcmToken);
     [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
-    NSLog(@"Subscribed to topic");
     
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
 }
-    
+
 - (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
     NSLog(@"%@", remoteMessage);
 }

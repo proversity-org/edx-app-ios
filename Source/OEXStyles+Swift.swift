@@ -48,7 +48,7 @@ extension OEXStyles {
         UINavigationBar.appearance().titleTextAttributes = navigationTitleTextStyle.attributes
         UIBarButtonItem.appearance().setTitleTextAttributes(navigationButtonTextStyle.attributes, for: .normal)
         
-        UIToolbar.appearance().tintColor = navigationItemTintColor()
+        UIToolbar.appearance().tintColor = navigationBarColor()
         
         let styleAttributes = OEXTextStyle(weight: .normal, size : .small, color : self.neutralBlack()).attributes
         UISegmentedControl.appearance().setTitleTextAttributes(styleAttributes, for: UIControlState.selected)
@@ -56,7 +56,15 @@ extension OEXStyles {
         UISegmentedControl.appearance().tintColor = self.primaryXLightColor()
         
         UINavigationBar.appearance().isTranslucent = false
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.classForCoder() as! UIAppearanceContainer.Type]).defaultTextAttributes = searchBarTextStyle.attributes
+
+        if #available(iOS 9.0, *) {
+            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.classForCoder() as! UIAppearanceContainer.Type]).defaultTextAttributes = searchBarTextStyle.attributes
+            
+        }
+        else {
+            //Make sure we remove UIAppearance+Swift.h+m when we drop iOS8 support
+            UITextField.my_appearanceWhenContained(in: UISearchBar.classForCoder() as! UIAppearanceContainer.Type).defaultTextAttributes = searchBarTextStyle.attributes
+        }
     }
     
     ///**Warning:** Not from style guide. Do not add more uses
@@ -92,8 +100,8 @@ extension OEXStyles {
         return style
     }
     
-    func textFieldStyle(with size: OEXTextSize, color: UIColor = OEXStyles.shared().neutralDark()) -> OEXTextStyle {
-        return OEXMutableTextStyle(weight: .normal, size: size, color: color)
+    func textFieldStyle(with size: OEXTextSize) -> OEXTextStyle {
+        return OEXMutableTextStyle(weight: .normal, size: size, color: OEXStyles.shared().neutralDark())
     }
     
 
@@ -164,14 +172,10 @@ extension UISearchBar {
 }
 
 //Convenience computed properties for margins
-var StandardHorizontalMargin: CGFloat {
+var StandardHorizontalMargin : CGFloat {
     return OEXStyles.shared().standardHorizontalMargin()
 }
 
-var StandardVerticalMargin: CGFloat {
+var StandardVerticalMargin : CGFloat {
     return OEXStyles.shared().standardVerticalMargin
-}
-
-var StandardFooterHeight: CGFloat {
-    return OEXStyles.shared().standardFooterHeight
 }

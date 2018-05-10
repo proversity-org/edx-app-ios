@@ -15,19 +15,17 @@ class CourseCardCell : UITableViewCell {
     fileprivate let courseView = CourseCardView(frame: CGRect.zero)
     fileprivate var course : OEXCourse?
     private let courseCardBorderStyle = BorderStyle()
-    private let iPadHorizMargin:CGFloat = 180
     
     override init(style : UITableViewCellStyle, reuseIdentifier : String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        let horizMargin = UIDevice.current.userInterfaceIdiom == .pad ? iPadHorizMargin : CourseCardCell.margin
         
         self.contentView.addSubview(courseView)
         
         courseView.snp_makeConstraints {make in
             make.top.equalTo(self.contentView).offset(CourseCardCell.margin)
             make.bottom.equalTo(self.contentView)
-            make.leading.equalTo(self.contentView).offset(horizMargin)
-            make.trailing.equalTo(self.contentView).offset(-horizMargin)
+            make.leading.equalTo(self.contentView).offset(CourseCardCell.margin)
+            make.trailing.equalTo(self.contentView).offset(-CourseCardCell.margin)
         }
         
         courseView.applyBorderStyle(style: courseCardBorderStyle)

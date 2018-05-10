@@ -16,8 +16,8 @@ protocol AdditionalTableViewCellItem {
     func decorateCell(cell: UITableViewCell)
 }
 
-struct AdditionalCellItem : AdditionalTableViewCellItem {
-    let identifier = AdditionalTableViewCell.identifier
+struct AdditionalTabBarViewCellItem : AdditionalTableViewCellItem {
+    let identifier = CourseDashboardCell.identifier
     let height:CGFloat = 85.0
     
     let title: String
@@ -26,9 +26,9 @@ struct AdditionalCellItem : AdditionalTableViewCellItem {
     let action:(() -> Void)
     
     
-    typealias CellType = AdditionalTableViewCell
+    typealias CellType = CourseDashboardCell
     func decorateCell(cell: UITableViewCell) {
-        guard let dashboardCell = cell as? AdditionalTableViewCell else { return }
+        guard let dashboardCell = cell as? CourseDashboardCell else { return }
         dashboardCell.useItem(item: self)
     }
 }
@@ -64,7 +64,7 @@ class AdditionalTabBarViewController: UIViewController, UITableViewDataSource, U
         view.addSubview(tableView)
     
         // Register tableViewCell
-        tableView.register(AdditionalTableViewCell.self, forCellReuseIdentifier: AdditionalTableViewCell.identifier)
+        tableView.register(CourseDashboardCell.self, forCellReuseIdentifier: CourseDashboardCell.identifier)
         
         tableView.snp_makeConstraints { (make) in
             make.edges.equalTo(view)
@@ -74,7 +74,7 @@ class AdditionalTabBarViewController: UIViewController, UITableViewDataSource, U
     private func prepareTableViewData(items:[TabBarItem]) {
         cellItems = []
         for item in items {
-            let standardCourseItem = AdditionalCellItem(title: item.title, detail: item.detailText, icon: item.icon) {
+            let standardCourseItem = AdditionalTabBarViewCellItem(title: item.title, detail: item.detailText, icon: item.icon) {
                 self.environment.router?.pushViewController(controller: item.viewController, fromController: self)
             }
             cellItems.append(standardCourseItem)

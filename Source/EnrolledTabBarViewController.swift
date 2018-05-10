@@ -164,7 +164,6 @@ class EnrolledTabBarViewController: UITabBarController, UITabBarControllerDelega
     private func addAccountButton() {
         let accountButton = UIBarButtonItem(image: Icon.Account.imageWithFontSize(size: tabBarImageFontSize), style: .plain, target: nil, action: nil)
         accountButton.accessibilityLabel = Strings.userAccount
-        accountButton.accessibilityIdentifier = "EnrolledTabBarViewController:account-button"
         navigationItem.rightBarButtonItem = accountButton
         
         accountButton.oex_setAction { [weak self] in
