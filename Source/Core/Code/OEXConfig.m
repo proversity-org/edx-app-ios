@@ -116,11 +116,11 @@ static OEXConfig* sSharedConfig;
 - (NSString*)organizationCode {
     return [self stringForKey:OEXOrganizationCode];
 }
-
+    
 - (NSString*)konnekteerApiKey {
     return [self stringForKey:KonnekteerApiKey];
 }
-
+    
 - (NSString*)mainTopic {
     return [self stringForKey:MainTopic];
 }

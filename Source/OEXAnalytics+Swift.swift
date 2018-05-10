@@ -14,6 +14,7 @@ public enum AnalyticsCategory : String {
     case Discovery = "discovery"
     case AppReviews = "app-reviews"
     case WhatsNew = "whats-new"
+    case SocialSharing = "social-sharing"
 }
 
 public enum AnalyticsDisplayName : String {
@@ -26,6 +27,7 @@ public enum AnalyticsDisplayName : String {
     case EnrolledCourseSuccess = "Course Enroll Success"
     case BulkDownloadToggleOn = "Bulk Download Toggle On"
     case BulkDownloadToggleOff = "Bulk Download Toggle Off"
+    case SharedCourse = "Shared a course"
 }
 
 public enum AnalyticsEventName: String {
@@ -48,6 +50,7 @@ public enum AnalyticsEventName: String {
     case VideosUnitDelete = "edx.bi.app.video.delete.unit"
     case BulkDownloadToggleOn = "edx.bi.app.videos.download.toggle.on"
     case BulkDownloadToggleOff = "edx.bi.app.videos.download.toggle.off"
+    case SharedCourse = "edx.bi.app.course.shared"
 }
 
 public enum AnalyticsScreenName: String {
@@ -72,6 +75,7 @@ public enum AnalyticsEventDataKey: String {
     case UnitID = "unit_id"
     case totalDownloadableVideos = "total_downloadable_videos"
     case remainingDownloadableVideos = "remaining_downloadable_videos"
+    case UserID = "user_id"
 }
 
 
@@ -145,7 +149,7 @@ extension OEXAnalytics {
         trackEvent(event, forComponent: nil, withInfo: [AnalyticsEventDataKey.SubsectionID.rawValue : subsectionID])
     }
     
-    func trackBulkDownloadToggle(isOn: Bool, courseID: String, totalVideosCount: Int, remainingVideosCount: Int) {
+    func trackBulkDownloadToggle(isOn: Bool, courseID: String, totalVideosCount: Int, remainingVideosCount: Int, blockID: CourseBlockID?) {
         let event = OEXAnalyticsEvent()
         event.courseID = courseID
         event.name = isOn ? AnalyticsEventName.BulkDownloadToggleOn.rawValue : AnalyticsEventName.BulkDownloadToggleOff.rawValue
@@ -155,6 +159,9 @@ extension OEXAnalytics {
         
         if isOn {
             info[AnalyticsEventDataKey.remainingDownloadableVideos.rawValue] = "\(remainingVideosCount)"
+        }
+        if let blockID = blockID {
+            info[OEXAnalyticsKeyBlockID] = "\(blockID)"
         }
         
         trackEvent(event, forComponent: nil, withInfo: info)
@@ -168,4 +175,14 @@ extension OEXAnalytics {
         
         trackEvent(event, forComponent: nil, withInfo: [AnalyticsEventDataKey.UnitID.rawValue : unitID])
     }
+
+    func trackCourseShared(courseID: String, url: String, type: String) {
+        let event = OEXAnalyticsEvent()
+        event.courseID = courseID;
+        event.name = AnalyticsEventName.SharedCourse.rawValue
+        event.displayName = AnalyticsDisplayName.SharedCourse.rawValue
+        event.category = AnalyticsCategory.SocialSharing.rawValue
+        trackEvent(event, forComponent: nil, withInfo: ["url": url, "type": type])
+    }
 }
+
