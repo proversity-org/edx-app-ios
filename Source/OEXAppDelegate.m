@@ -292,7 +292,6 @@
 }
 
 - (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"%@", remoteMessage);
 }
 

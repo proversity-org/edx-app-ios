@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>836611943730-5inot8d1bdb3ratbab0ge60kv5rfctjc.apps.googleusercontent.com</string>
+	<string>836611943730-h5d6al4e2gcpglregaqpjp2qgm7smt1d.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.836611943730-5inot8d1bdb3ratbab0ge60kv5rfctjc</string>
+	<string>com.googleusercontent.apps.836611943730-h5d6al4e2gcpglregaqpjp2qgm7smt1d</string>
 	<key>API_KEY</key>
 	<string>1q2w3e4r5t</string>
 	<key>GCM_SENDER_ID</key>
@@ -25,9 +25,9 @@
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
 	<true/>
 	<key>IS_SIGNIN_ENABLED</key>

@@ -262,12 +262,10 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             
             switch errorGroup {
             case HttpErrorGroup.http4xx:
-                state = .NeedingSession
-                break
+                self.state = .NeedingSession
             case HttpErrorGroup.http5xx:
-                loadController.state = LoadState.failed()
+                self.loadController.state = LoadState.failed()
                 decisionHandler(.cancel)
-                return
             }
         }
         decisionHandler(.allow)
