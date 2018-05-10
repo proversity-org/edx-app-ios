@@ -34,8 +34,8 @@
     return @([self.view currentValue]);
 }
 
-- (void)setValue:(NSNumber*)value {
-    [self.view setValue:[value boolValue]];
+- (void)takeValue:(NSNumber*)value {
+    [self.view takeValue:[value boolValue]];
 }
 
 - (BOOL)hasValue {

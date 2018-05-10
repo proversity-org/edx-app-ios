@@ -18,7 +18,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate {
         let icon : Icon
     }
     
-    typealias Environment = NetworkManagerProvider & OEXStylesProvider & OEXAnalyticsProvider
+    typealias Environment = NetworkManagerProvider & OEXStylesProvider
     
     fileprivate let environment : Environment
     
@@ -86,9 +86,7 @@ class CourseCatalogDetailView : UIView, UIWebViewDelegate {
         
         actionButton.oex_addAction({[weak self] _ in
             self?.actionButton.showProgress = true
-            self?.action?( {[weak self] _ in
-                            self?.actionButton.showProgress = false
-            } )
+            self?.action?( { self?.actionButton.showProgress = false } )
             }, for: .touchUpInside)
         
         descriptionView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal

@@ -31,6 +31,10 @@ class CourseCardViewModel : NSObject {
         return course.courseImageURL
     }
     
+    static func onMyVideos(course: OEXCourse, collectionInfo: String) -> CourseCardViewModel {
+        return CourseCardViewModel(course: course, detailText: course.courseRun, bottomTrailingText: collectionInfo, persistImage: true)
+    }
+    
     static func onHome(course: OEXCourse) -> CourseCardViewModel {
         return CourseCardViewModel(course: course, detailText: course.courseRun, bottomTrailingText: course.nextRelevantDateUpperCaseString, persistImage: true)
     }
@@ -41,10 +45,6 @@ class CourseCardViewModel : NSObject {
     
     static func onCourseCatalog(course: OEXCourse, wrapTitle: Bool = false) -> CourseCardViewModel {
         return CourseCardViewModel(course: course, detailText: course.courseRun, bottomTrailingText: course.nextRelevantDateUpperCaseString, persistImage: false, wrapTitle: wrapTitle)
-    }
-    
-    static func onCourseOutline(course: OEXCourse) -> CourseCardViewModel {
-        return CourseCardViewModel(course: course, detailText: course.courseRunIncludingNextDate, bottomTrailingText: nil, persistImage: true, wrapTitle: true)
     }
     
     func apply(card : CourseCardView, networkManager: NetworkManager) {

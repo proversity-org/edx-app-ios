@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OEXRegistrationFieldCheckBoxView : UIView
 
-- (void)setValue:(BOOL)value;
+- (void)takeValue:(BOOL)value;
 
 @property (nonatomic, strong, nullable) NSString* errorMessage;
 @property (nonatomic, strong) NSString* instructionMessage;

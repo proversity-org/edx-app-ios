@@ -14,10 +14,8 @@ import Foundation
 public class OfflineSupportViewController: UIViewController {
     typealias Env = ReachabilityProvider
     private let environment : Env
-    private var shouldShowOfflineSnackBar: Bool? = true
-    init(env: Env, shouldShowOfflineSnackBar: Bool? = true) {
+    init(env: Env) {
         self.environment = env
-        self.shouldShowOfflineSnackBar = shouldShowOfflineSnackBar
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,15 +26,11 @@ public class OfflineSupportViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupObservers()
-        edgesForExtendedLayout = []
-        tabBarController?.tabBar.isTranslucent = false
     }
     
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if shouldShowOfflineSnackBar ?? true {
-            showOfflineSnackBarIfNecessary()
-        }
+        showOfflineSnackBarIfNecessary()
     }
     
     private func setupObservers() {
@@ -45,8 +39,7 @@ public class OfflineSupportViewController: UIViewController {
         }
     }
     
-    /// Can be called from child on need bases
-    public func showOfflineSnackBarIfNecessary() {
+    private func showOfflineSnackBarIfNecessary() {
         if !environment.reachability.isReachable() {
             showOfflineSnackBar(message: Strings.offline, selector: #selector(reloadViewData))
         }

@@ -11,7 +11,7 @@ import MessageUI
 import edXCore
 
 private enum OEXRearViewOptions: Int {
-    case UserProfile, MyCourse, CourseCatalog, UserAccount, Debug
+    case UserProfile, MyCourse, MyVideos, CourseCatalog, UserAccount, Debug
 }
 
 private let versionButtonStyle = OEXTextStyle(weight:.normal, size:.xxSmall, color: OEXStyles.shared().neutralWhite())
@@ -30,6 +30,7 @@ class OEXRearTableViewController : UITableViewController {
     }
     
     @IBOutlet var coursesLabel: UILabel!
+    @IBOutlet var videosLabel: UILabel!
     @IBOutlet var accountLabel: UILabel!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var courseCatalogLabel: UILabel!
@@ -47,6 +48,7 @@ class OEXRearTableViewController : UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(OEXRearTableViewController.dataAvailable(notification:)), name: NSNotification.Name(rawValue: NOTIFICATION_URL_RESPONSE), object: nil)
         
         coursesLabel.text = Strings.myCourses.oex_uppercaseStringInCurrentLocale()
+        videosLabel.text = Strings.myVideos.oex_uppercaseStringInCurrentLocale()
         accountLabel.text = Strings.userAccount.oex_uppercaseStringInCurrentLocale()
         courseCatalogLabel.text = courseCatalogTitle().oex_uppercaseStringInCurrentLocale()
         setNaturalTextAlignment()
@@ -92,6 +94,7 @@ class OEXRearTableViewController : UITableViewController {
     
     private func setNaturalTextAlignment() {
         coursesLabel.textAlignment = .natural
+        videosLabel.textAlignment = .natural
         accountLabel.textAlignment = .natural
         userNameLabel.textAlignment = .natural
         userNameLabel.adjustsFontSizeToFitWidth = true
@@ -101,6 +104,7 @@ class OEXRearTableViewController : UITableViewController {
     private func setAccessibilityLabels() {
         userNameLabel.accessibilityLabel = userNameLabel.text
         coursesLabel.accessibilityLabel = coursesLabel.text
+        videosLabel.accessibilityLabel = videosLabel.text
         accountLabel.accessibilityLabel = accountLabel.text
         courseCatalogLabel.accessibilityLabel = courseCatalogLabel.text
         userProfilePicture.accessibilityLabel = Strings.accessibilityUserAvatar
@@ -149,6 +153,8 @@ class OEXRearTableViewController : UITableViewController {
                 environment.router?.showProfileForUsername(username: currentUserName)
             case .MyCourse:
                 environment.router?.showMyCourses()
+            case .MyVideos:
+                environment.router?.showMyVideos()
             case .CourseCatalog:
                 environment.router?.showCourseCatalog()
             case .UserAccount:
@@ -162,7 +168,7 @@ class OEXRearTableViewController : UITableViewController {
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if (indexPath.row == OEXRearViewOptions.Debug.rawValue && !environment.config.shouldShowDebug()) {
+        if ((indexPath.row == OEXRearViewOptions.Debug.rawValue && !environment.config.shouldShowDebug()) || (indexPath.row == OEXRearViewOptions.MyVideos.rawValue && !environment.config.isMyVideosEnabled)) {
             return 0
         }
         else if indexPath.row == OEXRearViewOptions.CourseCatalog.rawValue && !environment.config.courseEnrollmentConfig.isCourseDiscoveryEnabled() {

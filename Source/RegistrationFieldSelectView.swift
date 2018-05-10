@@ -8,51 +8,34 @@
 
 import UIKit
 
-class RegistrationFieldSelectView: RegistrationFormFieldView, UIPickerViewDelegate, UIPickerViewDataSource {
+class RegistrationFieldSelectView: OEXRegistrationFormTextField, UIPickerViewDelegate, UIPickerViewDataSource {
     var options : [OEXRegistrationOption] = []
     private(set) var selected : OEXRegistrationOption?
     
     @objc let picker = UIPickerView(frame: CGRect.zero)
-    private let dropdownView = UIView(frame: CGRect(x: 0, y: 0, width: 27, height: 40))
     private let dropdownTab = UIImageView()
     private let tapButton = UIButton()
     
-    private var titleStyle : OEXTextStyle {
-        return OEXTextStyle(weight: .normal, size: .base, color: OEXStyles.shared().neutralDark())
-    }
-    
-    override var currentValue: String {
-        return tapButton.attributedTitle(for: .normal)?.string ?? ""
-    }
-    
-    override init(with formField: OEXRegistrationFormField) {
-        super.init(with: formField)
-    }
-    
-    override func loadView() {
-        super.loadView()
+    override init(frame : CGRect) {
+        super.init(frame : CGRect.zero)
         picker.dataSource = self
         picker.delegate = self
         picker.showsSelectionIndicator = true;
-        textInputField.isEnabled = false
-        dropdownView.addSubview(dropdownTab)
-        dropdownView.layoutIfNeeded()
+        textInputView.isEnabled = false
+        
         dropdownTab.image = Icon.Dropdown.imageWithFontSize(size: 12)
         dropdownTab.tintColor = OEXStyles.shared().neutralDark()
-        dropdownTab.contentMode = .scaleAspectFit
         dropdownTab.sizeToFit()
-        dropdownTab.center = dropdownView.center
-        tapButton.localizedHorizontalContentAlignment = .Leading
         
         if isRightToLeft && !UIDevice.isOSVersionAtLeast9() {
             // Starting with iOS9, leftView and rightView are reflected in RTL views.
             // When we drop iOS8 support we can remove this conditional check entirely.
-            textInputField.leftViewMode = .always
-            textInputField.leftView = dropdownView
+            textInputView.leftViewMode = .always
+            textInputView.leftView = dropdownTab
         }
         else {
-            textInputField.rightViewMode = .always
-            textInputField.rightView = dropdownView
+            textInputView.rightViewMode = .always
+            textInputView.rightView = dropdownTab
         }
         tapButton.oex_addAction({[weak self] _ in
             self?.makeFirstResponder()
@@ -60,34 +43,20 @@ class RegistrationFieldSelectView: RegistrationFormFieldView, UIPickerViewDelega
         self.addSubview(tapButton)
         
         tapButton.snp_makeConstraints { (make) in
-            make.top.equalTo(textInputField)
-            make.leading.equalTo(textInputField)
-            make.trailing.equalTo(textInputField)
-            make.bottom.equalTo(textInputField)
+            make.top.equalTo(textInputView)
+            make.leading.equalTo(textInputView)
+            make.trailing.equalTo(textInputView)
+            make.bottom.equalTo(textInputView)
         }
-        let insets = OEXStyles.shared().standardTextViewInsets
-        tapButton.titleEdgeInsets = UIEdgeInsetsMake(0, insets.left, 0, insets.right)
-        refreshAccessibilty()
+        
+        self.textInputView.isAccessibilityElement = false
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    }
-    
-    override func refreshAccessibilty() {
-        guard let formField = formField else { return }
-        
-        let errorAccessibility = errorMessage ?? "" != "" ? ",\(Strings.Accessibility.errorText), \(errorMessage ?? "")" : ""
-        tapButton.accessibilityLabel = String(format: "%@, %@", formField.label, Strings.accessibilityDropdownTrait)
-        tapButton.accessibilityTraits = UIAccessibilityTraitNone
-        let accessibilitHintText = isRequired ? String(format: "%@, %@, %@, %@", Strings.Accessibility.requiredInput,formField.instructions, errorAccessibility , Strings.accessibilityShowsDropdownHint) : String(format: "%@, %@, %@, %@", Strings.Accessibility.optionalInput,formField.instructions,errorAccessibility , Strings.accessibilityShowsDropdownHint)
-        tapButton.accessibilityHint = accessibilitHintText
-        textInputField.isAccessibilityElement = false
-    }
-    
-    private func setButtonTitle(title: String) {
-        tapButton.setAttributedTitle(titleStyle.attributedString(withText: title), for: .normal)
-        tapButton.accessibilityLabel = String(format: "%@, %@, %@", formField?.label ?? "", title, Strings.accessibilityDropdownTrait)
+        tapButton.accessibilityLabel = self.placeholder
+        tapButton.accessibilityHint = Strings.accessibilityShowsDropdownHint
     }
     
     override var canBecomeFirstResponder: Bool {
@@ -117,27 +86,16 @@ class RegistrationFieldSelectView: RegistrationFormFieldView, UIPickerViewDelega
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selected = self.options[row]
         if let selected = self.selected, !selected.value.isEmpty {
-            setButtonTitle(title: selected.name)
+            self.textInputView.text = selected.name
         }
         else {
-            setButtonTitle(title: "")
+            self.textInputView.text = ""
         }
-        valueDidChange()
     }
     
     func makeFirstResponder() {
         self.becomeFirstResponder()
             UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, self.picker)
-    }
-    
-    override func validate() -> String? {
-        guard let field = formField else {
-            return nil
-        }
-        if isRequired && currentValue == "" {
-            return field.errorMessage.required == "" ? Strings.registrationFieldEmptySelectError(fieldName: field.label) : field.errorMessage.required
-        }
-        return nil
     }
 
 }

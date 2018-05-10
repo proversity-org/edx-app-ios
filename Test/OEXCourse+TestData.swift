@@ -80,8 +80,7 @@ public extension OEXCourse {
         effort: String? = nil,
         mediaInfo: [String:CourseMediaInfo] = [:],
         startInfo: OEXCourseStartDisplayInfo? = nil,
-        end : NSDate? = nil,
-        aboutUrl: String? = nil
+        end : NSDate? = nil
         ) -> OEXCourse
     {
         let courseData = OEXCourse.testData(
@@ -93,8 +92,7 @@ public extension OEXCourse {
             effort:effort,
             mediaInfo: mediaInfo,
             startInfo: startInfo,
-            end: end,
-            aboutUrl: aboutUrl)
+            end: end)
         return OEXCourse(dictionary: courseData)
     }
     

@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// id should be a JSON safe type.
 - (id)currentValue;
-- (void)setValue:(id)value;
+- (void)takeValue:(id)value;
 
 - (void)handleError:(nullable NSString*)errorMsg;
 

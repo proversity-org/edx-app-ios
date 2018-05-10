@@ -23,7 +23,9 @@
     self = [super init];
     if(self) {
         self.field = field;
-        self.view = [[RegistrationFieldSelectView alloc] initWith:field];
+        self.view = [[RegistrationFieldSelectView alloc] init];
+        self.view.instructionMessage = field.instructions;
+        self.view.placeholder = field.label;
         self.view.options = self.field.fieldOptions;
         self.view.accessibilityIdentifier = [NSString stringWithFormat:@"field-%@", field.name];
         self.view.picker.accessibilityIdentifier = [NSString stringWithFormat:@"picker-field-%@", field.name];
@@ -35,9 +37,9 @@
     return [self.view.selected.value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
-- (void)setValue:(NSString*)value {
+- (void)takeValue:(NSString*)value {
     if(value && [self.field.fieldOptions containsObject:value]) {
-        [self.view setValue:value];
+        [self.view takeValue:value];
     }
 }
 
@@ -50,7 +52,17 @@
 }
 
 - (BOOL)isValidInput {
-    return self.view.isValidInput;
+    if(self.field.isRequired && ![self hasValue]) {
+        if(!self.field.errorMessage.required) {
+            NSString* error = [Strings registrationFieldEmptySelectErrorWithFieldName:self.field.label];
+            [self handleError:error];
+        }
+        else {
+            [self handleError:self.field.errorMessage.required];
+        }
+        return NO;
+    }
+    return YES;
 }
 - (UIView*)accessibleInputField {
     return self.view;

@@ -65,12 +65,3 @@ extension UIView {
         style.applyToView(view: self)
     }
 }
-
-extension OEXPlaceholderTextView {
-    func applyStandardBorderStyle() {
-        textContainerInset = OEXStyles.shared().standardTextViewInsets
-        typingAttributes = OEXStyles.shared().textAreaBodyStyle.attributes
-        placeholderTextColor = OEXStyles.shared().neutralLight()
-        applyBorderStyle(style: OEXStyles.shared().entryFieldBorderStyle)
-    }
-}

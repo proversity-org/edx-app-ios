@@ -13,6 +13,11 @@ private let notificationLabelLeadingOffset = 20.0
 private let notificationLabelTrailingOffset = -10.0
 private let notificationBarHeight = 50.0
 
+@objc protocol CourseAnnouncementsViewControllerEnvironment : OEXConfigProvider, DataManagerProvider, NetworkManagerProvider, ReachabilityProvider, OEXRouterProvider, OEXAnalyticsProvider {}
+
+extension RouterEnvironment : CourseAnnouncementsViewControllerEnvironment {}
+
+
 private func announcementsDeserializer(response: HTTPURLResponse, json: JSON) -> Result<[OEXAnnouncement]> {
     return json.array.toResult().map {
         return $0.map {
@@ -21,9 +26,9 @@ private func announcementsDeserializer(response: HTTPURLResponse, json: JSON) ->
     }
 }
 
+
 class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebViewDelegate, LoadStateViewReloadSupport {
-    
-    typealias Environment = OEXAnalyticsProvider & OEXConfigProvider & DataManagerProvider & NetworkManagerProvider & OEXRouterProvider & OEXInterfaceProvider & ReachabilityProvider & OEXSessionProvider & OEXStylesProvider
+    private let environment: CourseAnnouncementsViewControllerEnvironment
     
     let courseID: String
     
@@ -34,11 +39,11 @@ class CourseAnnouncementsViewController: OfflineSupportViewController, UIWebView
     fileprivate let notificationBar : UIView
     private let notificationLabel : UILabel
     private let notificationSwitch : UISwitch
-    private let environment: Environment
+    
     private let fontStyle = OEXTextStyle(weight : .normal, size: .base, color: OEXStyles.shared().neutralBlack())
     private let switchStyle = OEXStyles.shared().standardSwitchStyle()
     
-    init(environment: Environment, courseID: String) {
+    init(environment: CourseAnnouncementsViewControllerEnvironment, courseID: String) {
         self.courseID = courseID
         self.environment = environment
         self.webView = UIWebView()

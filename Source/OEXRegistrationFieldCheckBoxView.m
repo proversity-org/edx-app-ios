@@ -35,7 +35,7 @@
     [self.checkBox setLabelText:label];
 }
 
-- (void)setValue:(BOOL)value {
+- (void)takeValue:(BOOL)value {
     [self.checkBox setSelected:value];
 }
 

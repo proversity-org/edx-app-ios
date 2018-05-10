@@ -38,6 +38,10 @@
 
 @implementation OEXDownloadViewController
 
+- (IBAction)navigateToDownloadedVideos {
+    [[OEXRouter sharedRouter] showMyVideos];
+}
+
 #pragma mark - REACHABILITY
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -154,28 +158,30 @@
 - (void)configureCell:(OEXDownloadTableCell*)cell forIndexPath:(NSIndexPath*)indexPath {
     if([self.arr_downloadingVideo count] > indexPath.row) {
         OEXHelperVideoDownload* downloadingVideo = [self.arr_downloadingVideo objectAtIndex:indexPath.row];
+
+        
         NSString* videoName = downloadingVideo.summary.name;
         if([videoName length] == 0) {
             videoName = [Strings parenthesisWithText:[Strings untitled]];
         }
         cell.lbl_title.text = videoName;
 
-        if (downloadingVideo.summary.hasVideoDuration && downloadingVideo.summary.hasVideoSize) {
-            cell.lbl_time.text = [DateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
-            cell.lbl_totalSize.text = [downloadingVideo.summary videoSize];
+        if(!downloadingVideo.summary.duration) {
+            cell.lbl_time.text = [Strings myVideosTimeLabel];
         }
-        else if (downloadingVideo.summary.hasVideoDuration) {
+        else {
             cell.lbl_time.text = [DateFormatting formatSecondsAsVideoLength: downloadingVideo.summary.duration];
-        }
-        else if (downloadingVideo.summary.hasVideoSize) {
-            cell.lbl_time.text = [downloadingVideo.summary videoSize];
         }
         
+        cell.lbl_totalSize.text = [downloadingVideo.summary videoSize];
         float progress = (float)downloadingVideo.downloadProgress;
         [cell.progressView setProgress:progress];
+        //
         cell.btn_cancel.tag = indexPath.row;
         cell.btn_cancel.accessibilityLabel = [Strings cancel];
+
         [cell.btn_cancel addTarget:self action:@selector(btnCancelPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
         cell.accessibilityLabel = [self downloadStatusAccessibilityLabelForVideoName:videoName percentComplete:(progress / OEXMaxDownloadProgress)];
     }
 }
@@ -187,7 +193,6 @@
 }
 
 - (void)downloadProgressNotification:(NSNotification*)notification {
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^(void){
         @autoreleasepool {
             NSDictionary* progress = (NSDictionary*)notification.userInfo;
@@ -196,7 +201,7 @@
             
             for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
                 if([video.summary.videoURL isEqualToString:url]) {
-                    [weakSelf updateProgressForVisibleRows];
+                    [self updateProgressForVisibleRows];
                     break;
                 }
             }
@@ -205,9 +210,8 @@
 }
 
 - (void)downloadCompleteNotification:(NSNotification*)notification {
-    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf updateProgressForVisibleRows];
+        [self updateProgressForVisibleRows];
     });
 }
 

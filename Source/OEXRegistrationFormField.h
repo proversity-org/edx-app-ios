@@ -49,8 +49,6 @@ typedef enum
 /// Contents are OEXRegistrationOption*
 @property (readonly, nonatomic, copy) NSArray* fieldOptions;
 
-- (OEXRegistrationFieldType)registrationFieldType:(NSString*)fieldType;
-
 @end
 
 @interface OEXMutableRegistrationFormField : OEXRegistrationFormField
