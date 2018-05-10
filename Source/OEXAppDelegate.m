@@ -87,6 +87,7 @@
     
     if (self.environment.config.pushNotificationsEnabled) {
         [FIRApp configure];
+        [FIRMessaging messaging].delegate = self;
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
             UIUserNotificationType allNotificationTypes =
             (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
@@ -97,7 +98,6 @@
             // iOS 10 or later
 #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
             // For iOS 10 display notification (sent via APNS)
-            [FIRMessaging messaging].delegate = self;
             [UNUserNotificationCenter currentNotificationCenter].delegate = self;
             UNAuthorizationOptions authOptions =
             UNAuthorizationOptionAlert
@@ -189,8 +189,8 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"%@", deviceToken);
     [FIRMessaging messaging].APNSToken = deviceToken;
+    [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     [self.environment.pushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
@@ -283,15 +283,16 @@
 
 #pragma mark Firebase
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"FCM registration token: %@", fcmToken);
     [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
-    NSLog(@"Subscribed to topic");
     
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
 }
 
 - (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"%@", remoteMessage);
 }
 
