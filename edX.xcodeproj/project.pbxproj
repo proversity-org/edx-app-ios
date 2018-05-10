@@ -624,6 +624,7 @@
 		B78823A81FC6F69900F9CD61 /* RegistrationFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78823A71FC6F69900F9CD61 /* RegistrationFieldController.swift */; };
 		B78823AC1FC709BD00F9CD61 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78823AB1FC709BD00F9CD61 /* String+Validation.swift */; };
 		B78823B01FC80CBB00F9CD61 /* RegistrationFieldControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78823AF1FC80CBB00F9CD61 /* RegistrationFieldControllerFactory.swift */; };
+		BD18148820A483380085C289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD18148720A483370085C289 /* GoogleService-Info.plist */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -1518,6 +1519,7 @@
 		B78823A71FC6F69900F9CD61 /* RegistrationFieldController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationFieldController.swift; sourceTree = "<group>"; };
 		B78823AB1FC709BD00F9CD61 /* String+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		B78823AF1FC80CBB00F9CD61 /* RegistrationFieldControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationFieldControllerFactory.swift; sourceTree = "<group>"; };
+		BD18148720A483370085C289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -3099,6 +3101,7 @@
 		BECB7B021924C0C3009C77F1 = {
 			isa = PBXGroup;
 			children = (
+				BD18148720A483370085C289 /* GoogleService-Info.plist */,
 				E052F5A81D9953BB009F6B6F /* edX.entitlements */,
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
@@ -3560,7 +3563,6 @@
 				77BDD65E1A44BD7300EA2A9C /* Process Config */,
 				77B4BAF31A52152A00B14C39 /* Upload Debugging Symbols */,
 				77E647AC1C90C10400B6740D /* Embed Frameworks */,
-				945763D7D42BB9F3F81F0156 /* [CP] Embed Pods Frameworks */,
 				A5227C8DDB2ED6310729C274 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -3581,8 +3583,6 @@
 				BECB7B281924C0C3009C77F1 /* Sources */,
 				BECB7B291924C0C3009C77F1 /* Frameworks */,
 				BECB7B2A1924C0C3009C77F1 /* Resources */,
-				9904497836E3E6F8251859B2 /* [CP] Embed Pods Frameworks */,
-				95744DC2F2D933AE0E8F2C96 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3776,6 +3776,7 @@
 				BD837BB81DC8D5D400341EFD /* Icon-76.png in Resources */,
 				69ECC63E1D50D1170030CF87 /* icon_google_white.png in Resources */,
 				69ECC63D1D50D1170030CF87 /* icon_facebook_white@2x.png in Resources */,
+				BD18148820A483380085C289 /* GoogleService-Info.plist in Resources */,
 				69ECC6361D50D1170030CF87 /* ic_partiallywatched@2x.png in Resources */,
 				69ECC6081D50D1170030CF87 /* Icon-29.png in Resources */,
 				69ECC6041D50D1170030CF87 /* OpenSans-LightItalic.ttf in Resources */,
@@ -3843,13 +3844,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-edX-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		0243B436864CA2EEDF9B6700 /* [CP] Check Pods Manifest.lock */ = {
@@ -3858,13 +3862,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-edXTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7753912C1C9397CE00FA959C /* Copy config */ = {
@@ -3926,60 +3933,24 @@
 			shellPath = /bin/sh;
 			shellScript = "rm -f \"${BUILT_PRODUCTS_DIR}/Strings.swift\"\n\"${SRCROOT}/script/Localizations.swift\" \"${SRCROOT}/Source/en.lproj/Localizable.strings\" \"${BUILT_PRODUCTS_DIR}/Strings.swift\"\nchmod -w \"${BUILT_PRODUCTS_DIR}/Strings.swift\"\n";
 		};
-		945763D7D42BB9F3F81F0156 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-edX/Pods-edX-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95744DC2F2D933AE0E8F2C96 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-edXTests/Pods-edXTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9904497836E3E6F8251859B2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-edXTests/Pods-edXTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A5227C8DDB2ED6310729C274 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-edX/Pods-edX-resources.sh",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools.bundle",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Parse/Parse/Resources/en.lproj",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4722,8 +4693,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_BITCODE = NO;
@@ -4743,8 +4714,8 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "bf259fef-f598-4512-b4df-79cb75f4c5ad";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.edx.mobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5169,8 +5140,8 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1bc59fda-473a-406a-a7ef-cda825cd79a3";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.edx.mobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -5186,8 +5157,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = edX.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_BITCODE = NO;
@@ -5207,8 +5178,8 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
 				PRODUCT_NAME = edX;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "bf259fef-f598-4512-b4df-79cb75f4c5ad";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore org.edx.mobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "Source/edX-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
