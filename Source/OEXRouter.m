@@ -23,7 +23,6 @@
 #import "OEXSession.h"
 #import "OEXDownloadViewController.h"
 #import "OEXCourse.h"
-#import "SWRevealViewController.h"
 
 
 static OEXRouter* sSharedRouter;
@@ -42,7 +41,6 @@ OEXRegistrationViewControllerDelegate
 @property (strong, nonatomic) SingleChildContainingViewController* containerViewController;
 @property (strong, nonatomic) UIViewController* currentContentController;
 
-@property (strong, nonatomic) RevealViewController* revealController;
 @property (strong, nonatomic) void(^registrationCompletion)(void);
 
 @end
@@ -107,14 +105,7 @@ OEXRegistrationViewControllerDelegate
     
     OEXUserDetails* currentUser = self.environment.session.currentUser;
     [self.environment.analytics identifyUser:currentUser];
-    
-    self.revealController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"SideNavigationContainer"];
-    self.revealController.delegate = self.revealController;
-    [self showMyCoursesAnimated:NO pushingCourseWithID:nil];
-    
-    UIViewController* rearController = [self.mainStoryboard instantiateViewControllerWithIdentifier:@"RearViewController"];
-    [self.revealController setDrawerViewControllerWithController:rearController animated:NO];
-    [self makeContentControllerCurrent:self.revealController];
+    [self showEnrolledTabBarView];
 }
 
 - (void)showLoginScreenFromController:(UIViewController*)controller completion:(void(^)(void))completion {
@@ -125,7 +116,7 @@ OEXRegistrationViewControllerDelegate
     OEXLoginViewController* loginController = [[UIStoryboard storyboardWithName:@"OEXLoginViewController" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginView"];
     loginController.delegate = self;
     loginController.environment = self.environment;
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginController];
+    ForwardingNavigationController *navController = [[ForwardingNavigationController alloc] initWithRootViewController:loginController];
     
     return navController;
 }
@@ -133,7 +124,7 @@ OEXRegistrationViewControllerDelegate
 - (void)showSignUpScreenFromController:(UIViewController*)controller completion:(void(^)(void))completion {
     self.registrationCompletion = completion;
     OEXRegistrationViewController* registrationController = [[OEXRegistrationViewController alloc] initWithEnvironment:self.environment];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:registrationController];
+    ForwardingNavigationController *navController = [[ForwardingNavigationController alloc] initWithRootViewController:registrationController];
     registrationController.delegate = self;
     
     [self presentViewController:navController fromController:[controller topMostController] completion:nil];
@@ -155,7 +146,7 @@ OEXRegistrationViewControllerDelegate
 }
 
 - (void)showAnnouncementsForCourseWithID:(NSString *)courseID {
-    UINavigationController* navigation = OEXSafeCastAsClass(self.revealController.frontViewController, UINavigationController);
+    UINavigationController* navigation = OEXSafeCastAsClass(UIApplication.sharedApplication.keyWindow.rootViewController, UINavigationController);
     CourseAnnouncementsViewController* currentController = OEXSafeCastAsClass(navigation.topViewController, CourseAnnouncementsViewController);
     BOOL showingChosenCourse = [currentController.courseID isEqual:courseID];
     
@@ -165,27 +156,11 @@ OEXRegistrationViewControllerDelegate
     }
 }
 
-- (UIBarButtonItem*)showNavigationBarItem {
-    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithImage:[UIImage MenuIcon] style:UIBarButtonItemStylePlain target:self action:@selector(showSidebar:)];
-    item.accessibilityLabel = [Strings accessibilityMenu];
-    item.accessibilityIdentifier = @"navigation-bar-button";
-    
-    return item;
-}
-
-- (void)showSidebar:(id)sender {
-    [self.revealController toggleDrawerAnimatedWithAnimated:YES];
-}
-
 - (void)showContentStackWithRootController:(UIViewController*)controller animated:(BOOL)animated {
-    controller.navigationItem.leftBarButtonItem = [self showNavigationBarItem];
-    NSAssert( self.revealController != nil, @"oops! must have a revealViewController" );
-    
-    [controller.view addGestureRecognizer:self.revealController.panGestureRecognizer];
     UINavigationController* navigationController = [[ForwardingNavigationController alloc] initWithRootViewController:controller];
-    [self.revealController pushFrontViewController:navigationController animated:animated];
+    [self makeContentControllerCurrent:navigationController];
 }
-
+    
 - (void)showDownloadsFromViewController:(UIViewController*)controller {
     OEXDownloadViewController* vc = [[UIStoryboard storyboardWithName:@"OEXDownloadViewController" bundle:nil] instantiateViewControllerWithIdentifier:@"OEXDownloadViewController"];
     [controller.navigationController pushViewController:vc animated:YES];
@@ -219,15 +194,11 @@ OEXRegistrationViewControllerDelegate
 @implementation OEXRouter(Testing)
 
 - (NSArray*)t_navigationHierarchy {
-    return OEXSafeCastAsClass(self.revealController.frontViewController, UINavigationController).viewControllers ?: @[];
+    return OEXSafeCastAsClass([[UIApplication sharedApplication] keyWindow].rootViewController, UINavigationController).viewControllers ?: @[];
 }
 
 - (BOOL)t_showingLogin {
     return [self.currentContentController isKindOfClass:[OEXLoginSplashViewController class]];
-}
-
-- (BOOL)t_hasDrawerController {
-    return self.revealController.drawerViewController != nil;
 }
 
 @end

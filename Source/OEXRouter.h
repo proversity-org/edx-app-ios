@@ -12,13 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class DataManager;
-
 @class RouterEnvironment;
 
 @class OEXHelperVideoDownload;
 @class OEXVideoPathEntry;
 @class NetworkManager;
-@class RevealViewController;
 
 typedef NS_ENUM(NSUInteger, OEXSideNavigationState) {
     OEXSideNavigationStateHidden,
@@ -73,7 +71,6 @@ extern NSString* OEXSideNavigationChangedStateKey;
 @interface OEXRouter (Private)
 
 @property (readonly, strong, nonatomic) RouterEnvironment* environment;
-@property (strong, nonatomic, nullable) RevealViewController* revealController;
 
 - (UINavigationController *) loginViewController;
 - (void)removeCurrentContentController;
@@ -86,7 +83,6 @@ extern NSString* OEXSideNavigationChangedStateKey;
 // UIViewController list for the currently navigation hierarchy
 - (NSArray*)t_navigationHierarchy;
 - (BOOL)t_showingLogin;
-- (BOOL)t_hasDrawerController;
 
 @end
 

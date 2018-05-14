@@ -22,7 +22,7 @@ class CourseOutlineViewControllerTests: SnapshotTestCase {
     override func setUp() {
         super.setUp()
         outline = CourseOutlineTestDataFactory.freshCourseOutline(course.course_id!)
-        let config = OEXConfig(dictionary: ["COURSE_VIDEOS_ENABLED": true, "TABS_DASHBOARD_ENABLED": true])
+        let config = OEXConfig(dictionary: ["COURSE_VIDEOS_ENABLED": true, "TAB_LAYOUTS_ENABLED": true])
         let interface = OEXInterface.shared()
         environment = TestRouterEnvironment(config: config, interface: interface)
         environment.mockCourseDataManager.querier = CourseOutlineQuerier(courseID: outline.root, interface: interface, outline: outline)
@@ -31,7 +31,7 @@ class CourseOutlineViewControllerTests: SnapshotTestCase {
         router = OEXRouter(environment: environment)
     }
     
-    func loadAndVerifyControllerWithBlockID(_ blockID : CourseBlockID, courseOutlineMode: CourseOutlineMode? = CourseOutlineMode.Full, verifier : @escaping (CourseOutlineViewController) -> ((XCTestExpectation) -> Void)?) {
+    func loadAndVerifyControllerWithBlockID(_ blockID : CourseBlockID, courseOutlineMode: CourseOutlineMode? = .full, verifier : @escaping (CourseOutlineViewController) -> ((XCTestExpectation) -> Void)?) {
         
         let blockIdOrNilIfRoot : CourseBlockID? = blockID == outline.root ? nil : blockID
         let controller = CourseOutlineViewController(environment: environment, courseID: outline.root, rootID: blockIdOrNilIfRoot, forMode: courseOutlineMode)
@@ -59,8 +59,8 @@ class CourseOutlineViewControllerTests: SnapshotTestCase {
     
     func testVideoModeSection() {
 
-        let fullChildren = environment.mockCourseDataManager.querier?.childrenOfBlockWithID(blockID: outline.root, forMode: .Full)
-        let filteredChildren = environment.mockCourseDataManager.querier?.childrenOfBlockWithID(blockID: outline.root, forMode: .Video)
+        let fullChildren = environment.mockCourseDataManager.querier?.childrenOfBlockWithID(blockID: outline.root, forMode: .full)
+        let filteredChildren = environment.mockCourseDataManager.querier?.childrenOfBlockWithID(blockID: outline.root, forMode: .video)
     
         let expectation = self.expectation(description: "Loaded children")
         let stream = joinStreams(fullChildren!, filteredChildren!)
@@ -122,7 +122,7 @@ class CourseOutlineViewControllerTests: SnapshotTestCase {
     }
     
     func testSnapshotVideoContent() {
-        loadAndVerifyControllerWithBlockID(outline.root, courseOutlineMode: CourseOutlineMode.Video) {
+        loadAndVerifyControllerWithBlockID(outline.root, courseOutlineMode: .video) {
             self.assertSnapshotValidWithContent($0.navigationController!)
             return nil
         }

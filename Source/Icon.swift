@@ -134,6 +134,7 @@ public enum Icon {
     case Spinner
     case StarEmpty
     case StarFilled
+    case Discovery
     case Transcript
     case UnknownError
     case UpVote
@@ -146,6 +147,8 @@ public enum Icon {
     case Warning
     case DeleteIcon
     case MoreOptionsIcon
+    case Account
+    case ArrowLeft
     
     private var renderer : IconRenderer {
         switch self {
@@ -157,6 +160,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .LongArrowUp)
         case .ArrowDown:
             return FontAwesomeRenderer(icon: .LongArrowDown)
+        case .Account:
+            return FontAwesomeRenderer(icon: .EllipsisV)
         case .Camera:
             return FontAwesomeRenderer(icon: .Camera)
         case .Close:
@@ -200,7 +205,7 @@ public enum Icon {
         case .CourseEnd:
             return FontAwesomeRenderer(icon: .ClockO)
         case .CourseHTMLContent:
-            return FontAwesomeRenderer(icon: .FileO)
+            return FontAwesomeRenderer(icon: .Book)
         case .CourseModeFull:
             return FontAwesomeRenderer(icon: .List)
         case .Recent:
@@ -245,6 +250,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .StarO)
         case .StarFilled:
             return FontAwesomeRenderer(icon: .Star)
+        case .Discovery:
+            return FontAwesomeRenderer(icon: .Search)
         case .UnknownError:
             return FontAwesomeRenderer(icon: .ExclamationCircle)
         case .NoTopics:
@@ -267,6 +274,8 @@ public enum Icon {
             return FontAwesomeRenderer(icon: .Exclamation)
         case .MoreOptionsIcon:
             return FontAwesomeRenderer(icon: .EllipsisH)
+        case .ArrowLeft:
+            return FontAwesomeRenderer(icon: .AngleLeft)
         }
     }
     

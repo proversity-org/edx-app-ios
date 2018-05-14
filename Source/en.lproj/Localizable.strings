@@ -10,6 +10,8 @@
 
 /* Alert dialog confirmation button when user chooses to download a large video */
 "ACCEPT_LARGE_VIDEO_DOWNLOAD"="Download";
+/*Accessibility label for bulk download view when in downloading state */
+"ACCESSIBILITY.DOWNLOADING_VIDEOS_TITLE" = "Downloading Videos";
 /* Label for check box when it's checked. */
 "ACCESSIBILITY_CHECKBOX_CHECKED" = "Checked";
 /* Label for check box when it's checked. */
@@ -20,6 +22,12 @@
 "ACCESSIBILITY_CHECKBOX_HINT_UNCHECKED" = "Tap to select";
 /* Appending By before course organization and number on My Find Courses*/
 "ACCESSIBILITY_BY" = "By";
+/* Accessibility hint for bulk download switch when in new state */
+"ACCESSIBILITY.BULK_DOWNLOAD_HINT" = "Toggling the switch on, will download all videos of this course";
+/* Accessibility hint for bulk download switch when in new partial or downloading state */
+"ACCESSIBILITY.BULK_DOWNLOAD_DOWNLOADING_HINT" = "Toggling the switch off, will cancel downloading of all videos and will delete all downloaded videos of this course.";
+/* Accessibility hint for bulk download switch when in downloaded state */
+"ACCESSIBILITY.BULK_DOWNLOAD_DOWNLOADED_HINT" = "Toggling the switch off, will delete all downloaded videos of this course.";
 /* Accessibility hint for close button*/
 "ACCESSIBILITY.CLOSE_HINT" = "Double tap to close.";
 /* Accessibility label for posted data of discussion responses*/
@@ -36,12 +44,12 @@
 "ACCESSIBILITY.DISCUSSION_FOLLOW_HINT" = "Double tap to follow.";
 /* Accessibility hint for Unfollow button for discussion responses*/
 "ACCESSIBILITY.DISCUSSION_UNFOLLOW_HINT" = "Double tap to unfollow.";
+/* Acessibility hint for the show downloads button. */
+"ACCESSIBILITY.SHOW_CURRENT_DOWNLOADS_BUTTON_HINT" = "Double tap to view current downloads";
 /* Acessibility label for the download progress button. {percent_complete} is an already localized numeric percentage like "44%" */
 "ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{one}" = "Downloads in progress: {percent_complete}";
 /* Acessibility label for the download progress button. {percent_complete} is an already localized numeric percentage like "44%" */
 "ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON##{other}" = "Downloads in progress: {percent_complete}";
-/* Acessibility hint for the download progress button. */
-"ACCESSIBILITY_DOWNLOAD_PROGRESS_BUTTON_HINT" = "Double tap to view current downloads";
 /* Accessibility hint for video download list row cells. {video_name} is the name of video being downloaded. {percent_complete} is an already localized numeric percentage like "44%". */
 "ACCESSIBILITY_DOWNLOAD_VIEW_CELL##{one}" = "Downloading {video_name}. {percent_complete} percent complete.";
 /* Accessibility hint for video download list row cells. {video_name} is the name of video being downloaded. {percent_complete} is an already localized numeric percentage like "44%". */
@@ -128,6 +136,10 @@
 "ACCESSIBILITY.WHATSNEW.HEADER_LABEL"="Version {app_version}, New Features";
 /*Accessibility text for course share button on course dashboard*/
 "ACCESSIBILITY.SHARE_A_COURSE"="Share a course";
+/*Accessibility text for close button*/
+"ACCESSIBILITY.CLOSE_LABEL"="Close";
+/*Accessibility text for profile button*/
+"ACCESSIBILITY.PROFILE_LABEL"="Pofile";
 /* Title of user profile section for user accomplishments (like badges) */
 "ACCOMPLISHMENTS.TITLE" = "Accomplishments";
 /* Default text template when user shares an accomplishment */
@@ -144,12 +156,28 @@
 "ADD_RESPONSE"="Add response";
 /* Add your post button title used in discussion's add a post textview */
 "ADD_YOUR_POST"="Add your post";
+/*Agreement text*/
+"AGREEMENT.TEXT"="you agree to the {eula} and {tos} and acknowledge the {privacy_policy}.";
+/*Agreement text prefix for user on signin screen*/
+"AGREEMENT.TEXT_PREFIX_SIGNIN"="By signing-in to this app, ";
+/*Agreement text prefix for user on signup screen*/
+"AGREEMENT.TEXT_PREFIX_SIGNUP"="By creating an account, ";
+/*Link Text for End Use License Agreement*/
+"AGREEMENT.LINK_TEXT_EULA"="{platform_name} End User License Agreement";
+/*Link Text for End Use License Agreement*/
+"AGREEMENT.LINK_TEXT_TOS"="{platform_name} Terms of Service and Honor Code";
+/*Link Text for End Use License Agreement*/
+"AGREEMENT.LINK_TEXT_PRIVACY_POLICY"="Privacy Policy";
 /* Alert dialog button allowing user to chosing to allow downloads on cellular */
 "ALLOW"="Allow";
 /* Filtering option to show all discussion posts */
 "ALL_POSTS"="All Posts";
 /* Tab allowing the user to see all videos */
 "ALL_VIDEOS"="All Videos";
+/*Subtitle for bulk download view when in downloading state */
+"ALL_DOWNLOADING_VIDEOS_SUB_TITLE" = "{remaining_videos_count} Remaining, {remaining_videos_size}MB total";
+/*Title for bulk download view when in downloaded state */
+"ALL_VIDEOS_DOWNLOADED_TITLE" = "All Videos Downloaded";
 /* Message shown when there are no announcements for a course */
 "ANNOUNCEMENT_UNAVAILABLE"="There are currently no announcements for this course.";
 /* Label indicating the response answer in Discussion Add comment screen */
@@ -180,6 +208,10 @@
 "APP_REVIEW.MESSAGE_SUBJECT" = "Customer Review";
 /*Asteric for marking fields required*/
 "ASTERIC" = "*";
+/*Subtitle for bulk download view when in new, partial or downloaded state - {count} is single video*/
+"BULK_DOWNLOAD_VIDEOS_SUB_TITLE##{one}" = "{count} Video, {videos_size}MB total";
+/*Subtitle for bulk download view when in new, partial or downloaded state - {count} is number of videos*/
+"BULK_DOWNLOAD_VIDEOS_SUB_TITLE##{other}" = "{count} Videos, {videos_size}MB total";
 /* Prefix used with Staff of Community TA on the posts screen */
 "BY_AUTHOR" = "By {author_name}";
 /* Prefix used with Staff of Community TA on the posts screen */
@@ -201,7 +233,7 @@
 /* Title of resources tab in course dashboardTabBar view */
 "RESOURSES"="Resources";
 /* Title of course important dates screen */
-"COURSEDATES.COURSE_IMPORTANT_DATES_TITLE"="Course Dates and Deadlines";
+"COURSEDATES.COURSE_IMPORTANT_DATES_TITLE"="Important Dates";
 /* Button text for cancelling any action */
 "CANCEL"="Cancel";
 /* Alert explaining charges will apply since the "Wi-fi only" switch was turned off */
@@ -281,7 +313,7 @@
 /* Text describing the Handouts section within the course dashboard */
 "DASHBOARD.COURSE_HANDOUTS_DETAIL"="Find important course information";
 /* Title text for the Important dates section of the course dashboard  */
-"DASHBOARD.COURSE_IMPORTANT_DATES"="Important Dates";
+"DASHBOARD.COURSE_IMPORTANT_DATES"="Dates";
 /* Text describing the Important dates section of the course dashboard  */
 "DASHBOARD.COURSE_IMPORTANT_DATES_DETAIL"="Keep track of deadlines and stay on track";
 /* Text describing the course due date for same day*/
@@ -289,9 +321,9 @@
 /* Text describing the course due date*/
 "COURSE_DUE_DATE"="due {due_date}";
 /* Label indicated that a course has ended */
-"COURSE_ENDED"="Ended - {end_date}";
+"COURSE_ENDED"="Ended {end_date}";
 /* Label indicating that a course will end */
-"COURSE_ENDING"="Ending - {end_date}";
+"COURSE_ENDING"="Ending {end_date}";
 /* Option to show all different types of course content. Constrasts with 'Show Videos Only'. */
 "COURSE_MODE_FULL"="Show Full Course";
 /* Option to show only video course content. Constrasts with 'Show All Course Content'. */
@@ -348,8 +380,14 @@
 "DOWNLOADS"="Downloads";
 /* Overlay message after user chooses to download a video */
 "DOWNLOADING_1_VIDEO"="Downloading 1 video.";
+/*Title for bulk download view when in downloading state */
+"DOWNLOADING_VIDEOS_TITLE" = "Downloading Videos...";
+/*Title for bulk download view when in new or partial state */
+"DOWNLOAD_TO_DEVICE_TITLE" = "Download to Device";
 /*Discover in left drawer(used for courses and programs discovery)*/
-"DISCOVER"="Discover";
+"DISCOVER"="Discovery";
+/*Debug option title in tabbar */
+"DEBUG"="Debug";
 /* Error message shown when email address is not properly formatted */
 "ERROR_MESSAGE.INVALID_EMAIL_FORMAT"="Please make sure your e-mail address is formatted correctly and try again.";
 /* Alert message shown when user tries to send an email, but email isn't setup */
@@ -367,7 +405,7 @@
 /* Error message when user is not enrolled to any course and course discovery is also disabled.*/
 "ENROLLMENT_LIST.NO_ENROLLMENT" = "It looks like you are not enrolled in any courses yet.";
 /* Prompt indicating user needs to enter an email address */
-"ENTER_EMAIL"="Please enter your user name or e-mail address and try again.";
+"ENTER_EMAIL"="Please enter your username or e-mail address and try again.";
 /* Prompt indicating user needs to enter a password */
 "ENTER_PASSWORD"="Please enter your password and try again.";
 /* Text used when the post is visible to everyone */
@@ -382,6 +420,8 @@
 "FAILED_TO_LOAD_TOPICS"="Failed to load topics.";
 /* Title of find courses screen */
 "FIND_COURSES"="Find Courses";
+/* No available courses on find courses section */
+"FIND_COURSES_NO_AVAILABLE_COURSES"="No available courses";
 /* Overlay message shown when enrolling in a course fails because the user is already in the course */
 "FIND_COURSES_ALREADY_ENROLLED_MESSAGE"="You are already enrolled in this course";
 /* Overlay message shown when enrolling in a course fails */
@@ -413,7 +453,7 @@
 /* Overlay error shown when logging in with an invalid email address */
 "INVALID_EMAIL_MESSAGE"="Please make sure your e-mail address is formatted correctly and try again.";
 /* Overlay error shown when logging in with an invalid username or password */
-"INVALID_USERNAME_PASSWORD"="Please make sure that your user name or e-mail address and password are correct and try again.";
+"INVALID_USERNAME_PASSWORD"="Please make sure that your username or e-mail address and password are correct and try again.";
 /* Alert dialog text asking whether it's okay to download large videos */
 "LARGE_DOWNLOAD_MESSAGE"="The videos you've selected are larger than 1 GB. Do you want to download these videos?";
 /* Alert dialog title when asking whether it's okay to download large videos */
@@ -431,7 +471,7 @@
 /* Option to sort discussion post list by most votes */
 "MOST_VOTES"="Most Votes";
 /* Screen title showing a user's courses */
-"MY_COURSES"="My Courses";
+"COURSES"="Courses";
 /* Screen title showing a user's settings */
 "MY_SETTINGS"="My Settings";
 /* Time Label in My Videos section*/
@@ -554,14 +594,10 @@
 "RECENT_ACTIVITY" = "Recent Activity";
 /* Section title to display recently downloaded videos */
 "RECENT_VIDEOS"="Recent Videos";
-/* Create account agreement. Followed by agreement name like "End User License Agreement */
-"REDIRECT_TEXT" = "By signing in to this app, you agree to the";
 /* Label before Sort and Filter buttons on Posts Screen ( The Colon(:) is part of the string) */
 "REFINE" = "Refine:";
 /* Button title when responses are closed for a thread */
 "RESPONSES_CLOSED"="Responses are closed for this post";
-/* Title of registration agreement */
-"REGISTRATION_AGREEMENT_BUTTON_TITLE"="{platform_name} Terms of Service and Honor Code";
 /* Create account agreement. Followed by list of agreement names like "End User License Agreement" */
 "REGISTRATION_AGREEMENT_MESSAGE"="By creating an account, you agree to the ";
 /* Button text allowing user create an account */
@@ -636,9 +672,15 @@
 /* Label for posts pinned by Staff */
 "STAFF"="STAFF";
 /* Label for date when course starts */
-"STARTING"="Starting - {start_date}";
-/* Discover Courses button text on the first screen */
-"STARTUP.DISCOVER_COURSES"="Discover Courses";
+"STARTING"="Starting {start_date}";
+/* Info message text on the startup screen */
+"STARTUP.INFO_MESSAGE_TEXT"="Free courses from the world's best universities in your pocket.";
+/*Placeholder text for search textfield on the startup screen*/
+"STARTUP.SEARCH_PLACEHOLDER_TEXT"="Search Courses";
+/*Log In button title on the startup screen*/
+"STARTUP.LOGIN_TEXT"="Log In";
+/*Create your Account button title on the startup screen*/
+"STARTUP.CREATE_YOUR_ACCOUNT_TEXT"="Create your Account";
 /* Explore Subjects button text on the first screen */
 "STARTUP_EXPLORE_SUBJECTS"="Explore Subjects";
 /* Button allowing user to submit feedback about the app via email */
@@ -684,7 +726,7 @@
 /* Placeholder title for course content with no title */
 "UNTITLED"="Untitled";
 /* Hint text for login field */
-"USERNAME_PLACEHOLDER" = "User name or e-mail address";
+"USERNAME_PLACEHOLDER" = "Username or e-mail address";
 /*Error message when operation failed with unknow error*/
 "UNKNOWN_ERROR" = "Your action could not be completed.";
 /* Screen title showing a user's account */

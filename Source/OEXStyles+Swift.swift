@@ -48,7 +48,7 @@ extension OEXStyles {
         UINavigationBar.appearance().titleTextAttributes = navigationTitleTextStyle.attributes
         UIBarButtonItem.appearance().setTitleTextAttributes(navigationButtonTextStyle.attributes, for: .normal)
         
-        UIToolbar.appearance().tintColor = navigationBarColor()
+        UIToolbar.appearance().tintColor = navigationItemTintColor()
         
         let styleAttributes = OEXTextStyle(weight: .normal, size : .small, color : self.neutralBlack()).attributes
         UISegmentedControl.appearance().setTitleTextAttributes(styleAttributes, for: UIControlState.selected)
@@ -56,15 +56,7 @@ extension OEXStyles {
         UISegmentedControl.appearance().tintColor = self.primaryXLightColor()
         
         UINavigationBar.appearance().isTranslucent = false
-
-        if #available(iOS 9.0, *) {
-            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.classForCoder() as! UIAppearanceContainer.Type]).defaultTextAttributes = searchBarTextStyle.attributes
-            
-        }
-        else {
-            //Make sure we remove UIAppearance+Swift.h+m when we drop iOS8 support
-            UITextField.my_appearanceWhenContained(in: UISearchBar.classForCoder() as! UIAppearanceContainer.Type).defaultTextAttributes = searchBarTextStyle.attributes
-        }
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.classForCoder() as! UIAppearanceContainer.Type]).defaultTextAttributes = searchBarTextStyle.attributes
     }
     
     ///**Warning:** Not from style guide. Do not add more uses
@@ -72,11 +64,9 @@ extension OEXStyles {
         return UIColor(red: CGFloat(126.0/255.0), green: CGFloat(199.0/255.0), blue: CGFloat(143.0/255.0), alpha: CGFloat(1.00))
     }
     
-    ///**Warning:** Not from style guide. Do not add more uses
     public var progressBarTrackTintColor : UIColor {
-        return UIColor(red: CGFloat(223.0/255.0), green: CGFloat(242.0/255.0), blue: CGFloat(228.0/255.0), alpha: CGFloat(1.00))
+        return OEXStyles.shared().neutralLight()
     }
-
 
     var standardTextViewInsets : UIEdgeInsets {
         return UIEdgeInsetsMake(8, 8, 8, 8)
@@ -102,8 +92,8 @@ extension OEXStyles {
         return style
     }
     
-    func textFieldStyle(with size: OEXTextSize) -> OEXTextStyle {
-        return OEXMutableTextStyle(weight: .normal, size: size, color: OEXStyles.shared().neutralDark())
+    func textFieldStyle(with size: OEXTextSize, color: UIColor = OEXStyles.shared().neutralDark()) -> OEXTextStyle {
+        return OEXMutableTextStyle(weight: .normal, size: size, color: color)
     }
     
 
@@ -174,10 +164,14 @@ extension UISearchBar {
 }
 
 //Convenience computed properties for margins
-var StandardHorizontalMargin : CGFloat {
+var StandardHorizontalMargin: CGFloat {
     return OEXStyles.shared().standardHorizontalMargin()
 }
 
-var StandardVerticalMargin : CGFloat {
+var StandardVerticalMargin: CGFloat {
     return OEXStyles.shared().standardVerticalMargin
+}
+
+var StandardFooterHeight: CGFloat {
+    return OEXStyles.shared().standardFooterHeight
 }

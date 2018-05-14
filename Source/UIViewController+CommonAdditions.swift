@@ -21,7 +21,7 @@ extension UIViewController {
         return UIApplication.shared.statusBarOrientation
     }
 
-    func topMostController() -> UIViewController? {
+    @objc func topMostController() -> UIViewController? {
         var topController = UIApplication.shared.keyWindow?.rootViewController
         while ((topController?.presentedViewController) != nil) {
             topController = topController?.presentedViewController
@@ -31,8 +31,20 @@ extension UIViewController {
     }
     
     func isModal() -> Bool {
-        return self.presentingViewController?.presentedViewController == self
-            || (self.navigationController != nil && self.navigationController?.presentingViewController?.presentedViewController == self.navigationController)
-            || self.tabBarController?.presentingViewController is UITabBarController
+        return (navigationController?.viewControllers.index(of: self) == 0) &&
+            (presentingViewController?.presentedViewController == self
+            || isRootModal()
+            || tabBarController?.presentingViewController is UITabBarController)
+    }
+    
+    func isRootModal() -> Bool {
+        return (navigationController != nil && navigationController?.presentingViewController?.presentedViewController == navigationController)
+    }
+    
+    func configurePresentationController(withSourceView sourceView: UIView) {
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            popoverPresentationController?.sourceView = sourceView
+            popoverPresentationController?.sourceRect = sourceView.bounds
+        }
     }
 }

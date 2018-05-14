@@ -22,7 +22,6 @@
 #import "OEXStyles.h"
 #import "OEXVideoSummary.h"
 #import "Reachability.h"
-#import "SWRevealViewController.h"
 #import "OEXCustomButton.h"
 
 #define RECENT_DOWNLOADEDVIEW_HEIGHT 76
@@ -62,13 +61,6 @@
     
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
-    // Do any additional setup after loading the view.
-#ifdef __IPHONE_8_0
-    if(IS_IOS8) {
-        [self.table_Downloads setLayoutMargins:UIEdgeInsetsZero];
-    }
-#endif
-
     //Initialize Downloading arr
     self.arr_downloadingVideo = [[NSMutableArray alloc] init];
 
@@ -106,7 +98,7 @@
             if(video.downloadProgress < OEXMaxDownloadProgress) {
                 [self.arr_downloadingVideo addObject:video];
                 if (video != nil && video.summary != nil) {
-                    NSString* key = video.summary.videoURL;
+                    NSString* key = video.summary.downloadURL;
                     if (key) {
                         duplicationAvoidingDict[key] = @"object";
                     }
@@ -138,12 +130,7 @@
     OEXDownloadTableCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CellDownloads" forIndexPath:indexPath];
 
     [self configureCell:cell forIndexPath:indexPath];
-#ifdef __IPHONE_8_0
-    if(IS_IOS8) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-#endif
-
+    
     return cell;
 }
 
@@ -195,7 +182,7 @@
             NSString* url = [task.originalRequest.URL absoluteString];
             
             for(OEXHelperVideoDownload* video in _arr_downloadingVideo) {
-                if([video.summary.videoURL isEqualToString:url]) {
+                if([video.summary.downloadURL isEqualToString:url]) {
                     [weakSelf updateProgressForVisibleRows];
                     break;
                 }

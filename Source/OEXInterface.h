@@ -27,10 +27,14 @@ extern NSString* const OEXCourseListKey;
 extern NSString* const OEXVideoStateChangedNotification;
 extern NSString* const OEXDownloadProgressChangedNotification;
 extern NSString* const OEXDownloadEndedNotification;
+extern NSString* const OEXDownloadStartedNotification;
+extern NSString* const OEXDownloadDeletedNotification;
+
+typedef void (^ DownloadVideosCompletionHandler)(BOOL cancelled);
 
 // This class requires significant refactoring
 // Think very hard before adding anything to it
-@interface OEXInterface : NSObject <OEXNetworkInterfaceDelegate, UIAlertViewDelegate>
+@interface OEXInterface : NSObject <OEXNetworkInterfaceDelegate>
 
 + (instancetype)sharedInterface;
 
@@ -106,16 +110,18 @@ extern NSString* const OEXDownloadEndedNotification;
 
 // Start All paused downloads
 - (void)startAllBackgroundDownloads;
-
+- (BOOL) canDownload;
+- (NSString* _Nullable) networkErrorMessage;
 /// @param array An array of OEXHelperVideoDownload representing the videos to download
 - (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)videos;
+- (NSInteger)downloadVideos:(NSArray<OEXHelperVideoDownload*>*)array completionHandler: (DownloadVideosCompletionHandler) completionHandler;
 
 /// @param array An array of video ids representing the videos to download
 - (NSInteger)downloadVideosWithIDs:(NSArray<NSString*>*)videoIDs courseID:(NSString*)courseID;
 
 - (NSArray<OEXHelperVideoDownload*>*)statesForVideosWithIDs:(NSArray<NSString*>*)videoIDs courseID:(NSString*)courseID;
 
-- (void)deleteDownloadedVideo:(OEXHelperVideoDownload *)video completionHandler:(void (^)(BOOL success))completionHandler;
+- (void)deleteDownloadedVideo:(OEXHelperVideoDownload *)video shouldNotify:(BOOL) shouldNotify completionHandler:(void (^)(BOOL success))completionHandler;
 - (void)deleteDownloadedVideos:(NSArray *)videos completionHandler:(void (^)(BOOL success))completionHandler;
 
 - (VideoData*)insertVideoData:(OEXHelperVideoDownload*)helperVideo;

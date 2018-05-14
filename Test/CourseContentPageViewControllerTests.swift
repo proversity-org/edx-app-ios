@@ -12,22 +12,27 @@ import XCTest
 
 class CourseContentPageViewControllerTests: SnapshotTestCase {
     
-    let outline = CourseOutlineTestDataFactory.freshCourseOutline(OEXCourse.freshCourse().course_id!)
+    var course : OEXCourse!
+    var outline : CourseOutline!
     var router : OEXRouter!
     var environment : TestRouterEnvironment!
     let networkManager = MockNetworkManager(baseURL: URL(string: "www.example.com")!)
     
     override func setUp() {
         super.setUp()
-        
-        environment = TestRouterEnvironment()
-        environment.mockCourseDataManager.querier = CourseOutlineQuerier(courseID: outline.root, outline: outline)
+        course = OEXCourse.freshCourse()
+        outline = CourseOutlineTestDataFactory.freshCourseOutline(course.course_id!)
+        let interface = OEXInterface.shared()
+        interface.t_setCourseEnrollments([UserCourseEnrollment(course: course)])
+        interface.t_setCourseVideos([course.video_outline!: OEXVideoSummaryTestDataFactory.localCourseVideos(CourseOutlineTestDataFactory.knownLocalVideoID)])
+        environment = TestRouterEnvironment(config: OEXConfig(dictionary:["TAB_LAYOUTS_ENABLED": true]), interface: interface)
+        environment.mockCourseDataManager.querier = CourseOutlineQuerier(courseID: course.course_id!, interface: interface, outline: outline)
         router = OEXRouter(environment: environment)
     }
     
     @discardableResult func loadAndVerifyControllerWithInitialChild(_ initialChildID : CourseBlockID?, parentID : CourseBlockID, verifier : ((CourseBlockID?, CourseContentPageViewController) -> ((XCTestExpectation) -> Void)?)? = nil) -> CourseContentPageViewController {
         
-        let controller = CourseContentPageViewController(environment: environment, courseID: outline.root, rootID: parentID, initialChildID: initialChildID, forMode: .Full)
+        let controller = CourseContentPageViewController(environment: environment, courseID: outline.root, rootID: parentID, initialChildID: initialChildID, forMode: .full)
         
         inScreenNavigationContext(controller) {
             let expectation = self.expectation(description: "course loaded")
@@ -99,9 +104,11 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
             controller.t_goForward()
             
             let testExpectation = expectation(description: "controller went forward")
-            controller.t_blockIDForCurrentViewController().listen(controller) {
-                testExpectation.fulfill()
-                XCTAssertEqual($0.value!, childID)
+            DispatchQueue.main.async() {
+                controller.t_blockIDForCurrentViewController().listen(controller) {
+                    testExpectation.fulfill()
+                    XCTAssertEqual($0.value!, childID)
+                }
             }
             self.waitForExpectations()
             XCTAssertTrue(controller.t_prevButtonEnabled)
@@ -174,8 +181,10 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
             controller.t_goForward()
             
             let testExpectation = expectation(description: "controller went backward")
-            controller.t_blockIDForCurrentViewController().listen(controller) {blockID in
-                testExpectation.fulfill()
+            DispatchQueue.main.async() {
+                controller.t_blockIDForCurrentViewController().listen(controller) {blockID in
+                    testExpectation.fulfill()
+                }
             }
             self.waitForExpectations()
         }

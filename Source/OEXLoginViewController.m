@@ -9,14 +9,10 @@
 @import edXCore;
 
 #import "OEXLoginViewController.h"
-
 #import "edX-Swift.h"
-
 #import <Masonry/Masonry.h>
-
 #import "NSString+OEXValidation.h"
 #import "NSJSONSerialization+OEXSafeAccess.h"
-
 #import "OEXAnalytics.h"
 #import "OEXAppDelegate.h"
 #import "OEXCustomButton.h"
@@ -40,7 +36,7 @@
 
 #define USER_EMAIL @"USERNAME"
 
-@interface OEXLoginViewController () <UIAlertViewDelegate>
+@interface OEXLoginViewController () <AgreementTextViewDelegate>
 {
     CGPoint originalOffset;     // store the offset of the scrollview.
     UITextField* activeField;   // assign textfield object which is in active state.
@@ -50,9 +46,6 @@
 @property (nonatomic, strong) NSString* signInID;
 @property (nonatomic, strong) NSString* signInPassword;
 @property (nonatomic, assign) BOOL reachable;
-@property (weak, nonatomic, nullable) IBOutlet UIWebView* webview_EULA;
-@property (weak, nonatomic, nullable) IBOutlet UIButton* btn_OpenEULA;
-@property (weak, nonatomic, nullable) IBOutlet UIImageView* img_SeparatorEULA;
 @property (strong, nonatomic) IBOutlet UIView* externalAuthContainer;
 @property (weak, nonatomic, nullable) IBOutlet OEXCustomLabel* lbl_OrSignIn;
 @property(nonatomic, strong) IBOutlet UIImageView* seperatorLeft;
@@ -62,16 +55,8 @@
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_MapTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_UsernameTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_PasswordTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_ForgotTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_SignInTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_SignTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_separatorTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_BySigningTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_EULATop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_UserGreyTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_PassGreyTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_LeftSepTop;
-@property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_RightSepTop;
 @property (weak, nonatomic, nullable) IBOutlet NSLayoutConstraint* constraint_ActivityIndTop;
 
 @property (weak, nonatomic, nullable) IBOutlet UITextField* tf_EmailID;
@@ -81,14 +66,13 @@
 @property (weak, nonatomic, nullable) IBOutlet UIScrollView* scroll_Main;
 @property (weak, nonatomic, nullable) IBOutlet UIImageView* img_Map;
 @property (weak, nonatomic, nullable) IBOutlet UIImageView* img_Logo;
-@property (weak, nonatomic, nullable) IBOutlet UILabel* lbl_Redirect;
+@property (weak, nonatomic) IBOutlet AgreementTextView *agreementTextView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *agreementTextViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *agreementTextViewTop;
 @property (weak, nonatomic, nullable) IBOutlet UIActivityIndicatorView* activityIndicator;
 @property (strong, nonatomic) IBOutlet UILabel* versionLabel;
-
 @property (nonatomic, assign) id <OEXExternalAuthProvider> authProvider;
 @property (nonatomic) OEXTextStyle *placeHolderStyle;
-@property (nonatomic) OEXMutableTextStyle *buttonsTitleStyle;
-
 
 @end
 
@@ -99,6 +83,7 @@
         self.lbl_OrSignIn.hidden = YES;
         self.seperatorLeft.hidden = YES;
         self.seperatorRight.hidden = YES;
+        self.agreementTextViewTop.constant = -30;
     }
 
     if(IS_IPHONE_4) {
@@ -107,26 +92,7 @@
         self.constraint_UserGreyTop.constant = 20;
         self.constraint_PasswordTop.constant = 8;
         self.constraint_PassGreyTop.constant = 8;
-        self.constraint_ForgotTop.constant = 8;
-        self.constraint_SignInTop.constant = 13;
         self.constraint_ActivityIndTop.constant = 43;
-        self.constraint_SignTop.constant = 9;
-
-        if([self isGoogleEnabled] || [self isFacebookEnabled]) {
-            self.constraint_LeftSepTop.constant = 18;
-            self.constraint_RightSepTop.constant = 18;
-            self.constraint_BySigningTop.constant = 69;
-            self.constraint_EULATop.constant = 73;
-        }
-        else {
-            self.lbl_OrSignIn.hidden = YES;
-            self.seperatorLeft.hidden = YES;
-            self.seperatorRight.hidden = YES;
-            self.constraint_LeftSepTop.constant = 18;
-            self.constraint_RightSepTop.constant = 18;
-            self.constraint_BySigningTop.constant = 18;
-            self.constraint_EULATop.constant = 23;
-        }
     }
     else {
         self.constraint_MapTop.constant = 90;
@@ -134,20 +100,7 @@
         self.constraint_UserGreyTop.constant = 25;
         self.constraint_PasswordTop.constant = 12;
         self.constraint_PassGreyTop.constant = 12;
-        self.constraint_ForgotTop.constant = 12;
-        self.constraint_SignInTop.constant = 20;
         self.constraint_ActivityIndTop.constant = 55;
-        self.constraint_SignTop.constant = 15;
-        if([self isGoogleEnabled] || [self isFacebookEnabled]) {
-            self.constraint_LeftSepTop.constant = 25;
-            self.constraint_RightSepTop.constant = 25;
-            self.constraint_BySigningTop.constant = 85;
-            self.constraint_EULATop.constant = 88;
-        }
-        else {
-            self.constraint_BySigningTop.constant = 25;
-            self.constraint_EULATop.constant = 30;
-        }
     }
 }
 
@@ -197,6 +150,7 @@
     if (self.environment.config.isRegistrationEnabled) {
         UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack)];
         closeButton.accessibilityLabel = [Strings close];
+        closeButton.accessibilityIdentifier = @"LoginViewController:close-bar-button-item";
         self.navigationItem.leftBarButtonItem = closeButton;
     }
     
@@ -210,7 +164,7 @@
     self.tf_Password.textAlignment = NSTextAlignmentNatural;
     self.img_Logo.isAccessibilityElement = YES;
     self.img_Logo.accessibilityLabel = [[OEXConfig sharedConfig] platformName];
-
+    
     NSString* environmentName = self.environment.config.environmentName;
     if(environmentName.length > 0) {
         NSString* appVersion = [NSBundle mainBundle].oex_buildVersionString;
@@ -221,7 +175,33 @@
     }
     
     _placeHolderStyle = [[OEXTextStyle alloc] initWithWeight:OEXTextWeightNormal size:OEXTextSizeBase color:[[OEXStyles sharedStyles] neutralDark]];
-    _buttonsTitleStyle = [[OEXMutableTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[[OEXStyles sharedStyles] primaryBaseColor]];
+    [self setAccessibilityIdentifiers];
+    [self setUpAgreementTextView];
+}
+
+-(void) setUpAgreementTextView {
+    [self.agreementTextView setupFor:AgreementTypeSignIn];
+    self.agreementTextView.agreementDelegate = self;
+    // To adjust textView according to its content size.
+    self.agreementTextViewHeight.constant = self.agreementTextView.contentSize.height + [self.environment.styles standardHorizontalMargin];
+}
+
+    //setting accessibility identifiers for developer automation use
+- (void)setAccessibilityIdentifiers {
+    self.img_Logo.accessibilityIdentifier = @"LoginViewController:logo-image-view";
+    self.tf_EmailID.accessibilityIdentifier = @"LoginViewController:email-text-field";
+    self.tf_Password.accessibilityIdentifier = @"LoginViewController:password-text-field";
+    self.agreementTextView.accessibilityIdentifier = @"LoginViewController:agreement-text-view";
+    self.externalAuthContainer.accessibilityIdentifier = @"LoginViewController:external-auth-container-view";
+    self.seperatorLeft.accessibilityIdentifier = @"LoginViewController:left-seperator-image-view";
+    self.seperatorRight.accessibilityIdentifier = @"LoginViewController:right-seperator-image-view";
+    self.btn_TroubleLogging.accessibilityIdentifier = @"LoginViewController:trouble-logging-button";
+    self.btn_Login.accessibilityIdentifier = @"LoginViewController:login-button";
+    self.scroll_Main.accessibilityIdentifier = @"LoginViewController:main-scroll-view";
+    self.img_Map.accessibilityIdentifier = @"LoginViewController:map-image-view";
+    self.activityIndicator.accessibilityIdentifier = @"LoginViewController:activity-indicator";
+    self.versionLabel.accessibilityIdentifier = @"LoginViewController:version-label";
+    self.lbl_OrSignIn.accessibilityIdentifier = @"LoginViewController:sign-in-label";
 }
 
 - (void)navigateBack {
@@ -229,18 +209,10 @@
 }
 
 - (void)setExclusiveTouch {
-    self.btn_OpenEULA.exclusiveTouch = YES;
     self.btn_Login.exclusiveTouch = YES;
     self.btn_TroubleLogging.exclusiveTouch = YES;
     self.view.multipleTouchEnabled = NO;
     self.view.exclusiveTouch = YES;
-}
-
-- (void)hideEULA:(BOOL)hide {
-    //EULA
-    [self.webview_EULA.scrollView setContentOffset:CGPointMake(0, 0)];
-    self.webview_EULA.hidden = hide;
-    self.img_SeparatorEULA.hidden = hide;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -254,9 +226,6 @@
 
     [self.view setUserInteractionEnabled:YES];
     self.view.exclusiveTouch = YES;
-
-    //EULA
-    [self hideEULA:YES];
 
     // Scrolling on keyboard hide and show
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -318,22 +287,9 @@
     self.tf_Password.text = @"";
     self.tf_EmailID.accessibilityLabel = nil;
     self.tf_Password.accessibilityLabel = nil;
+    OEXTextStyle *forgotButtonStyle = [[OEXTextStyle alloc] initWithWeight:OEXTextWeightBold size:OEXTextSizeBase color:[self.environment.styles primaryBaseColor]];
+    [self.btn_TroubleLogging setAttributedTitle:[forgotButtonStyle attributedStringWithText:[Strings troubleInLoginButton]] forState:UIControlStateNormal];
 
-    self.lbl_Redirect.text = [Strings redirectText];
-    self.lbl_Redirect.isAccessibilityElement = NO;
-    [self.btn_TroubleLogging setAttributedTitle:[_buttonsTitleStyle attributedStringWithText:[Strings troubleInLoginButton]] forState:UIControlStateNormal];
-    [self.btn_TroubleLogging setTitleColor:[[OEXStyles sharedStyles] primaryBaseColor] forState:UIControlStateNormal];
-    [self.btn_OpenEULA setTitleColor:[[OEXStyles sharedStyles] primaryBaseColor] forState:UIControlStateNormal];
-    _buttonsTitleStyle.weight = OEXTextWeightNormal;
-    _buttonsTitleStyle.size = OEXTextSizeXXSmall;
-
-    NSString *termsText = [Strings registrationAgreementButtonTitleWithPlatformName:self.environment.config.platformName];
-    [self.btn_OpenEULA setAttributedTitle:[_buttonsTitleStyle attributedStringWithText:termsText] forState:UIControlStateNormal];
-    self.btn_OpenEULA.titleLabel.adjustsFontSizeToFitWidth = YES;
-
-    self.btn_OpenEULA.accessibilityTraits = UIAccessibilityTraitLink;
-    self.btn_OpenEULA.accessibilityLabel = [NSString stringWithFormat:@"%@,%@",[Strings redirectText], termsText];
-    
     [self.btn_Login applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[self signInButtonText]];
     [self.activityIndicator stopAnimating];
 
@@ -363,35 +319,35 @@
     }
 }
 
-#pragma mark IBActions
-- (IBAction)openEULA:(id)sender {
-    NSURL* url = [[NSBundle mainBundle] URLForResource:@"Terms-and-Services" withExtension:@"htm"];
+#pragma mark AgreementTextViewDelegate
+- (void)agreementTextView:(AgreementTextView *)textView didSelect:(NSURL *)url {
     OEXUserLicenseAgreementViewController* viewController = [[OEXUserLicenseAgreementViewController alloc] initWithContentURL:url];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
+#pragma mark IBActions
 - (IBAction)troubleLoggingClicked:(id)sender {
     if(self.reachable) {
-        [self.view setUserInteractionEnabled:NO];
-
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings resetPasswordTitle]
-                                                        message:[Strings resetPasswordPopupText]
-                                                       delegate:self
-                                              cancelButtonTitle:[Strings cancel]
-                                              otherButtonTitles:[Strings ok], nil];
-
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        UITextField* textfield = [alert textFieldAtIndex:0];
-        textfield.keyboardType = UIKeyboardTypeEmailAddress;
-
-        if([self.tf_EmailID.text length] > 0) {
-            UITextField* tf = [alert textFieldAtIndex:0];
-            [[alert textFieldAtIndex:0] setAttributedPlaceholder:[_placeHolderStyle attributedStringWithText:[Strings emailAddressPrompt]]];
-            tf.text = self.tf_EmailID.text;
-        }
-
-        alert.tag = 1001;
-        [alert show];
+        [[UIAlertController alloc] showInViewController:self title:[Strings resetPasswordTitle] message:[Strings resetPasswordPopupText] preferredStyle:UIAlertControllerStyleAlert cancelButtonTitle:[Strings cancel] destructiveButtonTitle:nil otherButtonsTitle:@[[Strings ok]] tapBlock:^(UIAlertController* alertController, UIAlertAction* alertAction, NSInteger buttonIndex) {
+            if ( buttonIndex == 1 ) {
+                UITextField* emailTextField = alertController.textFields.firstObject;
+                if (!emailTextField || [emailTextField.text length] == 0 || ![emailTextField.text oex_isValidEmailAddress]) {
+                    [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:[Strings invalidEmailMessage] onViewController:self.navigationController];
+                }
+                else {
+                    self.str_ForgotEmail = emailTextField.text;
+                    [self presentViewController:[UIAlertController alertControllerWithTitle:[Strings resetPasswordTitle] message:[Strings waitingForResponse] preferredStyle:UIAlertControllerStyleAlert] animated:YES completion:^{
+                        [self resetPassword];
+                    }];
+                }
+            }
+        } textFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.keyboardType = UIKeyboardTypeEmailAddress;
+            if([self.tf_EmailID.text length] > 0) {
+                [textField setAttributedPlaceholder:[_placeHolderStyle attributedStringWithText:[Strings emailAddressPrompt]]];
+                textField.text = self.tf_EmailID.text;
+            }
+        }];
     }
     else {
         // error
@@ -494,9 +450,9 @@
             [self loginFailedWithErrorMessage:[Strings invalidUsernamePassword] title:nil];
             return;
         }
-        self.authProvider = nil;
         
         [self handleLoginResponseWith:data response:response error:error];
+        self.authProvider = nil;
     };
     
     [provider authorizeServiceFromController:self
@@ -512,7 +468,7 @@
 
     [self.view setUserInteractionEnabled:NO];
     [self.activityIndicator startAnimating];
-    [self.btn_Login applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[[Strings signInButtonTextOnSignIn] oex_uppercaseStringInCurrentLocale]];
+    [self.btn_Login applyButtonStyleWithStyle:[self.environment.styles filledPrimaryButtonStyle] withTitle:[Strings signInButtonTextOnSignIn]];
 }
 
 - (void)loginHandleLoginError:(NSError*)error {
@@ -609,69 +565,39 @@
     [_tf_Password resignFirstResponder];
 }
 
-#pragma mark UIAlertView Delegate
-
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self.view setUserInteractionEnabled:YES];
-
-    if(alertView.tag == 1001) {
-        UITextField* EmailtextField = [alertView textFieldAtIndex:0];
-
-        if(buttonIndex == 1) {
-            if([EmailtextField.text length] == 0 || ![EmailtextField.text oex_isValidEmailAddress]) {
-                [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:[Strings invalidEmailMessage] onViewController:self.navigationController];
-            }
-            else {
-                self.str_ForgotEmail = [[NSString alloc] init];
-
-                self.str_ForgotEmail = EmailtextField.text;
-
-                [self.view setUserInteractionEnabled:NO];
-
-                [[UIAlertController alloc] showAlertWithTitle:[Strings resetPasswordTitle]
-                                              message:[Strings waitingForResponse]
-                                     onViewController:self.navigationController];
-                [self resetPassword];
-            }
-        }
-    }
-}
-
 - (void)resetPassword {
-    [OEXAuthentication resetPasswordWithEmailId:self.str_ForgotEmail completionHandler:^(NSData* data, NSURLResponse* response, NSError* error)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view setUserInteractionEnabled:YES];
-
-                if(!error) {
-                    NSHTTPURLResponse* httpResp = (NSHTTPURLResponse*) response;
-                    if(httpResp.statusCode == 200) {
-                        [[[UIAlertView alloc] initWithTitle:[Strings resetPasswordConfirmationTitle]
-                                                    message:[Strings resetPasswordConfirmationMessage]
-
-                                                   delegate:self
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:[Strings ok], nil] show];
-                    }
-                    else if(httpResp.statusCode <= 400 && httpResp.statusCode < 500) {
-                        NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
-                        NSString* responseStr = [[dictionary objectForKey:@"email"] firstObject];
-                        [[UIAlertController alloc]
-                         showAlertWithTitle:[Strings floatingErrorTitle]
-                                    message:responseStr onViewController:self.navigationController];
-                    }
-                    else if(httpResp.statusCode >= 500) {
-                        NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                        [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:responseStr onViewController:self.navigationController];
-                        
-                    }
-                }
-                else {
-                    [[UIAlertController alloc]
-                     showAlertWithTitle:[Strings floatingErrorTitle] message:[error localizedDescription] onViewController:self.navigationController];
-                }
-            });
-    }];
+    [OEXAuthentication resetPasswordWithEmailId:self.str_ForgotEmail completionHandler:^(NSData *data, NSURLResponse *response, NSError* error)
+     {
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [self dismissViewControllerAnimated:YES completion:^{
+                 
+                 if(!error) {
+                     NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+                     if(httpResp.statusCode == 200) {
+                         [[UIAlertController alloc]
+                          showAlertWithTitle:[Strings resetPasswordConfirmationTitle]
+                          message:[Strings resetPasswordConfirmationMessage] onViewController:self.navigationController];
+                     }
+                     else if(httpResp.statusCode <= 400 && httpResp.statusCode < 500) {
+                         NSDictionary* dictionary = [NSJSONSerialization oex_JSONObjectWithData:data error:nil];
+                         NSString* responseStr = [[dictionary objectForKey:@"email"] firstObject];
+                         [[UIAlertController alloc]
+                          showAlertWithTitle:[Strings floatingErrorTitle]
+                          message:responseStr onViewController:self.navigationController];
+                     }
+                     else if(httpResp.statusCode >= 500) {
+                         NSString* responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                         [[UIAlertController alloc] showAlertWithTitle:[Strings floatingErrorTitle] message:responseStr onViewController:self.navigationController];
+                         
+                     }
+                 }
+                 else {
+                     [[UIAlertController alloc]
+                      showAlertWithTitle:[Strings floatingErrorTitle] message:[error localizedDescription] onViewController:self.navigationController];
+                 }
+             }];
+         });
+     }];
 }
 
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
@@ -761,10 +687,6 @@
 
 - (BOOL) isRTL {
     return [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return [OEXStyles sharedStyles].standardStatusBarStyle;
 }
 
 - (BOOL) shouldAutorotate {
