@@ -18,6 +18,7 @@
 #import <FirebaseMessaging/FirebaseMessaging.h>
 
 #import "OEXAppDelegate.h"
+#import "HPNService.h"
 
 #import "edX-Swift.h"
 #import "Logger+OEXObjC.h"
