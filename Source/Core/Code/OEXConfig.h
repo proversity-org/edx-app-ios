@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString*)organizationCode;
 - (nullable NSString*)konnekteerApiKey;
 - (nullable NSString*)mainTopic;
+- (nullable NSString*)organizationId;
+- (nullable NSString*)projectId;
 // Network
 - (nullable NSURL*)apiHostURL;
 - (nullable NSString*)feedbackEmailAddress;

@@ -640,6 +640,7 @@
 		BD837BB91DC8D5D400341EFD /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD837BB71DC8D5D400341EFD /* Icon-76@2x.png */; };
 		BD837BBB1DC8D5DF00341EFD /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = BD837BBA1DC8D5DF00341EFD /* Icon-40.png */; };
 		BD9E00C420A433C900510A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD9E00C320A433C900510A47 /* GoogleService-Info.plist */; };
+		BDFED2C520ADCCEF00492AF3 /* HPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFED2C420ADCCEF00492AF3 /* HPNService.m */; };
 		BE0D454A192DD4F800D720D6 /* OEXNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */; };
 		BE0D4551192DE65200D720D6 /* OEXInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0D4550192DE65200D720D6 /* OEXInterface.m */; };
 		BE0EE287192B78C400F9FF98 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0EE286192B78C400F9FF98 /* CoreTelephony.framework */; };
@@ -1543,6 +1544,8 @@
 		BD837BB71DC8D5D400341EFD /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
 		BD837BBA1DC8D5DF00341EFD /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		BD9E00C320A433C900510A47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDFED2C320ADCCEF00492AF3 /* HPNService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPNService.h; sourceTree = "<group>"; };
+		BDFED2C420ADCCEF00492AF3 /* HPNService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPNService.m; sourceTree = "<group>"; };
 		BE0D4547192DD16300D720D6 /* OEXNetworkConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OEXNetworkConstants.h; sourceTree = "<group>"; };
 		BE0D4548192DD4F800D720D6 /* OEXNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OEXNetworkInterface.h; sourceTree = "<group>"; };
 		BE0D4549192DD4F800D720D6 /* OEXNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OEXNetworkInterface.m; sourceTree = "<group>"; };
@@ -2220,6 +2223,8 @@
 				777EFEFB1A7AFF0E00F8BF06 /* OEXRouter.h */,
 				777EFEFC1A7AFF0E00F8BF06 /* OEXRouter.m */,
 				77FDF40E1AFBAE7700E8C639 /* OEXRouter+Swift.swift */,
+				BDFED2C320ADCCEF00492AF3 /* HPNService.h */,
+				BDFED2C420ADCCEF00492AF3 /* HPNService.m */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -4350,6 +4355,7 @@
 				77D470571C11EB4D00C6F0C9 /* ChoiceLabel.swift in Sources */,
 				77FDF4191B02910D00E8C639 /* IconMessageView.swift in Sources */,
 				77DCD23B1C2B14BA00CAEBB5 /* UITableView+Layout.swift in Sources */,
+				BDFED2C520ADCCEF00492AF3 /* HPNService.m in Sources */,
 				77509D941BE1710200B10CD3 /* TZStackView.swift in Sources */,
 				B78823A81FC6F69900F9CD61 /* RegistrationFieldController.swift in Sources */,
 				9E17EFD31BC65B7600C903CC /* UIAppearance+Swift.m in Sources */,
