@@ -6,8 +6,6 @@
 //  Copyright © 2018 edX. All rights reserved.
 //
 
-#import <FirebaseCore/FirebaseCore.h>
-#import <FirebaseMessaging/FirebaseMessaging.h>
 #import "HPNService.h"
 
 #define KONNEKTEER_API_URL "https://viz8n9p0ci.execute-api.us-east-1.amazonaws.com/prod/konnekteer"
@@ -31,11 +29,10 @@
       WithPayload:(NSDictionary * __nonnull)payload
 CompletionHandler:(onComplete __nullable)completionHandler
 {
-    [[FIRMessaging messaging] subscribeToTopic:[payload objectForKey:@"topic"]];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%s%s", KONNEKTEER_API_URL, SUBSCRIBE]];
     NSMutableURLRequest *urlRequest = [self prepareUrlRequest:url
                                                   WithAuthKey: authKey
-                                                  AndPayload:payload];
+                                                   AndPayload:payload];
     
     NSURLSessionDataTask *task = [self getSessionDataTaskFromUrl:urlRequest
                                                completionHandler:completionHandler];
@@ -47,7 +44,7 @@ CompletionHandler:(onComplete __nullable)completionHandler
 
 - (NSMutableURLRequest *)prepareUrlRequest:(NSURL * __nonnull)url
                                WithAuthKey:(NSString* __nonnull)authKey
-                               AndPayload:(NSDictionary * __nonnull)payload
+                                AndPayload:(NSDictionary * __nonnull)payload
 {
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]
                                        initWithURL:url];
@@ -59,8 +56,8 @@ CompletionHandler:(onComplete __nullable)completionHandler
     [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setValue:@"application/json"
       forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setValue:authKey
-      forHTTPHeaderField:@"Authorization"];
+    [urlRequest setValue:@"Authorization"
+      forHTTPHeaderField:authKey];
     
     [urlRequest setHTTPBody:postData];
     return urlRequest;
