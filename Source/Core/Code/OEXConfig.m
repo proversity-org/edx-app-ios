@@ -19,6 +19,8 @@ static NSString* const OEXFeedbackEmailAddress = @"FEEDBACK_EMAIL_ADDRESS";
 static NSString* const OEXOrganizationCode = @"ORGANIZATION_CODE";
 static NSString* const KonnekteerApiKey = @"KONNEKTEER_API_KEY";
 static NSString* const MainTopic = @"MAIN_TOPIC";
+static NSString* const OrganizationId = @"ORGANIZATION_ID";
+static NSString* const ProjectId = @"PROJECT_ID";
 
 static NSString* const OEXOAuthClientID = @"OAUTH_CLIENT_ID";
 
@@ -122,7 +124,15 @@ static OEXConfig* sSharedConfig;
 }
     
 - (NSString*)mainTopic {
-    return [self stringForKey:MainTopic];
+    return [self stringForKey:MainTopic] ?: @"";
+}
+
+- (NSString*)organizationId {
+    return [self stringForKey:OrganizationId] ?: @"";
+}
+
+- (NSString*)projectId {
+    return [self stringForKey:ProjectId] ?: @"";
 }
 
 - (NSString*)feedbackEmailAddress {
