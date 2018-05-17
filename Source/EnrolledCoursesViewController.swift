@@ -124,13 +124,14 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
                             let course = userCourse.course as OEXCourse
                             
                             // Subscribe to course
-                            let payload: [String: String] = ["topic": course.course_id!,
+                            let topic = course.course_id!.replace(string: "+", replacement: "-").replace(string: ":", replacement: "-")
+                            let payload: [String: String] = ["topic": topic,
                                                              "organisationId": (self?.environment.config.organizationId())!,
                                                              "projectId": (self?.environment.config.projectId())!]
                             
-//                            (HPNService.instance() as AnyObject).subscribe(self?.environment.config.konnekteerApiKey, payload: payload, completionHandler: {data, error in
-//                                print(data ?? "")
-//                            })
+                            (HPNService.instance() as AnyObject).subscribe((self?.environment.config.konnekteerApiKey())!, withPayload: payload, completionHandler: { data, error in
+                                print("Subscribed")
+                            })
                         }
                     }
                     self?.tableController.courses = enrollments.flatMap { $0.course } 

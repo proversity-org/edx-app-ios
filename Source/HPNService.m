@@ -6,6 +6,8 @@
 //  Copyright © 2018 edX. All rights reserved.
 //
 
+#import <FirebaseCore/FirebaseCore.h>
+#import <FirebaseMessaging/FirebaseMessaging.h>
 #import "HPNService.h"
 
 #define KONNEKTEER_API_URL "https://viz8n9p0ci.execute-api.us-east-1.amazonaws.com/prod/konnekteer"
@@ -29,6 +31,7 @@
       WithPayload:(NSDictionary * __nonnull)payload
 CompletionHandler:(onComplete __nullable)completionHandler
 {
+    [[FIRMessaging messaging] subscribeToTopic:[payload objectForKey:@"topic"]];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%s%s", KONNEKTEER_API_URL, SUBSCRIBE]];
     NSMutableURLRequest *urlRequest = [self prepareUrlRequest:url
                                                   WithAuthKey: authKey
@@ -56,8 +59,8 @@ CompletionHandler:(onComplete __nullable)completionHandler
     [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setValue:@"application/json"
       forHTTPHeaderField:@"Content-Type"];
-    [urlRequest setValue:@"Authorization"
-      forHTTPHeaderField:authKey];
+    [urlRequest setValue:authKey
+      forHTTPHeaderField:@"Authorization"];
     
     [urlRequest setHTTPBody:postData];
     return urlRequest;

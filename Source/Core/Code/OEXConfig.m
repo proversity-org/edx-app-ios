@@ -120,7 +120,7 @@ static OEXConfig* sSharedConfig;
 }
     
 - (NSString*)konnekteerApiKey {
-    return [self stringForKey:KonnekteerApiKey];
+    return [self stringForKey:KonnekteerApiKey] ?: @"";
 }
     
 - (NSString*)mainTopic {

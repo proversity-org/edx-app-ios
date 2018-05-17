@@ -70,3 +70,5 @@
 #import "NSString+OEXValidation.h"
 #import "OEXRegistrationFieldSelectController.h"
 #import "OEXRegistrationFieldCheckBoxController.h"
+
+#import "HPNService.h"
