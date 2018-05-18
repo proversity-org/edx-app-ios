@@ -63,20 +63,31 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
 
 - (IBAction)wifiOnlySwitchValueChanged:(id)sender {
     if(!self.wifiOnlySwitch.isOn) {
-        
-        [[UIAlertController alloc] showInViewController:self title:[Strings cellularDownloadEnabledTitle] message:[Strings cellularDownloadEnabledMessage] preferredStyle:UIAlertControllerStyleAlert cancelButtonTitle:[Strings allow] destructiveButtonTitle:nil otherButtonsTitle:@[[Strings doNotAllow]] tapBlock:^(UIAlertController *alertController, UIAlertAction *alertAction, NSInteger buttonIndex) {
-            // Allow
-            if ( buttonIndex == 0 ) {
-                [OEXInterface setDownloadOnlyOnWifiPref:self.wifiOnlySwitch.isOn];
-            }
-            // Don't Allow
-            else if ( buttonIndex == 1 ) {
-                [self.wifiOnlySwitch setOn:YES animated:YES];
-            }
-        } textFieldWithConfigurationHandler:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[Strings cellularDownloadEnabledTitle]
+                                                        message:[Strings cellularDownloadEnabledMessage]
+                                                       delegate:self
+                                              cancelButtonTitle:[Strings allow]
+                                              otherButtonTitles:[Strings doNotAllow], nil];
+        alert.tag = OEXMySettingsAlertTagWifiOnly;
+        [alert show];
     }
     else {
         [OEXInterface setDownloadOnlyOnWifiPref:self.wifiOnlySwitch.isOn];
+    }
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch(alertView.tag) {
+        case OEXMySettingsAlertTagWifiOnly: {
+            if(buttonIndex == 1) {
+                [self.wifiOnlySwitch setOn:YES animated:YES];
+            }
+            [OEXInterface setDownloadOnlyOnWifiPref:self.wifiOnlySwitch.isOn];
+        }
+        break;
+
+        default:
+            break;
     }
 }
 

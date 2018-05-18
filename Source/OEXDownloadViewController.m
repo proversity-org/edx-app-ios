@@ -22,6 +22,7 @@
 #import "OEXStyles.h"
 #import "OEXVideoSummary.h"
 #import "Reachability.h"
+#import "SWRevealViewController.h"
 #import "OEXCustomButton.h"
 
 #define RECENT_DOWNLOADEDVIEW_HEIGHT 76
@@ -61,6 +62,13 @@
     
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     
+    // Do any additional setup after loading the view.
+#ifdef __IPHONE_8_0
+    if(IS_IOS8) {
+        [self.table_Downloads setLayoutMargins:UIEdgeInsetsZero];
+    }
+#endif
+
     //Initialize Downloading arr
     self.arr_downloadingVideo = [[NSMutableArray alloc] init];
 
@@ -130,7 +138,12 @@
     OEXDownloadTableCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CellDownloads" forIndexPath:indexPath];
 
     [self configureCell:cell forIndexPath:indexPath];
-    
+#ifdef __IPHONE_8_0
+    if(IS_IOS8) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+#endif
+
     return cell;
 }
 

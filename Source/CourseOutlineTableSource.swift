@@ -38,11 +38,9 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     private var lastAccess:Bool = false
     private var shouldHideTableViewHeader:Bool = false
     let refreshController = PullRefreshController()
-    private var courseBlockID : CourseBlockID?
     
-    init(environment : Environment, courseID : String, forMode mode: CourseOutlineMode, courseBlockID : CourseBlockID? = nil) {
+    init(environment : Environment, courseID : String, forMode mode: CourseOutlineMode) {
         self.courseID = courseID
-        self.courseBlockID = courseBlockID
         self.environment = environment
         self.courseOutlineMode = mode
         self.courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID: courseID)
@@ -55,10 +53,9 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     
     var groups : [CourseOutlineQuerier.BlockGroup] = []
     var highlightedBlockID : CourseBlockID? = nil
-    private var videos: [OEXHelperVideoDownload]?
     
     func addCertificateView() {
-        guard environment.config.certificatesEnabled, let enrollment = environment.interface?.enrollmentForCourse(withID: courseID), let certificateUrl = enrollment.certificateUrl, let certificateImage = UIImage(named: "courseCertificate") else { return }
+        guard environment.config.isTabLayoutEnabled, environment.config.certificatesEnabled, let enrollment = environment.interface?.enrollmentForCourse(withID: courseID), let certificateUrl = enrollment.certificateUrl, let certificateImage = UIImage(named: "courseCertificate") else { return }
         
         let certificateItem =  CourseCertificateIem(certificateImage: certificateImage, certificateUrl: certificateUrl, action: {[weak self] _ in
             if let weakSelf = self, let url = NSURL(string: certificateUrl) {
@@ -87,50 +84,40 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     }
     
     private func configureHeaderView() {
+        
         if courseOutlineMode == .full {
             headerContainer.addSubview(lastAccessedView)
             headerContainer.addSubview(courseCard)
             addCertificateView()
         }
+        
         if let course = environment.interface?.enrollmentForCourse(withID: courseID)?.course {
             switch courseOutlineMode {
             case .full:
-                CourseCardViewModel.onCourseOutline(course: course).apply(card: courseCard, networkManager: environment.networkManager)
+                if environment.config.isTabLayoutEnabled {
+                    CourseCardViewModel.onCourseOutline(course: course).apply(card: courseCard, networkManager: environment.networkManager)
+                    refreshTableHeaderView(lastAccess: false)
+                }
                 break
             case .video:
-                if let courseBlockID = courseBlockID {
-                    let stream = courseQuerier.supportedBlockVideos(forCourseID: courseID, blockID: courseBlockID)
-                    stream.listen(self) {[weak self] downloads in
-                        self?.videos = downloads.value?.filter { $0.summary?.isDownloadableVideo ?? false }
-                        self?.addBulkDownloadHeaderView(course: course, videos: self?.videos)
-                    }
+                courseVideosHeaderView = CourseVideosHeaderView(with: course, environment: environment)
+                courseVideosHeaderView?.delegate = self
+                if let headerView = courseVideosHeaderView {
+                    headerContainer.addSubview(headerView)
                 }
-                else {
-                    videos = environment.interface?.downloadableVideos(of: course)
-                    addBulkDownloadHeaderView(course: course, videos: videos)
-                }
+                
+                refreshTableHeaderView(lastAccess: false)
                 break
             }
-            refreshTableHeaderView(lastAccess: false)
         }
-    }
-    
-    private func addBulkDownloadHeaderView(course: OEXCourse, videos: [OEXHelperVideoDownload]?) {
-        courseVideosHeaderView = CourseVideosHeaderView(with: course, environment: environment, videos: videos, blockID: courseBlockID)
-        courseVideosHeaderView?.delegate = self
-        if let headerView = courseVideosHeaderView {
-            headerContainer.addSubview(headerView)
-        }
-        
-        refreshTableHeaderView(lastAccess: false)
     }
     
     func courseVideosHeaderViewTapped() {
         delegate?.outlineTableControllerChoseShowDownloads(controller: self)
     }
     
-    func invalidOrNoNetworkFound() {
-        showOverlay(withMessage: environment.interface?.networkErrorMessage() ?? Strings.noWifiMessage)
+    func invalidDownloadSettings() {
+        showOverlay(withMessage: Strings.noWifiMessage)
     }
     
     private func indexPathForBlockWithID(blockID : CourseBlockID) -> NSIndexPath? {
@@ -312,21 +299,22 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
     }
     
     private func refreshTableHeaderView(lastAccess: Bool) {
+        if shouldHideTableViewHeader { return }
         self.lastAccess = lastAccess
         lastAccessedView.isHidden = !lastAccess
         
         switch courseOutlineMode {
         case .full:
-            if shouldHideTableViewHeader { return }
             var constraintView: UIView = courseCard            
             courseCard.snp_remakeConstraints { (make) in
                 let screenWidth = UIScreen.main.bounds.size.width
                 var height: CGFloat = 0
-                let screenHeight = UIScreen.main.bounds.size.height
-                let halfScreenHeight = screenHeight / 2.0
-                let ratioedHeight = screenWidth * defaultAspectRatio
-                height = CGFloat(Int(halfScreenHeight > ratioedHeight ? ratioedHeight : halfScreenHeight))
-                
+                if environment.config.isTabLayoutEnabled {
+                    let screenHeight = UIScreen.main.bounds.size.height
+                    let halfScreenHeight = screenHeight / 2.0
+                    let ratioedHeight = screenWidth * defaultAspectRatio
+                    height = CGFloat(Int(halfScreenHeight > ratioedHeight ? ratioedHeight : halfScreenHeight))
+                }
                 make.trailing.equalTo(headerContainer)
                 make.leading.equalTo(headerContainer)
                 make.width.equalTo(screenWidth)
@@ -355,11 +343,8 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
             tableView.setAndLayoutTableHeaderView(header: headerContainer)
             break
         case .video:
-            if let course = environment.interface?.enrollmentForCourse(withID: courseID)?.course, courseBlockID == nil {
-                videos = environment.interface?.downloadableVideos(of: course)
-                courseVideosHeaderView?.videos = videos ?? []
-            }
-            if videos?.count ?? 0 <= 0 {
+            if let course = environment.interface?.enrollmentForCourse(withID: courseID)?.course,
+                environment.interface?.downloadableVideos(of: course).count ?? 0 <= 0 {
                 tableView.tableHeaderView = nil
                 return
             }
