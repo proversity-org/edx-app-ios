@@ -49,7 +49,7 @@ class FirebaseAnalyticsTracker: NSObject, OEXAnalyticsTracker {
         
         var formattedParameters = [String: NSObject]()
         formatParamatersForFirebase(params: parameters, formattedParams: &formattedParameters)
-        Analytics.logEvent(formattedKeyForFirebase(key: event.displayName), parameters: formattedParameters)
+//        AnalyticsAnalytics.logEvent(formattedKeyForFirebase(key: event.displayName), parameters: formattedParameters)
         
     }
     
