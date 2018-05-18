@@ -205,7 +205,7 @@ public enum Icon {
         case .CourseEnd:
             return FontAwesomeRenderer(icon: .ClockO)
         case .CourseHTMLContent:
-            return FontAwesomeRenderer(icon: .Book)
+            return FontAwesomeRenderer(icon: .FileO)
         case .CourseModeFull:
             return FontAwesomeRenderer(icon: .List)
         case .Recent:

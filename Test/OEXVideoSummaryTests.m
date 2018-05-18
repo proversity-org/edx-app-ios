@@ -72,15 +72,6 @@
                      }};
 }
 
-- (OEXVideoSummary*) videoPipelineEnabledSummaryWith: (NSDictionary*)dictionary {
-    OEXConfig *origConfig = [OEXConfig sharedConfig];
-    OEXConfig *overrideConfig = [[OEXConfig alloc] initWithDictionary:@{@"USING_VIDEO_PIPELINE": @YES}];
-    [OEXConfig setSharedConfig:overrideConfig];
-    OEXVideoSummary* summary = [[OEXVideoSummary alloc] initWithDictionary:dictionary];
-    [OEXConfig setSharedConfig:origConfig];
-    return summary;
-}
-
 - (void)testParser {
     NSString* sectionURL = @"http://edx/some_section";
     NSString* category = @"video";
@@ -169,23 +160,7 @@
     OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncoding:fallback andOnlyOnWeb:false]];
     
     XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
     XCTAssertTrue(summary.isDownloadableVideo);
-    XCTAssertNotNil(summary.downloadURL);
-    XCTAssertNotEqual(summary.downloadURL, @"");
-}
-
-- (void)testSupportedHLSEncoding {
-    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingHLS andUrl:@"https://www.example.com/video.m3u8"];
-    OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncoding:hls andOnlyOnWeb:false]];
-    
-    XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
-    XCTAssertFalse(summary.isDownloadableVideo);
-    XCTAssertNil(summary.downloadURL);
-    XCTAssertEqual(summary.size.intValue, 0);
 }
 
 - (void)testSupportedFallbackEncoding {
@@ -193,11 +168,7 @@
     OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncoding:fallback andOnlyOnWeb:false]];
     
     XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
     XCTAssertTrue(summary.isDownloadableVideo);
-    XCTAssertNotNil(summary.downloadURL);
-    XCTAssertNotEqual(summary.downloadURL, @"");
 }
 
 - (void)testUnSupportedFallbackEncoding {
@@ -214,31 +185,7 @@
     
     XCTAssertFalse(summary.isSupportedVideo);
     XCTAssertFalse(summary.isDownloadableVideo);
-    XCTAssertNil(summary.downloadURL);
     XCTAssertTrue(summary.isYoutubeVideo);
-}
-
--(void) testPrefferedHLSEncodingDownloadPipelineEnabled {
-    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingHLS andUrl:@"https://www.example.com/video.m3u8"];
-    NSNumber *mobileLowSize = [NSNumber numberWithInt:3];
-    NSDictionary *mobileLow = @{OEXVideoEncodingMobileLow: @{
-                                        @"file_size": mobileLowSize,
-                                        @"url": @"https://www.example.com/video.mp4"
-                                        }};
-    NSDictionary *fallback = [self encodingWithName:OEXVideoEncodingFallback andUrl:@"https://www.example.com/video.mp4"];
-    OEXVideoSummary *summary = [self videoPipelineEnabledSummaryWith:[self summaryWithEncodings:@[hls, mobileLow, fallback] andOnlyOnWeb:false]];
-    XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
-    XCTAssertTrue(summary.isDownloadableVideo);
-    XCTAssertNotNil(summary.downloadURL);
-    XCTAssertNotEqual(summary.downloadURL, @"");
-    XCTAssertNotEqual(summary.downloadURL, summary.videoURL);
-    XCTAssertEqual(summary.preferredEncoding.name, OEXVideoEncodingHLS);
-    XCTAssertNotNil(summary.size);
-    NSNumber *hlsSize = (NSNumber *) [hls objectForKey:@"file_size"];
-    XCTAssertNotEqual(summary.size.integerValue, hlsSize.integerValue);
-    XCTAssertEqual(summary.size.integerValue, mobileLowSize.integerValue);
 }
 
 - (void)testSupportedYoutubeFallbackEncodingDownload {
@@ -247,43 +194,23 @@
     OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncodings:@[youtube, fallback] andOnlyOnWeb:false]];
     
     XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
     XCTAssertTrue(summary.isDownloadableVideo);
-    XCTAssertNotNil(summary.downloadURL);
-    XCTAssertNotEqual(summary.downloadURL, @"");
     XCTAssertFalse(summary.isYoutubeVideo);
 }
 
 - (void)testSupportedYoutubeHLSEncodingDownload {
     NSDictionary *youtube = [self encodingWithName:OEXVideoEncodingYoutube andUrl:@"https://www.youtube.com/watch?v=abc123"];
-    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingHLS andUrl:@"https://www.example.com/video.m3u8"];
+    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingFallback andUrl:@"https://www.example.com/video.m3u8"];
     OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncodings:@[youtube, hls] andOnlyOnWeb:false]];
     
     XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
     XCTAssertFalse(summary.isDownloadableVideo);
-    XCTAssertNil(summary.downloadURL);
-    XCTAssertFalse(summary.isYoutubeVideo);
-}
-
-- (void)testSupportedYoutubeHLSInFallbackEncodingDownload {
-    NSDictionary *youtube = [self encodingWithName:OEXVideoEncodingYoutube andUrl:@"https://www.youtube.com/watch?v=abc123"];
-    NSDictionary *hlsInFallback = [self encodingWithName:OEXVideoEncodingFallback andUrl:@"https://www.example.com/video.m3u8"];
-    OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncodings:@[youtube, hlsInFallback] andOnlyOnWeb:false]];
-    
-    XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
-    XCTAssertFalse(summary.isDownloadableVideo);
-    XCTAssertNil(summary.downloadURL);
     XCTAssertFalse(summary.isYoutubeVideo);
 }
 
 - (void)testSupportedYoutubeHLSEncodingAllSourcesDownload {
     NSDictionary *youtube = [self encodingWithName:OEXVideoEncodingYoutube andUrl:@"https://www.youtube.com/watch?v=abc123"];
-    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingHLS andUrl:@"https://www.example.com/video.m3u8"];
+    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingFallback andUrl:@"https://www.example.com/video.m3u8"];
     NSArray *all_sources = @[
         @"https://www.example.com/video.m3u8",
         @"https://player.vimeo.com/external/225003478.m3u8?s=6438b130458bd0eb38f7625ffa26623caee8ff7c",
@@ -293,30 +220,6 @@
     OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:summaryDict];
 
     XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
-    XCTAssertTrue([summary.videoURL isEqualToString:all_sources[0]]);
-    XCTAssertTrue(summary.isDownloadableVideo);
-    XCTAssertNotNil(summary.downloadURL);
-    XCTAssertNotEqual(summary.downloadURL, @"");
-    XCTAssertTrue([summary.downloadURL isEqualToString:all_sources[2]]);
-    XCTAssertFalse(summary.isYoutubeVideo);
-}
-
-- (void)testSupportedYoutubeHLSInFallbackEncodingAllSourcesDownload {
-    NSDictionary *youtube = [self encodingWithName:OEXVideoEncodingYoutube andUrl:@"https://www.youtube.com/watch?v=abc123"];
-    NSDictionary *hls = [self encodingWithName:OEXVideoEncodingFallback andUrl:@"https://www.example.com/video.m3u8"];
-    NSArray *all_sources = @[
-                             @"https://www.example.com/video.m3u8",
-                             @"https://player.vimeo.com/external/225003478.m3u8?s=6438b130458bd0eb38f7625ffa26623caee8ff7c",
-                             @"https://player.vimeo.com/external/225003478.hd.mp4?s=bb4df4d286c4326e7b53074f30b05c845ebd3912&profile_id=174",
-                             ];
-    NSDictionary *summaryDict = [self summaryWithEncodings:@[youtube, hls] andOnlyOnWeb:false andAllSources:all_sources];
-    OEXVideoSummary *summary = [[OEXVideoSummary alloc] initWithDictionary:summaryDict];
-    
-    XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
     XCTAssertTrue([summary.videoURL isEqualToString:all_sources[0]]);
     XCTAssertTrue(summary.isDownloadableVideo);
     XCTAssertTrue([summary.downloadURL isEqualToString:all_sources[2]]);
@@ -327,13 +230,17 @@
     NSDictionary *youtube = [self encodingWithName:OEXVideoEncodingYoutube andUrl:@"https://www.youtube.com/watch?v=abc123"];
     NSDictionary *hls = [self encodingWithName:OEXVideoEncodingFallback andUrl:@"https://www.example.com/video.m3u8"];
     NSArray *all_sources = @[@"https://www.example.com/video.mp4"];
-    OEXVideoSummary *summary = [self videoPipelineEnabledSummaryWith:[self summaryWithEncodings:@[youtube, hls] andOnlyOnWeb:false andAllSources:all_sources]];
+    OEXVideoSummary *summary = nil;
+
+    OEXConfig *origConfig = [OEXConfig sharedConfig];
+    OEXConfig *overrideConfig = [[OEXConfig alloc] initWithDictionary:@{@"USING_VIDEO_PIPELINE": @YES}];
+
+    [OEXConfig setSharedConfig:overrideConfig];
+    summary = [[OEXVideoSummary alloc] initWithDictionary:[self summaryWithEncodings:@[youtube, hls] andOnlyOnWeb:false andAllSources:all_sources]];
+    [OEXConfig setSharedConfig:origConfig];
+    
     XCTAssertTrue(summary.isSupportedVideo);
-    XCTAssertNotNil(summary.videoURL);
-    XCTAssertNotEqual(summary.videoURL, @"");
     XCTAssertFalse(summary.isDownloadableVideo);
-    XCTAssertNil(summary.downloadURL);
     XCTAssertFalse(summary.isYoutubeVideo);
 }
-
 @end
