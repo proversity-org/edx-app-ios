@@ -59,8 +59,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         let textStyle = OEXMutableTextStyle(weight: .normal, size: .base, color : OEXStyles.shared().neutralBlack())
         textStyle.alignment = NSTextAlignment.center
         versionLabel.attributedText = textStyle.attributedString(withText: Strings.versionDisplay(number: Bundle.main.oex_buildVersionString(), environment: ""))
-        versionLabel.accessibilityIdentifier = "AccountViewController:version-label"
-        tableView.accessibilityIdentifier = "AccountViewController:table-view"
         addConstraints()
     }
 
@@ -69,7 +67,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
             let closeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
             closeButton.accessibilityLabel = Strings.Accessibility.closeLabel
             closeButton.accessibilityHint = Strings.Accessibility.closeHint
-            closeButton.accessibilityIdentifier = "AccountViewController:close-button"
             navigationItem.rightBarButtonItem = closeButton
             
             closeButton.oex_setAction { [weak self] in
@@ -121,7 +118,6 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.separatorInset = UIEdgeInsets.zero
         cell.accessoryType = accessoryType(option: AccountviewOptions.accountOptions[indexPath.row])
         cell.title = optionTitle(option: AccountviewOptions.accountOptions[indexPath.row])
-        cell.accessibilityIdentifier = "AccountViewController:table-cell"
         return cell
     }
     
@@ -137,9 +133,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
                 launchEmailComposer()
             case .Logout:
                 OEXFileUtility.nukeUserPIIData()
-                dismiss(animated: true, completion: { [weak self] in
-                    self?.environment.router?.logout()
-                })
+                if (environment.config.isTabLayoutEnabled) {
+                    dismiss(animated: true, completion: { [weak self] in self?.environment.router?.logout() })
+                } else {
+                    environment.router?.logout()
+                }
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -184,7 +182,11 @@ class AccountViewController: UIViewController, UITableViewDelegate, UITableViewD
 extension AccountViewController : MFMailComposeViewControllerDelegate {
     func launchEmailComposer() {
         if !MFMailComposeViewController.canSendMail() {
-            UIAlertController().showAlert(withTitle: Strings.emailAccountNotSetUpTitle, message: Strings.emailAccountNotSetUpMessage, onViewController: self)
+            let alert = UIAlertView(title: Strings.emailAccountNotSetUpTitle,
+                                    message: Strings.emailAccountNotSetUpMessage,
+                                    delegate: nil,
+                                    cancelButtonTitle: Strings.ok)
+            alert.show()
         } else {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self

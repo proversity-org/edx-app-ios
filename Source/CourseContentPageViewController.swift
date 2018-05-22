@@ -116,10 +116,7 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
             success : {[weak self] cursor -> Void in
                 if let owner = self, let controller = owner.controllerForBlock(block: cursor.current.block)
                 {
-                    owner.setPageControllers(with: [controller], direction: .forward, animated: false, competion: { [weak self] (finished) in
-                        self?.view.isUserInteractionEnabled = true
-                        self?.navigationController?.toolbar.isUserInteractionEnabled = true
-                    })
+                    owner.setPageControllers(with: [controller], direction: .forward, animated: false)
                 }
                 else {
                     self?.initialLoadController.state = LoadState.failed(error: NSError.oex_courseContentLoadError())
@@ -203,31 +200,28 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
     }
     
     private func updateNavigationBars() {
-
         if let cursor = contentLoader.value {
             let item = cursor.current
-
-            DispatchQueue.main.async { [weak self] in
-                // only animate change if we haven't set a title yet, so the initial set happens without
-                // animation to make the push transition work right
-                let actions : () -> Void = {
-                    self?.navigationItem.title = item.block.displayName
-                }
-                if let navigationBar = self?.navigationController?.navigationBar, let _ = self?.navigationItem.title {
-                    let animated = self?.navigationItem.title != nil
-
-                    UIView.transition(with: navigationBar,
-                                      duration: 0.3 * (animated ? 1.0 : 0.0), options: UIViewAnimationOptions.transitionCrossDissolve,
-                                      animations: actions, completion: nil)
-                }
-                else {
-                    actions()
-                }
+            
+            // only animate change if we haven't set a title yet, so the initial set happens without
+            // animation to make the push transition work right
+            let actions : () -> Void = {
+                self.navigationItem.title = item.block.displayName
             }
-
+            if let navigationBar = navigationController?.navigationBar, let _ = navigationItem.title {
+                let animated = navigationItem.title != nil
+                UIView.transition(with: navigationBar,
+                    duration: 0.3 * (animated ? 1.0 : 0.0), options: UIViewAnimationOptions.transitionCrossDissolve,
+                    animations: actions, completion: nil)
+            }
+            else {
+                actions()
+            }
+            
             let prevItem = toolbarItemWithGroupItem(item: item, adjacentGroup: item.prevGroup, direction: .Prev, enabled: cursor.hasPrev)
             let nextItem = toolbarItemWithGroupItem(item: item, adjacentGroup: item.nextGroup, direction: .Next, enabled: cursor.hasNext)
-            setToolbarItems(
+            
+            self.setToolbarItems(
                 [
                     prevItem,
                     UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
@@ -235,7 +229,7 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
                 ], animated : true)
         }
         else {
-            toolbarItems = []
+            self.toolbarItems = []
         }
     }
     
@@ -272,18 +266,11 @@ public class CourseContentPageViewController : UIPageViewController, UIPageViewC
         if let currentController = viewControllers?.first,
             let nextController = self.siblingWithDirection(direction: direction, fromController: currentController)
         {
-            setPageControllers(with: [nextController], direction: direction, animated: true, competion: { [weak self] (finished) in
-                self?.view.isUserInteractionEnabled = true
-                self?.navigationController?.toolbar.isUserInteractionEnabled = true
-            })
+            setPageControllers(with: [nextController], direction: direction, animated: true)
         }
     }
     
     private func setPageControllers(with controllers: [UIViewController], direction:UIPageViewControllerNavigationDirection, animated:Bool, competion: ((Bool) -> Swift.Void)? = nil) {
-        // setViewControllers is being called in async thread so user may intract with UIPageController in that duration so
-        // disabling user interation while setting viewControllers of UIPageViewController
-        view.isUserInteractionEnabled = false
-        navigationController?.toolbar.isUserInteractionEnabled = false
         DispatchQueue.main.async { [weak self] in
             self?.setViewControllers(controllers, direction: direction, animated: animated, completion: competion)
             self?.updateNavigationForEnteredController(controller: controllers.first)
@@ -387,11 +374,11 @@ extension CourseContentPageViewController {
     }
     
     public var t_prevButtonEnabled : Bool {
-        return self.toolbarItems?[0].isEnabled ?? false
+        return self.toolbarItems![0].isEnabled
     }
     
     public var t_nextButtonEnabled : Bool {
-        return self.toolbarItems?[2].isEnabled ?? false
+        return self.toolbarItems![2].isEnabled
     }
     
     public func t_goForward() {

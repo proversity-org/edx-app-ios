@@ -22,7 +22,6 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = Strings.findCourses
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.accessibilityIdentifier = "CourseCatalogViewController:cancel-bar-button-item"
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -58,7 +57,7 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
 
         paginationController.stream.listen(self, success:
             {[weak self] courses in
-                self?.setupLoadingState(courses: courses)
+                self?.loadController.state = .Loaded
                 self?.tableController.courses = courses
                 self?.tableController.tableView.reloadData()
             }, failure: {[weak self] error in
@@ -85,15 +84,6 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
             return
         }
         self.environment.router?.showCourseCatalogDetail(courseID: courseID, fromController:self)
-    }
-    
-    func setupLoadingState(courses: [OEXCourse]) {
-        if courses.count > 0 {
-            loadController.state = .Loaded
-        } else {
-            let error = NSError.oex_error(with: .unknown, message: Strings.findCoursesNoAvailableCourses)
-            loadController.state = LoadState.failed(error: error, icon: Icon.UnknownError)
-        }
     }
 }
 
