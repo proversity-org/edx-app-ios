@@ -1,4 +1,4 @@
-
+import org.ajoberstar.grgit.*
 import org.ajoberstar.grgit.exception.*;
 
 buildscript {
