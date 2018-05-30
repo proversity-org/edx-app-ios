@@ -286,7 +286,7 @@
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"FCM registration token: %@", fcmToken);
-    [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
+    // [[FIRMessaging messaging] subscribeToTopic:self.environment.config.mainTopic];
     
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
