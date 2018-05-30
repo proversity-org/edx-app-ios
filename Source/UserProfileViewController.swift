@@ -65,7 +65,6 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
     }
     
     private func addBackBarButtonItem() {
-        if !environment.config.isTabLayoutEnabled { return }
         let backItem = UIBarButtonItem(image: Icon.ArrowLeft.imageWithFontSize(size: 40), style: .plain, target: nil, action: nil)
         backItem.oex_setAction {[weak self] in
             // Profile has different navbar color scheme that's why we need to revert nav bar color to original color while poping the controller
@@ -140,7 +139,12 @@ class UserProfileViewController: OfflineSupportViewController, UserProfilePresen
             activityItems: [message, url],
             applicationActivities: nil
         )
-        self.present(controller, animated: true, completion: nil)
+        if let titleView = navigationItem.titleView {
+            // Badges are not enabled, so sourceView can be revised on enabling of badges as per position of share location
+            // Position of UIActivityViewController can be not as per on iPad but app will not crash
+            controller.configurePresentationController(withSourceView: titleView)
+            present(controller, animated: true, completion: nil)
+        }
     }
     
     //MARK:- LoadStateViewReloadSupport method

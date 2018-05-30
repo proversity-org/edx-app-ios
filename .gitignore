@@ -14,6 +14,5 @@ default_config/local.yaml
 *.swp
 
 custom_config/
-deployment/
 fastlane/
 setup_and_build.py
