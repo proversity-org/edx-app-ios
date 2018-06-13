@@ -89,6 +89,10 @@ extension OEXConfig {
         return bool(forKey: "TAB_LAYOUTS_ENABLED")
     }
     
+    var openLinksInsideAppEnabled: Bool {
+        return bool(forKey: "OPEN_LINKS_INSIDE_APP_ENABLED")
+    }
+    
     var isJumpToLastAccessedModuleEnabled: Bool {
         return bool(forKey: "JUMP_TO_LAST_ACCESSED_MODULE_ENABLED")
     }
