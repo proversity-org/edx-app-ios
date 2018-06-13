@@ -85,10 +85,6 @@ extension OEXConfig {
         return bool(forKey: "ANNOUNCEMENTS_ENABLED")
     }
     
-    var isTabLayoutEnabled: Bool {
-        return bool(forKey: "TAB_LAYOUTS_ENABLED")
-    }
-    
     var openLinksInsideAppEnabled: Bool {
         return bool(forKey: "OPEN_LINKS_INSIDE_APP_ENABLED")
     }
