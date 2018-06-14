@@ -671,6 +671,8 @@
 		B7CCC73D209B16B100A66923 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCC71B209B16B000A66923 /* ConstraintLayoutSupportDSL.swift */; };
 		B7CCC73E209B16B100A66923 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCC71C209B16B000A66923 /* ConstraintMakerRelatable.swift */; };
 		B7CCC740209B1F9E00A66923 /* Default-375w-812h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7CCC73F209B1F9E00A66923 /* Default-375w-812h@3x.png */; };
+		BD176D6920D2E85200D3497E /* PollXBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6820D2E85200D3497E /* PollXBlockViewController.swift */; };
+		BD176D6B20D2E86800D3497E /* SurveyXBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6A20D2E86800D3497E /* SurveyXBlockViewController.swift */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -1617,6 +1619,8 @@
 		B7CCC71B209B16B000A66923 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		B7CCC71C209B16B000A66923 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		B7CCC73F209B1F9E00A66923 /* Default-375w-812h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-375w-812h@3x.png"; sourceTree = "<group>"; };
+		BD176D6820D2E85200D3497E /* PollXBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollXBlockViewController.swift; sourceTree = "<group>"; };
+		BD176D6A20D2E86800D3497E /* SurveyXBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyXBlockViewController.swift; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -3149,15 +3153,6 @@
 			path = "Registration Field Views";
 			sourceTree = "<group>";
 		};
-		BD9A0D7F1FBA014300AAEF0D /* edXUITests */ = {
-			isa = PBXGroup;
-			children = (
-				BD9A0D801FBA014300AAEF0D /* edXUITests.swift */,
-				BD9A0D821FBA014300AAEF0D /* Info.plist */,
-				BD9A0D891FBA019F00AAEF0D /* SnapshotHelper.swift */,
-			);
-			path = edXUITests;
-		};
 		B7A1EA81209C417000BD369A /* SnapKitExtensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -3207,6 +3202,25 @@
 			);
 			path = SnapKit;
 			sourceTree = "<group>";
+		};
+		BD176D6720D2E81200D3497E /* XBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				BD176D6820D2E85200D3497E /* PollXBlockViewController.swift */,
+				BD176D6A20D2E86800D3497E /* SurveyXBlockViewController.swift */,
+			);
+			name = XBlocks;
+			sourceTree = "<group>";
+		};
+		BD9A0D7F1FBA014300AAEF0D /* edXUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BD9A0D801FBA014300AAEF0D /* edXUITests.swift */,
+				BD9A0D821FBA014300AAEF0D /* Info.plist */,
+				BD9A0D891FBA019F00AAEF0D /* SnapshotHelper.swift */,
+			);
+			path = edXUITests;
+			sourceTree = "<unknown>";
 		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
@@ -3346,6 +3360,7 @@
 		BECB7B141924C0C3009C77F1 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BD176D6720D2E81200D3497E /* XBlocks */,
 				228E0B891F43137D0073E6FA /* Account View */,
 				1972E3B619BF474900085F08 /* Analytics */,
 				69EFBB011E361BE600FF66C4 /* App Review */,
@@ -4404,6 +4419,7 @@
 				890D027F1967343A002CE7EC /* OEXCourseInfoCell.m in Sources */,
 				E0A2461D1D5CA6950066C766 /* LogoutApi.swift in Sources */,
 				E02E59EF1F0E231000060AE0 /* VersionParser.swift in Sources */,
+				BD176D6B20D2E86800D3497E /* SurveyXBlockViewController.swift in Sources */,
 				770A27961A6995DF00DFC6FF /* NSArray+OEXFunctional.m in Sources */,
 				9CADE2F71A91E91A00ACDAF7 /* NSURL+OEXPathExtensions.m in Sources */,
 				1AB676AE1BA0964B002AD0EB /* OEXVideoPlayerSettings.swift in Sources */,
@@ -4605,6 +4621,7 @@
 				9ED03B951B204CDF0081A19A /* CourseSectionTableViewCell.swift in Sources */,
 				77BECB041B0A5FDB00894276 /* ContentInsetsController.swift in Sources */,
 				B4B6D6021A949EFC000F44E8 /* OEXRegistrationFormField.m in Sources */,
+				BD176D6920D2E85200D3497E /* PollXBlockViewController.swift in Sources */,
 				77D470571C11EB4D00C6F0C9 /* ChoiceLabel.swift in Sources */,
 				77FDF4191B02910D00E8C639 /* IconMessageView.swift in Sources */,
 				77DCD23B1C2B14BA00CAEBB5 /* UITableView+Layout.swift in Sources */,

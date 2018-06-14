@@ -58,6 +58,20 @@ class CourseProblemTableViewCell : CourseGenericBlockTableViewCell {
 
 }
 
+class CoursePollSurveyTableViewCell : CourseGenericBlockTableViewCell {
+    static let identifier = "CoursePollSurveyTableViewCellIdentifier"
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style : style, reuseIdentifier : reuseIdentifier)
+        content.setContentIcon(icon: Icon.CoursePollSurvey)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 class CourseUnknownTableViewCell: CourseGenericBlockTableViewCell {
     
     static let identifier = "CourseUnknownTableViewCellIdentifier"

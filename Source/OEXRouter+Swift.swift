@@ -17,6 +17,8 @@ import Foundation
 enum CourseHTMLBlockSubkind {
     case Base
     case Problem
+    case Poll
+    case Survey
 }
 
 enum CourseBlockDisplayType {
@@ -42,6 +44,8 @@ extension CourseBlock {
         case .Unknown("recap"): return .HTML(.Base)
         case .Unknown(_), .HTML: return multiDevice ? .HTML(.Base) : .Unknown
         case .Problem: return multiDevice ? .HTML(.Problem) : .Unknown
+        case .Poll: return multiDevice ? .HTML(.Poll) : .Unknown
+        case .Survey: return multiDevice ? .HTML(.Survey) : .Unknown
         case .Course: return .Outline
         case .Chapter: return .Outline
         case .Section: return .Outline
@@ -96,6 +100,14 @@ extension OEXRouter {
                 return outlineController
         case .Unit:
             return unitControllerForCourseID(courseID: courseID, blockID: blockID, initialChildID: nil, forMode: mode)
+        case .HTML(.Poll):
+            print(type)
+            let controller = PollXBlockViewController()
+            return controller
+        case .HTML(.Survey):
+            print(type)
+            let controller = SurveyXBlockViewController()
+            return controller
         case .HTML:
             let controller = HTMLBlockViewController(blockID: blockID, courseID : courseID, environment : environment)
             return controller
