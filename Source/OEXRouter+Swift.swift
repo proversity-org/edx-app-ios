@@ -94,6 +94,7 @@ extension OEXRouter {
     }
     
     private func controllerForBlockWithID(blockID : CourseBlockID?, type : CourseBlockDisplayType, courseID : String, forMode mode: CourseOutlineMode? = .full) -> UIViewController {
+        print(type)
         switch type {
             case .Outline:
                 let outlineController = CourseOutlineViewController(environment: self.environment, courseID: courseID, rootID: blockID, forMode: mode)
@@ -101,12 +102,11 @@ extension OEXRouter {
         case .Unit:
             return unitControllerForCourseID(courseID: courseID, blockID: blockID, initialChildID: nil, forMode: mode)
         case .HTML(.Poll):
-            print(type)
-            let controller = PollXBlockViewController()
+            let controller = PollViewController(blockID: blockID, courseID : courseID, environment : environment)
             return controller
+            break
         case .HTML(.Survey):
-            print(type)
-            let controller = SurveyXBlockViewController()
+            let controller = SurveyViewController(blockID: blockID, courseID : courseID, environment : environment)
             return controller
         case .HTML:
             let controller = HTMLBlockViewController(blockID: blockID, courseID : courseID, environment : environment)

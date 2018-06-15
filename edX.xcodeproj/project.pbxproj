@@ -671,8 +671,12 @@
 		B7CCC73D209B16B100A66923 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCC71B209B16B000A66923 /* ConstraintLayoutSupportDSL.swift */; };
 		B7CCC73E209B16B100A66923 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCC71C209B16B000A66923 /* ConstraintMakerRelatable.swift */; };
 		B7CCC740209B1F9E00A66923 /* Default-375w-812h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7CCC73F209B1F9E00A66923 /* Default-375w-812h@3x.png */; };
-		BD176D6920D2E85200D3497E /* PollXBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6820D2E85200D3497E /* PollXBlockViewController.swift */; };
-		BD176D6B20D2E86800D3497E /* SurveyXBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6A20D2E86800D3497E /* SurveyXBlockViewController.swift */; };
+		BD176D6920D2E85200D3497E /* PollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6820D2E85200D3497E /* PollViewController.swift */; };
+		BD176D6B20D2E86800D3497E /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6A20D2E86800D3497E /* SurveyViewController.swift */; };
+		BD176D6D20D2FD6300D3497E /* XBlockApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6C20D2FD6300D3497E /* XBlockApiClient.swift */; };
+		BD176D6F20D3002700D3497E /* XBlockApiRequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D6E20D3002700D3497E /* XBlockApiRequestData.swift */; };
+		BD176D8720D3093100D3497E /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D8620D3093100D3497E /* Poll.swift */; };
+		BD176D8B20D3178E00D3497E /* PollGetSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD176D8A20D3178E00D3497E /* PollGetSettings.swift */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
@@ -1619,8 +1623,12 @@
 		B7CCC71B209B16B000A66923 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		B7CCC71C209B16B000A66923 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		B7CCC73F209B1F9E00A66923 /* Default-375w-812h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-375w-812h@3x.png"; sourceTree = "<group>"; };
-		BD176D6820D2E85200D3497E /* PollXBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollXBlockViewController.swift; sourceTree = "<group>"; };
-		BD176D6A20D2E86800D3497E /* SurveyXBlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyXBlockViewController.swift; sourceTree = "<group>"; };
+		BD176D6820D2E85200D3497E /* PollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollViewController.swift; sourceTree = "<group>"; };
+		BD176D6A20D2E86800D3497E /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		BD176D6C20D2FD6300D3497E /* XBlockApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XBlockApiClient.swift; sourceTree = "<group>"; };
+		BD176D6E20D3002700D3497E /* XBlockApiRequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XBlockApiRequestData.swift; sourceTree = "<group>"; };
+		BD176D8620D3093100D3497E /* Poll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
+		BD176D8A20D3178E00D3497E /* PollGetSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollGetSettings.swift; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
@@ -3206,10 +3214,30 @@
 		BD176D6720D2E81200D3497E /* XBlocks */ = {
 			isa = PBXGroup;
 			children = (
-				BD176D6820D2E85200D3497E /* PollXBlockViewController.swift */,
-				BD176D6A20D2E86800D3497E /* SurveyXBlockViewController.swift */,
+				BD176D7920D302C200D3497E /* Survey */,
+				BD176D7820D302B700D3497E /* Poll */,
+				BD176D6C20D2FD6300D3497E /* XBlockApiClient.swift */,
+				BD176D6E20D3002700D3497E /* XBlockApiRequestData.swift */,
 			);
 			name = XBlocks;
+			sourceTree = "<group>";
+		};
+		BD176D7820D302B700D3497E /* Poll */ = {
+			isa = PBXGroup;
+			children = (
+				BD176D6820D2E85200D3497E /* PollViewController.swift */,
+				BD176D8620D3093100D3497E /* Poll.swift */,
+				BD176D8A20D3178E00D3497E /* PollGetSettings.swift */,
+			);
+			name = Poll;
+			sourceTree = "<group>";
+		};
+		BD176D7920D302C200D3497E /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				BD176D6A20D2E86800D3497E /* SurveyViewController.swift */,
+			);
+			name = Survey;
 			sourceTree = "<group>";
 		};
 		BD9A0D7F1FBA014300AAEF0D /* edXUITests */ = {
@@ -4320,6 +4348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD176D8720D3093100D3497E /* Poll.swift in Sources */,
 				77E6486E1C912DA200B6740D /* NetworkManager+StandardInterceptors.swift in Sources */,
 				7742F8DD1C3C979D009E555A /* EnrollmentConfig.swift in Sources */,
 				9E71B73F1B1D9DBD009C81E2 /* OEXStyles+Swift.swift in Sources */,
@@ -4358,6 +4387,7 @@
 				7778F0981ABB1A6C00B4CDA0 /* NSError+OEXKnownErrors.m in Sources */,
 				224F1F532067B4E0009B3639 /* CustomSlider.swift in Sources */,
 				223972E11FE92BB500B2BBEC /* EnrolledTabBarViewController.swift in Sources */,
+				BD176D8B20D3178E00D3497E /* PollGetSettings.swift in Sources */,
 				B4B6D6041A949EFC000F44E8 /* OEXRegistrationRestriction.m in Sources */,
 				77BFD86A1BB9E15B001D7BE5 /* Strings.swift in Sources */,
 				B4B285E81A9A662600DD603A /* OEXZeroRatingConfig.m in Sources */,
@@ -4419,7 +4449,7 @@
 				890D027F1967343A002CE7EC /* OEXCourseInfoCell.m in Sources */,
 				E0A2461D1D5CA6950066C766 /* LogoutApi.swift in Sources */,
 				E02E59EF1F0E231000060AE0 /* VersionParser.swift in Sources */,
-				BD176D6B20D2E86800D3497E /* SurveyXBlockViewController.swift in Sources */,
+				BD176D6B20D2E86800D3497E /* SurveyViewController.swift in Sources */,
 				770A27961A6995DF00DFC6FF /* NSArray+OEXFunctional.m in Sources */,
 				9CADE2F71A91E91A00ACDAF7 /* NSURL+OEXPathExtensions.m in Sources */,
 				1AB676AE1BA0964B002AD0EB /* OEXVideoPlayerSettings.swift in Sources */,
@@ -4572,6 +4602,7 @@
 				228CBD881ECF553E0054D063 /* CourseShareUtmParameters.swift in Sources */,
 				19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */,
 				B4B6D6051A949EFC000F44E8 /* OEXRegistrationAgreement.m in Sources */,
+				BD176D6D20D2FD6300D3497E /* XBlockApiClient.swift in Sources */,
 				7712732E1BA8F5C7008BA397 /* SegmentAnalyticsTracker.swift in Sources */,
 				776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */,
 				9C9B7F731A8CC80E00A857B2 /* OEXURLSessionManager.m in Sources */,
@@ -4621,7 +4652,7 @@
 				9ED03B951B204CDF0081A19A /* CourseSectionTableViewCell.swift in Sources */,
 				77BECB041B0A5FDB00894276 /* ContentInsetsController.swift in Sources */,
 				B4B6D6021A949EFC000F44E8 /* OEXRegistrationFormField.m in Sources */,
-				BD176D6920D2E85200D3497E /* PollXBlockViewController.swift in Sources */,
+				BD176D6920D2E85200D3497E /* PollViewController.swift in Sources */,
 				77D470571C11EB4D00C6F0C9 /* ChoiceLabel.swift in Sources */,
 				77FDF4191B02910D00E8C639 /* IconMessageView.swift in Sources */,
 				77DCD23B1C2B14BA00CAEBB5 /* UITableView+Layout.swift in Sources */,
@@ -4650,6 +4681,7 @@
 				B4B6D6391A95042B000F44E8 /* OEXCheckBoxView.m in Sources */,
 				1A22CD901B90B31A005B07D0 /* UIImage+OEXIcon.swift in Sources */,
 				1ACD163C1BB1BE63006ACC82 /* UserProfileViewController.swift in Sources */,
+				BD176D6F20D3002700D3497E /* XBlockApiRequestData.swift in Sources */,
 				5D836DCA1B2FA12E00411CAB /* DiscussionNewCommentViewController.swift in Sources */,
 				1AFEB1B11BBD51EE004C471D /* JSONFormBuilderChooser.swift in Sources */,
 				19321F651961698B00B7D75C /* OEXDownloadTableCell.m in Sources */,

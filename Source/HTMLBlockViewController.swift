@@ -23,7 +23,7 @@ public class HTMLBlockViewController: UIViewController, CourseBlockViewControlle
     public init(blockID : CourseBlockID?, courseID : String, environment : Environment) {
         self.courseID = courseID
         self.blockID = blockID
-        let shorterBlockIdArray = blockID!.characters.split{$0 == "@"}.map(String.init)
+        let shorterBlockIdArray = blockID!.split{$0 == "@"}.map(String.init)
         let shorterBlockId = shorterBlockIdArray.last
         webController = AuthenticatedWebViewController(environment: environment, blockID: shorterBlockId!)
         courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID: courseID)
