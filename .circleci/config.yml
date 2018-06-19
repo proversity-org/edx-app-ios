@@ -6,7 +6,7 @@ jobs:
 
     # Specify the Xcode version to use.
     macos:
-      xcode: "9.2.0"
+      xcode: "9.3.1"
     working_directory: ~/edx-app-ios
     environment:
       XCODE_WORKSPACE: edX.xcworkspace
