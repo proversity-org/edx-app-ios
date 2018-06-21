@@ -3471,7 +3471,7 @@
 				BD9A0D891FBA019F00AAEF0D /* SnapshotHelper.swift */,
 			);
 			path = edXUITests;
-			sourceTree = "<unknown>";
+			sourceTree = "<group>";
 		};
 		BE0D454E192DE63900D720D6 /* Data */ = {
 			isa = PBXGroup;
