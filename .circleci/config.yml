@@ -49,8 +49,8 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "cel,Careers and Employability Leadership Programme,0,2.14,,"
-            python setup_certificates.py cel
+            python config_project.py "pro,Proversity,0,2.14,devUUID,storeUUID"
+            fastlane beta
 
 workflows:
   version: 2
