@@ -37,32 +37,32 @@ class edXUITests: XCTestCase {
         app.otherElements["splash-screen"].buttons["Already have an account? Sign in"].tap()
         snapshot("login")
         
-        app.textFields["LoginViewController:email-text-field"].tap()
-        app.textFields["LoginViewController:email-text-field"].typeText("jagonzalr")
-        app.textFields["LoginViewController:password-text-field"].tap()
-        app.textFields["LoginViewController:password-text-field"].typeText("Fender182")
-        
-        app.otherElements["login-screen"].scrollViews.buttons["Sign In"].tap()
-        
-        expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
-        waitForExpectations(timeout: 20, handler: nil)
-        if (app.navigationBars["Courses"].exists) {
-            if (app.navigationBars["Courses"].buttons["Account"].exists) {
-                app.navigationBars["Courses"].buttons["Account"].tap()
-                app.navigationBars["Account"].buttons["Close"].tap()
-                app.navigationBars["Courses"].buttons["Account"].tap()
-                app.navigationBars["Account"].buttons["Close"].tap()
-                app.navigationBars["Courses"].buttons["Account"].tap()
-                app.navigationBars["Account"].buttons["Close"].tap()
-                app.navigationBars["Courses"].buttons["Account"].tap()
-                app.navigationBars["Account"].buttons["Close"].tap()
-                snapshot("courses")
-                app.navigationBars["Courses"].buttons["Account"].tap()
-                snapshot("profile")
-                app.tables.staticTexts["Logout"].tap()
-                app.textFields["LoginViewController:email-text-field"].tap()
-                app.textFields["LoginViewController:email-text-field"].typeText("")
-            }
-        }
+//        app.textFields["LoginViewController:email-text-field"].tap()
+//        app.textFields["LoginViewController:email-text-field"].typeText("jagonzalr")
+//        app.textFields["LoginViewController:password-text-field"].tap()
+//        app.textFields["LoginViewController:password-text-field"].typeText("Fender182")
+//        
+//        app.otherElements["login-screen"].scrollViews.buttons["Sign In"].tap()
+//        
+//        expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
+//        waitForExpectations(timeout: 20, handler: nil)
+//        if (app.navigationBars["Courses"].exists) {
+//            if (app.navigationBars["Courses"].buttons["Account"].exists) {
+//                app.navigationBars["Courses"].buttons["Account"].tap()
+//                app.navigationBars["Account"].buttons["Close"].tap()
+//                app.navigationBars["Courses"].buttons["Account"].tap()
+//                app.navigationBars["Account"].buttons["Close"].tap()
+//                app.navigationBars["Courses"].buttons["Account"].tap()
+//                app.navigationBars["Account"].buttons["Close"].tap()
+//                app.navigationBars["Courses"].buttons["Account"].tap()
+//                app.navigationBars["Account"].buttons["Close"].tap()
+//                snapshot("courses")
+//                app.navigationBars["Courses"].buttons["Account"].tap()
+//                snapshot("profile")
+//                app.tables.staticTexts["Logout"].tap()
+//                app.textFields["LoginViewController:email-text-field"].tap()
+//                app.textFields["LoginViewController:email-text-field"].typeText("")
+//            }
+//        }
     }
 }
