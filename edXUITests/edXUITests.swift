@@ -37,10 +37,11 @@ class edXUITests: XCTestCase {
         app.otherElements["splash-screen"].buttons["Already have an account? Sign in"].tap()
         snapshot("login")
         
-        app.otherElements["login-screen"].scrollViews.textFields["Username or E-mail address"].tap()
-        app.otherElements["login-screen"].scrollViews.textFields["Username or E-mail address"].typeText("jagonzalr")
-        app.otherElements["login-screen"].scrollViews.textFields["Password"].tap()
-        app.otherElements["login-screen"].scrollViews.textFields["Password"].typeText("Fender182")
+        app.textFields["LoginViewController:email-text-field"].tap()
+        app.textFields["LoginViewController:email-text-field"].typeText("jagonzalr")
+        app.textFields["LoginViewController:password-text-field"].tap()
+        app.textFields["LoginViewController:password-text-field"].typeText("Fender182")
+        
         app.otherElements["login-screen"].scrollViews.buttons["Sign In"].tap()
         
         expectation(for: NSPredicate(format: "exists == true"), evaluatedWith: app.navigationBars["Courses"], handler: nil)
@@ -59,8 +60,8 @@ class edXUITests: XCTestCase {
                 app.navigationBars["Courses"].buttons["Account"].tap()
                 snapshot("profile")
                 app.tables.staticTexts["Logout"].tap()
-                app.otherElements["login-screen"].scrollViews.textFields["Username or E-mail address"].tap()
-                app.otherElements["login-screen"].scrollViews.textFields["Username or E-mail address"].typeText("jagonzalr")
+                app.textFields["LoginViewController:email-text-field"].tap()
+                app.textFields["LoginViewController:email-text-field"].typeText("")
             }
         }
     }
