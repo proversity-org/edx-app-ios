@@ -33,9 +33,13 @@ class edXUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        snapshot("splash")
-        app.otherElements["splash-screen"].buttons["Already have an account? Sign in"].tap()
-        snapshot("login")
+        app/*@START_MENU_TOKEN@*/.buttons["LoginSpashViewController:sign-up-button"]/*[[".otherElements[\"splash-screen\"]",".buttons[\"Already have an account? Sign in\"]",".buttons[\"LoginSpashViewController:sign-up-button\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Sign In"]/*@START_MENU_TOKEN@*/.buttons["LoginViewController:close-bar-button-item"]/*[[".buttons[\"Close\"]",".buttons[\"LoginViewController:close-bar-button-item\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+//        let app = XCUIApplication()
+//        snapshot("splash")
+//        app.otherElements["splash-screen"].buttons["Already have an account? Sign in"].tap()
+//        snapshot("login")
         
 //        app.textFields["LoginViewController:email-text-field"].tap()
 //        app.textFields["LoginViewController:email-text-field"].typeText("jagonzalr")
