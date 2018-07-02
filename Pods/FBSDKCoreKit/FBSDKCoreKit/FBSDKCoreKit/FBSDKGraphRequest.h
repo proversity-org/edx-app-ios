@@ -22,11 +22,10 @@
 
 @class FBSDKAccessToken;
 
-/**
-  Represents a request to the Facebook Graph API.
+/*!
+ @abstract Represents a request to the Facebook Graph API.
 
-
- `FBSDKGraphRequest` encapsulates the components of a request (the
+ @discussion `FBSDKGraphRequest` encapsulates the components of a request (the
  Graph API path, the parameters, error recovery behavior) and should be
  used in conjunction with `FBSDKGraphRequestConnection` to issue the request.
 
@@ -38,36 +37,35 @@
 
  By default, FBSDKGraphRequest will attempt to recover any errors returned from
  Facebook. You can disable this via `disableErrorRecovery:`.
-
-- See:FBSDKGraphErrorRecoveryProcessor
+ @see FBSDKGraphErrorRecoveryProcessor
  */
 @interface FBSDKGraphRequest : NSObject
 
-/**
-  Initializes a new instance that use use `[FBSDKAccessToken currentAccessToken]`.
- - Parameter graphPath: the graph path (e.g., @"me").
- - Parameter parameters: the optional parameters dictionary.
+/*!
+ @abstract Initializes a new instance that use use `[FBSDKAccessToken currentAccessToken]`.
+ @param graphPath the graph path (e.g., @"me").
+ @param parameters the optional parameters dictionary.
  */
 - (instancetype)initWithGraphPath:(NSString *)graphPath
                        parameters:(NSDictionary *)parameters;
 
-/**
-  Initializes a new instance that use use `[FBSDKAccessToken currentAccessToken]`.
- - Parameter graphPath: the graph path (e.g., @"me").
- - Parameter parameters: the optional parameters dictionary.
- - Parameter HTTPMethod: the optional HTTP method. nil defaults to @"GET".
+/*!
+ @abstract Initializes a new instance that use use `[FBSDKAccessToken currentAccessToken]`.
+ @param graphPath the graph path (e.g., @"me").
+ @param parameters the optional parameters dictionary.
+ @param HTTPMethod the optional HTTP method. nil defaults to @"GET".
  */
 - (instancetype)initWithGraphPath:(NSString *)graphPath
                        parameters:(NSDictionary *)parameters
                        HTTPMethod:(NSString *)HTTPMethod;
 
-/**
-  Initializes a new instance.
- - Parameter graphPath: the graph path (e.g., @"me").
- - Parameter parameters: the optional parameters dictionary.
- - Parameter tokenString: the token string to use. Specifying nil will cause no token to be used.
- - Parameter version: the optional Graph API version (e.g., @"v2.0"). nil defaults to `[FBSDKSettings graphAPIVersion]`.
- - Parameter HTTPMethod: the optional HTTP method (e.g., @"POST"). nil defaults to @"GET".
+/*!
+ @abstract Initializes a new instance.
+ @param graphPath the graph path (e.g., @"me").
+ @param parameters the optional parameters dictionary.
+ @param tokenString the token string to use. Specifying nil will cause no token to be used.
+ @param version the optional Graph API version (e.g., @"v2.0"). nil defaults to `[FBSDKSettings graphAPIVersion]`.
+ @param HTTPMethod the optional HTTP method (e.g., @"POST"). nil defaults to @"GET".
  */
 - (instancetype)initWithGraphPath:(NSString *)graphPath
                        parameters:(NSDictionary *)parameters
@@ -76,36 +74,35 @@
                        HTTPMethod:(NSString *)HTTPMethod
 NS_DESIGNATED_INITIALIZER;
 
-/**
-  The request parameters.
+/*!
+ @abstract The request parameters.
  */
 @property (nonatomic, strong, readonly) NSMutableDictionary *parameters;
 
-/**
-  The access token string used by the request.
+/*!
+ @abstract The access token string used by the request.
  */
 @property (nonatomic, copy, readonly) NSString *tokenString;
 
-/**
-  The Graph API endpoint to use for the request, for example "me".
+/*!
+ @abstract The Graph API endpoint to use for the request, for example "me".
  */
 @property (nonatomic, copy, readonly) NSString *graphPath;
 
-/**
-  The HTTPMethod to use for the request, for example "GET" or "POST".
+/*!
+ @abstract The HTTPMethod to use for the request, for example "GET" or "POST".
  */
 @property (nonatomic, copy, readonly) NSString *HTTPMethod;
 
-/**
-  The Graph API version to use (e.g., "v2.0")
+/*!
+ @abstract The Graph API version to use (e.g., "v2.0")
  */
 @property (nonatomic, copy, readonly) NSString *version;
 
-/**
-  If set, disables the automatic error recovery mechanism.
- - Parameter disable: whether to disable the automatic error recovery mechanism
-
- By default, non-batched FBSDKGraphRequest instances will automatically try to recover
+/*!
+ @abstract If set, disables the automatic error recovery mechanism.
+ @param disable whether to disable the automatic error recovery mechanism
+ @discussion By default, non-batched FBSDKGraphRequest instances will automatically try to recover
  from errors by constructing a `FBSDKGraphErrorRecoveryProcessor` instance that
  re-issues the request on successful recoveries. The re-issued request will call the same
  handler as the receiver but may occur with a different `FBSDKGraphRequestConnection` instance.
@@ -114,9 +111,9 @@ NS_DESIGNATED_INITIALIZER;
  */
 - (void)setGraphErrorRecoveryDisabled:(BOOL)disable;
 
-/**
-  Starts a connection to the Graph API.
- - Parameter handler: The handler block to call when the request completes.
+/*!
+ @abstract Starts a connection to the Graph API.
+ @param handler The handler block to call when the request completes.
  */
 - (FBSDKGraphRequestConnection *)startWithCompletionHandler:(FBSDKGraphRequestHandler)handler;
 

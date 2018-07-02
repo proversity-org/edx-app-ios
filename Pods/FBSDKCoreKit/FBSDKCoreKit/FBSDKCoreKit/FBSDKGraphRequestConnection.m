@@ -87,7 +87,7 @@ NSURLSessionDataDelegate
 @property (nonatomic, retain) NSMutableArray *requests;
 @property (nonatomic, assign) FBSDKGraphRequestConnectionState state;
 @property (nonatomic, strong) FBSDKLogger *logger;
-@property (nonatomic, assign) uint64_t requestStartTime;
+@property (nonatomic, assign) unsigned long requestStartTime;
 
 @end
 
@@ -443,7 +443,7 @@ NSURLSessionDataDelegate
   NSUInteger bodyLength = [[body data] length] / 1024;
 
   [request setValue:[FBSDKGraphRequestConnection userAgent] forHTTPHeaderField:@"User-Agent"];
-  [request setValue:[body mimeContentType] forHTTPHeaderField:@"Content-Type"];
+  [request setValue:[FBSDKGraphRequestBody mimeContentType] forHTTPHeaderField:@"Content-Type"];
   [request setHTTPShouldHandleCookies:NO];
 
   [self logRequest:request bodyLength:bodyLength bodyLogger:bodyLogger attachmentLogger:attachmentLogger];
@@ -495,8 +495,7 @@ NSURLSessionDataDelegate
 
   NSString *url = [FBSDKGraphRequest serializeURL:baseURL
                                            params:request.parameters
-                                       httpMethod:request.HTTPMethod
-                                         forBatch:forBatch];
+                                       httpMethod:request.HTTPMethod];
   return url;
 }
 
@@ -541,7 +540,7 @@ NSURLSessionDataDelegate
       error = [FBSDKError errorWithCode:FBSDKGraphRequestProtocolMismatchErrorCode
                                 message:@"Unexpected number of results returned from server."];
     } else {
-      [_logger appendFormat:@"Response <#%lu>\nDuration: %llu msec\nSize: %lu kB\nResponse Body:\n%@\n\n",
+      [_logger appendFormat:@"Response <#%lu>\nDuration: %lu msec\nSize: %lu kB\nResponse Body:\n%@\n\n",
        (unsigned long)[_logger loggerSerialNumber],
        [FBSDKInternalUtility currentTimeInMilliseconds] - _requestStartTime,
        (unsigned long)[data length],
@@ -825,7 +824,7 @@ NSURLSessionDataDelegate
   if ([result isKindOfClass:[NSDictionary class]]) {
     NSDictionary *errorDictionary = [FBSDKTypeUtility dictionaryValue:result[@"body"]][@"error"];
 
-    if ([errorDictionary isKindOfClass:[NSDictionary class]]) {
+    if (errorDictionary) {
       NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
       [FBSDKInternalUtility dictionary:userInfo setObject:errorDictionary[@"code"] forKey:FBSDKGraphRequestErrorGraphErrorCode];
       [FBSDKInternalUtility dictionary:userInfo setObject:errorDictionary[@"error_subcode"] forKey:FBSDKGraphRequestErrorGraphErrorSubcode];

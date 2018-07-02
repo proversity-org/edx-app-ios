@@ -20,19 +20,18 @@
 #import <UIKit/UIKit.h>
 
 /*
-  simple class to manage image downloads
-
- this class is not smart enough to dedupe identical requests in flight.
+ @abstract simple class to manage image downloads
+ @discussion this class is not smart enough to dedupe identical requests in flight.
  */
 @interface FBSDKImageDownloader : NSObject
 
 + (instancetype)sharedInstance;
 
 /*
-  download an image or retrieve it from cache
- - Parameter url: the url to download
- - Parameter ttl: the amount of time (in seconds) that using a cached version is acceptable.
- - Parameter completion: the callback with the image - for simplicity nil is returned rather than surfacing an error.
+ @abstract download an image or retrieve it from cache
+ @param url the url to download
+ @param ttl the amount of time (in seconds) that using a cached version is acceptable.
+ @param completion the callback with the image - for simplicity nil is returned rather than surfacing an error.
  */
 - (void)downloadImageWithURL:(NSURL *)url ttl:(NSTimeInterval)ttl completion:(void(^)(UIImage* image))completion;
 

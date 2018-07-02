@@ -72,23 +72,21 @@ static NSString *const FBSDKLoginManagerLoggerTryWebView = @"tryFallback";
 
   id isClientState = clientState[FBSDKLoginManagerLoggingClientStateIsClientState];
   if ([isClientState isKindOfClass:[NSNumber class]] && [isClientState boolValue]) {
-    FBSDKLoginManagerLogger *logger = [[self alloc] initWithLoggingToken:nil];
+    FBSDKLoginManagerLogger *logger = [[self alloc] init];
     if (logger != nil) {
       logger->_identifier = clientState[FBSDKLoginManagerLoggerParamIdentifierKey];
       logger->_authMethod = clientState[FBSDKLoginManagerLoggerParamAuthMethodKey];
-      logger->_loggingToken = clientState[FBSDKLoginManagerLoggerParamLoggingTokenKey];
       return logger;
     }
   }
   return nil;
 }
 
-- (instancetype)initWithLoggingToken:(NSString *)loggingToken
+- (instancetype)init
 {
   if ((self = [super init]) != nil) {
     _identifier = [[NSUUID UUID] UUIDString];
     _extras = [NSMutableDictionary dictionary];
-    _loggingToken = [loggingToken copy];
   }
   return self;
 }
@@ -143,9 +141,10 @@ static NSString *const FBSDKLoginManagerLoggerTryWebView = @"tryFallback";
     [self logEvent:FBSDKAppEventNameFBSessionAuthEnd result:_lastResult error:_lastError];
 }
 
-- (void)startAuthMethod:(NSString *)authMethod
+- (void)startAuthMethod:(NSString *)authMethod loggingToken:(NSString *)loggingToken
 {
   _authMethod = [authMethod copy];
+  _loggingToken = [loggingToken copy];
   [self logEvent:FBSDKAppEventNameFBSessionAuthMethodStart params:[self _parametersForNewEvent]];
 }
 
@@ -218,7 +217,7 @@ static NSString *const FBSDKLoginManagerLoggerTryWebView = @"tryFallback";
   if ([FBSDKInternalUtility isOSRunTimeVersionAtLeast:iOS10Version]) {
     _extras[@"native_app_login_dialog_duration"] = @(dialogDuration);
     _extras[@"native_app_login_dialog_result"] = @(result);
-    [self logEvent:FBSDKAppEventNameFBSessionFASLoginDialogResult params:[self _parametersForNewEvent]];
+    [self logEvent:FBSDKAppEventNameFBSessionNativeAppSwitchLoginDialogResult params:[self _parametersForNewEvent]];
   }
 }
 
@@ -300,7 +299,6 @@ static NSString *const FBSDKLoginManagerLoggerTryWebView = @"tryFallback";
     }
   } else if (error) {
     params[FBSDKLoginManagerLoggerParamErrorCodeKey] = @(error.code);
-    params[FBSDKLoginManagerLoggerParamErrorMessageKey] = error.localizedDescription;
   }
 
   [self logEvent:eventName params:params];

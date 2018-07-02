@@ -20,8 +20,8 @@
 
 @class FBSDKLoginManager;
 
-/**
-  Structured interface for accessing the parameters used to complete a log in request.
+/*!
+ @abstract Structured interface for accessing the parameters used to complete a log in request.
  If \c accessTokenString is non-<code>nil</code>, the authentication succeeded. If \c error is
  non-<code>nil</code> the request failed. If both are \c nil, the request was cancelled.
  */
@@ -47,8 +47,8 @@
 
 @protocol FBSDKLoginCompleting
 
-/**
-  Invoke \p handler with the login parameters derived from the authentication result.
+/*!
+ @abstract Invoke \p handler with the login parameters derived from the authentication result.
  See the implementing class's documentation for whether it completes synchronously or asynchronously.
  */
 - (void)completeLogIn:(FBSDKLoginManager *)loginManager withHandler:(void(^)(FBSDKLoginCompletionParameters *parameters))handler;
@@ -57,8 +57,8 @@
 
 #pragma mark - Completers
 
-/**
-  Extracts the log in completion parameters from the \p parameters dictionary,
+/*!
+ @abstract Extracts the log in completion parameters from the \p parameters dictionary,
  which must contain the parsed result of the return URL query string.
 
  The \c user_id key is first used to derive the User ID. If that fails, \c signed_request
@@ -72,8 +72,8 @@
 
 @end
 
-/**
-  Requests the User ID, granted permissions and declined permissions from the server
+/*!
+ @abstract Requests the User ID, granted permissions and declined permissions from the server
  using the given access token, which must occur before authentication can be completed.
 
  Completion occurs asynchronously.
@@ -84,8 +84,8 @@
 
 @end
 
-/**
-  Converts an Accounts framework error in to an error or cancellation result
+/*!
+ @abstract Converts an Accounts framework error in to an error or cancellation result
 
  Completion occurs synchronously.
  */
