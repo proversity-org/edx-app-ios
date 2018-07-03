@@ -118,22 +118,6 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
             switch result {
             case let Result.success(enrollments):
                 if let enrollments = enrollments {
-                    if (self?.environment.config.pushNotificationsEnabled)! {
-                        
-                        for userCourse in enrollments {
-                            let course = userCourse.course as OEXCourse
-                            
-                            // Subscribe to course
-                            let topic = course.course_id!.replace(string: "+", replacement: "-").replace(string: ":", replacement: "-")
-                            let payload: [String: String] = ["topic": topic,
-                                                             "organisationId": (self?.environment.config.organizationId())!,
-                                                             "projectId": (self?.environment.config.projectId())!]
-                            
-                            (HPNService.instance() as AnyObject).subscribe((self?.environment.config.konnekteerApiKey())!, withPayload: payload, completionHandler: { data, error in
-                                print("Subscribed")
-                            })
-                        }
-                    }
                     self?.tableController.courses = enrollments.flatMap { $0.course } 
                     self?.tableController.tableView.reloadData()
                     self?.loadController.state = .Loaded

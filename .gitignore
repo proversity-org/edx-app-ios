@@ -12,7 +12,3 @@ build
 default_config/local.yaml 
 *.gcda
 *.swp
-
-custom_config/
-fastlane/
-setup_and_build.py

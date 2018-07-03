@@ -22,11 +22,11 @@ class FirebaseAnalyticsTracker: NSObject, OEXAnalyticsTracker {
     private let keysToSkip = [key_target_url, OEXAnalyticsKeyBlockID, "url"]
     
     func identifyUser(_ user : OEXUserDetails?) {
-        Analytics.setUserID(user?.userId?.stringValue)
+        FIRAnalytics.setUserID(user?.userId?.stringValue)
     }
     
     func clearIdentifiedUser() {
-        Analytics.setUserID(nil)
+        FIRAnalytics.setUserID(nil)
     }
     
     func trackEvent(_ event: OEXAnalyticsEvent, forComponent component: String?, withProperties properties: [String : Any]) {
@@ -49,7 +49,7 @@ class FirebaseAnalyticsTracker: NSObject, OEXAnalyticsTracker {
         
         var formattedParameters = [String: NSObject]()
         formatParamatersForFirebase(params: parameters, formattedParams: &formattedParameters)
-//        AnalyticsAnalytics.logEvent(formattedKeyForFirebase(key: event.displayName), parameters: formattedParameters)
+        FIRAnalytics.logEvent(withName: formattedKeyForFirebase(key: event.displayName), parameters: formattedParameters)
         
     }
     
