@@ -18,8 +18,8 @@
 
 #import <UIKit/UIKit.h>
 
-/**
-  A base class for common SDK buttons.
+/*!
+ @abstract A base class for common SDK buttons.
  */
 @interface FBSDKButton : UIButton
 

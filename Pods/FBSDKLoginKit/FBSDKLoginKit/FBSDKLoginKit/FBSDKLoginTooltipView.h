@@ -22,13 +22,13 @@
 
 @protocol FBSDKLoginTooltipViewDelegate;
 
-/**
+/*!
+ @class FBSDKLoginTooltipView
 
-  Represents a tooltip to be displayed next to a Facebook login button
+ @abstract Represents a tooltip to be displayed next to a Facebook login button
   to highlight features for new users.
 
-
- The `FBSDKLoginButton` may display this view automatically. If you do
+ @discussion The `FBSDKLoginButton` may display this view automatically. If you do
   not use the `FBSDKLoginButton`, you can manually call one of the `present*` methods
   as appropriate and customize behavior via `FBSDKLoginTooltipViewDelegate` delegate.
 
@@ -39,50 +39,53 @@
  */
 @interface FBSDKLoginTooltipView : FBSDKTooltipView
 
-/**  the delegate */
+/*! @abstract the delegate */
 @property (nonatomic, weak) id<FBSDKLoginTooltipViewDelegate> delegate;
 
-/**  if set to YES, the view will always be displayed and the delegate's
+/*! @abstract if set to YES, the view will always be displayed and the delegate's
   `loginTooltipView:shouldAppear:` will NOT be called. */
 @property (nonatomic, assign) BOOL forceDisplay;
 
 @end
 
-/**
+/*!
  @protocol
 
-  The `FBSDKLoginTooltipViewDelegate` protocol defines the methods used to receive event
+ @abstract
+ The `FBSDKLoginTooltipViewDelegate` protocol defines the methods used to receive event
  notifications from `FBSDKLoginTooltipView` objects.
  */
 @protocol FBSDKLoginTooltipViewDelegate <NSObject>
 
 @optional
 
-/**
-  Asks the delegate if the tooltip view should appear
+/*!
+ @abstract
+ Asks the delegate if the tooltip view should appear
 
- - Parameter view: The tooltip view.
- - Parameter appIsEligible: The value fetched from the server identifying if the app
+ @param view The tooltip view.
+ @param appIsEligible The value fetched from the server identifying if the app
  is eligible for the new login experience.
 
-
- Use this method to customize display behavior.
+ @discussion Use this method to customize display behavior.
  */
 - (BOOL)loginTooltipView:(FBSDKLoginTooltipView *)view shouldAppear:(BOOL)appIsEligible;
 
-/**
-  Tells the delegate the tooltip view will appear, specifically after it's been
+/*!
+ @abstract
+ Tells the delegate the tooltip view will appear, specifically after it's been
  added to the super view but before the fade in animation.
 
- - Parameter view: The tooltip view.
+ @param view The tooltip view.
  */
 - (void)loginTooltipViewWillAppear:(FBSDKLoginTooltipView *)view;
 
-/**
-  Tells the delegate the tooltip view will not appear (i.e., was not
+/*!
+ @abstract
+ Tells the delegate the tooltip view will not appear (i.e., was not
  added to the super view).
 
- - Parameter view: The tooltip view.
+ @param view The tooltip view.
  */
 - (void)loginTooltipViewWillNotAppear:(FBSDKLoginTooltipView *)view;
 

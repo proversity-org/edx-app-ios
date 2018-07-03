@@ -18,9 +18,11 @@
 
 #import <Foundation/Foundation.h>
 
-/**
+/*!
+ @class FBSDKLogger
 
-  Simple logging utility for conditionally logging strings and then emitting them
+ @abstract
+ Simple logging utility for conditionally logging strings and then emitting them
  via NSLog().
 
  @unsorted
