@@ -33,8 +33,8 @@ typedef NS_ENUM(NSUInteger, OEXMySettingsAlertTag) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.wifiOnlySwitch setTintColor:[OEXStyles sharedStyles].primaryBaseColor];
     [self.wifiOnlySwitch setOn:[OEXInterface shouldDownloadOnlyOnWifi]];
+    [self.wifiOnlySwitch setOnTintColor:[OEXStyles sharedStyles].primaryBaseColor];
     
     [self.subtitleLabel setTextAlignment:NSTextAlignmentNatural];
     [self.titleLabel setText:[Strings wifiOnlyTitle]];
