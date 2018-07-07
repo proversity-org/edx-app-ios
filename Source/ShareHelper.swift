@@ -82,14 +82,14 @@ private class CourseShareURL: NSObject, UIActivityItemSource {
     
     fileprivate func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
         
-        var shareURL: String = courseShareURL.absoluteString ?? ""
+        var courseShareURLStringWithUtmParams: String?
         if activityType == UIActivityType.postToFacebook, let utmParams = courseShareUtmParams.facebook {
-            shareURL = String(format:"%@?%@",courseShareURL, utmParams)
+            courseShareURLStringWithUtmParams = String(format:"%@?%@",courseShareURL, utmParams)
         }
         else if activityType == UIActivityType.postToTwitter, let utmParams = courseShareUtmParams.twitter{
-            shareURL = String(format:"%@?%@",courseShareURL, utmParams)
+            courseShareURLStringWithUtmParams = String(format:"%@?%@",courseShareURL, utmParams)
         }
         
-        return NSURL(string: shareURL)
+        return NSURL(string: courseShareURLStringWithUtmParams ?? "")
     }
 }

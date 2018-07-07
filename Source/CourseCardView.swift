@@ -12,8 +12,7 @@ import UIKit
 class CourseCardView: UIView, UIGestureRecognizerDelegate {
     private let arrowHeight = 15.0
     private let verticalMargin = 10
-    private let defaultCoverImageAspectRatio:CGFloat = 0.533
-
+    
     var course: OEXCourse?
     
     private let coverImageView = UIImageView()
@@ -31,15 +30,8 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     private var dateTextStyle : OEXTextStyle {
         return OEXTextStyle(weight : .normal, size: .small, color: OEXStyles.shared().neutralDark())
     }
-    private var coverImageAspectRatio : CGFloat {
-        // Let the placeholder image aspect ratio determine the course card image aspect ratio.
-        guard let placeholder = UIImage(named:"placeholderCourseCardImage") else {
-            return defaultCoverImageAspectRatio
-        }
-        return placeholder.size.height / placeholder.size.width
-    }
     
-    private func setupView() {
+    private func setup() {
         configureViews()
         
         accessibilityTraits = UIAccessibilityTraitStaticText
@@ -48,14 +40,15 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     
     override init(frame : CGRect) {
         super.init(frame : frame)
-        setupView()
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupView()
+        setup()
     }
     
+    @available(iOS 8.0, *)
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         
@@ -99,7 +92,7 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
             make.top.equalTo(self)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
-            make.height.equalTo(coverImageView.snp_width).multipliedBy(coverImageAspectRatio).priorityLow()
+            make.height.equalTo(coverImageView.snp_width).multipliedBy(0.533).priorityLow()
             make.bottom.equalTo(self)
         }
         dateLabel.snp_makeConstraints { (make) -> Void in
