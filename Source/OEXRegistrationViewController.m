@@ -32,27 +32,21 @@
 
 NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXExternalRegistrationWithExistingAccountNotification";
 
-@interface OEXRegistrationViewController () <OEXExternalRegistrationOptionsViewDelegate>
+@interface OEXRegistrationViewController () <OEXExternalRegistrationOptionsViewDelegate, AgreementTextViewDelegate>
 
 /// Contents are id <OEXRegistrationFieldController>
 @property (strong, nonatomic) NSArray* fieldControllers;
-
 @property (strong, nonatomic) IBOutlet UIScrollView* scrollView;
-
 // Used in auth from an external provider
 @property (strong, nonatomic) UIView* currentHeadingView;
 @property (strong, nonatomic) id <OEXExternalAuthProvider> externalProvider;
 @property (copy, nonatomic) NSString* externalAccessToken;
-
 @property (strong, nonatomic) UIButton* registerButton;
-@property (strong, nonatomic) UILabel* agreementLabel;
-@property (strong, nonatomic) UIButton* agreementLink;
+@property (strong, nonatomic) AgreementTextView* agreementTextView;
 @property (strong, nonatomic) UIButton* toggleOptionalFieldsButton;
 @property (strong, nonatomic) UIImageView* optionalFieldsSeparator;
 @property (strong, nonatomic) UIActivityIndicatorView* progressIndicator;
-
 @property (assign, nonatomic) BOOL isShowingOptionalFields;
-
 @property (strong, nonatomic) OEXRegistrationStyles* styles;
 @property (strong, nonatomic) OEXTextStyle *toggleButtonStyle;
 
@@ -71,6 +65,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.agreementTextView = [[AgreementTextView alloc] init];
     self.loadController = [[LoadStateViewController alloc] init];
     [self.loadController setupInControllerWithController:self contentView:self.scrollView];
     
@@ -80,6 +75,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     
     UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ic_cancel"] style:UIBarButtonItemStylePlain target:self action:@selector(navigateBack:)];
     closeButton.accessibilityLabel = [Strings close];
+    closeButton.accessibilityIdentifier = @"RegistrationViewController:close-button";
     self.navigationItem.leftBarButtonItem = closeButton;
     
     //By default we only shows required fields
@@ -90,6 +86,16 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(formFieldValueDidChange:) name:NOTIFICATION_REGISTRATION_FORM_FIELD_VALUE_DID_CHANGE object:nil];
     
     [self getFormFields];
+    [self setAccessibilityIdentifiers];
+}
+    //set accessibility identifiers for the developer automation use
+- (void)setAccessibilityIdentifiers {
+    self.registerButton.accessibilityIdentifier = @"RegistrationViewController:register-button";
+    self.agreementTextView.accessibilityIdentifier = @"RegistrationViewController:agreement-text-view";
+    self.toggleOptionalFieldsButton.accessibilityIdentifier = @"RegistrationViewController:toggle-optional-field-button";
+    self.optionalFieldsSeparator.accessibilityIdentifier = @"RegistrationViewController:toggle-optional-field-separator-image-view";
+    self.progressIndicator.accessibilityIdentifier = @"RegistrationViewController:progress-indicator";
+    self.currentHeadingView.accessibilityIdentifier = @"RegistrationViewController:current-heading-view";
 }
 
 -(void)formFieldValueDidChange: (NSNotification *)notification {
@@ -124,8 +130,6 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 
 - (void)initializeViews {
 
-    NSString* platform = self.environment.config.platformName;
-
     ////Create and initalize 'btnCreateAccount' button
     self.registerButton = [[UIButton alloc] init];
     
@@ -141,27 +145,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [self.registerButton addSubview:self.progressIndicator];
     [self.progressIndicator hidesWhenStopped];
     self.optionalFieldsSeparator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"separator3"]];
-    //Initialize label above agreement view
-    self.agreementLabel = [[UILabel alloc] init];
-    self.agreementLabel.font = [self.environment.styles sansSerifOfSize:10.f];
-    self.agreementLabel.textAlignment = NSTextAlignmentCenter;
-    self.agreementLabel.numberOfLines = 0;
-    self.agreementLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.agreementLabel.isAccessibilityElement = NO;
-    self.agreementLabel.text = [Strings registrationAgreementMessage];
-    self.agreementLink = [[UIButton alloc] init];
-    [self.agreementLink setTitle:[Strings registrationAgreementButtonTitleWithPlatformName:platform] forState:UIControlStateNormal];
-    [self.agreementLink.titleLabel setFont:[self.environment.styles semiBoldSansSerifOfSize:10]];
-    [self.agreementLink setTitleColor:[UIColor colorWithRed:0.16 green:0.44 blue:0.84 alpha:1] forState:UIControlStateNormal];
-    self.agreementLink.accessibilityTraits = UIAccessibilityTraitLink;
-    self.agreementLink.titleLabel.adjustsFontSizeToFitWidth = YES;
-    self.agreementLink.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    [self.agreementLink oex_addAction:^(id  _Nonnull control) {
-        [self agreementButtonTapped:nil];
-    } forEvents:UIControlEventTouchUpInside];
-    self.agreementLink.accessibilityLabel = [NSString stringWithFormat:@"%@ %@",[Strings registrationAgreementMessage],[Strings registrationAgreementButtonTitleWithPlatformName:platform]];
-
+    [self setUpAgreementTextView];
+    
     //This button will show and hide optional fields
     self.toggleOptionalFieldsButton = [[UIButton alloc] init];
     [self.toggleOptionalFieldsButton setBackgroundColor:[UIColor whiteColor]];
@@ -184,6 +170,19 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
         headingView.delegate = self;
         [self useHeadingView:headingView];
     }
+}
+
+-(void) setUpAgreementTextView {
+    [self.agreementTextView setupFor:AgreementTypeSignUp];
+    self.agreementTextView.agreementDelegate = self;
+    CGSize size = [self.agreementTextView sizeThatFits:CGSizeMake(self.scrollView.frame.size.width - 2 * self.styles.formMargin, CGFLOAT_MAX)];
+    self.agreementTextView.frame = CGRectMake(0, 0, size.width, size.height + [[OEXStyles sharedStyles] standardHorizontalMargin]);;
+}
+
+// MARK: AgreementTextViewDelegate
+- (void)agreementTextView:(AgreementTextView *)textView didSelect:(NSURL *)url {
+    OEXUserLicenseAgreementViewController* viewController = [[OEXUserLicenseAgreementViewController alloc] initWithContentURL:url];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)useHeadingView:(UIView*)headingView {
@@ -329,14 +328,9 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     [self.scrollView addSubview:self.registerButton];
     offset = offset + 40;
     
-    NSInteger buttonLabelSpacing = 10;
-    
-    [self.agreementLabel setFrame:CGRectMake(horizontalSpacing, offset + buttonLabelSpacing, width - 2 * horizontalSpacing, 20)];
-    [self.scrollView addSubview:self.agreementLabel];
-    offset = offset + self.agreementLabel.frame.size.height;
-    [self.scrollView addSubview:self.agreementLink];
-    [self.agreementLink setFrame:CGRectMake(horizontalSpacing, offset, contentWidth, 40)];
-    offset = offset + self.agreementLink.frame.size.height;
+    [self.scrollView addSubview:self.agreementTextView];
+    [self.agreementTextView setFrame:CGRectMake(horizontalSpacing, offset + 10, self.agreementTextView.frame.size.width, self.agreementTextView.frame.size.height)];
+    offset = offset + self.agreementTextView.frame.size.height + [[OEXStyles sharedStyles] standardHorizontalMargin] * 2;
     [self.scrollView setContentSize:CGSizeMake(width, offset)];
 }
 
@@ -353,7 +347,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 #pragma mark ExternalRegistrationOptionsDelegate
 
 - (void)optionsView:(OEXExternalRegistrationOptionsView *)view choseProvider:(id<OEXExternalAuthProvider>)provider {
-    [provider authorizeServiceFromController:self requestingUserDetails:YES withCompletion:^(NSString *accessToken, OEXRegisteringUserDetails *userProfile, NSError *error) {
+    [provider authorizeServiceFromController:self requestingUserDetails:YES withCompletion:^(NSString *accessToken, OEXRegisteringUserDetails *userDetails, NSError *error) {
         if(error == nil) {
             [view beginIndicatingActivity];
             self.view.userInteractionEnabled = NO;
@@ -367,10 +361,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                     }];
                 }
                 else {
-                    // No account already, so continue registration process
-                    UIView* headingView = [[OEXUsingExternalAuthHeadingView alloc] initWithFrame:CGRectZero serviceName:provider.displayName];
-                    [self useHeadingView:headingView];
-                    [self receivedFields:userProfile fromProvider:provider withAccessToken:accessToken];
+                    [self configureViewForSocial:provider accessToken:accessToken userDetails:userDetails];
                 }
             }];
         }
@@ -383,6 +374,17 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
             // Do nothing. Typically this happens because the user hits cancel and so they know it didn't work already
         }
     }];
+}
+
+- (void) configureViewForSocial:(id<OEXExternalAuthProvider>)provider accessToken:(NSString *) accessToken userDetails:(OEXRegisteringUserDetails *) userDetails {
+    // No account already, so continue registration process
+    __block OEXRegistrationViewController *blockSelf = self;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView* headingView = [[OEXUsingExternalAuthHeadingView alloc] initWithFrame:CGRectZero serviceName:provider.displayName];
+        [blockSelf useHeadingView:headingView];
+        [blockSelf receivedFields:userDetails fromProvider:provider withAccessToken:accessToken];
+    });
 }
 
 - (void)receivedFields:(OEXRegisteringUserDetails*)profile fromProvider:(id <OEXExternalAuthProvider>)provider withAccessToken:(NSString*)accessToken {
