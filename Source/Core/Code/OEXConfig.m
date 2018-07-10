@@ -118,19 +118,19 @@ static OEXConfig* sSharedConfig;
 - (NSString*)organizationCode {
     return [self stringForKey:OEXOrganizationCode];
 }
-    
+
 - (NSString*)konnekteerApiKey {
     return [self stringForKey:KonnekteerApiKey] ?: @"";
 }
-    
+
 - (NSString*)mainTopic {
     return [self stringForKey:MainTopic] ?: @"";
 }
-    
+
 - (NSString*)organizationId {
     return [self stringForKey:OrganizationId] ?: @"";
 }
-    
+
 - (NSString*)projectId {
     return [self stringForKey:ProjectId] ?: @"";
 }
