@@ -31,7 +31,7 @@ extension NSError {
         }
         self.init(domain: OEXErrorDomain, code: code, userInfo: info)
     }
-    
+
     func isAPIError(code: APIErrorCode) -> Bool {
         guard let errorCode = errorInfo?[ErrorFields.Code.rawValue] as? String else { return false }
         return errorCode == code.rawValue
