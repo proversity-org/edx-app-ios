@@ -151,7 +151,7 @@ extension UIAlertController {
     //MARK:- Helper Variables
     
     var visible : Bool {
-        return self.view != nil;
+        return self.view.superview != nil;
     }
     
     var cancelButtonIndex : Int {

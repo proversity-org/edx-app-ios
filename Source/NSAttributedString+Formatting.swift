@@ -45,7 +45,6 @@ extension OEXTextStyle {
     }
     
 }
-
 extension String {
     func applyStyle(style : OEXTextStyle) -> NSAttributedString {
         return style.attributedString(withText: self)

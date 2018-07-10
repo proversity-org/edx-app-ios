@@ -40,9 +40,9 @@ class CourseCertificateCell: UITableViewCell {
 
         applyStandardSeparatorInsets()
         contentView.addSubview(certificateView)
-        certificateView.snp.makeConstraints { make in
+        certificateView.snp_makeConstraints(closure: { (make) -> Void in
             make.edges.equalTo(contentView)
-        }
+        })
     }
 
     func useItem(item: CertificateItem) {

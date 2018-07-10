@@ -131,9 +131,9 @@ class FirebaseAnalyticsTracker: NSObject, OEXAnalyticsTracker {
         var formattedValue = value
         
         // Firebase only supports 100 characters for parameter value
-        if formattedValue.count > MaxParameterValueCharacters {
-            let index = formattedValue.index(formattedValue.startIndex, offsetBy: MaxParameterValueCharacters)
-            formattedValue = formattedValue.substring(to: index)
+        if formattedValue.characters.count > MaxParameterValueCharacters {
+            formattedValue = formattedValue.substring(from: formattedValue.characters.index(after: formattedValue.characters.startIndex))
+//            formattedValue = formattedValue.substring(to: formattedValue.startIndex.advancedBy(MaxParameterValueCharacters))
         }
         
         return formattedValue

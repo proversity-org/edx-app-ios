@@ -19,7 +19,8 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
     private let logoImageView = UIImageView()
     private let searchView = UIView()
     private let messageLabel = UILabel()
-    fileprivate let environment: Environment
+
+    private let environment: Environment
 
     init(environment: Environment) {
         self.environment = environment
@@ -33,6 +34,8 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = environment.styles.standardBackgroundColor()
         setupLogo()
         setupMessageLabel()
         setupSearchView()
@@ -43,8 +46,6 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
             self?.view.endEditing(true)
         }
         view.addGestureRecognizer(tapGesture)
-
-        addObservers()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -53,37 +54,15 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
     }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
+        return .portrait
     }
     
     // MARK: - View Setup
 
-    private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if view.frame.size.height - (searchView.frame.origin.y + searchView.frame.size.height) < keyboardSize.height  {
-                let difference = keyboardSize.height - (view.frame.size.height - (searchView.frame.origin.y + searchView.frame.size.height)) + StandardVerticalMargin
-                view.frame.origin.y = -difference
-            }
-        }
-    }
-
-    private func keyboardWillHide() {
-        view.frame.origin.y = 0
-    }
-
-    private func addObservers() {
-        NotificationCenter.default.oex_addObserver(observer: self, name: NSNotification.Name.UIKeyboardDidShow.rawValue) { (notification, observer, _) in
-            observer.keyboardWillShow(notification: notification)
-        }
-
-        NotificationCenter.default.oex_addObserver(observer: self, name: NSNotification.Name.UIKeyboardWillHide.rawValue) { (_, observer, _) in
-            observer.keyboardWillHide()
-        }
-    }
 
     private func setupLogo() {
         let logo = UIImage(named: "logo")
@@ -95,9 +74,9 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
         logoImageView.accessibilityIdentifier = "StartUpViewController:logo-image-view"
         view.addSubview(logoImageView)
 
-        logoImageView.snp.makeConstraints { make in
-            make.leading.equalTo(safeLeading).offset(2*StandardHorizontalMargin)
-            make.centerY.equalTo(view.snp.bottom).dividedBy(6.0)
+        logoImageView.snp_makeConstraints { (make) in
+            make.leading.equalTo(2*StandardHorizontalMargin)
+            make.centerY.equalTo(view.snp_bottom).dividedBy(6.0)
             make.width.equalTo((logo?.size.width ?? 0) / 2)
             make.height.equalTo((logo?.size.height ?? 0) / 2)
         }
@@ -110,10 +89,10 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
         messageLabel.accessibilityIdentifier = "StartUpViewController:message-label"
         view.addSubview(messageLabel)
         
-        messageLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(3 * StandardVerticalMargin)
+        messageLabel.snp_makeConstraints { (make) in
+            make.top.equalTo(logoImageView.snp_bottom).offset(3 * StandardVerticalMargin)
             make.leading.equalTo(logoImageView)
-            make.trailing.equalTo(safeTrailing).offset(-2 * StandardHorizontalMargin)
+            make.trailing.equalTo(view).offset(-2 * StandardHorizontalMargin)
         }
     }
     
@@ -122,8 +101,8 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
         let borderStyle = BorderStyle(cornerRadius: .Size(CornerRadius), width: .Size(1), color: environment.styles.primaryBaseColor())
         searchView.applyBorderStyle(style: borderStyle)
 
-        searchView.snp.makeConstraints { make in
-            make.top.equalTo(messageLabel.snp.bottom).offset(6 * StandardVerticalMargin)
+        searchView.snp_makeConstraints { (make) in
+            make.top.equalTo(messageLabel.snp_bottom).offset(6*StandardVerticalMargin)
             make.leading.equalTo(messageLabel)
             make.trailing.equalTo(messageLabel)
             make.height.equalTo(45)
@@ -136,7 +115,7 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
         
         searchView.addSubview(searchImageView)
         
-        searchImageView.snp.makeConstraints { make in
+        searchImageView.snp_makeConstraints { (make) in
             make.leading.equalTo(StandardHorizontalMargin)
             make.centerY.equalTo(searchView)
             make.width.equalTo(15)
@@ -153,8 +132,8 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
         searchTextField.defaultTextAttributes = environment.styles.textFieldStyle(with: .large, color: environment.styles.primaryBaseColor()).attributes
         searchView.addSubview(searchTextField)
         
-        searchTextField.snp.makeConstraints { make in
-            make.leading.equalTo(searchImageView.snp.trailing).offset(StandardHorizontalMargin)
+        searchTextField.snp_makeConstraints { (make) in
+            make.leading.equalTo(searchImageView.snp_trailing).offset(StandardHorizontalMargin)
             make.trailing.equalTo(searchView).offset(-StandardHorizontalMargin)
             make.centerY.equalTo(searchView)
         }
@@ -163,10 +142,10 @@ class StartupViewController: UIViewController, InterfaceOrientationOverriding {
     private func setupBottomBar() {
         let bottomBar = BottomBarView(environment: environment)
         view.addSubview(bottomBar)
-        bottomBar.snp.makeConstraints { make in
-            make.bottom.equalTo(safeBottom)
-            make.leading.equalTo(safeLeading)
-            make.trailing.equalTo(safeTrailing)
+        bottomBar.snp_makeConstraints { (make) in
+            make.bottom.equalTo(view)
+            make.leading.equalTo(view.snp_leading)
+            make.trailing.equalTo(view.snp_trailing)
         }
 
     }
@@ -229,23 +208,23 @@ private class BottomBarView: UIView, NSCopying {
 
         addSubview(bottomBar)
 
-        bottomBar.snp.makeConstraints { make in
+        bottomBar.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
             make.height.equalTo(BottomBarHeight)
         }
         
-        signInButton.snp.makeConstraints { make in
+        signInButton.snp_makeConstraints { (make) in
             make.top.equalTo(bottomBar).offset(BottomBarMargin)
             make.bottom.equalTo(bottomBar).offset(-BottomBarMargin)
             make.trailing.equalTo(bottomBar).offset(-BottomBarMargin)
             make.width.equalTo(95)
         }
         
-        registerButton.snp.makeConstraints { make in
+        registerButton.snp_makeConstraints { (make) in
             make.top.equalTo(bottomBar).offset(BottomBarMargin)
             make.bottom.equalTo(bottomBar).offset(-BottomBarMargin)
             make.leading.equalTo(bottomBar).offset(BottomBarMargin)
-            make.trailing.equalTo(signInButton.snp.leading).offset(-BottomBarMargin)
+            make.trailing.equalTo(signInButton.snp_leading).offset(-BottomBarMargin)
         }
 
     }
@@ -258,16 +237,11 @@ private class BottomBarView: UIView, NSCopying {
     func showRegistration() {
         environment?.router?.showSignUpScreen(from: firstAvailableUIViewController(), completion: nil)
     }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
 extension StartupViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        environment.analytics.trackCourseSearch(search: textField.text ?? "", action: "landing_screen")
         showCourses(with: textField.text)
         textField.text = nil
         return true

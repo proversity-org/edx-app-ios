@@ -49,7 +49,7 @@ class DetailToolbarButton: UIView {
         button.contentHorizontalAlignment = buttonAlignment
         button.oex_addAction({_ in action() }, for: .touchUpInside)
         
-        button.snp.makeConstraints { make in
+        button.snp_makeConstraints {make in
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.top.equalTo(self)

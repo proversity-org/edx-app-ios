@@ -24,7 +24,7 @@ class AccountViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.clear
         contentView.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
+        titleLabel.snp_makeConstraints { make -> Void in
             make.top.equalTo(contentView).offset(StandardVerticalMargin)
             make.leading.equalTo(contentView).offset(StandardHorizontalMargin)
             make.trailing.equalTo(contentView)

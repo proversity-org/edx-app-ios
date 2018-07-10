@@ -82,7 +82,7 @@ extension UserProfile : FormData {
     }
 }
 
-class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserProfileEditViewController: UITableViewController {
     
     typealias Environment = OEXAnalyticsProvider & DataManagerProvider & NetworkManagerProvider & OEXStylesProvider
     
@@ -91,14 +91,7 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
     var disabledFields = [String]()
     var imagePicker: ProfilePictureTaker?
     var banner: ProfileBanner!
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
-    }()
     let footer = UIView()
-    
     
     init(profile: UserProfile, environment: Environment) {
         self.profile = profile
@@ -133,24 +126,24 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
         bannerWrapper.addSubview(banner)
         bannerWrapper.addSubview(toast)
         
-        toast.snp.makeConstraints { make in
+        toast.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(bannerWrapper)
             make.trailing.equalTo(bannerWrapper)
             make.leading.equalTo(bannerWrapper)
             make.height.equalTo(0)
         }
         
-        banner.snp.makeConstraints { make in
+        banner.snp_makeConstraints { (make) -> Void in
             make.trailing.equalTo(bannerWrapper)
             make.leading.equalTo(bannerWrapper)
             make.bottom.equalTo(bannerWrapper)
-            make.top.equalTo(toast.snp.bottom)
+            make.top.equalTo(toast.snp_bottom)
         }
         
         let bottomLine = UIView()
         bottomLine.backgroundColor = OEXStyles.shared().neutralLight()
         bannerWrapper.addSubview(bottomLine)
-        bottomLine.snp.makeConstraints { make in
+        bottomLine.snp_makeConstraints { (make) -> Void in
             make.left.equalTo(bannerWrapper)
             make.right.equalTo(bannerWrapper)
             make.height.equalTo(1)
@@ -163,16 +156,19 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubViews()
+        
         title = Strings.Profile.editTitle
         navigationItem.backBarButtonItem?.title = " "
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
+        
+        
         tableView.tableHeaderView = makeHeader()
         tableView.tableFooterView = footer //get rid of extra lines when the content is shorter than a screen
-        tableView.cellLayoutMarginsFollowReadableWidth = false
-
+        if #available(iOS 9.0, *) {
+            tableView.cellLayoutMarginsFollowReadableWidth = false
+        }
         
         if let form = JSONFormBuilder(jsonFile: "profiles") {
             JSONFormBuilder.registerCells(tableView: tableView)
@@ -180,18 +176,6 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
         }
         addBackBarButtonItem()
     }
-    
-    private func addSubViews() {
-        view.addSubview(tableView)
-        setConstraints()
-    }
-    
-    private func setConstraints() {
-        tableView.snp.makeConstraints { make in
-            make.edges.equalTo(safeEdges)
-        }
-    }
-    
     
     private func addBackBarButtonItem() {
         let backItem = UIBarButtonItem(image: Icon.ArrowLeft.imageWithFontSize(size: 40), style: .plain, target: nil, action: nil)
@@ -218,7 +202,7 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
             let fieldDescription = field.title!
             
             view.addSubview(spinner)
-            spinner.snp.makeConstraints { make in
+            spinner.snp_makeConstraints { (make) -> Void in
                 make.center.equalTo(view)
             }
             
@@ -249,15 +233,15 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
         self.tableView.reloadData()
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fields.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let field = fields[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: field.cellIdentifier, for: indexPath as IndexPath)
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -289,12 +273,12 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let field = fields[indexPath.row]
         field.takeAction(data: profile, controller: self)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let field = fields[indexPath.row]
         let enabled = !disabledFields.contains(field.name)
         cell.isUserInteractionEnabled = enabled
@@ -332,9 +316,9 @@ class UserProfileEditViewController: UIViewController, UITableViewDelegate, UITa
     
     private func setToastHeight(toastHeight: CGFloat) {
         toast.isHidden = toastHeight <= 1
-        toast.snp.updateConstraints { make in
+        toast.snp_updateConstraints(closure: { (make) -> Void in
             make.height.equalTo(toastHeight)
-        }
+        })
         var headerFrame = self.tableView.tableHeaderView!.frame
         headerFrame.size.height = headerHeight + toastHeight
         self.tableView.tableHeaderView!.frame = headerFrame
@@ -364,16 +348,16 @@ private class ErrorToastView : UIView {
         
         messageLabel.adjustsFontSizeToFitWidth = true
         
-        errorLabel.snp.makeConstraints { make in
+        errorLabel.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(self)
             make.height.equalTo(self)
-            make.width.equalTo(errorLabel.snp.height)
+            make.width.equalTo(errorLabel.snp_height)
         }
         
-        messageLabel.snp.makeConstraints { make in
-            make.leading.equalTo(errorLabel.snp.trailing).offset(10)
+        messageLabel.snp_makeConstraints { (make) -> Void in
+            make.leading.equalTo(errorLabel.snp_trailing).offset(10)
             make.trailing.equalTo(self).offset(-10)
-            make.centerY.equalTo(self.snp.centerY)
+            make.centerY.equalTo(self.snp_centerY)
         }
     }
     

@@ -14,9 +14,9 @@ public protocol Removable {
 
 // Simple removable that just executes an action on remove
 open class BlockRemovable : Removable {
-    fileprivate var action : (() -> Void)?
+    fileprivate var action : ((Void) -> Void)?
     
-    public init(action : @escaping () -> Void) {
+    public init(action : @escaping (Void) -> Void) {
         self.action = action
     }
     

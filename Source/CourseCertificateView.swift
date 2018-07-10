@@ -62,24 +62,24 @@ class CourseCertificateView: UIView {
         titleLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         subtitleLabel.adjustsFontSizeToFitWidth = true
         
-        certificateImageView.snp.makeConstraints { make in
+        certificateImageView.snp_makeConstraints(closure: { (make) -> Void in
             make.top.equalTo(self).offset(StandardVerticalMargin)
             make.bottom.equalTo(self).inset(StandardVerticalMargin)
             make.leading.equalTo(self).offset(StandardHorizontalMargin)
-        }
+        })
         
-        titleLabel.snp.makeConstraints { make in
+        titleLabel.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(certificateImageView)
             make.trailing.equalTo(self).inset(StandardHorizontalMargin)
         }
         
-        subtitleLabel.snp.makeConstraints { make in
+        subtitleLabel.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(titleLabel)
             make.trailing.equalTo(titleLabel)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp_bottom)
         }
         
-        viewCertificateButton.snp.makeConstraints { make in
+        viewCertificateButton.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(titleLabel)
             make.trailing.equalTo(titleLabel)
             make.bottom.equalTo(certificateImageView)

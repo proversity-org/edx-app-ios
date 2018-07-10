@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseCatalogViewController: UIViewController, CoursesTableViewControllerDelegate, InterfaceOrientationOverriding {
+class CourseCatalogViewController: UIViewController, CoursesTableViewControllerDelegate {
     typealias Environment = NetworkManagerProvider & OEXRouterProvider & OEXSessionProvider & OEXConfigProvider & OEXAnalyticsProvider
     
     private let environment : Environment
@@ -48,8 +48,8 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
         self.loadController.setupInController(controller: self, contentView: tableController.view)
         
         self.view.addSubview(tableController.view)
-        tableController.view.snp.makeConstraints { make in
-            make.edges.equalTo(safeEdges)
+        tableController.view.snp_makeConstraints {make in
+            make.edges.equalTo(self.view)
         }
         
         self.view.backgroundColor = OEXStyles.shared().standardBackgroundColor()
@@ -94,14 +94,6 @@ class CourseCatalogViewController: UIViewController, CoursesTableViewControllerD
             let error = NSError.oex_error(with: .unknown, message: Strings.findCoursesNoAvailableCourses)
             loadController.state = LoadState.failed(error: error, icon: Icon.UnknownError)
         }
-    }
-
-    override var shouldAutorotate: Bool {
-        return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
     }
 }
 

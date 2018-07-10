@@ -47,20 +47,20 @@ class DownloadsAccessoryView : UIView {
         
         downloadSpinner.stopAnimating()
         
-        downloadSpinner.snp.makeConstraints { make in
+        downloadSpinner.snp_makeConstraints {make in
             make.center.equalTo(self)
         }
         
-        downloadButton.snp.makeConstraints { make in
+        downloadButton.snp_makeConstraints {make in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
             make.bottom.equalTo(self)
         }
         
-        countLabel.snp.makeConstraints { make in
+        countLabel.snp_makeConstraints {make in
             make.leading.equalTo(self)
             make.centerY.equalTo(self)
-            make.trailing.equalTo(downloadButton.imageView!.snp.leading).offset(-6)
+            make.trailing.equalTo(downloadButton.imageView!.snp_leading).offset(-6)
         }
         
     }

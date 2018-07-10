@@ -178,57 +178,55 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
     }
     
     private func applyPortraitConstraints() {
-        guard let contentView = contentView else { return }
-        contentView.snp.remakeConstraints { make in
-            make.edges.equalTo(safeEdges)
+        contentView?.snp_remakeConstraints {make in
+            make.edges.equalTo(view)
         }
         
-        videoController.view.snp.remakeConstraints { make in
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.top.equalTo(safeTop)
+        videoController.view.snp_remakeConstraints {make in
+            make.leading.equalTo(contentView!)
+            make.trailing.equalTo(contentView!)
+            make.top.equalTo(snp_topLayoutGuideBottom)
             make.height.equalTo(view.bounds.size.width * CGFloat(STANDARD_VIDEO_ASPECT_RATIO))
         }
         
-        rotateDeviceMessageView?.snp.remakeConstraints { make in
-            make.top.equalTo(videoController.view.snp.bottom)
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.bottom.equalTo(safeBottom)
+        rotateDeviceMessageView?.snp_remakeConstraints {make in
+            make.top.equalTo(videoController.view.snp_bottom)
+            make.leading.equalTo(contentView!)
+            make.trailing.equalTo(contentView!)
+            make.bottom.equalTo(snp_bottomLayoutGuideTop)
         }
         
-        videoTranscriptView?.transcriptTableView.snp.remakeConstraints { make in
-            make.top.equalTo(videoController.view.snp.bottom)
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
+        videoTranscriptView?.transcriptTableView.snp_remakeConstraints { make in
+            make.top.equalTo(videoController.view.snp_bottom)
+            make.leading.equalTo(contentView!)
+            make.trailing.equalTo(contentView!)
             let barHeight = navigationController?.toolbar.frame.size.height ?? 0.0
-            make.bottom.equalTo(view.snp.bottom).offset(-barHeight)
+            make.bottom.equalTo(view.snp_bottom).offset(-barHeight)
         }
     }
     
     private func applyLandscapeConstraints() {
-        guard let contentView = contentView else { return }
-        contentView.snp.remakeConstraints { make in
-            make.edges.equalTo(safeEdges)
+        contentView?.snp_remakeConstraints {make in
+            make.edges.equalTo(view)
         }
         
         let playerHeight = view.bounds.size.height - (navigationController?.toolbar.bounds.height ?? 0)
         
-        videoController.view.snp.remakeConstraints { make in
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.top.equalTo(safeTop)
+        videoController.view.snp_remakeConstraints {make in
+            make.leading.equalTo(contentView!)
+            make.trailing.equalTo(contentView!)
+            make.top.equalTo(snp_topLayoutGuideBottom)
             make.height.equalTo(playerHeight)
         }
         
-        videoTranscriptView?.transcriptTableView.snp.remakeConstraints { make in
-            make.top.equalTo(videoController.view.snp.bottom)
-            make.leading.equalTo(contentView)
-            make.trailing.equalTo(contentView)
-            make.bottom.equalTo(safeBottom)
+        videoTranscriptView?.transcriptTableView.snp_remakeConstraints { make in
+            make.top.equalTo(videoController.view.snp_bottom)
+            make.leading.equalTo(contentView!)
+            make.trailing.equalTo(contentView!)
+            make.bottom.equalTo(view)
         }
         
-        rotateDeviceMessageView?.snp.remakeConstraints { make in
+        rotateDeviceMessageView?.snp_remakeConstraints {make in
             make.height.equalTo(0.0)
         }
     }
@@ -336,8 +334,8 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
     
     //MARK: - VideoPlayerDelegate methods
     func playerWillMoveFromWindow(videoPlayer: VideoPlayer) {
-        videoPlayer.view.snp.remakeConstraints { make in
-            make.top.equalTo(safeTop)
+        videoPlayer.view.snp_remakeConstraints {make in
+            make.top.equalTo(snp_topLayoutGuideBottom)
             make.width.equalTo(view.bounds.size.width)
             make.height.equalTo(view.bounds.size.width * CGFloat(STANDARD_VIDEO_ASPECT_RATIO))
         }

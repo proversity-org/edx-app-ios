@@ -8,6 +8,7 @@
 
 import UIKit
 
+private let defaultAspectRatio:CGFloat = 0.533
 private let lassAccessViewPortraitHeight:CGFloat = 72
 private let lassAccessViewLandscapeHeight:CGFloat = 52
 
@@ -318,27 +319,35 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
         case .full:
             if shouldHideTableViewHeader { return }
             var constraintView: UIView = courseCard            
-            courseCard.snp.remakeConstraints { make in
+            courseCard.snp_remakeConstraints { (make) in
+                let screenWidth = UIScreen.main.bounds.size.width
+                var height: CGFloat = 0
+                let screenHeight = UIScreen.main.bounds.size.height
+                let halfScreenHeight = screenHeight / 2.0
+                let ratioedHeight = screenWidth * defaultAspectRatio
+                height = CGFloat(Int(halfScreenHeight > ratioedHeight ? ratioedHeight : halfScreenHeight))
+                
                 make.trailing.equalTo(headerContainer)
                 make.leading.equalTo(headerContainer)
+                make.width.equalTo(screenWidth)
                 make.top.equalTo(headerContainer)
-                make.height.equalTo(CourseCardView.cardHeight())
+                make.height.equalTo(height)
             }
             
             if let courseCertificateView = courseCertificateView {
-                courseCertificateView.snp.remakeConstraints { make in
+                courseCertificateView.snp_remakeConstraints { (make) -> Void in
                     make.trailing.equalTo(courseCard)
                     make.leading.equalTo(courseCard)
                     make.height.equalTo(CourseCertificateView.height)
-                    make.top.equalTo(constraintView.snp.bottom)
+                    make.top.equalTo(constraintView.snp_bottom)
                 }
                 constraintView = courseCertificateView
             }
             
-            lastAccessedView.snp.remakeConstraints { make in
+            lastAccessedView.snp_remakeConstraints { (make) -> Void in
                 make.trailing.equalTo(courseCard)
                 make.leading.equalTo(courseCard)
-                make.top.equalTo(constraintView.snp.bottom)
+                make.top.equalTo(constraintView.snp_bottom)
                 let height = lastAccess ? (isVerticallyCompact() ? lassAccessViewLandscapeHeight : lassAccessViewPortraitHeight) : 0
                 make.height.equalTo(height)
                 make.bottom.equalTo(headerContainer)
@@ -354,10 +363,10 @@ class CourseOutlineTableController : UITableViewController, CourseVideoTableView
                 tableView.tableHeaderView = nil
                 return
             }
-            courseVideosHeaderView?.snp.makeConstraints { make in
+            courseVideosHeaderView?.snp_makeConstraints(closure: { make in
                 make.edges.equalTo(headerContainer)
                 make.height.equalTo(CourseVideosHeaderView.height)
-            }
+            })
             courseVideosHeaderView?.refreshView()
             tableView.setAndLayoutTableHeaderView(header: headerContainer)
             break
