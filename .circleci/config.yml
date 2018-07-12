@@ -4,7 +4,7 @@ jobs:
   build:
 
     macos:
-      xcode: "9.2.0"
+      xcode: "9.4.0"
     working_directory: ~/edx-app-ios
     environment:
       XCODE_WORKSPACE: edX.xcworkspace
@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/houston-ios-config.git --branch no-branch --single-branch ./deployment
+            git clone git@github.com:proversity-org/houston-ios-config.git --branch 7b208611-7ad2-11e8-b3b8-b58d960a0e3c --single-branch ./deployment
             cp -R deployment/custom_config custom_config
             cp -R deployment/default_config/ default_config
             cp -R deployment/fastlane fastlane
@@ -57,4 +57,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: no-branch
+              only: houston/7b208611-7ad2-11e8-b3b8-b58d960a0e3c

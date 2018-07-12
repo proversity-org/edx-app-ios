@@ -34,7 +34,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.14</string>
+	<string>2.15</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSpokenName</key>
@@ -53,7 +53,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.14.2</string>
+	<string>2.15.2</string>
 	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
 	<false/>
 	<key>FacebookDisplayName</key>
@@ -80,10 +80,16 @@
 	</dict>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>for bluetooth</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>so user can intract with calendar</string>
 	<key>NSCameraUsageDescription</key>
 	<string>so you can take a picture for a profile image</string>
 	<key>NSContactsUsageDescription</key>
 	<string>so you can save a contact</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>so app can use user location</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>so user can access photo librart</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>so you can select a profile image</string>
 	<key>UIAppFonts</key>
@@ -118,6 +124,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
