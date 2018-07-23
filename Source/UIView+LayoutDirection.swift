@@ -10,10 +10,15 @@ import Foundation
 
 extension UIView {
     var isRightToLeft : Bool {
-        let direction = UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute)
-        switch direction {
-        case .leftToRight: return false
-        case .rightToLeft: return true
+        
+        if #available(iOS 9.0, *) {
+            let direction = UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute)
+            switch direction {
+            case .leftToRight: return false
+            case .rightToLeft: return true
+            }
+        } else {
+            return UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft
         }
     }
 }

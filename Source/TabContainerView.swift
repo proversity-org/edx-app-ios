@@ -33,11 +33,11 @@ class TabContainerView : UIView {
         stackView.spacing = StandardVerticalMargin
 
         addSubview(stackView)
-        stackView.snp.makeConstraints { make in
-            make.leading.equalTo(self.snp.leadingMargin)
-            make.trailing.equalTo(self.snp.trailingMargin)
-            make.top.equalTo(self.snp.topMargin)
-            make.bottom.equalTo(self.snp.bottomMargin)
+        stackView.snp_makeConstraints {make in
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.top.equalTo(self.snp_topMargin)
+            make.bottom.equalTo(self.snp_bottomMargin)
         }
 
         control.oex_addAction({[weak self] control in

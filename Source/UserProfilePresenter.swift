@@ -27,7 +27,7 @@ protocol UserProfilePresenter: class {
     var tabStream: OEXStream<[ProfileTabItem]> { get }
     func refresh() -> Void
 
-    var delegate: UserProfilePresenterDelegate? { get }
+    weak var delegate: UserProfilePresenterDelegate? { get }
 }
 
 class UserProfileNetworkPresenter : NSObject, UserProfilePresenter {

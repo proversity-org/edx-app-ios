@@ -151,27 +151,27 @@ class RegistrationFormFieldView: UIView {
     
     func setupConstraints() {
         // Setup Constraints
-        textInputLabel.snp.makeConstraints { make in
+        textInputLabel.snp_makeConstraints { (make) in
             make.top.equalTo(self)
             make.leading.equalTo(self).offset(StandardHorizontalMargin)
             make.trailing.equalTo(self).inset(StandardHorizontalMargin)
         }
-        textInputView.snp.makeConstraints { make in
+        textInputView.snp_makeConstraints { (make) in
             make.leading.equalTo(textInputLabel)
             make.trailing.equalTo(textInputLabel)
-            make.top.equalTo(textInputLabel.snp.bottom).offset(StandardVerticalMargin/2.0)
+            make.top.equalTo(textInputLabel.snp_bottom).offset(StandardVerticalMargin/2.0)
             make.height.equalTo(textInputViewHeight)
         }
-        errorLabel.snp.makeConstraints { make in
+        errorLabel.snp_makeConstraints { (make) in
             make.leading.equalTo(textInputLabel)
             make.trailing.equalTo(textInputLabel)
-            make.top.equalTo(textInputView.snp.bottom).offset(StandardVerticalMargin/2.0)
+            make.top.equalTo(textInputView.snp_bottom).offset(StandardVerticalMargin/2.0)
         }
-        instructionsLabel.snp.makeConstraints { make in
+        instructionsLabel.snp_makeConstraints { (make) in
             make.leading.equalTo(textInputLabel)
             make.trailing.equalTo(textInputLabel)
-            make.top.equalTo(errorLabel.snp.bottom).offset(StandardVerticalMargin/2.0)
-            make.bottom.equalTo(self).inset(StandardVerticalMargin)
+            make.top.equalTo(errorLabel.snp_bottom).offset(StandardVerticalMargin/2.0)
+            make.bottom.equalTo(snp_bottom).inset(StandardVerticalMargin)
         }
     }
     
@@ -213,7 +213,7 @@ class RegistrationFormFieldView: UIView {
         if isRequired && currentValue == "" {
             return field.errorMessage.required == "" ? Strings.registrationFieldEmptyError(fieldName: field.label) : field.errorMessage.required
         }
-        let length = currentValue.count
+        let length = currentValue.characters.count
         if length < field.restriction.minLength {
             return field.errorMessage.minLength == "" ? Strings.registrationFieldMinLengthError(fieldName: field.label, count: "\(field.restriction.minLength)")(field.restriction.minLength) : field.errorMessage.minLength
         }

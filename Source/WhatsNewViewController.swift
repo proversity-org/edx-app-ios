@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, InterfaceOrientationOverriding {
+class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     private let containerView: UIView = UIView()
     private let closeButton = UIButton(type: .system)
     private let headerLabel = UILabel()
@@ -118,28 +118,28 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
     }
     
     private func setConstraints() {
-        containerView.snp.makeConstraints { make in
-            make.edges.equalTo(safeEdges)
+        containerView.snp_makeConstraints {make in
+            make.edges.equalTo(view)
         }
         
-        headerLabel.snp.makeConstraints { make in
+        headerLabel.snp_makeConstraints { make in
             make.top.equalTo(containerView).offset(topSpace)
             make.centerX.equalTo(containerView)
         }
         
-        closeButton.snp.makeConstraints { make in
+        closeButton.snp_makeConstraints { make in
             make.top.equalTo(containerView).offset(topSpace)
             make.trailing.equalTo(containerView)
         }
         
-        pageController.view.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom).offset(StandardVerticalMargin)
+        pageController.view.snp_makeConstraints { make in
+            make.top.equalTo(headerLabel.snp_bottom).offset(StandardVerticalMargin)
             make.bottom.equalTo(containerView)
             make.trailing.equalTo(containerView)
             make.leading.equalTo(containerView)
         }
         
-        doneButton.snp.makeConstraints { make in
+        doneButton.snp_makeConstraints { make in
             make.bottom.equalTo(containerView).offset(-StandardVerticalMargin / 2)
             make.trailing.equalTo(containerView).offset(-StandardHorizontalMargin)
         }
@@ -148,15 +148,7 @@ class WhatsNewViewController: UIViewController, UIPageViewControllerDelegate, UI
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle(barStyle : nil)
     }
-
-    override var shouldAutorotate: Bool {
-        return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
-    }
-
+    
     private func contentController(withItem item: WhatsNew?, direction: UIPageViewControllerNavigationDirection)-> UIViewController {
         // UIPageController DataSource methods calling is different in voice over and in normal flow. 
         // In VO UIPageController didn't required viewControllerAfter but it does in normal flow.

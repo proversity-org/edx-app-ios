@@ -47,10 +47,13 @@ class EnrolledCoursesViewController : OfflineSupportViewController, CoursesTable
         self.loadController.setupInController(controller: self, contentView: tableController.view)
         
         self.view.addSubview(tableController.view)
-        tableController.view.snp.makeConstraints { make in
-            make.edges.equalTo(safeEdges)
+        tableController.view.snp_makeConstraints {make in
+            make.edges.equalTo(self.view)
         }
+        
         tableController.delegate = self
+        
+        self.view.backgroundColor = OEXStyles.shared().standardBackgroundColor()
         
         refreshController.setupInScrollView(scrollView: self.tableController.tableView)
         refreshController.delegate = self

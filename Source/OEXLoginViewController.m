@@ -36,7 +36,7 @@
 
 #define USER_EMAIL @"USERNAME"
 
-@interface OEXLoginViewController () <AgreementTextViewDelegate, InterfaceOrientationOverriding>
+@interface OEXLoginViewController () <AgreementTextViewDelegate>
 {
     CGPoint originalOffset;     // store the offset of the scrollview.
     UITextField* activeField;   // assign textfield object which is in active state.
@@ -180,7 +180,7 @@
 }
 
 -(void) setUpAgreementTextView {
-    [self.agreementTextView setupFor:AgreementTypeSignIn config:self.environment.config];
+    [self.agreementTextView setupFor:AgreementTypeSignIn];
     self.agreementTextView.agreementDelegate = self;
     // To adjust textView according to its content size.
     self.agreementTextViewHeight.constant = self.agreementTextView.contentSize.height + [self.environment.styles standardHorizontalMargin];
@@ -689,12 +689,11 @@
 }
 
 - (BOOL) shouldAutorotate {
-    return true;
+    return false;
 }
 
 - (UIInterfaceOrientationMask) supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
+    return UIInterfaceOrientationMaskPortrait;
 }
-
 
 @end

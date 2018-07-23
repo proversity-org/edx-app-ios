@@ -8,20 +8,21 @@
 
 import UIKit
 
-private let defaultCoverImageAspectRatio:CGFloat = 0.533
-
 @IBDesignable
 class CourseCardView: UIView, UIGestureRecognizerDelegate {
     private let arrowHeight = 15.0
     private let verticalMargin = 10
+    private let defaultCoverImageAspectRatio:CGFloat = 0.533
+
+    var course: OEXCourse?
+    
     private let coverImageView = UIImageView()
     private let container = UIView()
     private let titleLabel = UILabel()
     private let dateLabel = UILabel()
     private let bottomLine = UIView()
     private let overlayContainer = UIView()
-
-    var course: OEXCourse?
+    
     var tapAction : ((CourseCardView) -> ())?
     
     private var titleTextStyle : OEXTextStyle {
@@ -89,36 +90,36 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
         dateLabel.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: UILayoutConstraintAxis.horizontal)
         dateLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: UILayoutConstraintAxis.horizontal)
         
-        container.snp.makeConstraints { make in
+        container.snp_makeConstraints { make -> Void in
             make.leading.equalTo(self)
-            make.trailing.equalTo(self).priority(.required)
+            make.trailing.equalTo(self).priorityRequired()
             make.bottom.equalTo(self).offset(-OEXStyles.dividerSize())
         }
-        coverImageView.snp.makeConstraints { make in
+        coverImageView.snp_makeConstraints { (make) -> Void in
             make.top.equalTo(self)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
-            make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageAspectRatio).priority(.low)
+            make.height.equalTo(coverImageView.snp_width).multipliedBy(coverImageAspectRatio).priorityLow()
             make.bottom.equalTo(self)
         }
-        dateLabel.snp.makeConstraints { make in
+        dateLabel.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(container).offset(StandardHorizontalMargin)
-            make.top.equalTo(titleLabel.snp.bottom).offset(StandardVerticalMargin)
+            make.top.equalTo(titleLabel.snp_bottom).offset(StandardVerticalMargin)
             make.bottom.equalTo(container).offset(-verticalMargin)
             make.trailing.equalTo(titleLabel)
         }
-        bottomLine.snp.makeConstraints { make in
+        bottomLine.snp_makeConstraints { (make) -> Void in
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.bottom.equalTo(self)
-            make.top.equalTo(container.snp.bottom)
+            make.top.equalTo(container.snp_bottom)
         }
         
-        overlayContainer.snp.makeConstraints { make in
+        overlayContainer.snp_makeConstraints {make in
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.top.equalTo(self)
-            make.bottom.equalTo(container.snp.top)
+            make.bottom.equalTo(container.snp_top)
         }
         
         let tapGesture = UITapGestureRecognizer {[weak self] _ in self?.cardTapped() }
@@ -128,13 +129,13 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     
     override func updateConstraints() {
         if let accessory = titleAccessoryView {
-            accessory.snp.remakeConstraints { make in
+            accessory.snp_remakeConstraints { make in
                 make.trailing.equalTo(container).offset(-StandardHorizontalMargin)
                 make.centerY.equalTo(container)
             }
         }
         
-        titleLabel.snp.remakeConstraints { make in
+        titleLabel.snp_remakeConstraints { (make) -> Void in
             make.leading.equalTo(container).offset(StandardHorizontalMargin)
             if let accessory = titleAccessoryView {
                 make.trailing.lessThanOrEqualTo(accessory).offset(-StandardHorizontalMargin)
@@ -223,21 +224,9 @@ class CourseCardView: UIView, UIGestureRecognizerDelegate {
     
     func addCenteredOverlay(view : UIView) {
         addSubview(view)
-        view.snp.makeConstraints { make in
+        view.snp_makeConstraints {make in
             make.center.equalTo(overlayContainer)
         }
-    }
-}
-
-extension CourseCardView {
-    static func cardHeight(leftMargin: CGFloat = 0, rightMargin: CGFloat = 0) -> CGFloat {
-        let screenWidth = UIScreen.main.bounds.size.width
-        var height: CGFloat = 0
-        let screenHeight = UIScreen.main.bounds.size.height
-        let halfScreenHeight = (screenHeight / 2.0) - (leftMargin + rightMargin)
-        let ratioedHeight = screenWidth * defaultCoverImageAspectRatio
-        height = CGFloat(Int(halfScreenHeight > ratioedHeight ? ratioedHeight : halfScreenHeight))
-        return height
     }
 }
 

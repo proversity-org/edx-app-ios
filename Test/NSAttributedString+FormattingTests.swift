@@ -19,4 +19,5 @@ class NSAttributedString_FormattingTests: XCTestCase {
         let result = styled(name)
         XCTAssertEqual(result.string, "Hello someone")
     }
+    
 }

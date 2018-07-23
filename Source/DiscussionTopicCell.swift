@@ -50,7 +50,7 @@ class DiscussionTopicCell: UITableViewCell {
         self.backgroundColor = OEXStyles.shared().standardBackgroundColor()
         self.contentView.addSubview(titleLabel)
 
-        self.titleLabel.snp.makeConstraints { make in
+        self.titleLabel.snp_makeConstraints { (make) -> Void in
             make.trailing.equalTo(self.contentView).offset(-StandardHorizontalMargin)
             make.top.equalTo(self.contentView).offset(StandardVerticalMargin)
             make.bottom.equalTo(self.contentView).offset(-StandardVerticalMargin)
@@ -61,7 +61,7 @@ class DiscussionTopicCell: UITableViewCell {
     
     private var depth : UInt = 0 {
         didSet {
-            self.titleLabel.snp.updateConstraints { make in
+            self.titleLabel.snp_updateConstraints { make in
                 make.leading.equalTo(self.contentView).offset(self.indentationOffsetForDepth(itemDepth: depth))
                 depth == 0 ? self.applyStandardSeparatorInsets() : self.removeStandardSeparatorInsets()
             }
@@ -77,7 +77,8 @@ private extension String {
 }
 
 extension UITableViewCell {
-    func indentationOffsetForDepth(itemDepth depth : UInt) -> CGFloat {
+    
+    fileprivate func indentationOffsetForDepth(itemDepth depth : UInt) -> CGFloat {
         return CGFloat(depth + 1) * StandardHorizontalMargin
     }
 }

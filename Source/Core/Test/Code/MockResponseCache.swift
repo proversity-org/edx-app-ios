@@ -17,7 +17,7 @@ class MockResponseCache: NSObject, ResponseCache {
         completion(key.flatMap{ backing[$0] })
     }
     
-    func setCacheResponse(_ response: HTTPURLResponse, withData data: Data?, forRequest request: URLRequest, completion: (() -> Void)?) {
+    func setCacheResponse(_ response: HTTPURLResponse, withData data: Data?, forRequest request: URLRequest, completion: ((Void) -> Void)?) {
         if let key = responseCacheKeyForRequest(request) {
             backing[key] = ResponseCacheEntry(data : data, response : response)
         }

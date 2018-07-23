@@ -64,7 +64,6 @@
 - (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error {
     [activityIndicator stopAnimating];
     OEXLogInfo(@"EULA", @"Error is %@", error.localizedDescription);
-    [[UIAlertController alloc] showAlertWithTitle:nil message:error.localizedDescription onViewController:self];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView*)webView {
