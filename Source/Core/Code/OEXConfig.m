@@ -126,11 +126,11 @@ static OEXConfig* sSharedConfig;
 - (NSString*)mainTopic {
     return [self stringForKey:MainTopic] ?: @"";
 }
-    
+
 - (NSString*)organizationId {
     return [self stringForKey:OrganizationId] ?: @"";
 }
-    
+
 - (NSString*)projectId {
     return [self stringForKey:ProjectId] ?: @"";
 }

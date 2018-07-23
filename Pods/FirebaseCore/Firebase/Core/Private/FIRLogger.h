@@ -36,7 +36,6 @@ extern FIRLoggerService kFIRLoggerDynamicLinks;
 extern FIRLoggerService kFIRLoggerFirestore;
 extern FIRLoggerService kFIRLoggerInstanceID;
 extern FIRLoggerService kFIRLoggerInvites;
-extern FIRLoggerService kFIRLoggerMLKit;
 extern FIRLoggerService kFIRLoggerMessaging;
 extern FIRLoggerService kFIRLoggerPerf;
 extern FIRLoggerService kFIRLoggerRemoteConfig;

@@ -25,17 +25,15 @@ typedef void(^FBSDKServerConfigurationManagerLoadBlock)(FBSDKServerConfiguration
 @interface FBSDKServerConfigurationManager : NSObject
 
 /**
-  Returns the locally cached configuration.
-
- The result will be valid for the appID from FBSDKSettings, but may be expired. A network request will be
+ @abstract Returns the locally cached configuration.
+ @discussion The result will be valid for the appID from FBSDKSettings, but may be expired. A network request will be
  initiated to update the configuration if a valid and unexpired configuration is not available.
  */
 + (FBSDKServerConfiguration *)cachedServerConfiguration;
 
 /**
-  Executes the completionBlock with a valid and current configuration when it is available.
-
- This method will use a cached configuration if it is valid and not expired.
+ @abstract Executes the completionBlock with a valid and current configuration when it is available.
+ @discussion This method will use a cached configuration if it is valid and not expired.
  */
 + (void)loadServerConfigurationWithCompletionBlock:(FBSDKServerConfigurationManagerLoadBlock)completionBlock;
 

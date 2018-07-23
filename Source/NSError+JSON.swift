@@ -18,7 +18,7 @@ enum APIErrorCode : String {
     case OAuth2NotProvided = "token_not_provided"
 }
 
-fileprivate enum ErrorFields: String, RawStringExtractable {
+private enum ErrorFields: String, RawStringExtractable {
     case Code = "error_code"
     case DeveloperMessage = "developer_message"
 }
@@ -31,7 +31,7 @@ extension NSError {
         }
         self.init(domain: OEXErrorDomain, code: code, userInfo: info)
     }
-    
+
     func isAPIError(code: APIErrorCode) -> Bool {
         guard let errorCode = errorInfo?[ErrorFields.Code.rawValue] as? String else { return false }
         return errorCode == code.rawValue

@@ -36,6 +36,4 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application;
 
-- (BOOL)isAuthenticationURL:(NSURL *)url;
-
 @end

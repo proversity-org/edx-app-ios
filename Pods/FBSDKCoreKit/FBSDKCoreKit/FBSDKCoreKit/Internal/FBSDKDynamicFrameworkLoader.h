@@ -22,9 +22,11 @@
 
 #import <FBSDKCoreKit/FBSDKMacros.h>
 
-/**
+/*!
+ @class FBSDKDynamicFrameworkLoader
 
-  This class provides a way to load constants and methods from Apple Frameworks in a dynamic
+ @abstract
+ This class provides a way to load constants and methods from Apple Frameworks in a dynamic
  fashion.  It allows the SDK to be just dragged into a project without having to specify additional
  frameworks to link against.  It is an internal class and not to be used by 3rd party developers.
 
@@ -34,94 +36,107 @@
 
 #pragma mark - Security Constants
 
-/**
-  Load the kSecRandomDefault value from the Security Framework
+/*!
+ @abstract
+ Load the kSecRandomDefault value from the Security Framework
 
- - Returns: The kSecRandomDefault value or nil.
+ @return The kSecRandomDefault value or nil.
  */
 + (SecRandomRef)loadkSecRandomDefault;
 
-/**
-  Load the kSecAttrAccessible value from the Security Framework
+/*!
+ @abstract
+ Load the kSecAttrAccessible value from the Security Framework
 
- - Returns: The kSecAttrAccessible value or nil.
+ @return The kSecAttrAccessible value or nil.
  */
 + (CFTypeRef)loadkSecAttrAccessible;
 
-/**
-  Load the kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly value from the Security Framework
+/*!
+ @abstract
+ Load the kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly value from the Security Framework
 
- - Returns: The kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly value or nil.
+ @return The kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly value or nil.
  */
 + (CFTypeRef)loadkSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
 
-/**
-  Load the kSecAttrAccount value from the Security Framework
+/*!
+ @abstract
+ Load the kSecAttrAccount value from the Security Framework
 
- - Returns: The kSecAttrAccount value or nil.
+ @return The kSecAttrAccount value or nil.
  */
 + (CFTypeRef)loadkSecAttrAccount;
 
-/**
-  Load the kSecAttrService value from the Security Framework
+/*!
+ @abstract
+ Load the kSecAttrService value from the Security Framework
 
- - Returns: The kSecAttrService value or nil.
+ @return The kSecAttrService value or nil.
  */
 + (CFTypeRef)loadkSecAttrService;
 
-/**
-  Load the kSecAttrGeneric value from the Security Framework
+/*!
+ @abstract
+ Load the kSecAttrGeneric value from the Security Framework
 
- - Returns: The kSecAttrGeneric value or nil.
+ @return The kSecAttrGeneric value or nil.
  */
 + (CFTypeRef)loadkSecAttrGeneric;
 
-/**
-  Load the kSecValueData value from the Security Framework
+/*!
+ @abstract
+ Load the kSecValueData value from the Security Framework
 
- - Returns: The kSecValueData value or nil.
+ @return The kSecValueData value or nil.
  */
 + (CFTypeRef)loadkSecValueData;
 
-/**
-  Load the kSecClassGenericPassword value from the Security Framework
+/*!
+ @abstract
+ Load the kSecClassGenericPassword value from the Security Framework
 
- - Returns: The kSecClassGenericPassword value or nil.
+ @return The kSecClassGenericPassword value or nil.
  */
 + (CFTypeRef)loadkSecClassGenericPassword;
 
-/**
-  Load the kSecAttrAccessGroup value from the Security Framework
+/*!
+ @abstract
+ Load the kSecAttrAccessGroup value from the Security Framework
 
- - Returns: The kSecAttrAccessGroup value or nil.
+ @return The kSecAttrAccessGroup value or nil.
  */
 + (CFTypeRef)loadkSecAttrAccessGroup;
 
-/**
-  Load the kSecMatchLimitOne value from the Security Framework
+/*!
+ @abstract
+ Load the kSecMatchLimitOne value from the Security Framework
 
- - Returns: The kSecMatchLimitOne value or nil.
+ @return The kSecMatchLimitOne value or nil.
  */
 + (CFTypeRef)loadkSecMatchLimitOne;
 
-/**
-  Load the kSecMatchLimit value from the Security Framework
+/*!
+ @abstract
+ Load the kSecMatchLimit value from the Security Framework
 
- - Returns: The kSecMatchLimit value or nil.
+ @return The kSecMatchLimit value or nil.
  */
 + (CFTypeRef)loadkSecMatchLimit;
 
-/**
-  Load the kSecReturnData value from the Security Framework
+/*!
+ @abstract
+ Load the kSecReturnData value from the Security Framework
 
- - Returns: The kSecReturnData value or nil.
+ @return The kSecReturnData value or nil.
  */
 + (CFTypeRef)loadkSecReturnData;
 
-/**
-  Load the kSecClass value from the Security Framework
+/*!
+ @abstract
+ Load the kSecClass value from the Security Framework
 
- - Returns: The kSecClass value or nil.
+ @return The kSecClass value or nil.
  */
 + (CFTypeRef)loadkSecClass;
 
@@ -141,16 +156,10 @@ FBSDK_EXTERN OSStatus fbsdkdfl_SecItemDelete(CFDictionaryRef query);
 #pragma mark - Social Constants
 
 FBSDK_EXTERN NSString *fbsdkdfl_SLServiceTypeFacebook(void);
-FBSDK_EXTERN NSString *fbsdkdfl_SLServiceTypeTwitter(void);
 
 #pragma mark - Social Classes
 
 FBSDK_EXTERN Class fbsdkdfl_SLComposeViewControllerClass(void);
-
-#pragma mark - MessageUI Classes
-
-FBSDK_EXTERN Class fbsdkdfl_MFMailComposeViewControllerClass(void);
-FBSDK_EXTERN Class fbsdkdfl_MFMessageComposeViewControllerClass(void);
 
 #pragma mark - QuartzCore Classes
 
@@ -179,7 +188,6 @@ FBSDK_EXTERN Class fbsdkdfl_ASIdentifierManagerClass(void);
 #pragma mark - SafariServices Classes
 
 FBSDK_EXTERN Class fbsdkdfl_SFSafariViewControllerClass(void);
-FBSDK_EXTERN Class fbsdkdfl_SFAuthenticationSessionClass(void);
 
 #pragma mark - Accounts Constants
 
@@ -206,24 +214,3 @@ FBSDK_EXTERN Class fbsdkdfl_ALAssetsLibraryClass(void);
 #pragma mark - CoreTelephony Classes
 
 FBSDK_EXTERN Class fbsdkdfl_CTTelephonyNetworkInfoClass(void);
-
-#pragma mark - CoreImage
-
-FBSDK_EXTERN Class fbsdkdfl_CIImageClass(void);
-FBSDK_EXTERN Class fbsdkdfl_CIFilterClass(void);
-FBSDK_EXTERN NSString *fbsdkdfl_kCIInputImageKey(void);
-FBSDK_EXTERN NSString *fbsdkdfl_kCIInputRadiusKey(void);
-FBSDK_EXTERN NSString *fbsdkdfl_kCIOutputImageKey(void);
-
-#pragma mark - Photos.framework
-
-FBSDK_EXTERN Class fbsdkdfl_PHPhotoLibrary(void);
-FBSDK_EXTERN Class fbsdkdfl_PHAssetChangeRequest(void);
-
-#pragma mark - MobileCoreServices
-
-FBSDK_EXTERN CFStringRef fbsdkdfl_UTTypeCopyPreferredTagWithClass(CFStringRef inUTI,
-                                                                  CFStringRef inTagClass);
-FBSDK_EXTERN CFStringRef fbsdkdfl_kUTTagClassMIMEType(void);
-FBSDK_EXTERN CFStringRef fbsdkdfl_kUTTypeJPEG(void);
-FBSDK_EXTERN CFStringRef fbsdkdfl_kUTTypePNG(void);

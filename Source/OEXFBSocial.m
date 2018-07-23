@@ -36,7 +36,6 @@
 
 - (void)loginFromController:(UIViewController *)controller completion:(void (^)(NSString *, NSError *))completionHandler {
     FBSDKLoginManager* fbLoginManager = [[FBSDKLoginManager alloc]init];
-    [fbLoginManager logOut];
     [fbLoginManager logInWithReadPermissions:@[@"email", @"public_profile"] fromViewController:controller handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         FBSDKAccessToken* accessToken = [FBSDKAccessToken currentAccessToken];
         
@@ -75,7 +74,7 @@
 - (void)requestUserProfileInfoWithCompletion:(void (^)(NSDictionary*, NSError *))completion {
     if([FBSDKAccessToken currentAccessToken])
     {
-        [[[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:@{@"fields": @"name,email"}] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        [[[FBSDKGraphRequest alloc]initWithGraphPath:@"me" parameters:nil] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
             completion(result, error);
         }];
     }

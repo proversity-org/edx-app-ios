@@ -18,41 +18,40 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- FBSDKProfilePictureMode enum
-  Defines the aspect ratio mode for the source image of the profile picture.
+/*!
+ @typedef FBSDKProfilePictureMode enum
+ @abstract Defines the aspect ratio mode for the source image of the profile picture.
  */
 typedef NS_ENUM(NSUInteger, FBSDKProfilePictureMode)
 {
-  /**
-    A square cropped version of the image will be included in the view.
+  /*!
+   @abstract A square cropped version of the image will be included in the view.
    */
   FBSDKProfilePictureModeSquare,
-  /**
-    The original picture's aspect ratio will be used for the source image in the view.
+  /*!
+   @abstract The original picture's aspect ratio will be used for the source image in the view.
    */
   FBSDKProfilePictureModeNormal,
 };
 
-/**
-  A view to display a profile picture.
+/*!
+ @abstract A view to display a profile picture.
  */
 @interface FBSDKProfilePictureView : UIView
 
-/**
-  The mode for the receiver to determine the aspect ratio of the source image.
+/*!
+ @abstract The mode for the receiver to determine the aspect ratio of the source image.
  */
 @property (nonatomic, assign) FBSDKProfilePictureMode pictureMode;
 
-/**
-  The profile ID to show the picture for.
+/*!
+ @abstract The profile ID to show the picture for.
  */
 @property (nonatomic, copy) NSString *profileID;
 
-/**
-  Explicitly marks the receiver as needing to update the image.
-
- This method is called whenever any properties that affect the source image are modified, but this can also
+/*!
+ @abstract Explicitly marks the receiver as needing to update the image.
+ @discussion This method is called whenever any properties that affect the source image are modified, but this can also
  be used to trigger a manual update of the image if it needs to be re-downloaded.
  */
 - (void)setNeedsImageUpdate;

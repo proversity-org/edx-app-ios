@@ -631,9 +631,9 @@
 		B78823AC1FC709BD00F9CD61 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78823AB1FC709BD00F9CD61 /* String+Validation.swift */; };
 		B78823B01FC80CBB00F9CD61 /* RegistrationFieldControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78823AF1FC80CBB00F9CD61 /* RegistrationFieldControllerFactory.swift */; };
 		B78B233F20908C3D00F8D976 /* AgreementTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B233E20908C3D00F8D976 /* AgreementTextView.swift */; };
+		BD106AF820A30AC6002D9758 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD106AF720A30AC6002D9758 /* GoogleService-Info.plist */; };
 		BD3838541DD1CA7E00805697 /* OEXFontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */; };
-		BD6B931320ED081D00EE80DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD6B931220ED081C00EE80DA /* GoogleService-Info.plist */; };
-		BD6B931620ED0C5800EE80DA /* HPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6B931520ED0C5800EE80DA /* HPNService.m */; };
+		BD5F79F320AD95DF00399121 /* HPNService.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5F79F120AD95DF00399121 /* HPNService.m */; };
 		BD7C6C3E1DCA32370004D135 /* OEXFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */; };
 		BD7C6C401DCA329A0004D135 /* fonts.json in Resources */ = {isa = PBXBuildFile; fileRef = BD7C6C3F1DCA329A0004D135 /* fonts.json */; };
 		BD7C6C421DCA33540004D135 /* OEXFontsDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7C6C411DCA33540004D135 /* OEXFontsDataFactory.swift */; };
@@ -1529,10 +1529,19 @@
 		B78823AB1FC709BD00F9CD61 /* String+Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
 		B78823AF1FC80CBB00F9CD61 /* RegistrationFieldControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationFieldControllerFactory.swift; sourceTree = "<group>"; };
 		B78B233E20908C3D00F8D976 /* AgreementTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementTextView.swift; sourceTree = "<group>"; };
+		BD106AF720A30AC6002D9758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
-		BD6B931220ED081C00EE80DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BD6B931420ED0C5800EE80DA /* HPNService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPNService.h; sourceTree = "<group>"; };
-		BD6B931520ED0C5800EE80DA /* HPNService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPNService.m; sourceTree = "<group>"; };
+		BD4692BC2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/MobileAppEula.htm; sourceTree = "<group>"; };
+		BD4692BD2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/PrivacyPolicy.htm; sourceTree = "<group>"; };
+		BD4692BE2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/TermsOfServices.htm; sourceTree = "<group>"; };
+		BD4692BF2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD4692C02105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BD4692C12105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/profiles.json; sourceTree = "<group>"; };
+		BD4692C22105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/countries.json; sourceTree = "<group>"; };
+		BD4692C32105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/languages.json; sourceTree = "<group>"; };
+		BD4692C42105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/whats_new.json; sourceTree = "<group>"; };
+		BD5F79F120AD95DF00399121 /* HPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPNService.m; sourceTree = "<group>"; };
+		BD5F79F220AD95DF00399121 /* HPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPNService.h; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
 		BD7C6C411DCA33540004D135 /* OEXFontsDataFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsDataFactory.swift; sourceTree = "<group>"; };
@@ -2220,6 +2229,8 @@
 				777EFEFB1A7AFF0E00F8BF06 /* OEXRouter.h */,
 				777EFEFC1A7AFF0E00F8BF06 /* OEXRouter.m */,
 				77FDF40E1AFBAE7700E8C639 /* OEXRouter+Swift.swift */,
+				BD5F79F220AD95DF00399121 /* HPNService.h */,
+				BD5F79F120AD95DF00399121 /* HPNService.m */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -2333,8 +2344,6 @@
 				77BC3E681AE0091400E51529 /* OEXPushNotificationProcessor.m */,
 				775434871AD8121200635A40 /* OEXParsePushProvider.h */,
 				775434881AD8121200635A40 /* OEXParsePushProvider.m */,
-				BD6B931420ED0C5800EE80DA /* HPNService.h */,
-				BD6B931520ED0C5800EE80DA /* HPNService.m */,
 			);
 			name = "Push Notifications";
 			sourceTree = "<group>";
@@ -3117,7 +3126,7 @@
 		BECB7B021924C0C3009C77F1 = {
 			isa = PBXGroup;
 			children = (
-				BD6B931220ED081C00EE80DA /* GoogleService-Info.plist */,
+				BD106AF720A30AC6002D9758 /* GoogleService-Info.plist */,
 				E052F5A81D9953BB009F6B6F /* edX.entitlements */,
 				77E647B11C90C21100B6740D /* App */,
 				77E6478F1C90C10300B6740D /* Core */,
@@ -3662,6 +3671,7 @@
 			knownRegions = (
 				en,
 				"es-419",
+				he,
 			);
 			mainGroup = BECB7B021924C0C3009C77F1;
 			productRefGroup = BECB7B0C1924C0C3009C77F1 /* Products */;
@@ -3780,7 +3790,7 @@
 				69ECC6291D50D1170030CF87 /* check@2x.png in Resources */,
 				22A4191E1EB1CF1500BBC8CA /* shareCourse@2x.png in Resources */,
 				E021F46C1F739599007A26E7 /* loginScreenImage@2x~ipad.png in Resources */,
-				BD6B931320ED081D00EE80DA /* GoogleService-Info.plist in Resources */,
+				BD106AF820A30AC6002D9758 /* GoogleService-Info.plist in Resources */,
 				B4B6D64A1A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.xib in Resources */,
 				BD837BB81DC8D5D400341EFD /* Icon-76.png in Resources */,
 				69ECC63E1D50D1170030CF87 /* icon_google_white.png in Resources */,
@@ -4346,7 +4356,7 @@
 				9E0CC1031BA9574E00A1CFDB /* SpinnerButton.swift in Sources */,
 				E0A1A0391E93A7AB00510488 /* Debugging.swift in Sources */,
 				191A002419405B91004F7902 /* OEXUserDetails.m in Sources */,
-				BD6B931620ED0C5800EE80DA /* HPNService.m in Sources */,
+				BD5F79F320AD95DF00399121 /* HPNService.m in Sources */,
 				021AD6251F150BA3009AF653 /* Dictionary+SafeAccess.swift in Sources */,
 				77BECB0D1B0A8BBD00894276 /* UIEdgeInsets+Geometry.swift in Sources */,
 				77AF07751CB311B200A42704 /* UserProfileView.swift in Sources */,
@@ -4603,6 +4613,7 @@
 			children = (
 				1A03DEA41BBC72BA006783FB /* en */,
 				E08CC57D1F33269D0092ACED /* es-419 */,
+				BD4692C22105FE8700B069D8 /* he */,
 			);
 			name = countries.json;
 			sourceTree = "<group>";
@@ -4612,6 +4623,7 @@
 			children = (
 				1A55019D1BBA30C900D5F9DD /* en */,
 				E08CC57C1F33269C0092ACED /* es-419 */,
+				BD4692C12105FE8700B069D8 /* he */,
 			);
 			name = profiles.json;
 			sourceTree = "<group>";
@@ -4621,6 +4633,7 @@
 			children = (
 				1AFEB1BA1BBD88F3004C471D /* en */,
 				E08CC57E1F33269D0092ACED /* es-419 */,
+				BD4692C32105FE8700B069D8 /* he */,
 			);
 			name = languages.json;
 			sourceTree = "<group>";
@@ -4630,6 +4643,7 @@
 			children = (
 				2245C9F9209C591B0097B23F /* en */,
 				2245C9FB209C591D0097B23F /* es-419 */,
+				BD4692BC2105FE8600B069D8 /* he */,
 			);
 			name = MobileAppEula.htm;
 			sourceTree = "<group>";
@@ -4639,6 +4653,7 @@
 			children = (
 				2245C9FD209C592A0097B23F /* en */,
 				2245C9FF209C592D0097B23F /* es-419 */,
+				BD4692BD2105FE8600B069D8 /* he */,
 			);
 			name = PrivacyPolicy.htm;
 			sourceTree = "<group>";
@@ -4648,6 +4663,7 @@
 			children = (
 				2245CA01209C59340097B23F /* en */,
 				2245CA03209C59370097B23F /* es-419 */,
+				BD4692BE2105FE8600B069D8 /* he */,
 			);
 			name = TermsOfServices.htm;
 			sourceTree = "<group>";
@@ -4657,6 +4673,7 @@
 			children = (
 				773BE0001AAA07DD0074C3CA /* en */,
 				E08CC57A1F33269C0092ACED /* es-419 */,
+				BD4692BF2105FE8600B069D8 /* he */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4666,6 +4683,7 @@
 			children = (
 				E04A932A1F13846B00D4615D /* en */,
 				E08CC57B1F33269C0092ACED /* es-419 */,
+				BD4692C02105FE8600B069D8 /* he */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -4675,6 +4693,7 @@
 			children = (
 				E0EEC6E81F1CD279006C8D62 /* en */,
 				E08CC57F1F33269D0092ACED /* es-419 */,
+				BD4692C42105FE8700B069D8 /* he */,
 			);
 			name = whats_new.json;
 			sourceTree = "<group>";
@@ -4758,24 +4777,6 @@
 				INFOPLIST_FILE = "Source/edX-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Analytics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Branch\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DateTools\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Masonry\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Parse\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Segment-GoogleAnalytics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Smartling.i18n\"",
-					"\"${PODS_ROOT}/GoogleAnalytics/Libraries\"",
-					"\"${PODS_ROOT}/GoogleAuthUtilities/Libraries\"",
-					"\"${PODS_ROOT}/GoogleIDFASupport/Libraries\"",
-					"\"${PODS_ROOT}/GoogleSignIn/Libraries\"",
-				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
@@ -5216,24 +5217,6 @@
 				INFOPLIST_FILE = "Source/edX-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Analytics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Branch\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DateTools\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Masonry\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Parse\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}Segment-GoogleAnalytics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Smartling.i18n\"",
-					"\"${PODS_ROOT}/GoogleAnalytics/Libraries\"",
-					"\"${PODS_ROOT}/GoogleAuthUtilities/Libraries\"",
-					"\"${PODS_ROOT}/GoogleIDFASupport/Libraries\"",
-					"\"${PODS_ROOT}/GoogleSignIn/Libraries\"",
-				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
@@ -5274,24 +5257,6 @@
 				INFOPLIST_FILE = "Source/edX-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Analytics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Branch\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DateTools\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Masonry\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Parse\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Segment-GoogleAnalytics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Smartling.i18n\"",
-					"\"${PODS_ROOT}/GoogleAnalytics/Libraries\"",
-					"\"${PODS_ROOT}/GoogleAuthUtilities/Libraries\"",
-					"\"${PODS_ROOT}/GoogleIDFASupport/Libraries\"",
-					"\"${PODS_ROOT}/GoogleSignIn/Libraries\"",
-				);
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
@@ -5353,6 +5318,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.edx.mobile;
 				PRODUCT_NAME = edXTests;
+				PROVISIONING_PROFILE = "1bc59fda-473a-406a-a7ef-cda825cd79a3";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development org.edx.mobile";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Test/edXTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
