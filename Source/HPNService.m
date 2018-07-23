@@ -31,7 +31,12 @@
       WithPayload:(NSDictionary * __nonnull)payload
 CompletionHandler:(onComplete __nullable)completionHandler
 {
-    [[FIRMessaging messaging] subscribeToTopic:[payload objectForKey:@"topic"]];
+    @try {
+        [[FIRMessaging messaging] subscribeToTopic:payload[@"topic"]];
+    } @catch (NSException *exception) {
+        NSLog(@"%@", exception.reason);
+    }
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%s%s", KONNEKTEER_API_URL, SUBSCRIBE]];
     NSMutableURLRequest *urlRequest = [self prepareUrlRequest:url
                                                   WithAuthKey: authKey
