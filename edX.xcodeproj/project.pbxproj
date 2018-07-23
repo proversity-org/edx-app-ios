@@ -1531,6 +1531,15 @@
 		B78B233E20908C3D00F8D976 /* AgreementTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementTextView.swift; sourceTree = "<group>"; };
 		BD106AF720A30AC6002D9758 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
+		BD4692BC2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/MobileAppEula.htm; sourceTree = "<group>"; };
+		BD4692BD2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/PrivacyPolicy.htm; sourceTree = "<group>"; };
+		BD4692BE2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/TermsOfServices.htm; sourceTree = "<group>"; };
+		BD4692BF2105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD4692C02105FE8600B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BD4692C12105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/profiles.json; sourceTree = "<group>"; };
+		BD4692C22105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/countries.json; sourceTree = "<group>"; };
+		BD4692C32105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/languages.json; sourceTree = "<group>"; };
+		BD4692C42105FE8700B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/whats_new.json; sourceTree = "<group>"; };
 		BD5F79F120AD95DF00399121 /* HPNService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPNService.m; sourceTree = "<group>"; };
 		BD5F79F220AD95DF00399121 /* HPNService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPNService.h; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
@@ -3662,6 +3671,7 @@
 			knownRegions = (
 				en,
 				"es-419",
+				he,
 			);
 			mainGroup = BECB7B021924C0C3009C77F1;
 			productRefGroup = BECB7B0C1924C0C3009C77F1 /* Products */;
@@ -4603,6 +4613,7 @@
 			children = (
 				1A03DEA41BBC72BA006783FB /* en */,
 				E08CC57D1F33269D0092ACED /* es-419 */,
+				BD4692C22105FE8700B069D8 /* he */,
 			);
 			name = countries.json;
 			sourceTree = "<group>";
@@ -4612,6 +4623,7 @@
 			children = (
 				1A55019D1BBA30C900D5F9DD /* en */,
 				E08CC57C1F33269C0092ACED /* es-419 */,
+				BD4692C12105FE8700B069D8 /* he */,
 			);
 			name = profiles.json;
 			sourceTree = "<group>";
@@ -4621,6 +4633,7 @@
 			children = (
 				1AFEB1BA1BBD88F3004C471D /* en */,
 				E08CC57E1F33269D0092ACED /* es-419 */,
+				BD4692C32105FE8700B069D8 /* he */,
 			);
 			name = languages.json;
 			sourceTree = "<group>";
@@ -4630,6 +4643,7 @@
 			children = (
 				2245C9F9209C591B0097B23F /* en */,
 				2245C9FB209C591D0097B23F /* es-419 */,
+				BD4692BC2105FE8600B069D8 /* he */,
 			);
 			name = MobileAppEula.htm;
 			sourceTree = "<group>";
@@ -4639,6 +4653,7 @@
 			children = (
 				2245C9FD209C592A0097B23F /* en */,
 				2245C9FF209C592D0097B23F /* es-419 */,
+				BD4692BD2105FE8600B069D8 /* he */,
 			);
 			name = PrivacyPolicy.htm;
 			sourceTree = "<group>";
@@ -4648,6 +4663,7 @@
 			children = (
 				2245CA01209C59340097B23F /* en */,
 				2245CA03209C59370097B23F /* es-419 */,
+				BD4692BE2105FE8600B069D8 /* he */,
 			);
 			name = TermsOfServices.htm;
 			sourceTree = "<group>";
@@ -4657,6 +4673,7 @@
 			children = (
 				773BE0001AAA07DD0074C3CA /* en */,
 				E08CC57A1F33269C0092ACED /* es-419 */,
+				BD4692BF2105FE8600B069D8 /* he */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -4666,6 +4683,7 @@
 			children = (
 				E04A932A1F13846B00D4615D /* en */,
 				E08CC57B1F33269C0092ACED /* es-419 */,
+				BD4692C02105FE8600B069D8 /* he */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -4675,6 +4693,7 @@
 			children = (
 				E0EEC6E81F1CD279006C8D62 /* en */,
 				E08CC57F1F33269D0092ACED /* es-419 */,
+				BD4692C42105FE8700B069D8 /* he */,
 			);
 			name = whats_new.json;
 			sourceTree = "<group>";
