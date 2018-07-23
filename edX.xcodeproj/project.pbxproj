@@ -1754,6 +1754,16 @@
 		BD0A75F720F491190080A9D1 /* HPNService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPNService.h; sourceTree = "<group>"; };
 		BD0A75F820F491190080A9D1 /* HPNService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPNService.m; sourceTree = "<group>"; };
 		BD3838531DD1CA7E00805697 /* OEXFontsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsTests.swift; sourceTree = "<group>"; };
+		BD4692A92105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/subjects.json; sourceTree = "<group>"; };
+		BD4692AA2105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/MobileAppEula.htm; sourceTree = "<group>"; };
+		BD4692AB2105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/PrivacyPolicy.htm; sourceTree = "<group>"; };
+		BD4692AC2105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = he; path = he.lproj/TermsOfServices.htm; sourceTree = "<group>"; };
+		BD4692AD2105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD4692AE2105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BD4692AF2105F6D300B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/profiles.json; sourceTree = "<group>"; };
+		BD4692B02105F6D400B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/countries.json; sourceTree = "<group>"; };
+		BD4692B12105F6D400B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/languages.json; sourceTree = "<group>"; };
+		BD4692B22105F6D400B069D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = he; path = he.lproj/whats_new.json; sourceTree = "<group>"; };
 		BD7C6C3D1DCA32360004D135 /* OEXFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFonts.swift; sourceTree = "<group>"; };
 		BD7C6C3F1DCA329A0004D135 /* fonts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fonts.json; sourceTree = "<group>"; };
 		BD7C6C411DCA33540004D135 /* OEXFontsDataFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OEXFontsDataFactory.swift; sourceTree = "<group>"; };
@@ -3980,21 +3990,25 @@
 				TargetAttributes = {
 					77E6478D1C90C10300B6740D = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 57UCUYGPA2;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					77E647961C90C10300B6740D = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 57UCUYGPA2;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					77E6482F1C91016300B6740D = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 57UCUYGPA2;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = BECB7B0A1924C0C3009C77F1;
 					};
 					BECB7B0A1924C0C3009C77F1 = {
+						DevelopmentTeam = 57UCUYGPA2;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -4027,6 +4041,7 @@
 			knownRegions = (
 				en,
 				"es-419",
+				he,
 			);
 			mainGroup = BECB7B021924C0C3009C77F1;
 			productRefGroup = BECB7B0C1924C0C3009C77F1 /* Products */;
@@ -5073,6 +5088,7 @@
 			children = (
 				1A03DEA41BBC72BA006783FB /* en */,
 				E08CC57D1F33269D0092ACED /* es-419 */,
+				BD4692B02105F6D400B069D8 /* he */,
 			);
 			name = countries.json;
 			sourceTree = "<group>";
@@ -5082,6 +5098,7 @@
 			children = (
 				1A55019D1BBA30C900D5F9DD /* en */,
 				E08CC57C1F33269C0092ACED /* es-419 */,
+				BD4692AF2105F6D300B069D8 /* he */,
 			);
 			name = profiles.json;
 			sourceTree = "<group>";
@@ -5091,6 +5108,7 @@
 			children = (
 				1AFEB1BA1BBD88F3004C471D /* en */,
 				E08CC57E1F33269D0092ACED /* es-419 */,
+				BD4692B12105F6D400B069D8 /* he */,
 			);
 			name = languages.json;
 			sourceTree = "<group>";
@@ -5100,6 +5118,7 @@
 			children = (
 				2245C9F9209C591B0097B23F /* en */,
 				2245C9FB209C591D0097B23F /* es-419 */,
+				BD4692AA2105F6D300B069D8 /* he */,
 			);
 			name = MobileAppEula.htm;
 			sourceTree = "<group>";
@@ -5109,6 +5128,7 @@
 			children = (
 				2245C9FD209C592A0097B23F /* en */,
 				2245C9FF209C592D0097B23F /* es-419 */,
+				BD4692AB2105F6D300B069D8 /* he */,
 			);
 			name = PrivacyPolicy.htm;
 			sourceTree = "<group>";
@@ -5118,6 +5138,7 @@
 			children = (
 				2245CA01209C59340097B23F /* en */,
 				2245CA03209C59370097B23F /* es-419 */,
+				BD4692AC2105F6D300B069D8 /* he */,
 			);
 			name = TermsOfServices.htm;
 			sourceTree = "<group>";
@@ -5127,6 +5148,7 @@
 			children = (
 				B793455E20B584F500DBFC33 /* en */,
 				B793456020B584F800DBFC33 /* es-419 */,
+				BD4692A92105F6D300B069D8 /* he */,
 			);
 			name = subjects.json;
 			sourceTree = "<group>";
@@ -5136,6 +5158,7 @@
 			children = (
 				773BE0001AAA07DD0074C3CA /* en */,
 				E08CC57A1F33269C0092ACED /* es-419 */,
+				BD4692AD2105F6D300B069D8 /* he */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -5145,6 +5168,7 @@
 			children = (
 				E04A932A1F13846B00D4615D /* en */,
 				E08CC57B1F33269C0092ACED /* es-419 */,
+				BD4692AE2105F6D300B069D8 /* he */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -5154,6 +5178,7 @@
 			children = (
 				E0EEC6E81F1CD279006C8D62 /* en */,
 				E08CC57F1F33269D0092ACED /* es-419 */,
+				BD4692B22105F6D400B069D8 /* he */,
 			);
 			name = whats_new.json;
 			sourceTree = "<group>";
@@ -5225,7 +5250,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5335,7 +5360,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5369,7 +5394,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5402,7 +5427,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5431,7 +5456,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Source/Core/Test/SupportingFiles/Info.plist;
@@ -5455,7 +5480,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Source/Core/Test/SupportingFiles/Info.plist;
@@ -5478,7 +5503,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Source/Core/Test/SupportingFiles/Info.plist;
@@ -5500,7 +5525,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Test/EndToEnd/SupportingFiles/Info.plist;
@@ -5525,7 +5550,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Test/EndToEnd/SupportingFiles/Info.plist;
@@ -5549,7 +5574,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Test/EndToEnd/SupportingFiles/Info.plist;
@@ -5688,7 +5713,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5745,7 +5770,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CONFIGURATION_BUILD_DIR = "$PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				DEVELOPMENT_TEAM = "57UCUYGPA2";
+				DEVELOPMENT_TEAM = 57UCUYGPA2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
