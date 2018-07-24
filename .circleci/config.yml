@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "pro,Proversity,0,2.14,devUUID,storeUUID"
+            python config_project.py "pro,Proversity,0,2.15,devUUID,storeUUID"
             fastlane beta
 
 workflows:

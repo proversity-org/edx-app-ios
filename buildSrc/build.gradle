@@ -6,7 +6,9 @@ buildscript {
         classpath 'org.ajoberstar:grgit:1.1.0'
     }
     repositories {
-        mavenCentral()
+        maven {
+            url 'http://repo1.maven.org/maven2'
+        }
     }
 }
 
@@ -18,7 +20,9 @@ subprojects {
     }
 
     it.repositories {
-        mavenCentral()
+        maven {
+            url 'http://repo1.maven.org/maven2'
+        }
     }
 
     it.dependencies {
@@ -35,7 +39,9 @@ subprojects {
 }
 
 repositories {
-    mavenCentral()
+    maven {
+        url 'http://repo1.maven.org/maven2'
+    }
 }
 
 
