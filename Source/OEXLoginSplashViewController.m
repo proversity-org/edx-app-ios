@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton* signInButton;
 @property (strong, nonatomic) IBOutlet UIButton* signUpButton;
+@property (weak, nonatomic) IBOutlet UIImageView *logoSub;
 
 @property (strong, nonatomic) RouterEnvironment* environment;
 
@@ -44,6 +45,10 @@
     if (self.environment.config.invertColorLoginSlpashViewSignInBtn) {
         [self.signInButton setTitleColor:[self.environment.styles neutralBlack] forState:UIControlStateNormal];
         [self.signInButton setTitleColor:[self.environment.styles neutralBlack] forState:UIControlStateSelected];
+    }
+    
+    if (!self.environment.config.useLogoSub) {
+        [self.logoSub setHidden:YES];
     }
 }
 

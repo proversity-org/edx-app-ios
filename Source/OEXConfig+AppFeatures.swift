@@ -96,4 +96,8 @@ extension OEXConfig {
     var invertColorLoginSlpashViewSignInBtn: Bool {
         return bool(forKey: "INVERT_COLOR_LOGIN_SPLASH_VIEW_SIGN_IN_BTN")
     }
+    
+    var useLogoSub: Bool {
+        return bool(forKey: "USE_LOGO_SUB")
+    }
 }

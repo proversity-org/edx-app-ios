@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OEXLoginSplashViewController">
             <connections>
+                <outlet property="logoSub" destination="pA7-sl-zCV" id="2IZ-4r-F1Z"/>
                 <outlet property="signInButton" destination="dJC-c2-JVU" id="GkN-i6-f70"/>
                 <outlet property="signUpButton" destination="AEY-cT-K95" id="FUr-Ml-oWt"/>
                 <outlet property="view" destination="IfH-km-N4o" id="hud-pD-B81"/>
@@ -29,7 +30,7 @@
                     <rect key="frame" x="117" y="46" width="141" height="65"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEY-cT-K95">
-                    <rect key="frame" x="62.5" y="530" width="250" height="44"/>
+                    <rect key="frame" x="63" y="530" width="250" height="44"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" identifier="register"/>
                     <constraints>
@@ -46,7 +47,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJC-c2-JVU">
-                    <rect key="frame" x="62.5" y="600" width="250" height="25"/>
+                    <rect key="frame" x="63" y="600" width="250" height="25"/>
                     <accessibility key="accessibilityConfiguration" identifier="login"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="cz8-9B-leE"/>
@@ -61,6 +62,12 @@
                         <action selector="showLogin:" destination="-1" eventType="touchUpInside" id="bpi-ei-60F"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-sub.png" translatesAutoresizingMaskIntoConstraints="NO" id="pA7-sl-zCV">
+                    <rect key="frame" x="117" y="119" width="141" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="6cZ-Pz-HJf"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <accessibility key="accessibilityConfiguration" identifier="splash-screen"/>
@@ -68,6 +75,7 @@
                 <constraint firstItem="dCr-uy-BzX" firstAttribute="top" secondItem="SIO-jm-HLG" secondAttribute="top" id="2QO-Yy-Lzb"/>
                 <constraint firstItem="AEY-cT-K95" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KSL-zR-AIM" secondAttribute="bottom" id="3V1-HQ-qtm"/>
                 <constraint firstAttribute="centerX" secondItem="AEY-cT-K95" secondAttribute="centerX" id="4Xu-hT-26y"/>
+                <constraint firstItem="pA7-sl-zCV" firstAttribute="leading" secondItem="KSL-zR-AIM" secondAttribute="leading" id="4eX-f2-eqJ"/>
                 <constraint firstItem="KSL-zR-AIM" firstAttribute="top" secondItem="IfH-km-N4o" secondAttribute="top" constant="46" id="6sf-dG-AbH"/>
                 <constraint firstItem="SIO-jm-HLG" firstAttribute="trailing" secondItem="dCr-uy-BzX" secondAttribute="trailing" id="8x1-ce-Spy"/>
                 <constraint firstAttribute="bottom" secondItem="dJC-c2-JVU" secondAttribute="bottom" constant="42" id="C4S-jf-BpE"/>
@@ -78,6 +86,7 @@
                 <constraint firstAttribute="centerX" secondItem="dJC-c2-JVU" secondAttribute="centerX" id="cab-Re-AdF"/>
                 <constraint firstAttribute="centerX" secondItem="KSL-zR-AIM" secondAttribute="centerX" id="fNT-bT-cQp"/>
                 <constraint firstItem="dJC-c2-JVU" firstAttribute="top" secondItem="AEY-cT-K95" secondAttribute="bottom" constant="26" id="nyP-Mu-POU"/>
+                <constraint firstItem="pA7-sl-zCV" firstAttribute="top" secondItem="KSL-zR-AIM" secondAttribute="bottom" constant="8" id="rps-YQ-4vy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="dCr-uy-BzX"/>
         </view>
@@ -148,6 +157,7 @@
     <resources>
         <image name="bt_signin_active.png" width="525" height="100"/>
         <image name="launchBackground.png" width="1122" height="1920"/>
+        <image name="logo-sub.png" width="141" height="30"/>
         <image name="logo.png" width="141" height="65"/>
     </resources>
 </document>
