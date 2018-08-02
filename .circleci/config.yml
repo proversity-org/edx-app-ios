@@ -49,8 +49,8 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "pro,Proversity,0,2.15,devUUID,storeUUID"
-            fastlane beta
+            python config_project.py "slp,SLP,0,2.15,,"
+            python setup_certificates.py slp
 
 workflows:
   version: 2
