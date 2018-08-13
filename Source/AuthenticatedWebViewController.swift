@@ -356,7 +356,6 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             completionHandler(.performDefaultHandling, nil)
         }
     }
-<<<<<<< HEAD
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == "clickPDFDownload") {
@@ -431,6 +430,4 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     //        }
     //        return nil
     //    }
-=======
->>>>>>> upstream/master
 }
