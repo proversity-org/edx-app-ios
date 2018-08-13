@@ -136,9 +136,9 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         loadController.state = state
     }
     
-    public init(environment : Environment, blockID: String) {
+    public init(environment : Environment) {
         self.environment = environment
-        self.blockID = blockID
+        self.blockID = ""
         loadController = LoadStateViewController()
         insetsController = ContentInsetsController()
         headerInsets = HeaderViewInsets()
@@ -355,6 +355,20 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
         else {
             completionHandler(.performDefaultHandling, nil)
         }
+    }
+    
+    public init(environment : Environment, blockID: String) {
+        self.environment = environment
+        self.blockID = blockID
+        loadController = LoadStateViewController()
+        insetsController = ContentInsetsController()
+        headerInsets = HeaderViewInsets()
+        insetsController.addSource(source: headerInsets)
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        automaticallyAdjustsScrollViewInsets = false
+        webController.view.accessibilityIdentifier = "AuthenticatedWebViewController:authenticated-web-view"
     }
     
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
