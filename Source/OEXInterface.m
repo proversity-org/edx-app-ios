@@ -164,6 +164,7 @@ static OEXInterface* _sharedInterface = nil;
     }
     else if([type isEqualToString:URL_COURSE_ENROLLMENTS]) {
         URLString = [self formatEnrollmentURLWith:[OEXConfig sharedConfig] url:URLString];
+    }
     else {
         return nil;
     }
