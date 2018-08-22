@@ -68,8 +68,7 @@ jobs:
           name: Save logs
           command: |
             mkdir -p /tmp/core_dumps
-            cp -r /Users/distiller/Library/Logs/gym/edX-edX.log /tmp/core_dumps
-            cp -r /Users/distiller/Library/Logs/snapshot/edX-edX.log /tmp/core_dumps
+            cp -r /Users/distiller/Library/Logs /tmp/core_dumps
           when: on_fail
       - store_artifacts:
           path: /tmp/core_dumps
