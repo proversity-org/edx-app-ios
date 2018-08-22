@@ -33,9 +33,9 @@ class edXUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        snapshot("1.splash")
+        snapshot("1_splash")
         app/*@START_MENU_TOKEN@*/.buttons["LoginSpashViewController:sign-up-button"]/*[[".otherElements[\"splash-screen\"]",".buttons[\"Already have an account? Sign in\"]",".buttons[\"LoginSpashViewController:sign-up-button\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-        snapshot("2.login")
+        snapshot("2_login")
         let emailTextField = app/*@START_MENU_TOKEN@*/.textFields["LoginViewController:email-text-field"]/*[[".otherElements[\"login-screen\"]",".scrollViews[\"LoginViewController:main-scroll-view\"]",".textFields[\"Username or e-mail address\"]",".textFields[\"LoginViewController:email-text-field\"]"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/
         emailTextField.tap()
         emailTextField.typeText("jagonzalr")
@@ -48,9 +48,9 @@ class edXUITests: XCTestCase {
         if (app.navigationBars["Courses"].exists) {
             sleep(20)
             let coursesNavigationBar = app.navigationBars["Courses"]
-            snapshot("3.courses")
+            snapshot("3_courses")
             coursesNavigationBar/*@START_MENU_TOKEN@*/.buttons["EnrolledTabBarViewController:account-button"]/*[[".buttons[\"Account\"]",".buttons[\"EnrolledTabBarViewController:account-button\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-            snapshot("4.account")
+            snapshot("4_account")
             app.tables["AccountViewController:table-view"]/*@START_MENU_TOKEN@*/.staticTexts["Logout"]/*[[".cells.matching(identifier: \"AccountViewController:table-cell\").staticTexts[\"Logout\"]",".staticTexts[\"Logout\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         }
     }
