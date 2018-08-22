@@ -69,8 +69,6 @@ jobs:
           command: |
             mkdir -p /tmp/core_dumps
             cp -r /Users/distiller/Library/Logs /tmp/core_dumps
-            chown -R $USER:$USER /var/folders/gk
-            cp -r /var/folders/gk
           when: on_fail
       - store_artifacts:
           path: /tmp/core_dumps
