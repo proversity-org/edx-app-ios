@@ -68,8 +68,8 @@ jobs:
           name: Save logs
           command: |
             mkdir -p /tmp/core_dumps
-            cp -r /Users/distiller/Library/Logs /tmp/core_dumps
-            cp -r /var/folders/gk /tmp/core_dumps
+            sudo cp -r /Users/distiller/Library/Logs /tmp/core_dumps
+            sudo cp -r /var/folders/gk /tmp/core_dumps
           when: on_fail
       - store_artifacts:
           path: /tmp/core_dumps
