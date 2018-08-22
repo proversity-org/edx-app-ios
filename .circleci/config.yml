@@ -17,19 +17,32 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v0.0.1-brew-cache-
       - run:
-          name: Install dependencies
+          name: Install Python dependencies
+          command: sudo pip install requests
+      - run:
+          name: Install Brew dependencies
           command: |
-            sudo pip install requests
             brew update
             brew upgrade openssl
             brew install ruby
             brew install imagemagick
             brew cleanup
-            sudo gem install fastlane
-            ./gradlew dependencies --stacktrace --info
       - run:
-          name: Download app resources
+          name: Install Fastlane
+          command: sudo gem install fastlane
+      - run:
+          name: Install Gradle dependencies
+          command: ./gradlew dependencies --stacktrace --info
+      - save_cache:
+          key: v0.0.1-brew-cache-
+          paths:
+            - /usr/local/Homebrew
+      - run:
+          name: Setup app
           command: |
             git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch --depth=1 ./deployment
             cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
