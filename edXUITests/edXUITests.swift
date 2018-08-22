@@ -47,10 +47,13 @@ class edXUITests: XCTestCase {
         waitForExpectations(timeout: 20, handler: nil)
         if (app.navigationBars["Courses"].exists) {
             sleep(20)
-            let coursesNavigationBar = app.navigationBars["Courses"]
             snapshot("3_courses")
-            coursesNavigationBar/*@START_MENU_TOKEN@*/.buttons["EnrolledTabBarViewController:account-button"]/*[[".buttons[\"Account\"]",".buttons[\"EnrolledTabBarViewController:account-button\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-            snapshot("4_account")
+            app.tabBars.buttons["Find Courses"].tap()
+            sleep(20)
+            snapshot("4_find_courses")
+            let findCoursesNavigationBar = app.navigationBars["Find Courses"]
+            findCoursesNavigationBar/*@START_MENU_TOKEN@*/.buttons["EnrolledTabBarViewController:account-button"]/*[[".buttons[\"Account\"]",".buttons[\"EnrolledTabBarViewController:account-button\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            snapshot("5_account")
             app.tables["AccountViewController:table-view"]/*@START_MENU_TOKEN@*/.staticTexts["Logout"]/*[[".cells.matching(identifier: \"AccountViewController:table-cell\").staticTexts[\"Logout\"]",".staticTexts[\"Logout\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         }
     }
