@@ -43,7 +43,7 @@ jobs:
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/houston-ios-config.git --branch 9ba606f1-ac3a-11e8-a042-d3c31f74f1d7 --single-branch ./deployment
+            git clone git@github.com:proversity-org/houston-ios-config.git --branch no-branch --single-branch ./deployment
             cp -R deployment/custom_config custom_config
             cp -R deployment/default_config/ default_config
             cp -R deployment/fastlane fastlane
@@ -63,7 +63,7 @@ jobs:
           name: Deploy to Testflight
           command: |
             python setup_and_build.py
-            echo ready to build
+            fastlane beta
 workflows:
   version: 2
   build_and_deploy:
@@ -71,4 +71,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: houston/9ba606f1-ac3a-11e8-a042-d3c31f74f1d7
+              only: no-branch
