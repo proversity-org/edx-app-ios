@@ -112,6 +112,7 @@
         [application registerForRemoteNotifications];
     }
     
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
@@ -120,25 +121,6 @@
     UIViewController *topController = self.window.rootViewController;
     
     return [topController supportedInterfaceOrientations];
-}
-
-
-- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
-    BOOL handled = false;
-    if (self.environment.config.facebookConfig.enabled) {
-        handled = [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-        if(handled) {
-            return handled;
-        }
-
-    }
-    
-    if (self.environment.config.googleConfig.enabled){
-        handled = [[GIDSignIn sharedInstance] handleURL:url sourceApplication:sourceApplication annotation:annotation];
-        [[OEXGoogleSocial sharedInstance] setHandledOpenUrl:YES];
-    }
-   
-    return handled;
 }
 
 // Respond to URI scheme links
@@ -281,7 +263,7 @@
         }
     }
 }
-    
+
 #pragma mark Firebase
 - (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -291,7 +273,7 @@
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
 }
-    
+
 - (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
     NSLog(@"%@", remoteMessage);
 }

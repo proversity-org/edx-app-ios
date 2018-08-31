@@ -4,7 +4,7 @@ jobs:
   build:
 
     macos:
-      xcode: "9.2.0"
+      xcode: "9.4.0"
     working_directory: ~/edx-app-ios
     environment:
       XCODE_WORKSPACE: edX.xcworkspace
@@ -15,21 +15,35 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v0.0.1-brew-cache-
       - run:
-          name: Install dependencies
+          name: Install Python dependencies
+          command: sudo pip install requests
+      - run:
+          name: Install Homebrew dependencies
           command: |
-            sudo pip install requests
             brew update
             brew upgrade openssl
             brew install ruby
             brew install imagemagick
             brew cleanup
-            sudo gem install fastlane -v 2.92.0
+      - run:
+          name: Install Fastlane
+          command: sudo gem install fastlane
+      - run:
+          name: Install Gradle dependencies
+          command: |
             ./gradlew dependencies --stacktrace --info
+      - save_cache:
+          key: v0.0.1-brew-cache-
+          paths:
+            - /usr/local/Homebrew
       - run:
           name: Download app resources
           command: |
-            git clone git@github.com:proversity-org/houston-ios-config.git --branch no-branch --single-branch ./deployment
+            git clone git@github.com:proversity-org/houston-ios-config.git --branch c54fc9a2-3cda-11e8-b467-0ed5f89f718b --single-branch ./deployment
             cp -R deployment/custom_config custom_config
             cp -R deployment/default_config/ default_config
             cp -R deployment/fastlane fastlane
@@ -57,4 +71,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: no-branch
+              only: houston/c54fc9a2-3cda-11e8-b467-0ed5f89f718b

@@ -32,7 +32,7 @@
 
 NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXExternalRegistrationWithExistingAccountNotification";
 
-@interface OEXRegistrationViewController () <OEXExternalRegistrationOptionsViewDelegate, AgreementTextViewDelegate>
+@interface OEXRegistrationViewController () <OEXExternalRegistrationOptionsViewDelegate, AgreementTextViewDelegate, InterfaceOrientationOverriding>
 
 /// Contents are id <OEXRegistrationFieldController>
 @property (strong, nonatomic) NSArray* fieldControllers;
@@ -173,10 +173,10 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 }
 
 -(void) setUpAgreementTextView {
-    [self.agreementTextView setupFor:AgreementTypeSignUp];
+    [self.agreementTextView setupFor:AgreementTypeSignUp config:self.environment.config];
     self.agreementTextView.agreementDelegate = self;
     CGSize size = [self.agreementTextView sizeThatFits:CGSizeMake(self.scrollView.frame.size.width - 2 * self.styles.formMargin, CGFLOAT_MAX)];
-    self.agreementTextView.frame = CGRectMake(0, 0, size.width, size.height + [[OEXStyles sharedStyles] standardHorizontalMargin]);;
+    self.agreementTextView.frame = CGRectMake(0, 0, size.width, size.height + [[OEXStyles sharedStyles] standardHorizontalMargin]);
 }
 
 // MARK: AgreementTextViewDelegate
@@ -329,7 +329,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
     offset = offset + 40;
     
     [self.scrollView addSubview:self.agreementTextView];
-    [self.agreementTextView setFrame:CGRectMake(horizontalSpacing, offset + 10, self.agreementTextView.frame.size.width, self.agreementTextView.frame.size.height)];
+    [self.agreementTextView setFrame:CGRectMake(horizontalSpacing, offset + 10, width - 2 * horizontalSpacing, self.agreementTextView.frame.size.height)];
     offset = offset + self.agreementTextView.frame.size.height + [[OEXStyles sharedStyles] standardHorizontalMargin] * 2;
     [self.scrollView setContentSize:CGSizeMake(width, offset)];
 }
@@ -347,7 +347,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 #pragma mark ExternalRegistrationOptionsDelegate
 
 - (void)optionsView:(OEXExternalRegistrationOptionsView *)view choseProvider:(id<OEXExternalAuthProvider>)provider {
-    [provider authorizeServiceFromController:self requestingUserDetails:YES withCompletion:^(NSString *accessToken, OEXRegisteringUserDetails *userProfile, NSError *error) {
+    [provider authorizeServiceFromController:self requestingUserDetails:YES withCompletion:^(NSString *accessToken, OEXRegisteringUserDetails *userDetails, NSError *error) {
         if(error == nil) {
             [view beginIndicatingActivity];
             self.view.userInteractionEnabled = NO;
@@ -361,10 +361,7 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
                     }];
                 }
                 else {
-                    // No account already, so continue registration process
-                    UIView* headingView = [[OEXUsingExternalAuthHeadingView alloc] initWithFrame:CGRectZero serviceName:provider.displayName];
-                    [self useHeadingView:headingView];
-                    [self receivedFields:userProfile fromProvider:provider withAccessToken:accessToken];
+                    [self configureViewForSocial:provider accessToken:accessToken userDetails:userDetails];
                 }
             }];
         }
@@ -377,6 +374,17 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
             // Do nothing. Typically this happens because the user hits cancel and so they know it didn't work already
         }
     }];
+}
+
+- (void) configureViewForSocial:(id<OEXExternalAuthProvider>)provider accessToken:(NSString *) accessToken userDetails:(OEXRegisteringUserDetails *) userDetails {
+    // No account already, so continue registration process
+    __block OEXRegistrationViewController *blockSelf = self;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView* headingView = [[OEXUsingExternalAuthHeadingView alloc] initWithFrame:CGRectZero serviceName:provider.displayName];
+        [blockSelf useHeadingView:headingView];
+        [blockSelf receivedFields:userDetails fromProvider:provider withAccessToken:accessToken];
+    });
 }
 
 - (void)receivedFields:(OEXRegisteringUserDetails*)profile fromProvider:(id <OEXExternalAuthProvider>)provider withAccessToken:(NSString*)accessToken {
@@ -485,11 +493,11 @@ NSString* const OEXExternalRegistrationWithExistingAccountNotification = @"OEXEx
 }
 
 - (BOOL) shouldAutorotate {
-    return false;
+    return true;
 }
 
 - (UIInterfaceOrientationMask) supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 #pragma mark - Scolling on Keyboard Hide/Show
