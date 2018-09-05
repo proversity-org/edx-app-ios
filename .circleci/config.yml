@@ -31,7 +31,7 @@ jobs:
             brew cleanup
       - run:
           name: Install Fastlane
-          command: sudo gem install fastlane
+          command: sudo gem install fastlane -v 2.102.0
       - run:
           name: Install Gradle dependencies
           command: |
