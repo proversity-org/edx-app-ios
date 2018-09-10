@@ -1,0 +1,11 @@
+repositories {
+    maven {
+        url "https://mvnrepository.com/repos/central"
+    }
+}
+
+dependencies {
+    // compile localGroovy()
+    // compile gradleApi()
+    // compile 'org.yaml:snakeyaml:1.14'
+}
