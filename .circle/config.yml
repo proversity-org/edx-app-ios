@@ -1,0 +1,75 @@
+version: 2
+
+jobs:
+  build:
+
+    macos:
+      xcode: "9.4.0"
+    working_directory: ~/edx-app-ios
+    environment:
+      XCODE_WORKSPACE: edX.xcworkspace
+      XCODE_SCHEME: edX
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+      TERM: dumb
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v0.0.1-brew-cache-
+      - run:
+          name: Install Python dependencies
+          command: sudo pip install requests
+      - run:
+          name: Install Homebrew dependencies
+          command: |
+            brew update
+            brew upgrade openssl
+            brew install ruby
+            brew install imagemagick
+            brew cleanup
+      - run:
+          name: Install Fastlane
+          command: sudo gem install fastlane -v 2.102.0
+      - run:
+          name: Install Gradle dependencies
+          command: |
+            ./gradlew dependencies --stacktrace --info
+      - save_cache:
+          key: v0.0.1-brew-cache-
+          paths:
+            - /usr/local/Homebrew
+      - run:
+          name: Download app resources
+          command: |
+            git clone git@github.com:proversity-org/houston-ios-config.git --branch no-branch --single-branch ./deployment
+            cp -R deployment/custom_config custom_config
+            cp -R deployment/default_config/ default_config
+            cp -R deployment/fastlane fastlane
+            cp -R deployment/setup_and_build.py setup_and_build.py
+            cp -R deployment/consola_billing.py consola_billing.py
+            cp -R deployment/GoogleService-Info.plist GoogleService-Info.plist
+            cp -R deployment/colors.json Source/Resources/Colors
+            cp -R deployment/assets/icon/ Source/Resources/Images.xcassets/AppIcon.appiconset
+            cp -R deployment/assets/icon/ Source/Resources/Icons
+            cp -R deployment/assets/logo/ Source/Resources/Images
+            cp -R deployment/assets/splash/ Source/Resources/Splash
+            cp -R deployment/assets/image/ Source/Resources/Images
+            cp -R deployment/assets/login/ Source/Resources/Images
+            cp -R deployment/assets/artwork/iTunesArtwork@2x.png iTunesArtwork@2x.png
+            cp -R deployment/assets/artwork/iTunesArtwork Source/Resources/Images
+            cp -R deployment/assets/artwork/iTunesArtwork@2x Source/Resources/Images
+      - run:
+          name: Deploy to Testflight
+          command: |
+            python setup_and_build.py
+            fastlane beta
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: no-branch

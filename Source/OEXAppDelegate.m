@@ -232,7 +232,7 @@
     }
     
     //Initialize Firebase
-    if (config.isFirebaseEnabled) {
+    if (config.firebaseConfig.analyticsEnabled) {
         [FIRApp configure];
         [[FIRAnalyticsConfiguration sharedInstance] setAnalyticsCollectionEnabled:YES];
     }
@@ -273,7 +273,6 @@
     // TODO: If necessary send token to application server.
     // Note: This callback is fired at each app startup and whenever a new token is generated.
 }
-
 - (void)applicationReceivedRemoteMessage:(nonnull FIRMessagingRemoteMessage *)remoteMessage {
     NSLog(@"%@", remoteMessage);
 }

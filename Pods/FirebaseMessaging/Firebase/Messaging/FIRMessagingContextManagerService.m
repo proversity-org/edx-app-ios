@@ -129,10 +129,7 @@ typedef NS_ENUM(NSUInteger, FIRMessagingContextManagerMessageType) {
 + (void)scheduleLocalNotificationForMessage:(NSDictionary *)message
                                      atDate:(NSDate *)date {
   NSDictionary *apsDictionary = message;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
   UILocalNotification *notification = [[UILocalNotification alloc] init];
-#pragma clang diagnostic pop
 
   // A great way to understand timezones and UILocalNotifications
   // http://stackoverflow.com/questions/18424569/understanding-uilocalnotification-timezone
@@ -172,10 +169,8 @@ typedef NS_ENUM(NSUInteger, FIRMessagingContextManagerMessageType) {
   if (userInfo.count) {
     notification.userInfo = userInfo;
   }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-#pragma clang diagnostic pop
 }
 
 + (NSDictionary *)parseDataFromMessage:(NSDictionary *)message {

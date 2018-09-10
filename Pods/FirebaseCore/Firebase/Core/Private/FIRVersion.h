@@ -17,7 +17,7 @@
 #import <Foundation/Foundation.h>
 
 /** The version of the Firebase SDK. */
-FOUNDATION_EXPORT const unsigned char *const FIRVersionString;
+FOUNDATION_EXPORT const unsigned char *const FirebaseVersionString;
 
 /** The version of the FirebaseCore Component. */
-FOUNDATION_EXPORT const unsigned char *const FIRCoreVersionString;
+FOUNDATION_EXPORT const unsigned char *const FirebaseCoreVersionString;

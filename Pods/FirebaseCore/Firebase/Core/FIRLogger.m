@@ -36,7 +36,6 @@ FIRLoggerService kFIRLoggerDynamicLinks = @"[Firebase/DynamicLinks]";
 FIRLoggerService kFIRLoggerFirestore = @"[Firebase/Firestore]";
 FIRLoggerService kFIRLoggerInstanceID = @"[Firebase/InstanceID]";
 FIRLoggerService kFIRLoggerInvites = @"[Firebase/Invites]";
-FIRLoggerService kFIRLoggerMLKit = @"[Firebase/MLKit]";
 FIRLoggerService kFIRLoggerMessaging = @"[Firebase/Messaging]";
 FIRLoggerService kFIRLoggerPerf = @"[Firebase/Performance]";
 FIRLoggerService kFIRLoggerRemoteConfig = @"[Firebase/RemoteConfig]";
@@ -54,6 +53,10 @@ NSString *const kFIRPersistedDebugModeKey = @"/google/firebase/debug_mode";
 /// ASL client facility name used by FIRLogger.
 const char *kFIRLoggerASLClientFacilityName = "com.firebase.app.logger";
 
+/// Message format used by ASL client that matches format of NSLog.
+const char *kFIRLoggerCustomASLMessageFormat =
+    "$((Time)(J.3)) $(Sender)[$(PID)] <$((Level)(str))> $Message";
+
 /// Keys for the number of errors and warnings logged.
 NSString *const kFIRLoggerErrorCountKey = @"/google/firebase/count_of_errors_logged";
 NSString *const kFIRLoggerWarningCountKey = @"/google/firebase/count_of_warnings_logged";
@@ -63,10 +66,6 @@ static dispatch_once_t sFIRLoggerOnceToken;
 static aslclient sFIRLoggerClient;
 
 static dispatch_queue_t sFIRClientQueue;
-
-/// NSUserDefaults that should be used to store and read variables. If nil, `standardUserDefaults`
-/// will be used.
-static NSUserDefaults *sFIRLoggerUserDefaults;
 
 static BOOL sFIRLoggerDebugMode;
 
@@ -117,17 +116,14 @@ void FIRLoggerInitializeASL() {
     sFIRAnalyticsDebugMode = NO;
     sFIRLoggerMaximumLevel = FIRLoggerLevelNotice;
 
-    // Use the standard NSUserDefaults if it hasn't been explicitly set.
-    if (sFIRLoggerUserDefaults == nil) {
-      sFIRLoggerUserDefaults = [NSUserDefaults standardUserDefaults];
-    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL debugMode = [userDefaults boolForKey:kFIRPersistedDebugModeKey];
 
-    BOOL debugMode = [sFIRLoggerUserDefaults boolForKey:kFIRPersistedDebugModeKey];
     if ([arguments containsObject:kFIRDisableDebugModeApplicationArgument]) {  // Default mode
-      [sFIRLoggerUserDefaults removeObjectForKey:kFIRPersistedDebugModeKey];
+      [userDefaults removeObjectForKey:kFIRPersistedDebugModeKey];
     } else if ([arguments containsObject:kFIREnableDebugModeApplicationArgument] ||
                debugMode) {  // Debug mode
-      [sFIRLoggerUserDefaults setBool:YES forKey:kFIRPersistedDebugModeKey];
+      [userDefaults setBool:YES forKey:kFIRPersistedDebugModeKey];
       asl_set_filter(sFIRLoggerClient, ASL_FILTER_MASK_UPTO(ASL_LEVEL_DEBUG));
       sFIRLoggerDebugMode = YES;
     }
@@ -177,14 +173,7 @@ void FIRSetLoggerLevel(FIRLoggerLevel loggerLevel) {
   });
 }
 
-/**
- * Check if the level is high enough to be loggable.
- *
- * Analytics can override the log level with an intentional race condition.
- * Add the attribute to get a clean thread sanitizer run.
- */
-__attribute__((no_sanitize("thread"))) BOOL FIRIsLoggableLevel(FIRLoggerLevel loggerLevel,
-                                                               BOOL analyticsComponent) {
+BOOL FIRIsLoggableLevel(FIRLoggerLevel loggerLevel, BOOL analyticsComponent) {
   FIRLoggerInitializeASL();
   if (sFIRLoggerDebugMode) {
     return YES;
@@ -197,12 +186,7 @@ __attribute__((no_sanitize("thread"))) BOOL FIRIsLoggableLevel(FIRLoggerLevel lo
 #ifdef DEBUG
 void FIRResetLogger() {
   sFIRLoggerOnceToken = 0;
-  [sFIRLoggerUserDefaults removeObjectForKey:kFIRPersistedDebugModeKey];
-  sFIRLoggerUserDefaults = nil;
-}
-
-void FIRSetLoggerUserDefaults(NSUserDefaults *defaults) {
-  sFIRLoggerUserDefaults = defaults;
+  [[NSUserDefaults standardUserDefaults] removeObjectForKey:kFIRPersistedDebugModeKey];
 }
 
 aslclient getFIRLoggerClient() {
@@ -243,8 +227,8 @@ void FIRLogBasic(FIRLoggerLevel level,
   NSCAssert(numberOfMatches == 1, @"Incorrect message code format.");
 #endif
   NSString *logMsg = [[NSString alloc] initWithFormat:message arguments:args_ptr];
-  logMsg =
-      [NSString stringWithFormat:@"%s - %@[%@] %@", FIRVersionString, service, messageCode, logMsg];
+  logMsg = [NSString
+      stringWithFormat:@"%s - %@[%@] %@", FirebaseVersionString, service, messageCode, logMsg];
   dispatch_async(sFIRClientQueue, ^{
     asl_log(sFIRLoggerClient, NULL, level, "%s", logMsg.UTF8String);
   });

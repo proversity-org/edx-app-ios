@@ -129,6 +129,10 @@ static NSUInteger SerializedSize(int32_t value) {
 
   BOOL isVOIPSocket = NO;
 
+#if FIRMessaging_PROBER
+  isVOIPSocket = YES;
+#endif
+
   [self openStream:self.outStream isVOIPStream:isVOIPSocket];
   [self openStream:self.inStream isVOIPStream:isVOIPSocket];
 }

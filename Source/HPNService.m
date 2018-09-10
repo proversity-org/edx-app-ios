@@ -5,16 +5,13 @@
 //  Created by Jose Antonio Gonzalez on 2018/07/10.
 //  Copyright © 2018 edX. All rights reserved.
 //
-
 #import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseMessaging/FirebaseMessaging.h>
 #import "HPNService.h"
 
 #define KONNEKTEER_API_URL "https://viz8n9p0ci.execute-api.us-east-1.amazonaws.com/prod/konnekteer"
 #define SUBSCRIBE "/saveTopicSubscription"
-
 @implementation HPNService
-
 + (id __nonnull)instance
 {
     static HPNService *instance = nil;
@@ -26,7 +23,6 @@
     
     return instance;
 }
-
 - (void)subscribe:(NSString * __nonnull)authKey
       WithPayload:(NSDictionary * __nonnull)payload
 CompletionHandler:(onComplete __nullable)completionHandler
@@ -47,9 +43,7 @@ CompletionHandler:(onComplete __nullable)completionHandler
     
     [task resume];
 }
-
 #pragma mark - Helpers
-
 - (NSMutableURLRequest *)prepareUrlRequest:(NSURL * __nonnull)url
                                WithAuthKey:(NSString* __nonnull)authKey
                                 AndPayload:(NSDictionary * __nonnull)payload
@@ -70,7 +64,6 @@ CompletionHandler:(onComplete __nullable)completionHandler
     [urlRequest setHTTPBody:postData];
     return urlRequest;
 }
-
 - (NSURLSessionDataTask *)getSessionDataTaskFromUrl:(NSMutableURLRequest *)urlRequest
                                   completionHandler:(onComplete __nonnull)completionHandler
 {
@@ -96,5 +89,4 @@ CompletionHandler:(onComplete __nullable)completionHandler
                 }
             }];
 }
-
 @end
