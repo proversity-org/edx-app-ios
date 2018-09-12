@@ -44,7 +44,7 @@ jobs:
       - run:
           name: Setup app
           command: |
-            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch no-branch --single-branch --depth=1 ./deployment
+            git clone git@github.com:proversity-org/edx-app-ios-config.git --branch proversity/slp --single-branch --depth=1 ./deployment
             cp -R deployment/assets/app_icons/ Source/Resources/Images.xcassets/AppIcon.appiconset
             cp -R deployment/assets/app_icons/ Source/Resources/Icons
             cp -R deployment/assets/logos/ Source/Resources/Images
@@ -62,8 +62,8 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "pro,Proversity,0,2.15,devUUID,storeUUID"
-            fastlane beta
+            python config_project.py "slp,The School Leadership Pathway,2.15.12,2.15,1bc161c4-5fba-41dc-a68d-faa219e028f8,fd86de56-cc17-4499-8bf1-3e987c2dcbbf"
+            fastlane screenshots
       - run:
           name: Save logs
           command: |
@@ -80,4 +80,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: no-branch
+              only: master
