@@ -562,7 +562,11 @@ class VideoPlayer: UIViewController,VideoPlayerControlsDelegate,TranscriptManage
             }
         }
     }
-    
+
+    func setVideo(video: OEXHelperVideoDownload){
+        self.video = video
+    }
+
     deinit {
         removeObservers()
     }

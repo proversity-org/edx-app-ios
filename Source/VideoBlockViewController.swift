@@ -32,7 +32,12 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
         self.environment = environment
         courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID: courseID)
         loadController = LoadStateViewController()
-        videoController = VideoPlayer(environment: environment)
+        let block = courseQuerier.blockWithID(id: blockID)
+        if environment.config.youtubeConfig.enabled && (block.value?.type.asVideo?.isYoutubeVideo)! {
+            videoController = YoutubeVideoPlayer(environment: environment)
+        }else{
+            videoController = VideoPlayer(environment: environment)
+        }
         super.init(nibName: nil, bundle: nil)
         addChildViewController(videoController)
         videoController.didMove(toParentViewController: self)
@@ -56,11 +61,20 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
                         if let video = block.type.asVideo, video.isYoutubeVideo,
                             let url = block.blockURL
                         {
-                            self?.showYoutubeMessage(url: url)
+                            if (self?.environment.config.youtubeConfig.enabled)!{
+                                let youtubeVideo = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID)
+                                self?.showLoadedBlock(block: block, forVideo: youtubeVideo!)
+                            }
+                            else {
+                                
+                                self?.showYoutubeMessage(url: url)
+                            }
                         }
                         else if
                             let video = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID), block.type.asVideo?.preferredEncoding != nil
                         {
+                            
+                            let y = self?.environment.config.youtubeConfig.enabled
                             self?.showLoadedBlock(block: block, forVideo: video)
                         }
                         else {
@@ -378,6 +392,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
             showOverlay(withMessage: errorMessage)
         }
     }
+
 }
 
 extension VideoBlockViewController {

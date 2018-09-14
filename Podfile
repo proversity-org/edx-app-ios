@@ -19,6 +19,7 @@ pod 'FBSDKLoginKit', '~> 4.31.1'
 pod 'Smartling.i18n', '~> 1.0'
 pod 'Firebase/Core', '= 3.11.0'
 pod 'Branch', '= 0.25.5'
+pod 'youtube-ios-player-helper', '~> 0.1.6'
 end
 
 target 'edXTests' do
