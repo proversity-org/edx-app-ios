@@ -34,6 +34,7 @@ class YoutubeVideoPlayer: VideoPlayer{
     private func createYoutubePlayer() {
         videoPlayerProtraitView(portraitView: UIDevice.current.orientation.isPortrait)
         view.addSubview(playerView)
+        UINavigationBar.appearance().barTintColor = .black
     }
 
     func videoPlayerProtraitView(portraitView: Bool){
@@ -61,8 +62,8 @@ class YoutubeVideoPlayer: VideoPlayer{
 extension YoutubeVideoPlayer {
 
     override func setFullscreen(fullscreen: Bool, animated: Bool, with deviceOrientation: UIInterfaceOrientation, forceRotate rotate: Bool) {
-        isFullScreen = deviceOrientation.isLandscape
-        videoPlayerProtraitView(portraitView: deviceOrientation.isPortrait)
+        isFullScreen = fullscreen
+        videoPlayerProtraitView(portraitView: !fullscreen)
         playerView.playVideo()
 
     }
