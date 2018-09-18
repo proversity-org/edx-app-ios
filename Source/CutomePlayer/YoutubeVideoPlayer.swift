@@ -27,7 +27,6 @@ class YoutubeVideoPlayer: VideoPlayer{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         createYoutubePlayer()
     }
 
@@ -41,7 +40,7 @@ class YoutubeVideoPlayer: VideoPlayer{
         let screenSize: CGRect = UIScreen.main.bounds
 
         if portraitView{
-            playerView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height * 0.3)
+            playerView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.width * 9 / 16)
         }
         else{
             playerView.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: screenSize.height)
@@ -50,11 +49,17 @@ class YoutubeVideoPlayer: VideoPlayer{
 
     override func play(video: OEXHelperVideoDownload) {
         super.setVideo(video: video)
-        let videoUrl = video.summary?.videoURL
-        let url = URLComponents(string : videoUrl!)
+        guard let videoUrl = video.summary?.videoURL else{
+            Logger.logError("YOUTUBE_VIDEO", "invalid url")
+            return
+        }
+        guard let url = URLComponents(string : videoUrl) else {
+            Logger.logError("YOUTUBE_VIDEO", "invalid url")
+            return
+        }
         let playvarsDic = ["playsinline": 1, "autohide": 1, "fs": 0, "showinfo": 0, ]
 
-        videoId = (url?.queryItems?.first?.value)!
+        videoId = (url.queryItems?.first?.value)!
         playerView.load(withVideoId: videoId, playerVars: playvarsDic)
     }
  }
@@ -76,5 +81,3 @@ extension YoutubeVideoPlayer: YTPlayerViewDelegate {
         self.playerView.playVideo()
     }
 }
-
-

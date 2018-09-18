@@ -33,7 +33,7 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
         courseQuerier = environment.dataManager.courseDataManager.querierForCourseWithID(courseID: courseID)
         loadController = LoadStateViewController()
         let block = courseQuerier.blockWithID(id: blockID)
-        if environment.config.youtubeConfig.enabled && (block.value?.type.asVideo?.isYoutubeVideo)! {
+        if environment.config.youtubeVideoConfig.enabled && (block.value?.type.asVideo?.isYoutubeVideo)! {
             videoController = YoutubeVideoPlayer(environment: environment)
         }else{
             videoController = VideoPlayer(environment: environment)
@@ -58,23 +58,21 @@ class VideoBlockViewController : UIViewController, CourseBlockViewController, St
     func addLoadListener() {
         loader.listen (self,
                        success : { [weak self] block in
-                        if let video = block.type.asVideo, video.isYoutubeVideo,
-                            let url = block.blockURL
-                        {
-                            if (self?.environment.config.youtubeConfig.enabled)!{
-                                let youtubeVideo = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID)
-                                self?.showLoadedBlock(block: block, forVideo: youtubeVideo!)
+                        guard let video = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID)else {
+                            self?.showError(error: nil)
+                            return
+                        }
+                        if (video.summary?.isYoutubeVideo)! {
+                            if (self?.environment.config.youtubeVideoConfig.enabled)!{
+                                self?.showLoadedBlock(block: block, forVideo: video)
                             }
                             else {
-                                
-                                self?.showYoutubeMessage(url: url)
+                                let url = block.blockURL
+                                self?.showYoutubeMessage(url: url!)
                             }
                         }
-                        else if
-                            let video = self?.environment.interface?.stateForVideo(withID: self?.blockID, courseID : self?.courseID), block.type.asVideo?.preferredEncoding != nil
+                        else if block.type.asVideo?.preferredEncoding != nil
                         {
-                            
-                            let y = self?.environment.config.youtubeConfig.enabled
                             self?.showLoadedBlock(block: block, forVideo: video)
                         }
                         else {
