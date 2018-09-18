@@ -13,19 +13,19 @@ fileprivate enum YoutubeKeys: String, RawStringExtractable {
     case YoutubeApiKey = "YOUTUBE_API_KEY"
 }
 
-class YoutubeConfig: NSObject {
+class YoutubeVideoConfig: NSObject {
     var enabled: Bool = false
     var youtubeApiKey: String = ""
-    
+
     init(dictionary: [String: AnyObject]) {
         enabled = dictionary[YoutubeKeys.Enabled] as? Bool ?? false
         youtubeApiKey = dictionary[YoutubeKeys.YoutubeApiKey] as? String ?? ""
-        
+
     }
 }
 private let key = "YOUTUBE_VIDEO"
 extension OEXConfig {
-    var youtubeConfig: YoutubeConfig {
-        return YoutubeConfig(dictionary: self[key] as? [String:AnyObject] ?? [:])
+    var youtubeVideoConfig: YoutubeVideoConfig {
+        return YoutubeVideoConfig(dictionary: self[key] as? [String:AnyObject] ?? [:])
     }
 }
