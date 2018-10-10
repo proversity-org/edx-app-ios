@@ -49,10 +49,13 @@ static CGFloat OEXExternalAuthButtonAspectRatio = 3.4;
             return button;
         }];
         
-        if (self.itemsPerRow <= 1 )
+        if (self.itemsPerRow <= 1 ){
             self.itemsPerRow = 1;
+        } else {
+            self.itemsPerRow = 2;
+        }
+        
     }
-
     return self;
 
 }

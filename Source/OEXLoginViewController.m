@@ -79,7 +79,7 @@
 @implementation OEXLoginViewController
 
 - (void)layoutSubviews {
-    if(!([self isFacebookEnabled] || [self isGoogleEnabled])) {
+    if(!([self isFacebookEnabled] || [self isGoogleEnabled] || [self isSamlProviderEnabled])) {
         self.lbl_OrSignIn.hidden = YES;
         self.seperatorLeft.hidden = YES;
         self.seperatorRight.hidden = YES;
@@ -121,6 +121,9 @@
 - (BOOL)isGoogleEnabled {
     return ![OEXNetworkUtility isOnZeroRatedNetwork] && [self.environment.config googleConfig].enabled;
 }
+- (BOOL)isSamlProviderEnabled {
+    return ![OEXNetworkUtility isOnZeroRatedNetwork] && [self.environment.config samlProviderConfig].enabled;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -133,6 +136,9 @@
     }
     if([self isFacebookEnabled]) {
         [providers addObject:[[OEXFacebookAuthProvider alloc] init]];
+    }
+    if([self isSamlProviderEnabled]) {
+        [providers addObject:[[SamlAuthProvider alloc] initWithEnvironment:self.environment]];
     }
 
     __weak __typeof(self) owner = self;
