@@ -846,6 +846,7 @@
 		E0FC64C31C85B492004E3E92 /* DiscussionDataParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */; };
 		E0FCFCC91EC59DB2000B969C /* WhatsNewObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */; };
 		E0FF457920FDD24400109662 /* VideoCompletionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FF457820FDD24400109662 /* VideoCompletionApi.swift */; };
+		E495C48B216FBBE9003842C8 /* SamlLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495C48A216FBBE9003842C8 /* SamlLoginViewController.swift */; };
 		E4A1B744216E9395009ACFC0 /* SAMLConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A1B743216E9395009ACFC0 /* SAMLConfig.swift */; };
 		E4A1B748216E9BFA009ACFC0 /* SamlAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A1B747216E9BFA009ACFC0 /* SamlAuthProvider.swift */; };
 		F22A0ABB1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22A0ABA1CE60D5E00D50DFF /* NetworkManager+Authenticators.swift */; };
@@ -1877,6 +1878,7 @@
 		E0FC64C11C85B46C004E3E92 /* DiscussionDataParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionDataParsingTests.swift; sourceTree = "<group>"; };
 		E0FCFCC81EC59DB2000B969C /* WhatsNewObjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNewObjectTests.swift; sourceTree = "<group>"; };
 		E0FF457820FDD24400109662 /* VideoCompletionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCompletionApi.swift; sourceTree = "<group>"; };
+		E495C48A216FBBE9003842C8 /* SamlLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamlLoginViewController.swift; sourceTree = "<group>"; };
 		E4A1B743216E9395009ACFC0 /* SAMLConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAMLConfig.swift; sourceTree = "<group>"; };
 		E4A1B747216E9BFA009ACFC0 /* SamlAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamlAuthProvider.swift; sourceTree = "<group>"; };
 		E638C306F51AA4045D332D34 /* Pods-edXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-edXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-edXTests/Pods-edXTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2688,6 +2690,7 @@
 				69E1CD001D7D7BA300531449 /* OEXRegistrationViewController+Swift.swift */,
 				B4B6D6451A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.h */,
 				B4B6D6461A95CF33000F44E8 /* OEXUserLicenseAgreementViewController.m */,
+				E495C48A216FBBE9003842C8 /* SamlLoginViewController.swift */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -4778,6 +4781,7 @@
 				B7CCC73E209B16B100A66923 /* ConstraintMakerRelatable.swift in Sources */,
 				228CBD881ECF553E0054D063 /* CourseShareUtmParameters.swift in Sources */,
 				19A1339419CAAC21003ADD24 /* OEXClosedCaptionTableViewCell.m in Sources */,
+				E495C48B216FBBE9003842C8 /* SamlLoginViewController.swift in Sources */,
 				B4B6D6051A949EFC000F44E8 /* OEXRegistrationAgreement.m in Sources */,
 				7712732E1BA8F5C7008BA397 /* SegmentAnalyticsTracker.swift in Sources */,
 				776459821A09650C008404CC /* NSDictionary+OEXEncoding.m in Sources */,

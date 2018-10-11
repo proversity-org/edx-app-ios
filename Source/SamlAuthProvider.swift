@@ -34,5 +34,11 @@ import Foundation
         button.layer.cornerRadius = 8
         return button
     }
-
+    
+    func initializeSamlViewController(view:UIViewController) {        
+        let samlLoginViewController = SamlLoginViewController(environment: environment)
+        let navigationController = UINavigationController(rootViewController: samlLoginViewController)
+        view.present(navigationController, animated: true, completion: nil)
+    }
+    
 }

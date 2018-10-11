@@ -37,5 +37,6 @@
 #define URL_COURSE_ENROLLMENT @"/api/enrollment/v1/enrollment"
 #define URL_COURSE_ENROLLMENT_EMAIL_OPT_IN @"/api/user_api/v1/preferences/email_opt_in"
 #define SIGN_UP_URL @"/user_api/v1/account/registration/"
+#define SAML_PROVIDER_LOGIN_URL @"/auth/login/tpa-saml/?auth_entry=login&idp={idpSlug}"
 
 #endif
