@@ -10,7 +10,7 @@ import Foundation
 
 @objc class SamlAuthProvider: NSObject {
   
-    typealias Environment = OEXStylesProvider & OEXConfigProvider
+    typealias Environment = OEXStylesProvider & OEXConfigProvider & OEXRouterProvider
     private let environment: Environment
     
     init(environment: Environment) {
@@ -36,7 +36,7 @@ import Foundation
     }
     
     func initializeSamlViewController(view:UIViewController) {        
-        let samlLoginViewController = SamlLoginViewController(environment: environment)
+        let samlLoginViewController = SamlLoginViewController(environment: environment, loginViewController: view as! OEXLoginViewController)
         let navigationController = UINavigationController(rootViewController: samlLoginViewController)
         view.present(navigationController, animated: true, completion: nil)
     }

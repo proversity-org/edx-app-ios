@@ -31,6 +31,7 @@ extern NSString* const OEXSessionEndedNotification;
 
 @property (readonly, nonatomic, strong, nullable) OEXAccessToken* token;
 @property (readonly, nonatomic, strong, nullable) OEXUserDetails* currentUser;
+@property (readonly, nonatomic, strong, nullable) NSHTTPCookie* sessionCookie;
 
 - (void)loadTokenFromStore;
 - (void)saveAccessToken:(OEXAccessToken*)token userDetails:(OEXUserDetails*)userDetails;
@@ -38,6 +39,7 @@ extern NSString* const OEXSessionEndedNotification;
 - (void)removeAllWebData;
 
 - (void)performMigrations;
+- (void)saveSessionCookies:(NSHTTPCookie*)sessionCookie userDetails:(OEXUserDetails*)userDetails;
 
 @end
 

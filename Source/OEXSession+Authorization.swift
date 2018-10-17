@@ -12,6 +12,8 @@ extension OEXSession : AuthorizationHeaderProvider {
     public var authorizationHeaders : [String:String] {
         if let accessToken = self.token?.accessToken, let tokenType = self.token?.tokenType {
             return ["Authorization" : "\(tokenType) \(accessToken)"]
+        } else if let cookieName = self.sessionCookie?.name, let cookieValue = self.sessionCookie?.value {
+            return ["Cookie" : String(format: "%@=%@", cookieName, cookieValue)]
         }
         else {
             return [:]

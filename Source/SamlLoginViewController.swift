@@ -11,12 +11,15 @@ import WebKit
 @objc class SamlLoginViewController: UIViewController, UIWebViewDelegate {
     
     var webView: UIWebView!
+    var sessionCookie: HTTPCookie!
+    let loginViewController: OEXLoginViewController
     
-    typealias Environment = OEXConfigProvider & OEXStylesProvider
+    typealias Environment = OEXConfigProvider & OEXStylesProvider & OEXRouterProvider
     fileprivate let environment: Environment
     
-    init(environment: Environment) {
+    init(environment: Environment, loginViewController: OEXLoginViewController) {
         self.environment = environment
+        self.loginViewController = loginViewController
         super.init(nibName: nil, bundle :nil)
     }
     
@@ -44,13 +47,57 @@ import WebKit
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
-        let url = webView.request?.URLString
-        if (url?.contains(find: (environment.config.apiHostURL()?.absoluteString)!))! {
-            if let cookies = HTTPCookieStorage.shared.cookies {
-                for cookie in cookies {
-                    NSLog("\(cookie)")
+        guard let url = webView.request?.URLString else {
+            return
+        }
+        if (url.contains(find: (environment.config.apiHostURL()?.absoluteString)!)) {
+            guard  let cookies = HTTPCookieStorage.shared.cookies else {
+                return
+            }
+            for cookie in cookies {
+                if (cookie.name.elementsEqual("sessionid")){
+                    self.sessionCookie = cookie
+                    getUserDetails(sessionCookie: cookie)
+                    
                 }
             }
-        }        
+        }
     }
+    
+    func handleSuccessfulLoginWithSaml(userDetails: OEXUserDetails) {        
+        
+        guard let session = OEXSession.shared() else {
+            return
+        }
+        session.saveCookies(sessionCookie, userDetails: userDetails)
+        self.dismiss(animated: false, completion: nil)
+        loginViewController.delegate?.loginViewControllerDidLogin(loginViewController)
+        //self.environment.router?.showEnrolledTabBarView()
+        
+    }
+    
+    //// This methods is used to get user details when user session cookie is available
+    func getUserDetails(sessionCookie: HTTPCookie) {
+        let config = URLSessionConfiguration.default
+        let session = URLSession.init(configuration: config, delegate: nil, delegateQueue: nil)
+        let request = NSMutableURLRequest.init(url: URL(string: String(format: "%@%@", (environment.config.apiHostURL()?.absoluteString)!, URL_GET_USER_INFO))!)
+        let cookie = String(format: "%@=%@", sessionCookie.name, sessionCookie.value)
+        request.addValue(cookie, forHTTPHeaderField: "Cookie")
+        let task = session.dataTask(with: request as URLRequest, completionHandler: self.completionGetUserDetails)
+        task.resume()
+    }
+    
+    func completionGetUserDetails(data:Data?, response: URLResponse?, error: Error?) {
+        guard error == nil && data != nil else {
+            return
+        }
+        if let httpResponse = response as? HTTPURLResponse {
+            if (httpResponse.statusCode == 200) {
+                let dictionary = try? JSONSerialization.jsonObject(with: data!)
+                let userDetails = OEXUserDetails(userDictionary: dictionary as! [AnyHashable : Any])
+                handleSuccessfulLoginWithSaml(userDetails: userDetails)
+            }
+        }
+    }
+    
 }
