@@ -79,7 +79,6 @@
 
     [self setupGlobalEnvironment];
     [self.environment.session performMigrations];
-
     [self.environment.router openInWindow:self.window];
     
     if (self.environment.config.pushNotificationsEnabled) {
@@ -100,8 +99,8 @@
     }
 
     [self configureFabricKits:launchOptions];
-    
-    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    return YES;
 }
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
@@ -266,7 +265,6 @@
     if(fabric.appKey && fabric.isEnabled) {
         [Fabric with:@[CrashlyticsKit]];
     }
-    
 }
 
 - (void) configureFabricKits:(NSDictionary*) launchOptions {
@@ -276,6 +274,7 @@
             [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
                 // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
                 // params will be empty if no data found
+                [[DeepLinkManager sharedInstance] processDeepLinkWith:params environment:self.environment.router.environment];
             }];
         }
     }
