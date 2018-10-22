@@ -80,6 +80,9 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
         self.token = tokenData;
         self.currentUser = userDetails;
         [[NSNotificationCenter defaultCenter] postNotificationName:OEXSessionStartedNotification object:nil userInfo:@{OEXSessionStartedUserDetailsKey : userDetails}];
+    } else if ([self validCookie] && userDetails) {
+        self.currentUser = userDetails;
+        [[NSNotificationCenter defaultCenter] postNotificationName:OEXSessionStartedNotification object:nil userInfo:@{OEXSessionStartedUserDetailsKey : userDetails}];
     }
     else {
         [self.credentialStore clear];
@@ -151,12 +154,31 @@ static NSString* OEXSessionClearedCache = @"OEXSessionClearedCache";
 }
 
 - (void)saveSessionCookies:(NSHTTPCookie*) sessionCookie userDetails:(OEXUserDetails*)userDetails {
+    [self.credentialStore clear];
+    [self.credentialStore saveSessionCookie:sessionCookie userDetails:userDetails];
+    
     self.sessionCookie = sessionCookie;
     self.currentUser = userDetails;
     
     if(sessionCookie != nil && userDetails != nil) {
         [[NSNotificationCenter defaultCenter] postNotificationName:OEXSessionStartedNotification object:nil userInfo:@{OEXSessionStartedUserDetailsKey : userDetails}];
     }
+}
+
+- (BOOL)validCookie {
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        if([cookie.name isEqualToString:@"sessionid"]) {
+            NSDate *expiresDate = [cookie expiresDate];
+            NSDate *currentDate = [NSDate date];
+            NSComparisonResult result = [currentDate compare:expiresDate];
+            if(result==NSOrderedAscending){
+                self.sessionCookie = cookie;
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 @end

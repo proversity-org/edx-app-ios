@@ -239,7 +239,12 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
     // MARK: Request Loading
     
     public func loadRequest(request : NSURLRequest) {
-        contentRequest = request
+        let mainRequest = request.mutableCopy() as! NSMutableURLRequest
+        if let cookie = self.environment.session.sessionCookie {
+            let cookieString = String(format: "%@=%@", cookie.name, cookie.value)
+            mainRequest.addValue(cookieString, forHTTPHeaderField: "Cookie")
+        }
+        contentRequest = mainRequest
         loadController.state = .Initial
         state = webController.initialContentState
         
@@ -250,7 +255,7 @@ public class AuthenticatedWebViewController: UIViewController, WKNavigationDeleg
             loadOAuthRefreshRequest()
         }
         else {
-            webController.loadURLRequest(request: request)
+            webController.loadURLRequest(request: mainRequest)
         }
     }
     

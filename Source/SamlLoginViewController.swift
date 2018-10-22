@@ -2,7 +2,7 @@
 //  SamlLoginViewController.swift
 //  edX
 //
-//  Created by andrey.cano on 10/11/18.
+//  Created by andrey.canon on 10/11/18.
 //  Copyright © 2018 edX. All rights reserved.
 //
 
@@ -12,14 +12,13 @@ import WebKit
     
     var webView: UIWebView!
     var sessionCookie: HTTPCookie!
-    let loginViewController: OEXLoginViewController
+    private let loadingIndicatorView = SpinnerView(size: .Large, color: .Primary)
     
     typealias Environment = OEXConfigProvider & OEXStylesProvider & OEXRouterProvider
     fileprivate let environment: Environment
     
-    init(environment: Environment, loginViewController: OEXLoginViewController) {
+    init(environment: Environment) {
         self.environment = environment
-        self.loginViewController = loginViewController
         super.init(nibName: nil, bundle :nil)
     }
     
@@ -45,12 +44,23 @@ import WebKit
         dismiss(animated: true, completion: nil)
     }
     
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        loadingIndicatorView.startAnimating()
+        view.addSubview(loadingIndicatorView)
+        loadingIndicatorView.snp.makeConstraints { make in
+            make.center.equalTo(view)
+        }
+        webView.isHidden = true
+    }
+    
     func webViewDidFinishLoad(_ webView: UIWebView) {
         navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title")
+        loadingIndicatorView.removeFromSuperview()
         guard let url = webView.request?.URLString else {
             return
         }
-        if (url.contains(find: (environment.config.apiHostURL()?.absoluteString)!)) {
+        let userAllowed = !(url.contains(find: "register") || url.contains(find: "login"))
+        if (url.contains(find: (environment.config.apiHostURL()?.absoluteString)!) && userAllowed) {
             guard  let cookies = HTTPCookieStorage.shared.cookies else {
                 return
             }
@@ -61,7 +71,10 @@ import WebKit
                     
                 }
             }
+        } else {
+            webView.isHidden = false
         }
+        
     }
     
     func handleSuccessfulLoginWithSaml(userDetails: OEXUserDetails) {        
@@ -71,17 +84,15 @@ import WebKit
         }
         session.saveCookies(sessionCookie, userDetails: userDetails)
         self.dismiss(animated: false, completion: nil)
-        loginViewController.delegate?.loginViewControllerDidLogin(loginViewController)
-        //self.environment.router?.showEnrolledTabBarView()
-        
+       
     }
     
     //// This methods is used to get user details when user session cookie is available
     func getUserDetails(sessionCookie: HTTPCookie) {
         let config = URLSessionConfiguration.default
         let session = URLSession.init(configuration: config, delegate: nil, delegateQueue: nil)
-        let request = NSMutableURLRequest.init(url: URL(string: String(format: "%@%@", (environment.config.apiHostURL()?.absoluteString)!, URL_GET_USER_INFO))!)
         let cookie = String(format: "%@=%@", sessionCookie.name, sessionCookie.value)
+        let request = NSMutableURLRequest.init(url: URL(string: String(format: "%@%@", (environment.config.apiHostURL()?.absoluteString)!, URL_GET_USER_INFO))!)        
         request.addValue(cookie, forHTTPHeaderField: "Cookie")
         let task = session.dataTask(with: request as URLRequest, completionHandler: self.completionGetUserDetails)
         task.resume()

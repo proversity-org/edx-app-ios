@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly, nullable) OEXAccessToken* storedAccessToken;
 @property (nonatomic, strong, readonly, nullable) OEXUserDetails* storedUserDetails;
 
+- (void)saveSessionCookie:(NSHTTPCookie*)sessionCookie userDetails:(OEXUserDetails*)userDetails;
 - (void)saveAccessToken:(OEXAccessToken*)accessToken userDetails:(OEXUserDetails*)userDetails;
 - (void)clear;
 

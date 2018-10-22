@@ -119,4 +119,11 @@
             nil];
 }
 
+- (void)saveSessionCookie:(NSHTTPCookie*)sessionCookie userDetails:(OEXUserDetails*)userDetails {
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:sessionCookie];
+    NSData* userDetailsData = [userDetails userDetailsData];
+    NSDictionary* sessionDictionary = @{kUserDetailsKey:userDetailsData};
+    [self saveService:kCredentialsService data:sessionDictionary];
+}
+
 @end

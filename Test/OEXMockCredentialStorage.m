@@ -45,4 +45,9 @@
     self.storedUserDetails = nil;
 }
 
+- (void)saveSessionCookie:(nonnull NSHTTPCookie *)sessionCookie userDetails:(nonnull OEXUserDetails *)userDetails {
+    
+}
+
+
 @end

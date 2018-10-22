@@ -2,7 +2,7 @@
 //  SamlAuthProvider.swift
 //  edX
 //
-//  Created by user909217 on 10/10/18.
+//  Created by andrey.canon on 10/10/18.
 //  Copyright © 2018 edX. All rights reserved.
 //
 
@@ -36,7 +36,7 @@ import Foundation
     }
     
     func initializeSamlViewController(view:UIViewController) {        
-        let samlLoginViewController = SamlLoginViewController(environment: environment, loginViewController: view as! OEXLoginViewController)
+        let samlLoginViewController = SamlLoginViewController(environment: environment)
         let navigationController = UINavigationController(rootViewController: samlLoginViewController)
         view.present(navigationController, animated: true, completion: nil)
     }

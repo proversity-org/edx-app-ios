@@ -223,6 +223,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self handleSamlLogin];
 
     //Analytics Screen record
     [[OEXAnalytics sharedAnalytics] trackScreenWithName:@"Login"];
@@ -706,6 +707,14 @@
 
 - (UIInterfaceOrientationMask) supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+
+- (void)handleSamlLogin {
+    NSHTTPCookie *cookie = self.environment.session.sessionCookie;
+    OEXUserDetails *userDetails = self.environment.session.currentUser;
+    if (userDetails && cookie) {
+        [self didLogin];
+    }
 }
 
 
