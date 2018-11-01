@@ -107,7 +107,13 @@ import WebKit
                 let userDetails = OEXUserDetails(userDictionary: dictionary as! [AnyHashable : Any])
                 handleSuccessfulLoginWithSaml(userDetails: userDetails)
             } else if httpResponse.statusCode == 401 {
-                webView.isHidden = false
+                DispatchQueue.main.async {
+                    guard let session = OEXSession.shared() else {
+                        return
+                    }
+                    session.closeAndClear()
+                    self.webView.isHidden = false
+                }
             }
         }
     }
