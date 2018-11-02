@@ -95,16 +95,19 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/DateTools/DateTools/DateTools.bundle"
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "${PODS_ROOT}/youtube-ios-player-helper/youtube-ios-player-helper/Assets.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/DateTools/DateTools/DateTools.bundle"
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "${PODS_ROOT}/youtube-ios-player-helper/youtube-ios-player-helper/Assets.bundle"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_resource "${PODS_ROOT}/DateTools/DateTools/DateTools.bundle"
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
   install_resource "${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "${PODS_ROOT}/youtube-ios-player-helper/youtube-ios-player-helper/Assets.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
