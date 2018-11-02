@@ -9,6 +9,7 @@
 class YoutubeVideoPlayer: VideoPlayer{
 
     let playerView: YTPlayerView
+    let background: UIColor
     var videoId: String
 
     override var currentTime: TimeInterval {
@@ -17,6 +18,7 @@ class YoutubeVideoPlayer: VideoPlayer{
     override init(environment : Environment) {
         playerView = YTPlayerView()
         videoId = String()
+        background = environment.styles.neutralWhite()
         super.init(environment: environment)
         playerView.delegate = self
     }
@@ -29,11 +31,16 @@ class YoutubeVideoPlayer: VideoPlayer{
         super.viewDidLoad()
         createYoutubePlayer()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        UINavigationBar.appearance().barTintColor = background
+    }
 
     private func createYoutubePlayer() {
         videoPlayerProtraitView(portraitView: UIDevice.current.orientation.isPortrait)
         view.addSubview(playerView)
         UINavigationBar.appearance().barTintColor = .black
+        t_captionLanguage = String(Locale.preferredLanguages[0].prefix(2))
     }
 
     func videoPlayerProtraitView(portraitView: Bool){
