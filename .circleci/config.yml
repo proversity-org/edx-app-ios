@@ -64,7 +64,7 @@ jobs:
           command: |
             python config_project.py "pro,Proversity,0,2.16,devUUID,storeUUID"
             fastlane beta
-            no_output_timeout: 60m
+          no_output_timeout: 60m
       - run:
           name: Save logs
           command: |
