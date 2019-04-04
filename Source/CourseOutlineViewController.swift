@@ -68,8 +68,8 @@ public class CourseOutlineViewController :
         
         lastAccessedController.delegate = self
         
-        addChildViewController(tableController)
-        tableController.didMove(toParentViewController: self)
+        addChild(tableController)
+        tableController.didMove(toParent: self)
         tableController.delegate = self
     }
     

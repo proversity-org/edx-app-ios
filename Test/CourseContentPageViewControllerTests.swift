@@ -146,23 +146,16 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
         XCTAssertTrue(childIDs.count > 2, "Need at least three children for this test")
         let childID = childIDs.first
         
-        loadAndVerifyControllerWithInitialChild(childID, parentID: outline.root) {_ in
+        loadAndVerifyControllerWithInitialChild(childID, parentID: outline.root) { (coursID, controller) -> ((XCTestExpectation) -> Void)? in
             return { expectation -> Void in
-                DispatchQueue.main.async {
-                    self.environment.eventTracker.eventStream.listenOnce(self) {_ in
-                        let events = self.environment.eventTracker.events.flatMap { return $0.asScreen }
-                        
-                        if events.count < 2 {
-                            return
-                        }
-                        
-                        let event = events.first!
-                        XCTAssertNotNil(event)
-                        XCTAssertEqual(event.screenName, OEXAnalyticsScreenUnitDetail)
-                        XCTAssertEqual(event.courseID, self.outline.root)
-                        XCTAssertEqual(event.value, self.outline.blocks[self.outline.root]?.internalName)
-                        expectation.fulfill()
-                    }
+                self.environment.eventTracker.eventStream.listenOnce(self) {_ in
+                    let events = self.environment.eventTracker.events.compactMap { return $0.asScreen }
+                    let event = events.first!
+                    XCTAssertNotNil(event)
+                    XCTAssertEqual(event.screenName, OEXAnalyticsScreenUnitDetail)
+                    XCTAssertEqual(event.courseID, self.outline.root)
+                    XCTAssertEqual(event.value, self.outline.blocks[self.outline.root]?.internalName)
+                    expectation.fulfill()
                 }
             }
         }
@@ -188,7 +181,7 @@ class CourseContentPageViewControllerTests: SnapshotTestCase {
                 self.waitForExpectations()
             }
         
-            let pageEvents = environment.eventTracker.events.flatMap { (e: MockAnalyticsRecord) -> MockAnalyticsEventRecord? in
+            let pageEvents = environment.eventTracker.events.compactMap { (e: MockAnalyticsRecord) -> MockAnalyticsEventRecord? in
                 if let event = e.asEvent, event.event.name == OEXAnalyticsEventComponentViewed {
                     return event
                 }

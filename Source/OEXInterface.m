@@ -747,10 +747,6 @@ static OEXInterface* _sharedInterface = nil;
                 }
 
                 [self downloadWithRequestString:imageDownloadURL forceUpdate:force];
-
-                //course subsection
-                NSString* courseVideoDetails = course.video_outline;
-                [self downloadWithRequestString:courseVideoDetails forceUpdate:force];
             }
         }
 

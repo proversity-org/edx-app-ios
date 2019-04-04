@@ -11,8 +11,8 @@ import UIKit
 typealias DismissCompletion = () -> Void
 
 @objc class DeepLinkManager: NSObject {
-
-    static let sharedInstance = DeepLinkManager()
+    
+    @objc static let sharedInstance = DeepLinkManager()
     typealias Environment = OEXSessionProvider & OEXRouterProvider & OEXConfigProvider
     var environment: Environment?
     
@@ -23,8 +23,8 @@ typealias DismissCompletion = () -> Void
     private override init() {
         super.init()
     }
-
-    func processDeepLink(with params: [String: Any], environment: Environment) {
+    
+    @objc func processDeepLink(with params: [String: Any], environment: Environment) {
         self.environment = environment
         let deepLink = DeepLink(dictionary: params)
         let deepLinkType = deepLink.type
@@ -36,12 +36,12 @@ typealias DismissCompletion = () -> Void
     private func showLoginScreen() {
         guard let topViewController = topMostViewController,
             !(topViewController is OEXLoginViewController) else { return }
-    
+        
         dismiss() { [weak self] in
             self?.environment?.router?.showLoginScreen(from: nil, completion: nil)
         }
     }
-        
+    
     private func isUserLoggedin() -> Bool {
         return environment?.session.currentUser != nil
     }
@@ -84,9 +84,11 @@ typealias DismissCompletion = () -> Void
             if !controllerAlreadyDisplayed(for: link.type) {
                 courseDashboardView.switchTab(with: link.type)
             }
-        } else {
-            dismiss() { [weak self] in
-                self?.environment?.router?.showCourseWithDeepLink(type: link.type, courseID: link.courseId ?? "")
+        }
+        
+        dismiss() { [weak self] in
+            if let topController = self?.topMostViewController {
+                self?.environment?.router?.showCourse(with: link, courseID: link.courseId ?? "", from: topController)
             }
         }
     }
@@ -103,7 +105,7 @@ typealias DismissCompletion = () -> Void
             
             // Program discovery detail if already loaded
             if let programDiscoveryViewController = topMostViewController as? ProgramsDiscoveryViewController,
-                let pathId = link.courseId {
+                let pathId = link.pathID {
                 programDiscoveryViewController.loadProgramDetails(with: pathId)
             }
             
@@ -113,27 +115,27 @@ typealias DismissCompletion = () -> Void
         switch link.type {
         case .courseDetail:
             guard environment?.config.discovery.course.isEnabled ?? false, let courseId = link.courseId else { return }
-                if let discoveryViewController = topMostViewController as? DiscoveryViewController {
-                    discoveryViewController.switchSegment(with: .courseDiscovery)
-                    environment?.router?.showDiscoveryDetail(from: discoveryViewController, type: .courseDetail, coursePathID: courseId, bottomBar: discoveryViewController.bottomBar)
-                    return
-                }
-                else if let findCoursesViewController = topMostViewController as? OEXFindCoursesViewController {
-                    environment?.router?.showDiscoveryDetail(from: findCoursesViewController, type: .courseDetail, coursePathID: courseId, bottomBar: findCoursesViewController.bottomBar)
-                    return
-                }
+            if let discoveryViewController = topMostViewController as? DiscoveryViewController {
+                discoveryViewController.switchSegment(with: .courseDiscovery)
+                environment?.router?.showDiscoveryDetail(from: discoveryViewController, type: .courseDetail, pathID: courseId, bottomBar: discoveryViewController.bottomBar)
+                return
+            }
+            else if let findCoursesViewController = topMostViewController as? OEXFindCoursesViewController {
+                environment?.router?.showDiscoveryDetail(from: findCoursesViewController, type: .courseDetail, pathID: courseId, bottomBar: findCoursesViewController.bottomBar)
+                return
+            }
             break
         case .programDiscoveryDetail:
             guard environment?.config.discovery.program.isEnabled ?? false, let pathId = link.pathID else { return }
-                if let discoveryViewController = topMostViewController as? DiscoveryViewController {
-                    discoveryViewController.switchSegment(with: .programDiscovery)
-                    environment?.router?.showDiscoveryDetail(from: discoveryViewController, type: .programDiscoveryDetail, coursePathID: pathId, bottomBar: discoveryViewController.bottomBar)
-                    return
-                }
-                else if let programsDiscoveryViewController = topMostViewController as? ProgramsDiscoveryViewController {
-                    environment?.router?.showDiscoveryDetail(from: programsDiscoveryViewController, type: .programDiscoveryDetail, coursePathID: pathId, bottomBar: programsDiscoveryViewController.bottomBar)
-                    return
-                }
+            if let discoveryViewController = topMostViewController as? DiscoveryViewController {
+                discoveryViewController.switchSegment(with: .programDiscovery)
+                environment?.router?.showDiscoveryDetail(from: discoveryViewController, type: .programDiscoveryDetail, pathID: pathId, bottomBar: discoveryViewController.bottomBar)
+                return
+            }
+            else if let programsDiscoveryViewController = topMostViewController as? ProgramsDiscoveryViewController {
+                environment?.router?.showDiscoveryDetail(from: programsDiscoveryViewController, type: .programDiscoveryDetail, pathID: pathId, bottomBar: programsDiscoveryViewController.bottomBar)
+                return
+            }
             break
         case .programDiscovery:
             guard environment?.config.discovery.program.isEnabled ?? false else { return }
@@ -154,8 +156,28 @@ typealias DismissCompletion = () -> Void
             break
         }
         
-        dismiss() { [weak self] in
-            self?.environment?.router?.showDiscoveryController(with: link.type, isUserLoggedIn: self?.isUserLoggedin() ?? false, coursePathID: link.courseId)
+        guard let topController = topMostViewController else { return }
+        
+        let pathId = link.type == .courseDetail ? link.courseId : link.pathID
+        
+        if isUserLoggedin() {
+            dismiss() { [weak self] in
+                if let topController = self?.topMostViewController {
+                    self?.environment?.router?.showDiscoveryController(from: topController, type: link.type, isUserLoggedIn: true , pathID: pathId)
+                }
+            }
+        }
+        else {
+            if !(topController is DiscoveryViewController), topController.isModal() {
+                topController.dismiss(animated: true) { [weak self] in
+                    if let topController = self?.topMostViewController {
+                        self?.environment?.router?.showDiscoveryController(from: topController, type: link.type, isUserLoggedIn: false , pathID: pathId)
+                    }
+                }
+            }
+            else {
+                environment?.router?.showDiscoveryController(from: topController, type: link.type, isUserLoggedIn: false , pathID: pathId)
+            }
         }
     }
     
@@ -171,7 +193,7 @@ typealias DismissCompletion = () -> Void
             }
         }
     }
-
+    
     private func showProgramDetail(with link: DeepLink) {
         guard !controllerAlreadyDisplayed(for: link.type),
             let myProgramDetailURL = environment?.config.programConfig.programDetailURLTemplate,
@@ -179,25 +201,25 @@ typealias DismissCompletion = () -> Void
             let url = URL(string: myProgramDetailURL.replacingOccurrences(of: URIString.pathPlaceHolder.rawValue, with: pathID))
             else { return}
         
-             if let topController = topMostViewController, let controller = topController as? ProgramsViewController {
-                if controller.type == .base {
-                    environment?.router?.showProgramDetails(with: url, from: topController)
-                } else if controller.type == .detail && controller.programsURL != url {
-                    controller.loadPrograms(with: url)
+        if let topController = topMostViewController, let controller = topController as? ProgramsViewController {
+            if controller.type == .base {
+                environment?.router?.showProgramDetails(with: url, from: topController)
+            } else if controller.type == .detail && controller.programsURL != url {
+                controller.loadPrograms(with: url)
+            }
+        }
+        else {
+            dismiss() { [weak self] in
+                if let topController = self?.topMostViewController {
+                    self?.environment?.router?.showProgram(with: link.type, url: url, from: topController)
                 }
             }
-            else {
-                dismiss() { [weak self] in
-                    if let topController = self?.topMostViewController {
-                        self?.environment?.router?.showProgram(with: link.type, url: url, from: topController)
-                    }
-                }
-            }
+        }
     }
     
     private func showAccountViewController(with link: DeepLink) {
         guard !controllerAlreadyDisplayed(for: link.type) else { return}
-    
+        
         dismiss() { [weak self] in
             if let topViewController = self?.topMostViewController {
                 self?.environment?.router?.showAccount(controller:topViewController, modalTransitionStylePresent: true)
@@ -207,11 +229,11 @@ typealias DismissCompletion = () -> Void
     
     private func showProfile(with link: DeepLink) {
         guard let topViewController = topMostViewController, let username = environment?.session.currentUser?.username else { return }
-
+        
         func showView(modal: Bool) {
             environment?.router?.showProfileForUsername(controller: topMostViewController, username: username, editable: false, modal: modal)
         }
-
+        
         if topViewController is AccountViewController {
             showView(modal: false)
         }
@@ -227,9 +249,110 @@ typealias DismissCompletion = () -> Void
         }
     }
     
+    private func showDiscussionTopic(with link: DeepLink) {
+        guard let courseId = link.courseId,
+            let topicID = link.topicID,
+            let topController = topMostViewController else { return }
+        
+        var isControllerAlreadyDisplayed : Bool {
+            if let topController = topMostViewController, let postController = topController as? PostsViewController, postController.topicID == link.topicID  {
+                return true
+            }
+            return false
+        }
+        
+        func showDiscussionPosts() {
+            if let topController = topMostViewController {
+                environment?.router?.showDiscussionPosts(from: topController, courseID: courseId, topicID: topicID)
+            }
+        }
+        
+        if let postController = topController as? PostsViewController, postController.topicID != link.topicID {
+            postController.navigationController?.popViewController(animated: true)
+            showDiscussionPosts()
+        }
+        else {
+            dismiss() { [weak self] in
+                guard let topController = self?.topMostViewController, !isControllerAlreadyDisplayed else { return }
+                
+                if let courseDashboardController = topController as? CourseDashboardViewController, courseDashboardController.courseID == link.courseId {
+                    courseDashboardController.switchTab(with: link.type)
+                }
+                else {
+                    self?.showCourseDashboardViewController(with: link)
+                }
+                
+                showDiscussionPosts()
+            }
+        }
+    }
+    
+    private func showDiscussionResponses(with link: DeepLink) {
+        guard let courseId = link.courseId,
+            let threadID = link.threadID,
+            let topController = topMostViewController else { return }
+        
+        var isControllerAlreadyDisplayed: Bool {
+            if let topController = topMostViewController, let discussionResponseController = topController as? DiscussionResponsesViewController, discussionResponseController.threadID == link.threadID {
+                return true
+            }
+            return false
+        }
+        
+        func showResponses() {
+            if let topController = topMostViewController {
+                environment?.router?.showDiscussionResponses(from: topController, courseID: courseId, threadID: threadID, isDiscussionBlackedOut: false)
+            }
+        }
+        
+        if let discussionResponseController = topController as? DiscussionResponsesViewController, discussionResponseController.threadID != link.threadID  {
+            discussionResponseController.navigationController?.popViewController(animated: true)
+            showResponses()
+        }
+        else {
+            dismiss() { [weak self] in
+                guard let topController = self?.topMostViewController, !isControllerAlreadyDisplayed else { return }
+                if let courseDashboardController = topController as? CourseDashboardViewController, courseDashboardController.courseID == link.courseId {
+                    courseDashboardController.switchTab(with: link.type)
+                }
+                else if let postViewController = topController as? PostsViewController, postViewController.topicID != link.topicID {
+                    postViewController.navigationController?.popViewController(animated: true)
+                }
+                self?.showDiscussionTopic(with: link)
+                showResponses()
+                
+            }
+        }
+    }
+    
+    private func showCourseHandout(with link: DeepLink) {
+        
+        var controllerAlreadyDisplayed: Bool {
+            if let topController = topMostViewController, let courseHandoutController = topController as? CourseHandoutsViewController, courseHandoutController.courseID == link.courseId {
+                return true
+            }
+            return false
+        }
+        
+        func showHandout() {
+            if let topController = topMostViewController {
+                environment?.router?.showHandoutsFromController(controller: topController, courseID: link.courseId ?? "")
+            }
+        }
+        
+        guard !controllerAlreadyDisplayed else { return }
+        
+         dismiss() { [weak self] in
+            if let topController = self?.topMostViewController {
+                self?.environment?.router?.showCourse(with: link, courseID: link.courseId ?? "", from: topController)
+            }
+            showHandout()
+        }
+    }
+    
     private func controllerAlreadyDisplayed(for type: DeepLinkType) -> Bool {
         guard let topViewController = topMostViewController else { return false }
-
+        
         return linkType(for: topViewController) == type
     }
     
@@ -245,20 +368,20 @@ typealias DismissCompletion = () -> Void
     private func isDiscovery(type: DeepLinkType) -> Bool {
         return (type == .courseDiscovery || type == .courseDetail || type == .programDiscovery || type == .programDiscoveryDetail)
     }
-
+    
     private func navigateToDeepLink(with type: DeepLinkType, link: DeepLink) {
         
         if isDiscovery(type: type) {
             showDiscovery(with: link)
         }
-        
+            
         else if !isUserLoggedin() {
             showLoginScreen()
             return
         }
         
         switch type {
-        case .courseDashboard, .courseVideos, .discussions:
+        case .courseDashboard, .courseVideos, .discussions, .courseDates:
             showCourseDashboardViewController(with: link)
             break
         case .program:
@@ -275,6 +398,16 @@ typealias DismissCompletion = () -> Void
         case .profile:
             showProfile(with: link)
             break
+        case .discussionTopic:
+            showDiscussionTopic(with: link)
+            break
+        case .discussionPost:
+            showDiscussionResponses(with: link)
+            break
+        case .courseHandout:
+            showCourseHandout(with: link)
+            break
+            
         default:
             break
         }
