@@ -19,7 +19,7 @@ pod 'FBSDKLoginKit', '~> 4.42.0'
 pod 'Smartling.i18n', '~> 1.0'
 pod 'Firebase/Core', '= 5.4.1'
 pod 'Branch', '= 0.25.5'
-pod 'youtube-ios-player-helper', '~> 0.1.6'
+pod 'YoutubePlayer-in-WKWebView', '~> 0.3.0'
 end
 
 target 'edXTests' do
@@ -28,7 +28,9 @@ target 'edXTests' do
     pod 'OHHTTPStubs', '~> 4.0'
 end
 
-target 'EndToEndTests' do    pod 'youtube-ios-player-helper', '~> 0.1.6'end
+target 'EndToEndTests' do
+    pod 'YoutubePlayer-in-WKWebView', '~> 0.3.0'
+end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

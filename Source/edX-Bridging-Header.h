@@ -5,7 +5,7 @@
 #import <Analytics/SEGAnalytics.h>
 #import <FirebaseCore/FirebaseCore.h>
 #import <FirebaseAnalytics/FirebaseAnalytics.h>
-#import <YTPlayerView.h>
+#import <WKYTPlayerView.h>
 
 #import "DACircularProgressView.h"
 #import <DateTools/NSDate+DateTools.h>
