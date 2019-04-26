@@ -62,7 +62,7 @@ jobs:
       - run:
           name: Deploy to Testflight
           command: |
-            python config_project.py "tf,Teach First X,2.18.0,2.18,6f6b2667-2447-4606-8317-4d15efcb89dc,04694d6d-bc6b-4e7e-84dc-4d55299fded1"
+            python config_project.py "pro,Proversity,0,2.18,devUUID,storeUUID"
             python setup_certificates.py wsl
           no_output_timeout: 60m
       - run:
@@ -81,4 +81,4 @@ workflows:
       - build:
           filters:
             branches:
-              only: master
+              only: no-branch
